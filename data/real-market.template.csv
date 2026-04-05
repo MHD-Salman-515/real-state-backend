@@ -1,0 +1,5 @@
+city,district,property_type,area_m2,price_syp,price_usd,created_at,source
+damascus,mazzeh,apartment,140,1750000000,,2026-02-10T10:00:00Z,import
+damascus,malki,apartment,160,,140000,2026-02-12T14:30:00Z,import
+rif dimashq,jaramana,house,210,620000000,,2026-01-29T09:15:00Z,import
+aleppo,aziziyeh,studio,45,,23000,2026-02-20T16:45:00Z,import

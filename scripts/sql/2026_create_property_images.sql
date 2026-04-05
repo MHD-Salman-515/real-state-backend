@@ -1,0 +1,15 @@
+USE `housing_db`;
+
+CREATE TABLE IF NOT EXISTS `PropertyImage` (
+  `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `propertyId` INT NOT NULL,
+  `url` TEXT NOT NULL,
+  `room` ENUM('LIVING','KITCHEN','BEDROOM','BATHROOM','BALCONY','EXTERIOR') NOT NULL,
+  `caption` VARCHAR(255) NULL,
+  `sortOrder` INT NOT NULL DEFAULT 0,
+  `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_property_image_property_id` (`propertyId`),
+  CONSTRAINT `fk_property_image_property_id`
+    FOREIGN KEY (`propertyId`) REFERENCES `Property`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

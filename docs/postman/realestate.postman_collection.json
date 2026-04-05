@@ -1,0 +1,524 @@
+{
+  "info": {
+    "name": "RealEstate-System APIs (Owner + Buyer + Admin)",
+    "description": "Comprehensive API collection for Auth, Owner Chat, Advisor, Market Intelligence, External Baseline, Buyer Chat, Saved Searches, Buyer History, Owner Portfolio Analyzer, and Admin Exports.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1) Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Postman Owner\",\n  \"email\": \"owner@example.com\",\n  \"phone\": \"+963999000111\",\n  \"password\": \"Pass1234!\",\n  \"role\": \"OWNER\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login (Auto set {{token}})",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let data = {};",
+                  "try { data = pm.response.json(); } catch(e) {}",
+                  "const token = data.access_token || data.token || data?.data?.access_token || data?.data?.token;",
+                  "if (token) {",
+                  "  pm.environment.set('token', token);",
+                  "  pm.test('Token saved to environment', function () { pm.expect(token).to.be.a('string').and.not.empty; });",
+                  "} else {",
+                  "  pm.test('Token missing in login response', function () { pm.expect.fail('No access_token/token found'); });",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"owner@example.com\",\n  \"password\": \"Pass1234!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2) Owner Chat",
+      "item": [
+        {
+          "name": "Create Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Owner Chat Session\"\n}" },
+            "url": "{{baseUrl}}/owner/chat/sessions"
+          }
+        },
+        {
+          "name": "List Sessions",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/owner/chat/sessions?limit=20"
+          }
+        },
+        {
+          "name": "List Session Messages",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/owner/chat/sessions/{{ownerChatSessionId}}/messages?limit=50"
+          }
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"قيّم سعر عقاري\",\n  \"context\": { \"propertyId\": 1 }\n}"
+            },
+            "url": "{{baseUrl}}/owner/chat/sessions/{{ownerChatSessionId}}/message"
+          }
+        },
+        {
+          "name": "Apply Price Action",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionId\": {{ownerChatSessionId}},\n  \"propertyId\": 1,\n  \"price\": 1800000000\n}"
+            },
+            "url": "{{baseUrl}}/owner/chat/actions/apply-price"
+          }
+        },
+        {
+          "name": "Update Session Context",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"property_id\": 1\n}" },
+            "url": "{{baseUrl}}/owner/chat/sessions/{{ownerChatSessionId}}/context"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3) Advisor",
+      "item": [
+        {
+          "name": "Seller Price",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"city\": \"damascus\",\n  \"district\": \"mazzeh\",\n  \"property_type\": \"apartment\",\n  \"area_m2\": 150,\n  \"user_message\": \"بدي سعر مناسب للبيع\"\n}"
+            },
+            "url": "{{baseUrl}}/advisor/seller-price"
+          }
+        },
+        {
+          "name": "Buyer Evaluate",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"city\": \"damascus\",\n  \"district\": \"mazzeh\",\n  \"property_type\": \"apartment\",\n  \"area_m2\": 120,\n  \"ask_price_syp\": 1650000000\n}"
+            },
+            "url": "{{baseUrl}}/advisor/buyer-evaluate"
+          }
+        },
+        {
+          "name": "Explain",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mode\": \"seller\",\n  \"user_message\": \"اشرح النتيجة\",\n  \"result\": {\n    \"optimal_price_syp\": 1798160000,\n    \"optimal_range_syp\": { \"min\": 1708252000, \"max\": 1888068000 },\n    \"fast_sale_price_syp\": 1659840000,\n    \"fast_sale_range_syp\": { \"min\": 1576848000, \"max\": 1742832000 },\n    \"confidence\": 0.84,\n    \"fx_used\": 14000\n  }\n}"
+            },
+            "url": "{{baseUrl}}/advisor/explain"
+          }
+        },
+        {
+          "name": "Track Outcome",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"log_id\": \"12345\",\n  \"action\": \"accepted_optimal\",\n  \"final_price_syp\": 1798160000\n}"
+            },
+            "url": "{{baseUrl}}/advisor/track"
+          }
+        },
+        {
+          "name": "Advisor Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/advisor/analytics?days=7"
+          }
+        },
+        {
+          "name": "Insights",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/advisor/insights?city=damascus&district=mazzeh&property_type=apartment&days_window=90"
+          }
+        },
+        {
+          "name": "Simulate",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"city\": \"damascus\",\n  \"district\": \"mazzeh\",\n  \"property_type\": \"apartment\",\n  \"area_m2\": 150,\n  \"proposed_price_syp\": 1800000000,\n  \"days_window\": 90\n}"
+            },
+            "url": "{{baseUrl}}/advisor/simulate"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4) Market Intelligence (snapshots/trends)",
+      "item": [
+        {
+          "name": "Rebuild Snapshots (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"days\": 365\n}" },
+            "url": "{{baseUrl}}/admin/market/rebuild-snapshots"
+          }
+        },
+        {
+          "name": "Market Trends",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/market/trends?city=damascus&district=mazzeh&property_type=apartment&days=30"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5) External Market Baseline",
+      "item": [
+        {
+          "name": "Create Source",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Syrian Listings Portal\",\n  \"source_type\": \"website\",\n  \"reliability_score\": 0.8\n}"
+            },
+            "url": "{{baseUrl}}/admin/external-market/sources"
+          }
+        },
+        {
+          "name": "List Sources",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/admin/external-market/sources"
+          }
+        },
+        {
+          "name": "Create Observation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_id\": 1,\n  \"city\": \"damascus\",\n  \"district\": \"mazzeh\",\n  \"property_type\": \"apartment\",\n  \"metric\": \"price_per_m2_syp\",\n  \"value\": 3500000,\n  \"value_unit\": \"SYP_PER_M2\",\n  \"published_at\": \"2026-03-01T12:00:00.000Z\",\n  \"url\": \"https://example.com/listing/123\"\n}"
+            },
+            "url": "{{baseUrl}}/admin/external-market/observations"
+          }
+        },
+        {
+          "name": "Import CSV (multipart)",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "" },
+                { "key": "source_id", "value": "1", "type": "text" },
+                { "key": "metric", "value": "price_per_m2_syp", "type": "text" },
+                { "key": "value_unit", "value": "SYP_PER_M2", "type": "text" },
+                { "key": "months_window", "value": "12", "type": "text" }
+              ]
+            },
+            "url": "{{baseUrl}}/admin/external-market/import-csv"
+          }
+        },
+        {
+          "name": "Rebuild Baseline",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"months_window\": 12\n}" },
+            "url": "{{baseUrl}}/admin/external-market/rebuild-baseline"
+          }
+        },
+        {
+          "name": "Get Baseline",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/admin/external-market/baseline?city=damascus&district=mazzeh&propertyType=apartment"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6) Buyer Chat",
+      "item": [
+        {
+          "name": "Create Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Buyer Search Session\"\n}" },
+            "url": "{{baseUrl}}/buyer/chat/sessions"
+          }
+        },
+        {
+          "name": "List Sessions",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/buyer/chat/sessions?limit=20"
+          }
+        },
+        {
+          "name": "List Messages",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/buyer/chat/sessions/{{buyerChatSessionId}}/messages?limit=50"
+          }
+        },
+        {
+          "name": "Send Message (Find Properties)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"message\": \"بدي شقة 120 متر بحدود 300 مليون بالمزة\"\n}" },
+            "url": "{{baseUrl}}/buyer/chat/sessions/{{buyerChatSessionId}}/message"
+          }
+        },
+        {
+          "name": "Buyer Recommendations",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/buyer/recommendations?city=damascus&district=mazzeh&property_type=APARTMENT&area_m2=120&budget_syp=300000000&limit=5&days=30"
+          }
+        }
+      ]
+    },
+    {
+      "name": "7) Buyer Saved Searches",
+      "item": [
+        {
+          "name": "Create Saved Search",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"شقق المزة\",\n  \"filtersJson\": {\n    \"city\": \"damascus\",\n    \"district\": \"mazzeh\",\n    \"property_type\": \"APARTMENT\",\n    \"area_m2\": 120,\n    \"budget_syp\": 300000000\n  }\n}"
+            },
+            "url": "{{baseUrl}}/buyer/saved-searches"
+          }
+        },
+        {
+          "name": "List Saved Searches",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/buyer/saved-searches"
+          }
+        },
+        {
+          "name": "Delete Saved Search",
+          "request": {
+            "method": "DELETE",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/buyer/saved-searches/{{savedSearchId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "8) Buyer History",
+      "item": [
+        {
+          "name": "List Buyer History",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/buyer/history?limit=50"
+          }
+        },
+        {
+          "name": "Get Buyer History By Id",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/buyer/history/{{buyerHistoryId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "9) Owner Portfolio Analyzer",
+      "item": [
+        {
+          "name": "Get Portfolio Analysis",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/owner/portfolio/analysis"
+          }
+        },
+        {
+          "name": "Apply Recommendation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyId\": 1,\n  \"target\": \"OPTIMAL\"\n}"
+            },
+            "url": "{{baseUrl}}/owner/portfolio/apply-recommendation"
+          }
+        }
+      ]
+    },
+    {
+      "name": "10) Admin Exports",
+      "item": [
+        {
+          "name": "Admin Buyer History Export (JSON)",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/admin/buyer/history/export?format=json&days=30"
+          }
+        },
+        {
+          "name": "Admin Buyer History Export (CSV)",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/admin/buyer/history/export?format=csv&days=30"
+          }
+        },
+        {
+          "name": "Admin Advisor Export",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/admin/advisor/export?format=json&days=90"
+          }
+        },
+        {
+          "name": "Admin Chat Export",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/admin/chat/export?format=json&days=30"
+          }
+        },
+        {
+          "name": "Admin Chat RAG Dump",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": "{{baseUrl}}/admin/chat/rag-dump?days=30"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "token", "value": "" },
+    { "key": "ownerChatSessionId", "value": "1" },
+    { "key": "buyerChatSessionId", "value": "1" },
+    { "key": "savedSearchId", "value": "1" },
+    { "key": "buyerHistoryId", "value": "1" }
+  ]
+}

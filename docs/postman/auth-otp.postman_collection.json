@@ -1,0 +1,96 @@
+{
+  "info": {
+    "name": "Urbanex Auth OTP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "OTP auth flow for NestJS backend"
+  },
+  "item": [
+    {
+      "name": "Sign Up",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"owner@example.com\",\n  \"password\": \"Password123\",\n  \"name\": \"Owner One\"\n}"
+        },
+        "url": "{{baseUrl}}/auth/sign-up"
+      }
+    },
+    {
+      "name": "Sign In",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"owner@example.com\",\n  \"password\": \"Password123\"\n}"
+        },
+        "url": "{{baseUrl}}/auth/sign-in"
+      }
+    },
+    {
+      "name": "Verify OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"owner@example.com\",\n  \"code\": \"123456\"\n}"
+        },
+        "url": "{{baseUrl}}/auth/verify-otp"
+      }
+    },
+    {
+      "name": "Resend OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"owner@example.com\"\n}"
+        },
+        "url": "{{baseUrl}}/auth/resend-otp"
+      }
+    },
+    {
+      "name": "Refresh Session",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/auth/refresh"
+      }
+    },
+    {
+      "name": "Sign Out",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/auth/sign-out"
+      }
+    },
+    {
+      "name": "Auth Me",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/auth/me"
+      }
+    },
+    {
+      "name": "Owner Me",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/owner/me"
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" }
+  ]
+}

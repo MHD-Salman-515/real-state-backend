@@ -1,0 +1,625 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  email     String   @unique(map: "User_email_key")
+  phone     String?
+  password  String
+  role      Role     @default(CLIENT)
+  emailVerifiedAt DateTime? @map("email_verified_at")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relations
+  appointments Appointment[] @relation("AppointmentClient")
+  properties   Property[]    @relation("PropertyOwner")
+
+  invoicesAsClient  Invoice[] @relation("InvoiceClient")
+  invoicesAsCreator Invoice[] @relation("InvoiceCreatedBy")
+
+  maintenanceTicketsAsClient   MaintenanceTicket[] @relation("TicketClient")
+  maintenanceTicketsAsWorker   MaintenanceTicket[] @relation("TicketWorker")
+  maintenanceTicketsAsSupplier MaintenanceTicket[] @relation("TicketSupplier")
+
+  expensesAsContractor Expense[]   @relation("ExpenseContractor")
+  ticketLogs           Ticketlog[] @relation("TicketLogUser")
+  ownerMarketWatches   OwnerMarketWatch[]
+  chatSessions         ChatSession[]
+  buyerChatSessions    BuyerChatSession[]
+  buyerSavedSearches   BuyerSavedSearch[]
+  buyerRecommendationLogs BuyerRecommendationLog[]
+  emailOtps EmailOtp[]
+  refreshTokens RefreshToken[]
+
+  @@map("User")
+}
+
+model EmailOtp {
+  id          Int      @id @default(autoincrement())
+  email       String   @db.VarChar(191)
+  userId      Int?     @map("user_id")
+  codeHash    String   @map("code_hash") @db.VarChar(128)
+  expiresAt   DateTime @map("expires_at") @db.DateTime(3)
+  attempts    Int      @default(0)
+  maxAttempts Int      @default(5) @map("max_attempts")
+  lastSentAt  DateTime @map("last_sent_at") @db.DateTime(3)
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  consumedAt  DateTime? @map("consumed_at") @db.DateTime(3)
+
+  user User? @relation(fields: [userId], references: [id], map: "email_otp_user_id_fkey")
+
+  @@index([email], map: "email_otp_email_idx")
+  @@index([expiresAt], map: "email_otp_expires_at_idx")
+  @@index([createdAt], map: "email_otp_created_at_idx")
+  @@map("email_otp")
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  tokenHash String   @map("token_hash") @db.VarChar(128)
+  expiresAt DateTime @map("expires_at") @db.DateTime(3)
+  revokedAt DateTime? @map("revoked_at") @db.DateTime(3)
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(3)
+
+  user User @relation(fields: [userId], references: [id], map: "refresh_tokens_user_id_fkey")
+
+  @@index([userId], map: "refresh_tokens_user_id_idx")
+  @@index([expiresAt], map: "refresh_tokens_expires_at_idx")
+  @@index([createdAt], map: "refresh_tokens_created_at_idx")
+  @@map("refresh_tokens")
+}
+
+model OwnerMarketWatch {
+  id           Int      @id @default(autoincrement())
+  ownerId      Int      @map("owner_id")
+  city         String   @db.VarChar(128)
+  district     String   @db.VarChar(128)
+  propertyType String   @map("property_type") @db.VarChar(128)
+  daysWindow   Int      @default(90) @map("days_window")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  owner User @relation(fields: [ownerId], references: [id], map: "owner_market_watch_owner_id_fkey")
+
+  @@index([ownerId], map: "owner_market_watch_owner_id_idx")
+  @@unique([ownerId, city, district, propertyType], map: "owner_market_watch_owner_city_district_type_uq")
+  @@map("owner_market_watch")
+}
+
+model Appointment {
+  id         Int               @id @default(autoincrement())
+  clientId   Int
+  propertyId Int
+  date       DateTime
+  status     AppointmentStatus @default(PENDING)
+  notes      String?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  // relations
+  client   User     @relation("AppointmentClient", fields: [clientId], references: [id], map: "Appointment_clientId_fkey")
+  property Property @relation("AppointmentProperty", fields: [propertyId], references: [id], map: "Appointment_propertyId_fkey")
+
+  @@index([clientId], map: "Appointment_clientId_fkey")
+  @@index([propertyId], map: "Appointment_propertyId_fkey")
+  @@map("Appointment")
+}
+
+model Property {
+  id          Int           @id @default(autoincrement())
+  ownerId     Int
+  title       String
+  description String?
+  address     String?
+  area        Float?
+  city        String
+  image       String?
+  price       Float?
+  type        Property_type
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // relations
+  owner User @relation("PropertyOwner", fields: [ownerId], references: [id], map: "Property_ownerId_fkey")
+
+  appointments       Appointment[]       @relation("AppointmentProperty")
+  invoices           Invoice[]
+  maintenanceTickets MaintenanceTicket[]
+
+  @@index([ownerId], map: "Property_ownerId_fkey")
+  @@map("Property")
+}
+
+model Invoice {
+  id                   Int           @id @default(autoincrement())
+  clientId             Int
+  propertyId           Int
+  type                 InvoiceType
+  totalAmount          Float
+  tax                  Float         @default(0)
+  issueDate            DateTime      @default(now())
+  dueDate              DateTime?
+  status               InvoiceStatus @default(PENDING)
+  createdBy            Int
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  commissionPercentage Float         @default(5)
+
+  // relations
+  client   User     @relation("InvoiceClient", fields: [clientId], references: [id], map: "Invoice_clientId_fkey")
+  creator  User     @relation("InvoiceCreatedBy", fields: [createdBy], references: [id], map: "Invoice_createdBy_fkey")
+  property Property @relation(fields: [propertyId], references: [id], map: "Invoice_propertyId_fkey")
+
+  commissions Commission[]
+  expenses    Expense[]
+  payments    Payment[]
+
+  @@index([clientId], map: "Invoice_clientId_fkey")
+  @@index([createdBy], map: "Invoice_createdBy_fkey")
+  @@index([propertyId], map: "Invoice_propertyId_fkey")
+  @@map("Invoice")
+}
+
+model Commission {
+  id         Int      @id @default(autoincrement())
+  invoiceId  Int
+  amount     Float
+  percentage Float
+  createdAt  DateTime @default(now())
+
+  // relations
+  invoice Invoice @relation(fields: [invoiceId], references: [id], map: "Commission_invoiceId_fkey")
+
+  @@index([invoiceId], map: "Commission_invoiceId_fkey")
+  @@map("Commission")
+}
+
+model Expense {
+  id           Int      @id @default(autoincrement())
+  invoiceId    Int?
+  contractorId Int
+  ticketId     Int?
+  amount       Float
+  description  String
+  expenseDate  DateTime @default(now())
+
+  // relations
+  invoice    Invoice?           @relation(fields: [invoiceId], references: [id], map: "Expense_invoiceId_fkey")
+  contractor User               @relation("ExpenseContractor", fields: [contractorId], references: [id], map: "Expense_contractorId_fkey")
+  ticket     MaintenanceTicket? @relation(fields: [ticketId], references: [id], map: "Expense_ticketId_fkey")
+
+  @@index([contractorId], map: "Expense_contractorId_fkey")
+  @@index([invoiceId], map: "Expense_invoiceId_fkey")
+  @@index([ticketId], map: "Expense_ticketId_fkey")
+  @@map("Expense")
+}
+
+model MaintenanceTicket {
+  id          Int            @id @default(autoincrement())
+  propertyId  Int
+  clientId    Int
+  assignedTo  Int?
+  supplierId  Int?
+  category    String
+  description String
+  priority    TicketPriority @default(MEDIUM)
+  status      TicketStatus   @default(OPEN)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // relations
+  property Property @relation(fields: [propertyId], references: [id], map: "MaintenanceTicket_propertyId_fkey")
+
+  client   User  @relation("TicketClient", fields: [clientId], references: [id], map: "MaintenanceTicket_clientId_fkey")
+  worker   User? @relation("TicketWorker", fields: [assignedTo], references: [id], map: "MaintenanceTicket_assignedTo_fkey")
+  supplier User? @relation("TicketSupplier", fields: [supplierId], references: [id], map: "MaintenanceTicket_supplierId_fkey")
+
+  expenses Expense[]
+  logs     Ticketlog[]
+
+  @@index([assignedTo], map: "MaintenanceTicket_assignedTo_fkey")
+  @@index([clientId], map: "MaintenanceTicket_clientId_fkey")
+  @@index([propertyId], map: "MaintenanceTicket_propertyId_fkey")
+  @@index([supplierId], map: "MaintenanceTicket_supplierId_fkey")
+  @@map("Maintenanceticket")
+}
+
+model Ticketlog {
+  id         Int      @id @default(autoincrement())
+  ticketId   Int
+  userId     Int
+  action     String
+  actionDate DateTime @default(now())
+
+  // relations
+  ticket MaintenanceTicket @relation(fields: [ticketId], references: [id], map: "TicketLog_ticketId_fkey")
+  user   User              @relation("TicketLogUser", fields: [userId], references: [id], map: "TicketLog_userId_fkey")
+
+  @@index([ticketId], map: "TicketLog_ticketId_fkey")
+  @@index([userId], map: "TicketLog_userId_fkey")
+  @@map("Ticketlog")
+}
+
+model Payment {
+  id        Int      @id @default(autoincrement())
+  invoiceId Int
+  amount    Float
+  date      DateTime @default(now())
+
+  // relations
+  invoice Invoice @relation(fields: [invoiceId], references: [id], map: "Payment_invoiceId_fkey")
+
+  @@index([invoiceId], map: "Payment_invoiceId_fkey")
+  @@map("payment")
+}
+
+model AreasPrice {
+  city                 String
+  district             String
+  property_type        String
+  avg_price_per_m2     Float?
+  avg_price_per_m2_syp Float?
+  sample_count         Int      @default(0)
+  fx_usd_to_syp        Float?
+  fx_source            String?
+  updated_at           DateTime @default(now())
+
+  @@id([city, district, property_type])
+  @@map("areas_price")
+}
+
+model FxRate {
+  id           Int      @id @default(autoincrement())
+  usd_to_syp   Float
+  source       String?
+  effective_at DateTime @default(now())
+
+  @@index([effective_at])
+  @@map("fx_rates")
+}
+
+model MarketData {
+  id               Int      @id @default(autoincrement())
+  external_property_id String? @db.VarChar(191)
+  title            String?  @db.VarChar(512)
+  title_normalized String?  @db.VarChar(512)
+  city             String?
+  district         String?
+  address          String?
+  location_raw     String?  @db.VarChar(512)
+  area_m2          Float?
+  bedrooms         Int?
+  price_usd        Float?
+  price_raw        String?  @db.VarChar(191)
+  price_syp        Float?
+  price_per_m2     Float?
+  price_per_m2_syp Float?
+  property_type    String?
+  luxury_level     String?  @db.VarChar(128)
+  price_category   String?  @db.VarChar(128)
+  market_segment   String?  @db.VarChar(128)
+  source_name      String?  @db.VarChar(191)
+  phone            String?  @db.VarChar(191)
+  image_count      Int?
+  no_image_note    String?  @db.VarChar(255)
+  image_url        String?  @db.VarChar(1024)
+  image_1          String?  @db.VarChar(1024)
+  image_2          String?  @db.VarChar(1024)
+  image_3          String?  @db.VarChar(1024)
+  image_4          String?  @db.VarChar(1024)
+  image_5          String?  @db.VarChar(1024)
+  image_6          String?  @db.VarChar(1024)
+  has_image        Boolean?
+  missing_price_flag Boolean?
+  missing_area_flag Boolean?
+  missing_bedrooms_flag Boolean?
+  source_url       String?  @db.VarChar(1024)
+  source           String?
+  fx_usd_to_syp    Float?
+  fx_source        String?
+  ingest_hash      String?  @unique(map: "market_data_ingest_hash_unique") @db.VarChar(64)
+  is_outlier       Boolean  @default(false)
+  raw_json         Json?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @default(now()) @updatedAt
+
+  @@index([city, district, property_type])
+  @@index([external_property_id], map: "market_data_external_property_id_idx")
+  @@index([is_outlier], map: "market_data_is_outlier_idx")
+  @@map("market_data")
+}
+
+model MarketSnapshotDaily {
+  id                       Int      @id @default(autoincrement())
+  city                     String   @db.VarChar(128)
+  district                 String   @db.VarChar(128)
+  property_type            String   @db.VarChar(128)
+  snapshot_date            DateTime @db.Date
+  avg_price_per_m2_syp     Float
+  median_price_per_m2_syp  Float
+  min_price_per_m2_syp     Float
+  max_price_per_m2_syp     Float
+  sample_count             Int
+  volatility               Float
+  trend_direction          String?  @db.VarChar(16)
+  created_at               DateTime @default(now()) @db.DateTime(3)
+
+  @@unique([city, district, property_type, snapshot_date], map: "market_snapshot_daily_area_date_uq")
+  @@index([city, district, property_type], map: "market_snapshot_daily_area_idx")
+  @@index([snapshot_date], map: "market_snapshot_daily_snapshot_date_idx")
+  @@map("market_snapshot_daily")
+}
+
+model ExternalMarketSource {
+  id               Int      @id @default(autoincrement())
+  name             String   @db.VarChar(191)
+  source_type      String?  @db.VarChar(64)
+  base_url         String?  @db.VarChar(1024)
+  reliabilityScore Float    @default(1) @map("reliability_score")
+  isActive         Boolean  @default(true) @map("is_active")
+  methodologyJson  Json?    @map("methodology_json")
+  createdAt        DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.DateTime(3)
+
+  observations ExternalMarketObservation[]
+
+  @@index([isActive], map: "external_market_sources_is_active_idx")
+  @@map("external_market_sources")
+}
+
+model ExternalMarketObservation {
+  id           BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  sourceId     Int      @map("source_id")
+  city         String?  @db.VarChar(128)
+  district     String?  @db.VarChar(128)
+  propertyType String?  @map("property_type") @db.VarChar(128)
+  metric       String   @db.VarChar(64)
+  value        Float
+  valueUnit    String?  @map("value_unit") @db.VarChar(32)
+  url          String?  @db.VarChar(1024)
+  publishedAt  DateTime @map("published_at") @db.DateTime(3)
+  ingestHash   String   @unique(map: "external_market_observations_ingest_hash_uq") @map("ingest_hash") @db.VarChar(64)
+  rawJson      Json?    @map("raw_json")
+  createdAt    DateTime @default(now()) @map("created_at") @db.DateTime(3)
+
+  source ExternalMarketSource @relation(fields: [sourceId], references: [id], map: "external_market_observations_source_id_fkey")
+
+  @@index([sourceId], map: "external_market_observations_source_id_idx")
+  @@index([city, district, propertyType, metric], map: "external_market_observations_area_metric_idx")
+  @@index([publishedAt], map: "external_market_observations_published_at_idx")
+  @@map("external_market_observations")
+}
+
+model ExternalBaselineIndex {
+  id            BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  city          String   @db.VarChar(128)
+  district      String   @db.VarChar(128)
+  propertyType  String   @map("property_type") @db.VarChar(128)
+  metric        String   @db.VarChar(64)
+  periodStart   DateTime @map("period_start") @db.DateTime(3)
+  periodEnd     DateTime @map("period_end") @db.DateTime(3)
+  valueMean     Float    @map("value_mean")
+  valueMedian   Float    @map("value_median")
+  sampleCount   Int      @map("sample_count")
+  methodologyJson Json   @map("methodology_json")
+  sourcesJson   Json     @map("sources_json")
+  createdAt     DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.DateTime(3)
+
+  @@unique([city, district, propertyType, metric], map: "external_baseline_index_area_metric_uq")
+  @@index([city, district, propertyType], map: "external_baseline_index_area_idx")
+  @@map("external_baseline_index")
+}
+
+model AdvisorRequestLog {
+  id               BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  endpoint         String   @db.VarChar(64)
+  ownerId          Int?     @map("owner_id")
+  cityNorm         String?  @map("city_norm") @db.VarChar(128)
+  districtNorm     String?  @map("district_norm") @db.VarChar(128)
+  propertyTypeNorm String?  @map("property_type_norm") @db.VarChar(128)
+  areaKey          String?  @map("area_key") @db.VarChar(255)
+  areaM2           Float?   @map("area_m2")
+  sampleCount      Int?     @map("sample_count")
+  fxUsed           Float?   @map("fx_used")
+  verdict          String?  @db.VarChar(16)
+  confidence       Float?
+  requestJson      Json?    @map("request_json")
+  resultJson       Json?    @map("result_json")
+  statusCode       Int      @map("status_code")
+  latencyMs        Int      @map("latency_ms") @db.UnsignedInt
+  createdAt        DateTime @default(now()) @map("created_at") @db.DateTime(3)
+
+  @@index([createdAt], map: "advisor_request_logs_created_at_idx")
+  @@index([endpoint, createdAt], map: "advisor_request_logs_endpoint_created_at_idx")
+  @@index([ownerId, createdAt], map: "advisor_request_logs_owner_id_created_at_idx")
+  @@map("advisor_request_logs")
+}
+
+model AdvisorOutcome {
+  id            BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  logId         String   @map("log_id") @db.VarChar(64)
+  ownerId       Int?     @map("owner_id")
+  action        String   @db.VarChar(32)
+  finalPriceSyp BigInt   @map("final_price_syp")
+  createdAt     DateTime @default(now()) @map("created_at") @db.DateTime(3)
+
+  @@index([logId], map: "advisor_outcomes_log_id_idx")
+  @@index([action, createdAt], map: "advisor_outcomes_action_created_at_idx")
+  @@index([ownerId, createdAt], map: "advisor_outcomes_owner_id_created_at_idx")
+  @@map("advisor_outcomes")
+}
+
+model ChatSession {
+  id        Int               @id @default(autoincrement())
+  ownerId   Int               @map("owner_id")
+  title     String?           @db.VarChar(191)
+  status    ChatSessionStatus @default(ACTIVE)
+  metaJson  Json?             @map("meta_json")
+  createdAt DateTime          @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt DateTime          @updatedAt @map("updated_at") @db.DateTime(3)
+
+  owner    User          @relation(fields: [ownerId], references: [id], map: "chat_sessions_owner_id_fkey")
+  messages ChatMessage[]
+
+  @@index([ownerId], map: "chat_sessions_owner_id_idx")
+  @@index([ownerId, updatedAt], map: "chat_sessions_owner_id_updated_at_idx")
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        Int             @id @default(autoincrement())
+  sessionId Int             @map("session_id")
+  role      ChatMessageRole
+  text      String          @map("content") @db.Text
+  intent    String?         @db.VarChar(64)
+  payloadJson Json?         @map("payload_json")
+  createdAt DateTime        @default(now()) @map("created_at") @db.DateTime(3)
+
+  session ChatSession @relation(fields: [sessionId], references: [id], map: "chat_messages_session_id_fkey")
+
+  @@index([sessionId], map: "chat_messages_session_id_idx")
+  @@index([sessionId, createdAt], map: "chat_messages_session_id_created_at_idx")
+  @@map("chat_messages")
+}
+
+model BuyerChatSession {
+  id        Int      @id @default(autoincrement())
+  buyerId   Int      @map("buyer_id")
+  title     String?  @db.VarChar(191)
+  metaJson  Json?    @map("meta_json")
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(3)
+
+  buyer    User               @relation(fields: [buyerId], references: [id], map: "buyer_chat_sessions_buyer_id_fkey")
+  messages BuyerChatMessage[]
+  recommendationLogs BuyerRecommendationLog[]
+
+  @@index([buyerId], map: "buyer_chat_sessions_buyer_id_idx")
+  @@index([buyerId, createdAt], map: "buyer_chat_sessions_buyer_id_created_at_idx")
+  @@map("buyer_chat_sessions")
+}
+
+model BuyerRecommendationLog {
+  id                Int      @id @default(autoincrement())
+  buyerId           Int      @map("buyer_id")
+  sessionId         Int?     @map("session_id")
+  intent            String   @db.VarChar(64)
+  queryJson         Json     @map("query_json")
+  resultsJson       Json     @map("results_json")
+  marketContextJson Json?    @map("market_context_json")
+  createdAt         DateTime @default(now()) @map("created_at") @db.DateTime(3)
+
+  buyer   User             @relation(fields: [buyerId], references: [id], map: "buyer_recommendation_logs_buyer_id_fkey")
+  session BuyerChatSession? @relation(fields: [sessionId], references: [id], map: "buyer_recommendation_logs_session_id_fkey")
+
+  @@index([buyerId, createdAt], map: "buyer_recommendation_logs_buyer_id_created_at_idx")
+  @@index([sessionId], map: "buyer_recommendation_logs_session_id_idx")
+  @@index([createdAt], map: "buyer_recommendation_logs_created_at_idx")
+  @@map("buyer_recommendation_logs")
+}
+
+model BuyerSavedSearch {
+  id          Int      @id @default(autoincrement())
+  buyerId     Int      @map("buyer_id")
+  title       String?  @db.VarChar(191)
+  filtersJson Json     @map("filters_json")
+  filtersHash String   @unique(map: "buyer_saved_searches_filters_hash_key") @map("filters_hash") @db.VarChar(64)
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(3)
+
+  buyer User @relation(fields: [buyerId], references: [id], map: "buyer_saved_searches_buyer_id_fkey")
+
+  @@index([buyerId], map: "buyer_saved_searches_buyer_id_idx")
+  @@index([buyerId, createdAt], map: "buyer_saved_searches_buyer_id_created_at_idx")
+  @@map("buyer_saved_searches")
+}
+
+model BuyerChatMessage {
+  id         Int                 @id @default(autoincrement())
+  sessionId  Int                 @map("session_id")
+  role       BuyerChatMessageRole
+  content    String              @db.Text
+  intent     String?             @db.VarChar(64)
+  payloadJson Json?              @map("payload_json")
+  createdAt  DateTime            @default(now()) @map("created_at") @db.DateTime(3)
+
+  session BuyerChatSession @relation(fields: [sessionId], references: [id], map: "buyer_chat_messages_session_id_fkey")
+
+  @@index([sessionId], map: "buyer_chat_messages_session_id_idx")
+  @@index([sessionId, createdAt], map: "buyer_chat_messages_session_id_created_at_idx")
+  @@map("buyer_chat_messages")
+}
+
+enum Role {
+  ADMIN
+  ACCOUNTANT
+  CLIENT
+  OWNER
+  SUPPLIER
+  WORKER
+}
+
+enum AppointmentStatus {
+  PENDING
+  APPROVED
+  COMPLETED
+  CANCELLED
+}
+
+enum InvoiceType {
+  RENT
+  SALE
+  SERVICE
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum Property_type {
+  APARTMENT
+  HOUSE
+  VILLA
+  STUDIO
+  LAND
+}
+
+enum ChatSessionStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum ChatMessageRole {
+  USER
+  ASSISTANT
+  TOOL
+}
+
+enum BuyerChatMessageRole {
+  USER
+  ASSISTANT
+}

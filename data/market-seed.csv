@@ -1,0 +1,2001 @@
+city,district,property_type,area_m2,price_syp,price_usd,source,created_at
+damascus,shaalaan,house,164,1390106612,,seed,2025-12-07T08:03:28.557Z
+rif dimashq,qudsaya project,studio,26,206667098,,seed,2026-02-23T02:02:57.557Z
+rif dimashq,jaramana,apartment,193,705126465,,seed,2026-01-09T08:08:01.557Z
+damascus,mashrou dummar,studio,35,404191563,,seed,2025-12-13T17:35:53.557Z
+rif dimashq,darayya,land,484,1345377102,,seed,2026-01-02T01:46:11.557Z
+damascus,malki,apartment,110,1412010804,,seed,2026-03-01T18:47:10.557Z
+damascus,mashrou dummar,land,555,2519721053,,seed,2026-02-07T04:49:59.557Z
+damascus,hay al ameen,studio,36,420808172,,seed,2026-02-15T05:33:54.557Z
+damascus,midan,studio,57,204907127,,seed,2026-01-08T06:06:53.557Z
+damascus,kafr sousa,house,140,766460406,,seed,2026-02-20T03:00:12.557Z
+damascus,muhajireen,studio,48,702071712,,seed,2025-12-04T13:14:27.557Z
+damascus,khaled ibn al walid,apartment,176,1610314652,,seed,2025-12-12T05:02:08.557Z
+damascus,mazzeh,apartment,129,823283246,,seed,2026-03-01T05:48:42.557Z
+damascus,malki,house,169,1394237306,,seed,2026-02-19T03:57:12.557Z
+rif dimashq,harasta,apartment,159,435902501,,seed,2026-01-12T00:11:37.557Z
+damascus,mazzeh,studio,40,243701788,,seed,2025-12-25T20:30:46.557Z
+rif dimashq,qudsaya project,villa,312,4265136200,,seed,2025-12-26T14:40:12.557Z
+damascus,kafr sousa,apartment,172,1165749519,,seed,2025-12-20T00:12:40.557Z
+damascus,kafr sousa,land,444,1615198203,,seed,2025-11-11T04:17:20.557Z
+damascus,kafr sousa,house,208,1032713372,,seed,2025-12-24T07:06:02.557Z
+damascus,shaalaan,house,218,1735177842,,seed,2025-11-15T02:17:12.557Z
+damascus,mashrou dummar,apartment,141,1539698712,,seed,2025-12-23T03:27:02.557Z
+rif dimashq,qudsaya project,apartment,172,1667366907,,seed,2025-12-08T20:48:58.557Z
+damascus,malki,apartment,120,1518597588,,seed,2026-02-03T16:54:50.557Z
+damascus,mazzeh,apartment,125,604169059,,seed,2026-01-25T21:14:10.557Z
+rif dimashq,qudsaya project,villa,426,3396770640,,seed,2026-01-31T00:17:20.557Z
+damascus,mashrou dummar,apartment,102,1087067270,,seed,2026-01-29T00:51:40.557Z
+rif dimashq,sahnaya,house,154,591733939,,seed,2025-12-18T17:16:20.557Z
+damascus,abu rummaneh,house,106,1069324793,,seed,2025-12-05T02:59:10.557Z
+damascus,baghdad,apartment,135,1427962721,,seed,2026-01-09T09:15:20.557Z
+damascus,shaalaan,apartment,73,822134981,,seed,2025-11-07T17:15:51.557Z
+damascus,rukn al-din,studio,49,168728380,,seed,2026-01-06T20:16:52.557Z
+damascus,shaalaan,apartment,144,1417999863,,seed,2026-01-13T09:19:38.557Z
+rif dimashq,qudsaya project,apartment,153,1237255242,,seed,2026-02-04T12:54:44.557Z
+rif dimashq,qudsaya project,apartment,73,664274283,,seed,2026-02-12T16:59:22.557Z
+rif dimashq,qudsaya project,apartment,178,1588009756,,seed,2026-01-10T15:21:40.557Z
+rif dimashq,jaramana,land,421,920592005,,seed,2026-01-24T13:40:45.557Z
+damascus,malki,villa,184,2250213786,,seed,2026-01-31T17:45:24.557Z
+rif dimashq,mleiha,apartment,173,613669344,,seed,2026-01-16T06:02:47.557Z
+rif dimashq,artouz,house,101,498353011,,seed,2025-11-10T10:58:37.557Z
+damascus,mazzeh,house,171,800610797,,seed,2026-02-02T14:01:13.557Z
+damascus,hay al ameen,studio,28,411068287,,seed,2026-01-29T17:30:20.557Z
+rif dimashq,jaramana,apartment,169,378757598,,seed,2026-01-01T09:03:33.557Z
+damascus,midan,apartment,136,304968701,,seed,2025-11-26T05:25:38.557Z
+damascus,baghdad,apartment,190,1890390043,,seed,2025-12-08T03:41:23.557Z
+damascus,shaalaan,apartment,212,2023089086,,seed,2025-12-11T18:12:23.557Z
+damascus,rukn al-din,land,131,172674375,,seed,2026-02-11T23:16:40.557Z
+damascus,hay al ameen,villa,482,6698878857,,seed,2026-01-09T19:50:43.557Z
+damascus,malki,land,701,3994318629,,seed,2025-12-14T04:38:21.557Z
+rif dimashq,sahnaya,apartment,159,829757781,,seed,2026-01-10T22:19:48.557Z
+damascus,mashrou dummar,studio,38,430907334,,seed,2025-11-15T02:35:38.557Z
+damascus,muhajireen,apartment,144,1564865419,,seed,2026-02-09T19:08:50.557Z
+damascus,malki,house,252,2476644050,,seed,2025-12-15T17:07:05.557Z
+damascus,shaalaan,apartment,219,2830591515,,seed,2025-12-24T06:33:47.557Z
+damascus,malki,apartment,101,1179328108,,seed,2025-11-05T18:01:38.557Z
+rif dimashq,sahnaya,apartment,166,1217416795,,seed,2026-02-01T17:40:10.557Z
+damascus,kafr sousa,apartment,137,679429366,,seed,2025-11-11T13:15:13.557Z
+damascus,malki,apartment,151,1561396756,,seed,2025-12-18T21:18:50.557Z
+damascus,kafr sousa,apartment,207,1097110384,,seed,2025-11-11T08:18:45.557Z
+damascus,mazzeh,apartment,80,516293284,,seed,2025-11-18T06:57:29.557Z
+damascus,mazzeh,apartment,178,1246976233,,seed,2025-12-11T03:51:03.557Z
+rif dimashq,jaramana,house,117,234630727,,seed,2025-12-02T01:47:52.557Z
+rif dimashq,jaramana,land,415,586024339,,seed,2025-11-19T08:09:53.557Z
+damascus,muhajireen,apartment,123,1411287476,,seed,2026-01-06T08:22:26.557Z
+rif dimashq,jadidat al sheibani,land,808,2670714487,,seed,2025-11-16T18:31:53.557Z
+rif dimashq,artouz,apartment,92,587916136,,seed,2026-01-17T09:37:57.557Z
+damascus,hay al ameen,house,103,984518496,,seed,2026-02-16T22:42:11.557Z
+damascus,abu rummaneh,apartment,176,1414980960,,seed,2025-12-10T23:15:45.557Z
+damascus,khaled ibn al walid,house,99,603214771,,seed,2026-01-31T19:55:20.557Z
+damascus,shaalaan,apartment,113,1213975724,,seed,2025-11-04T20:23:28.557Z
+rif dimashq,jaramana,apartment,126,381296491,,seed,2026-02-14T10:40:06.557Z
+rif dimashq,jadidat al sheibani,apartment,145,627887700,,seed,2025-11-24T11:18:52.557Z
+rif dimashq,sahnaya,apartment,160,926673873,,seed,2026-01-08T02:21:04.557Z
+rif dimashq,jadidat al sheibani,apartment,121,740075459,,seed,2025-11-11T00:08:37.557Z
+rif dimashq,qudsaya project,apartment,114,1117623448,,seed,2025-12-06T21:16:31.557Z
+damascus,baghdad,apartment,78,906181773,,seed,2025-12-08T04:49:45.557Z
+damascus,kafr sousa,apartment,206,1385277237,,seed,2025-11-15T20:11:17.557Z
+damascus,mashrou dummar,studio,51,492813431,,seed,2025-12-03T17:55:41.557Z
+rif dimashq,darayya,house,230,858470400,,seed,2026-02-20T22:19:22.557Z
+damascus,abu rummaneh,apartment,165,1428499275,,seed,2025-11-15T04:21:53.557Z
+damascus,shaalaan,apartment,153,1893040149,,seed,2025-12-30T10:52:02.557Z
+damascus,abu rummaneh,apartment,204,1581664787,,seed,2026-02-20T20:54:02.557Z
+damascus,khaled ibn al walid,apartment,213,1288841657,,seed,2025-11-29T20:15:51.557Z
+damascus,malki,apartment,190,2042089559,,seed,2026-02-02T18:22:57.557Z
+damascus,mashrou dummar,apartment,172,1302045632,,seed,2026-02-18T15:27:43.557Z
+damascus,shaalaan,apartment,133,1398741100,,seed,2025-11-08T22:49:36.557Z
+damascus,kafr sousa,apartment,94,439979706,,seed,2025-11-28T05:39:07.557Z
+rif dimashq,darayya,apartment,120,461894400,,seed,2025-11-19T09:47:18.557Z
+rif dimashq,jaramana,apartment,103,250933176,,seed,2025-11-14T00:44:23.557Z
+damascus,rukn al-din,apartment,192,626869439,,seed,2025-11-07T10:36:33.557Z
+damascus,khaled ibn al walid,apartment,96,1125091196,,seed,2026-02-14T18:28:23.557Z
+rif dimashq,qudsaya project,land,327,1715477079,,seed,2025-12-08T18:06:40.557Z
+rif dimashq,jaramana,apartment,97,259489966,,seed,2025-12-09T18:48:52.557Z
+damascus,hay al ameen,house,245,1796852710,,seed,2025-12-31T22:50:58.557Z
+rif dimashq,mleiha,apartment,203,455261145,,seed,2025-11-19T11:21:13.557Z
+damascus,rukn al-din,studio,34,111712421,,seed,2025-11-09T22:52:05.557Z
+damascus,baghdad,apartment,211,2168346657,,seed,2025-11-24T22:10:20.557Z
+damascus,rukn al-din,studio,60,189160120,,seed,2026-02-24T10:53:35.557Z
+rif dimashq,jadidat al sheibani,studio,54,258809580,,seed,2025-12-01T09:19:54.557Z
+rif dimashq,mleiha,land,749,1497244844,,seed,2025-12-29T05:02:15.557Z
+damascus,shaalaan,studio,45,454828641,,seed,2026-03-02T20:41:44.557Z
+damascus,muhajireen,apartment,209,2198656003,,seed,2025-12-10T01:19:24.557Z
+rif dimashq,qudsaya project,house,205,1675551261,,seed,2025-12-04T17:21:50.557Z
+damascus,rukn al-din,apartment,77,256143591,,seed,2025-12-24T15:58:41.557Z
+damascus,rukn al-din,apartment,146,469647804,,seed,2025-12-16T03:40:45.557Z
+rif dimashq,mleiha,apartment,158,389188614,,seed,2025-12-02T16:06:24.557Z
+damascus,mazzeh,house,257,1490391109,,seed,2025-12-10T01:25:26.557Z
+damascus,malki,villa,295,3701989625,,seed,2026-01-08T14:13:48.557Z
+rif dimashq,mleiha,studio,30,95101270,,seed,2025-11-11T00:10:08.557Z
+damascus,muhajireen,apartment,208,2244670982,,seed,2026-01-10T11:13:05.557Z
+damascus,mazzeh,apartment,195,971238607,,seed,2025-12-10T14:55:38.557Z
+damascus,rukn al-din,apartment,92,261945107,,seed,2025-12-13T21:19:22.557Z
+rif dimashq,jaramana,apartment,189,515333217,,seed,2026-02-18T17:04:46.557Z
+damascus,hay al ameen,studio,54,384827868,,seed,2026-02-10T04:36:36.557Z
+rif dimashq,jaramana,house,257,719492857,,seed,2025-12-08T00:34:23.557Z
+damascus,kafr sousa,villa,469,4308566338,,seed,2026-01-30T11:27:00.557Z
+damascus,hay al ameen,studio,25,183300000,,seed,2025-12-07T12:16:04.557Z
+damascus,hay al ameen,apartment,187,2147347146,,seed,2026-01-29T13:38:28.557Z
+rif dimashq,artouz,house,295,1187841622,,seed,2026-02-10T05:05:58.557Z
+damascus,shaalaan,apartment,200,1882379860,,seed,2026-02-24T20:28:57.557Z
+damascus,muhajireen,apartment,122,1369964029,,seed,2025-12-04T22:00:05.557Z
+damascus,shaalaan,house,95,927263483,,seed,2026-03-02T18:19:32.557Z
+damascus,kafr sousa,land,588,1752408663,,seed,2026-01-25T09:36:24.557Z
+rif dimashq,jaramana,land,659,822926250,,seed,2025-11-25T18:35:40.557Z
+rif dimashq,artouz,studio,29,212313689,,seed,2025-11-20T10:08:47.557Z
+damascus,kafr sousa,studio,48,306449084,,seed,2025-12-03T07:51:15.557Z
+rif dimashq,jaramana,apartment,172,410564057,,seed,2025-12-29T19:36:55.557Z
+damascus,mashrou dummar,land,362,1890821216,,seed,2026-02-01T03:54:52.557Z
+rif dimashq,qudsaya project,apartment,198,1760904757,,seed,2026-01-18T04:10:19.557Z
+rif dimashq,artouz,villa,317,3090345010,,seed,2026-02-09T19:47:14.557Z
+rif dimashq,jadidat al sheibani,house,116,648749378,,seed,2026-01-19T09:00:03.557Z
+damascus,malki,villa,219,4186404000,,seed,2026-01-12T08:57:17.557Z
+rif dimashq,sahnaya,house,214,774188351,,seed,2025-12-23T06:19:11.557Z
+rif dimashq,jaramana,land,896,1604102962,,seed,2025-12-28T17:51:52.557Z
+damascus,rukn al-din,house,166,596106000,,seed,2026-01-09T16:12:17.557Z
+rif dimashq,artouz,apartment,84,461614804,,seed,2025-11-07T18:17:13.557Z
+rif dimashq,jaramana,apartment,77,223114983,,seed,2026-02-10T00:29:41.557Z
+rif dimashq,harasta,apartment,150,395053127,,seed,2025-12-06T20:32:20.557Z
+rif dimashq,jaramana,house,252,616299771,,seed,2026-02-02T07:57:04.557Z
+rif dimashq,sahnaya,apartment,197,1067971455,,seed,2026-01-05T08:49:07.557Z
+damascus,midan,studio,26,97640476,,seed,2026-02-24T14:55:34.557Z
+damascus,muhajireen,house,135,851937144,,seed,2026-02-09T09:34:07.557Z
+damascus,malki,apartment,175,1523589471,,seed,2026-02-02T00:32:23.557Z
+rif dimashq,sahnaya,land,247,532191413,,seed,2025-12-28T20:14:59.557Z
+damascus,shaalaan,apartment,211,2305963476,,seed,2026-02-09T15:08:44.557Z
+rif dimashq,mleiha,land,750,1145408504,,seed,2026-01-31T17:31:29.557Z
+rif dimashq,sahnaya,house,134,601809332,,seed,2025-12-07T07:16:24.557Z
+damascus,muhajireen,apartment,219,1902488877,,seed,2026-02-08T14:25:18.557Z
+damascus,mazzeh,apartment,104,882580595,,seed,2025-11-15T22:20:02.557Z
+damascus,malki,land,808,4298820210,,seed,2026-02-25T23:19:57.557Z
+rif dimashq,mleiha,land,392,467754000,,seed,2025-12-26T18:38:13.557Z
+rif dimashq,jaramana,apartment,83,193376477,,seed,2025-12-11T01:16:23.557Z
+damascus,mashrou dummar,apartment,123,1155478672,,seed,2026-02-16T10:31:59.557Z
+damascus,kafr sousa,studio,39,195607118,,seed,2025-11-13T08:36:54.557Z
+damascus,mashrou dummar,apartment,121,1238891323,,seed,2026-02-11T21:10:33.557Z
+damascus,shaalaan,villa,485,6341919743,,seed,2026-02-07T16:08:28.557Z
+damascus,rukn al-din,studio,56,173655005,,seed,2025-12-30T08:56:11.557Z
+damascus,mashrou dummar,apartment,133,1009183939,,seed,2026-01-26T17:25:23.557Z
+damascus,malki,apartment,190,1724583733,,seed,2026-01-07T21:38:40.557Z
+damascus,rukn al-din,apartment,88,342868680,,seed,2026-01-22T05:52:18.557Z
+rif dimashq,mleiha,house,144,362760682,,seed,2025-12-26T07:45:29.557Z
+damascus,abu rummaneh,apartment,81,1045460524,,seed,2025-12-05T12:27:14.557Z
+damascus,kafr sousa,villa,471,4384614775,,seed,2025-11-28T06:27:08.557Z
+damascus,rukn al-din,apartment,213,529246759,,seed,2025-11-23T08:21:36.557Z
+damascus,malki,apartment,162,1512069701,,seed,2026-01-25T17:25:26.557Z
+damascus,mazzeh,villa,206,1491958365,,seed,2025-11-29T16:10:24.557Z
+damascus,midan,apartment,180,559908033,,seed,2026-01-03T21:28:19.557Z
+rif dimashq,artouz,apartment,201,814706128,,seed,2025-12-31T22:46:49.557Z
+damascus,hay al ameen,apartment,219,1735385120,,seed,2026-01-30T16:25:18.557Z
+damascus,kafr sousa,apartment,139,897627447,,seed,2025-12-21T22:37:06.557Z
+damascus,mashrou dummar,villa,254,4369917600,,seed,2026-02-27T20:01:37.557Z
+rif dimashq,qudsaya project,apartment,166,1270758913,,seed,2026-03-03T01:18:57.557Z
+damascus,muhajireen,house,163,1361639893,,seed,2025-12-12T03:46:00.557Z
+damascus,malki,apartment,86,911645754,,seed,2025-12-18T18:45:45.557Z
+rif dimashq,harasta,apartment,171,366519622,,seed,2026-03-01T14:06:37.557Z
+rif dimashq,jaramana,apartment,163,579359587,,seed,2026-03-02T23:31:27.557Z
+rif dimashq,qudsaya project,house,185,1677732248,,seed,2025-12-19T04:52:02.557Z
+damascus,kafr sousa,apartment,171,799591804,,seed,2026-01-14T23:58:06.557Z
+rif dimashq,darayya,apartment,142,706007097,,seed,2025-12-05T08:32:44.557Z
+damascus,abu rummaneh,house,112,867154122,,seed,2026-03-01T19:28:43.557Z
+damascus,malki,villa,344,3653280000,,seed,2026-02-28T09:24:41.557Z
+rif dimashq,jaramana,villa,301,1650580700,,seed,2026-01-27T22:28:09.557Z
+rif dimashq,qudsaya project,apartment,132,1150252188,,seed,2026-02-01T16:52:18.557Z
+damascus,mazzeh,apartment,125,593481117,,seed,2026-03-01T22:51:44.557Z
+damascus,hay al ameen,apartment,82,637431031,,seed,2026-02-20T02:12:56.557Z
+rif dimashq,qudsaya project,house,202,1305947723,,seed,2025-11-13T04:15:25.557Z
+damascus,malki,villa,453,5493692835,,seed,2026-01-01T03:29:02.557Z
+damascus,rukn al-din,apartment,82,263410987,,seed,2026-01-27T06:25:21.557Z
+damascus,baghdad,apartment,102,953116075,,seed,2026-02-10T20:59:31.557Z
+rif dimashq,qudsaya project,villa,192,2684701307,,seed,2025-12-26T07:51:50.557Z
+damascus,kafr sousa,villa,330,2995825455,,seed,2026-02-17T17:22:20.557Z
+damascus,malki,apartment,106,929919918,,seed,2025-12-28T10:53:38.557Z
+rif dimashq,jadidat al sheibani,land,317,1193308782,,seed,2026-02-12T13:50:57.557Z
+damascus,hay al ameen,apartment,97,637662480,,seed,2025-11-23T01:48:23.557Z
+damascus,rukn al-din,apartment,209,829101274,,seed,2026-01-21T09:25:40.557Z
+damascus,khaled ibn al walid,apartment,166,1583123172,,seed,2026-02-06T11:05:41.557Z
+damascus,malki,apartment,116,1422490974,,seed,2025-11-04T14:40:02.557Z
+damascus,midan,apartment,152,325128000,,seed,2026-01-26T13:08:07.557Z
+damascus,abu rummaneh,villa,260,5018035357,,seed,2026-02-23T12:03:33.557Z
+rif dimashq,sahnaya,house,171,889796021,,seed,2026-01-29T03:20:00.557Z
+damascus,abu rummaneh,villa,516,5388588000,,seed,2026-01-15T01:09:53.557Z
+damascus,rukn al-din,apartment,211,711826909,,seed,2026-02-23T13:51:39.557Z
+damascus,khaled ibn al walid,studio,53,632117334,,seed,2026-03-01T15:29:28.557Z
+damascus,mazzeh,apartment,204,1288213028,,seed,2026-02-07T17:35:05.557Z
+rif dimashq,harasta,apartment,184,489296910,,seed,2026-01-10T20:53:06.557Z
+damascus,shaalaan,apartment,106,1203906135,,seed,2026-01-28T10:06:05.557Z
+damascus,mashrou dummar,apartment,214,2399460109,,seed,2026-01-01T09:29:44.557Z
+rif dimashq,qudsaya project,apartment,200,1993781769,,seed,2026-01-06T19:27:33.557Z
+damascus,mazzeh,apartment,148,820162712,,seed,2026-01-16T07:27:02.557Z
+damascus,mashrou dummar,apartment,187,1874659632,,seed,2026-01-01T12:02:42.557Z
+damascus,abu rummaneh,studio,37,476866122,,seed,2026-01-08T16:12:55.557Z
+damascus,muhajireen,house,246,2025164885,,seed,2026-01-21T18:14:42.557Z
+damascus,malki,apartment,155,1393309898,,seed,2026-02-19T21:25:00.557Z
+damascus,rukn al-din,apartment,151,386698880,,seed,2026-02-13T04:56:25.557Z
+rif dimashq,darayya,studio,37,301282416,,seed,2025-12-22T20:11:16.557Z
+rif dimashq,sahnaya,apartment,205,1368848792,,seed,2026-01-21T06:56:18.557Z
+damascus,mazzeh,apartment,189,913619377,,seed,2025-11-26T19:44:49.557Z
+rif dimashq,artouz,apartment,180,1164572696,,seed,2026-01-21T17:11:07.557Z
+rif dimashq,jadidat al sheibani,apartment,162,639241379,,seed,2026-02-27T04:55:58.557Z
+rif dimashq,jadidat al sheibani,apartment,111,595755664,,seed,2026-01-24T06:19:25.557Z
+damascus,rukn al-din,apartment,201,663284312,,seed,2025-11-26T16:23:52.557Z
+damascus,mazzeh,apartment,99,522949633,,seed,2026-01-21T20:19:28.557Z
+damascus,mazzeh,studio,40,201420958,,seed,2025-11-18T06:55:09.557Z
+rif dimashq,jadidat al sheibani,house,120,639357182,,seed,2026-02-01T12:39:04.557Z
+rif dimashq,mleiha,house,239,673955070,,seed,2025-12-05T20:19:23.557Z
+damascus,abu rummaneh,villa,409,5196801457,,seed,2025-12-04T14:15:16.557Z
+damascus,shaalaan,house,212,1622259810,,seed,2026-02-10T08:41:03.557Z
+rif dimashq,artouz,apartment,102,650440948,,seed,2025-12-13T15:56:59.557Z
+damascus,muhajireen,apartment,219,1760703603,,seed,2025-11-19T06:21:53.557Z
+damascus,khaled ibn al walid,apartment,113,1227744610,,seed,2026-02-27T07:58:30.557Z
+damascus,abu rummaneh,apartment,71,754398627,,seed,2026-01-05T00:23:44.557Z
+rif dimashq,jaramana,land,724,1664252156,,seed,2025-12-04T16:56:18.557Z
+rif dimashq,darayya,apartment,151,606358442,,seed,2025-12-26T11:10:15.557Z
+damascus,abu rummaneh,villa,478,6302146759,,seed,2025-11-04T19:08:14.557Z
+damascus,muhajireen,studio,51,601502615,,seed,2026-01-04T00:16:51.557Z
+rif dimashq,qudsaya project,house,190,1061910000,,seed,2026-02-18T00:32:36.558Z
+damascus,abu rummaneh,land,884,4068168000,,seed,2026-02-20T17:37:27.558Z
+damascus,shaalaan,apartment,216,2539067608,,seed,2026-02-20T21:56:43.558Z
+damascus,muhajireen,studio,59,465323265,,seed,2025-12-16T04:00:58.558Z
+damascus,baghdad,apartment,196,1517980565,,seed,2026-02-05T07:53:09.558Z
+damascus,midan,apartment,203,727668066,,seed,2025-12-03T18:00:21.558Z
+rif dimashq,artouz,studio,37,196957641,,seed,2026-01-08T05:17:44.558Z
+damascus,malki,apartment,100,797220000,,seed,2026-01-27T09:06:20.558Z
+damascus,rukn al-din,apartment,167,683868758,,seed,2025-11-23T23:04:39.558Z
+rif dimashq,mleiha,apartment,190,559102537,,seed,2025-12-15T19:08:12.558Z
+rif dimashq,sahnaya,apartment,181,1037451326,,seed,2025-12-04T03:07:02.558Z
+damascus,muhajireen,studio,51,515931671,,seed,2026-01-27T00:17:44.558Z
+rif dimashq,qudsaya project,apartment,177,1896380948,,seed,2025-12-08T21:24:36.558Z
+rif dimashq,jadidat al sheibani,apartment,193,789466500,,seed,2026-02-16T10:42:32.558Z
+rif dimashq,harasta,house,256,783433728,,seed,2025-12-30T23:31:08.558Z
+damascus,baghdad,apartment,113,1201681423,,seed,2025-12-26T20:12:07.558Z
+damascus,kafr sousa,apartment,194,1156111423,,seed,2025-12-22T15:03:12.558Z
+rif dimashq,jadidat al sheibani,apartment,157,797973833,,seed,2025-12-11T12:48:09.558Z
+rif dimashq,jaramana,apartment,101,259622618,,seed,2025-12-27T13:33:45.558Z
+damascus,shaalaan,apartment,109,1178343003,,seed,2026-01-18T22:55:59.558Z
+damascus,kafr sousa,apartment,132,933246350,,seed,2025-12-14T00:47:57.558Z
+damascus,khaled ibn al walid,apartment,121,1402136045,,seed,2025-12-15T22:59:29.558Z
+damascus,khaled ibn al walid,apartment,200,1469549590,,seed,2025-12-12T07:39:15.558Z
+damascus,muhajireen,villa,426,6048393958,,seed,2025-11-05T03:30:52.558Z
+damascus,khaled ibn al walid,studio,26,254994422,,seed,2025-12-17T15:38:21.558Z
+damascus,hay al ameen,apartment,163,1146611192,,seed,2026-02-16T17:37:38.558Z
+damascus,shaalaan,apartment,81,800504648,,seed,2025-12-26T12:12:42.558Z
+damascus,mashrou dummar,apartment,220,2098679555,,seed,2026-02-18T04:52:35.558Z
+damascus,hay al ameen,villa,324,3220663680,,seed,2026-01-05T01:04:44.558Z
+rif dimashq,mleiha,apartment,132,445425494,,seed,2026-03-01T05:06:23.558Z
+damascus,midan,apartment,166,539968153,,seed,2026-02-28T21:09:52.558Z
+rif dimashq,mleiha,house,172,335520951,,seed,2026-01-05T16:42:52.558Z
+rif dimashq,sahnaya,studio,30,161790868,,seed,2026-01-11T01:40:24.558Z
+damascus,mashrou dummar,apartment,70,692729306,,seed,2025-12-13T21:31:37.558Z
+rif dimashq,sahnaya,house,151,625482627,,seed,2026-02-02T20:36:28.558Z
+damascus,hay al ameen,apartment,163,1225334807,,seed,2025-12-19T20:48:33.558Z
+rif dimashq,darayya,apartment,148,929727196,,seed,2026-02-26T03:25:14.558Z
+damascus,shaalaan,apartment,194,1568193441,,seed,2025-12-02T07:12:44.558Z
+rif dimashq,mleiha,apartment,158,344878349,,seed,2025-11-27T10:24:44.558Z
+rif dimashq,sahnaya,apartment,72,327008757,,seed,2025-12-09T04:15:58.558Z
+damascus,mazzeh,apartment,78,564482811,,seed,2026-01-06T22:32:04.558Z
+rif dimashq,qudsaya project,house,176,1305397112,,seed,2026-01-23T23:07:05.558Z
+rif dimashq,qudsaya project,apartment,208,2075317059,,seed,2026-02-20T14:43:27.558Z
+rif dimashq,mleiha,studio,57,150405910,,seed,2026-01-11T07:35:47.558Z
+damascus,mazzeh,apartment,149,647295035,,seed,2026-01-06T18:20:14.558Z
+rif dimashq,qudsaya project,villa,386,3390494116,,seed,2025-12-15T15:29:29.558Z
+damascus,rukn al-din,apartment,169,581867843,,seed,2026-01-24T06:18:41.558Z
+damascus,kafr sousa,house,236,783081942,,seed,2026-01-14T03:21:25.558Z
+rif dimashq,mleiha,house,101,333870985,,seed,2026-01-14T23:57:56.558Z
+damascus,abu rummaneh,villa,287,4406730634,,seed,2025-12-12T07:20:42.558Z
+rif dimashq,qudsaya project,apartment,101,938408216,,seed,2026-02-21T23:20:33.558Z
+damascus,mazzeh,apartment,151,1224043255,,seed,2025-12-12T00:39:58.558Z
+damascus,shaalaan,land,811,5344661208,,seed,2025-11-04T06:09:58.558Z
+damascus,baghdad,apartment,73,699744822,,seed,2025-11-15T18:20:02.558Z
+rif dimashq,jadidat al sheibani,apartment,175,973495384,,seed,2026-02-22T04:26:38.558Z
+damascus,abu rummaneh,apartment,77,761678227,,seed,2025-11-15T19:17:25.558Z
+rif dimashq,jadidat al sheibani,studio,55,300618396,,seed,2026-01-03T22:19:38.558Z
+damascus,kafr sousa,apartment,176,903271677,,seed,2025-11-09T13:54:27.558Z
+damascus,khaled ibn al walid,apartment,187,1431009274,,seed,2026-01-23T06:29:35.558Z
+rif dimashq,qudsaya project,apartment,173,1689919637,,seed,2026-01-22T05:22:23.558Z
+damascus,rukn al-din,apartment,128,291201600,,seed,2025-11-10T00:04:26.558Z
+rif dimashq,qudsaya project,land,294,1294112421,,seed,2025-11-25T01:03:43.558Z
+rif dimashq,sahnaya,apartment,117,492202522,,seed,2025-11-23T15:04:32.558Z
+damascus,kafr sousa,house,227,1084275647,,seed,2025-11-17T01:41:48.558Z
+damascus,shaalaan,apartment,218,1958529298,,seed,2026-02-03T14:43:41.558Z
+damascus,abu rummaneh,apartment,102,816918826,,seed,2025-12-03T04:35:16.558Z
+damascus,muhajireen,apartment,111,1004635280,,seed,2025-11-17T11:35:58.558Z
+rif dimashq,darayya,house,170,806102266,,seed,2026-02-06T22:52:12.558Z
+damascus,mazzeh,house,155,580320000,,seed,2025-11-21T02:16:12.558Z
+rif dimashq,jadidat al sheibani,apartment,170,911944482,,seed,2025-12-27T06:12:21.558Z
+damascus,rukn al-din,apartment,196,527899732,,seed,2025-12-07T17:29:01.558Z
+damascus,abu rummaneh,apartment,128,1104153258,,seed,2025-11-04T01:59:35.558Z
+rif dimashq,jadidat al sheibani,house,118,390816000,,seed,2026-02-28T06:12:05.558Z
+rif dimashq,qudsaya project,land,469,2177839372,,seed,2025-12-30T08:38:27.558Z
+damascus,malki,apartment,158,1566407707,,seed,2026-02-04T10:36:12.558Z
+damascus,muhajireen,apartment,184,1543785182,,seed,2025-11-11T14:55:50.558Z
+rif dimashq,jaramana,house,142,286075914,,seed,2025-11-14T22:07:09.558Z
+damascus,shaalaan,apartment,128,997882843,,seed,2025-12-31T00:07:51.558Z
+damascus,hay al ameen,apartment,170,1720653446,,seed,2026-01-10T03:02:43.558Z
+rif dimashq,qudsaya project,apartment,134,1203497960,,seed,2025-12-05T16:08:57.558Z
+rif dimashq,darayya,apartment,90,511043330,,seed,2025-11-18T07:50:24.558Z
+damascus,khaled ibn al walid,apartment,175,1435314315,,seed,2025-12-03T23:11:07.558Z
+damascus,rukn al-din,studio,55,187895484,,seed,2025-12-01T18:47:42.558Z
+rif dimashq,jadidat al sheibani,apartment,82,635816990,,seed,2026-02-20T19:43:48.558Z
+damascus,abu rummaneh,apartment,163,1996528600,,seed,2025-11-29T00:57:50.558Z
+rif dimashq,sahnaya,land,834,2032964954,,seed,2025-12-09T18:07:43.558Z
+damascus,hay al ameen,apartment,179,1497370943,,seed,2025-12-26T19:25:53.558Z
+damascus,baghdad,studio,27,284198322,,seed,2026-02-14T07:11:31.558Z
+rif dimashq,qudsaya project,house,118,1012712697,,seed,2026-02-25T22:52:10.558Z
+rif dimashq,sahnaya,apartment,93,510832704,,seed,2026-02-03T22:58:35.558Z
+damascus,mashrou dummar,apartment,139,1163067352,,seed,2026-02-17T14:45:11.558Z
+damascus,mazzeh,apartment,214,1091602902,,seed,2026-01-02T04:27:05.558Z
+rif dimashq,qudsaya project,apartment,206,1370921760,,seed,2026-02-04T22:11:08.558Z
+damascus,kafr sousa,studio,39,183777750,,seed,2026-01-01T18:16:58.558Z
+damascus,kafr sousa,villa,358,2857476595,,seed,2026-01-27T16:24:55.558Z
+damascus,baghdad,apartment,213,2570358566,,seed,2025-11-11T15:06:58.558Z
+damascus,mazzeh,apartment,163,665046951,,seed,2026-01-26T16:44:05.558Z
+rif dimashq,mleiha,house,206,575280043,,seed,2026-02-26T16:00:21.558Z
+damascus,rukn al-din,apartment,200,541212024,,seed,2025-11-18T07:02:09.558Z
+damascus,rukn al-din,land,757,1542183384,,seed,2026-01-03T17:37:53.558Z
+rif dimashq,artouz,apartment,157,998125373,,seed,2026-02-28T11:12:17.558Z
+rif dimashq,sahnaya,studio,31,193655344,,seed,2025-11-23T04:36:51.558Z
+rif dimashq,qudsaya project,apartment,148,1149445136,,seed,2025-12-13T02:47:23.558Z
+damascus,midan,apartment,110,252986210,,seed,2026-02-19T04:38:23.558Z
+damascus,abu rummaneh,apartment,78,963917371,,seed,2025-12-30T13:34:50.558Z
+damascus,mazzeh,house,111,608632437,,seed,2026-01-08T15:26:39.558Z
+rif dimashq,mleiha,villa,293,1593032340,,seed,2026-03-02T05:01:07.558Z
+damascus,abu rummaneh,apartment,126,1257698235,,seed,2026-01-12T11:53:33.558Z
+damascus,mazzeh,studio,40,240730787,,seed,2026-01-08T19:26:38.558Z
+damascus,malki,studio,58,689267900,,seed,2026-01-24T09:45:01.558Z
+damascus,mashrou dummar,apartment,154,1594308061,,seed,2025-11-26T17:43:02.558Z
+rif dimashq,sahnaya,villa,429,3294350236,,seed,2025-12-12T02:30:48.558Z
+rif dimashq,darayya,studio,58,272406378,,seed,2026-01-02T21:09:16.558Z
+damascus,muhajireen,house,122,936018755,,seed,2025-11-19T02:14:56.558Z
+damascus,mashrou dummar,studio,33,312469834,,seed,2026-01-23T03:43:47.558Z
+damascus,baghdad,apartment,110,1296607453,,seed,2026-02-19T12:19:43.558Z
+damascus,muhajireen,studio,49,678501700,,seed,2025-12-24T23:26:46.558Z
+damascus,rukn al-din,apartment,104,319063676,,seed,2026-02-12T20:19:20.558Z
+rif dimashq,mleiha,studio,46,168378970,,seed,2025-12-08T20:45:20.558Z
+rif dimashq,qudsaya project,apartment,74,877917204,,seed,2025-12-06T11:46:53.558Z
+damascus,rukn al-din,apartment,82,193570906,,seed,2026-02-10T20:15:49.558Z
+damascus,mashrou dummar,studio,55,658413305,,seed,2025-12-30T08:58:21.558Z
+rif dimashq,jaramana,land,478,938134763,,seed,2026-02-06T17:41:27.558Z
+damascus,mazzeh,apartment,77,463731364,,seed,2026-01-14T03:22:27.558Z
+damascus,rukn al-din,apartment,128,350141085,,seed,2025-11-10T14:01:45.558Z
+rif dimashq,sahnaya,apartment,147,800340699,,seed,2026-01-08T04:42:55.558Z
+damascus,kafr sousa,villa,420,2999183636,,seed,2026-01-16T17:57:17.558Z
+rif dimashq,mleiha,apartment,89,179735055,,seed,2026-02-11T14:51:04.558Z
+damascus,khaled ibn al walid,apartment,116,1069948077,,seed,2026-01-30T22:30:07.558Z
+damascus,muhajireen,studio,57,592349038,,seed,2025-11-24T21:31:07.558Z
+damascus,kafr sousa,apartment,218,1224899289,,seed,2026-03-01T02:27:39.558Z
+rif dimashq,darayya,studio,48,210816000,,seed,2025-11-29T10:18:47.558Z
+rif dimashq,jadidat al sheibani,apartment,148,1122076800,,seed,2026-02-07T20:52:53.558Z
+rif dimashq,qudsaya project,apartment,89,590449001,,seed,2026-01-09T14:42:50.558Z
+damascus,malki,apartment,159,1256516693,,seed,2025-11-11T02:31:37.558Z
+rif dimashq,mleiha,house,281,668764338,,seed,2025-12-14T21:59:16.558Z
+damascus,kafr sousa,apartment,140,812533075,,seed,2025-11-29T10:25:50.558Z
+damascus,muhajireen,apartment,213,2647983769,,seed,2025-12-17T09:50:03.558Z
+rif dimashq,darayya,house,216,1058278919,,seed,2026-03-01T11:18:38.558Z
+damascus,hay al ameen,house,179,1710959328,,seed,2026-01-05T04:03:55.558Z
+damascus,baghdad,villa,266,2732881896,,seed,2025-11-18T17:48:00.558Z
+damascus,shaalaan,apartment,129,1116168200,,seed,2025-12-14T13:36:00.558Z
+rif dimashq,artouz,land,439,1417114772,,seed,2025-11-05T11:51:19.558Z
+damascus,baghdad,house,222,1235549880,,seed,2025-11-17T08:04:15.558Z
+damascus,kafr sousa,apartment,190,1155683996,,seed,2026-02-17T12:38:17.558Z
+rif dimashq,mleiha,house,210,450634670,,seed,2025-12-12T03:41:46.558Z
+rif dimashq,artouz,apartment,71,487737878,,seed,2026-01-16T01:51:53.558Z
+damascus,baghdad,villa,458,6280238520,,seed,2025-11-05T07:08:39.558Z
+damascus,abu rummaneh,apartment,71,666216502,,seed,2025-11-05T00:39:46.558Z
+damascus,malki,apartment,182,2165246870,,seed,2026-01-24T10:58:38.558Z
+damascus,kafr sousa,apartment,168,824862936,,seed,2025-12-25T03:13:29.558Z
+rif dimashq,darayya,villa,272,2626919424,,seed,2025-11-05T22:37:37.558Z
+damascus,muhajireen,villa,392,4233811680,,seed,2025-12-28T14:13:21.558Z
+damascus,rukn al-din,apartment,113,306362286,,seed,2025-12-14T11:25:37.558Z
+damascus,kafr sousa,apartment,107,657272960,,seed,2025-11-06T07:05:32.558Z
+damascus,muhajireen,apartment,80,818703968,,seed,2025-11-25T09:52:37.558Z
+damascus,baghdad,studio,56,518501037,,seed,2026-03-03T06:45:58.558Z
+damascus,hay al ameen,apartment,113,1057074493,,seed,2025-12-29T12:55:03.558Z
+rif dimashq,mleiha,villa,319,1318254071,,seed,2025-11-27T06:29:24.558Z
+damascus,midan,apartment,217,536114601,,seed,2026-01-27T20:33:41.558Z
+damascus,khaled ibn al walid,apartment,201,2160269980,,seed,2025-11-29T21:15:50.558Z
+rif dimashq,qudsaya project,land,517,3542794200,,seed,2026-01-15T11:01:03.558Z
+damascus,khaled ibn al walid,apartment,104,909772241,,seed,2026-02-15T22:26:59.558Z
+rif dimashq,darayya,house,147,667965764,,seed,2026-02-14T11:02:50.558Z
+damascus,abu rummaneh,apartment,157,1435952900,,seed,2025-12-24T23:23:33.558Z
+damascus,baghdad,apartment,139,1176792395,,seed,2025-12-08T16:40:57.558Z
+damascus,hay al ameen,apartment,150,1131480408,,seed,2026-01-02T15:11:04.558Z
+rif dimashq,artouz,house,250,887347659,,seed,2025-11-26T22:36:45.558Z
+damascus,kafr sousa,apartment,90,520809678,,seed,2026-01-18T03:54:15.558Z
+damascus,midan,studio,32,93036721,,seed,2026-02-02T06:58:06.558Z
+damascus,baghdad,apartment,179,1532817169,,seed,2026-02-21T19:30:59.558Z
+damascus,hay al ameen,apartment,192,1768602018,,seed,2025-12-23T19:13:10.558Z
+rif dimashq,mleiha,apartment,182,391766500,,seed,2026-01-24T04:51:56.558Z
+damascus,rukn al-din,apartment,99,350873044,,seed,2026-01-18T21:21:15.558Z
+damascus,khaled ibn al walid,apartment,120,1318608348,,seed,2026-01-08T15:44:11.558Z
+damascus,malki,apartment,210,3174118058,,seed,2026-01-24T05:10:48.558Z
+rif dimashq,jaramana,apartment,109,358232632,,seed,2026-02-21T01:36:23.558Z
+damascus,khaled ibn al walid,apartment,123,987476620,,seed,2026-02-28T14:26:57.558Z
+damascus,kafr sousa,land,360,1386419849,,seed,2026-01-17T04:02:57.558Z
+rif dimashq,darayya,apartment,130,626515272,,seed,2026-01-28T07:52:35.558Z
+rif dimashq,jadidat al sheibani,studio,25,189285092,,seed,2025-11-17T11:59:10.558Z
+rif dimashq,harasta,apartment,176,436692646,,seed,2025-11-30T01:36:38.558Z
+damascus,kafr sousa,land,264,613800000,,seed,2026-02-19T08:05:15.558Z
+damascus,midan,land,583,1202163681,,seed,2025-11-29T12:27:01.558Z
+rif dimashq,qudsaya project,house,206,1706857083,,seed,2025-11-09T02:45:17.558Z
+damascus,rukn al-din,apartment,79,199579315,,seed,2026-01-21T04:02:10.558Z
+rif dimashq,jaramana,apartment,210,601789271,,seed,2025-11-13T19:37:03.558Z
+damascus,hay al ameen,apartment,71,620390984,,seed,2026-02-14T04:11:09.558Z
+damascus,hay al ameen,apartment,157,1114660310,,seed,2026-01-25T08:46:20.558Z
+damascus,khaled ibn al walid,apartment,195,1807796423,,seed,2026-01-02T01:42:46.558Z
+rif dimashq,jaramana,house,253,807123922,,seed,2026-02-26T16:35:25.558Z
+damascus,khaled ibn al walid,apartment,219,2173038329,,seed,2025-11-14T21:34:44.558Z
+rif dimashq,qudsaya project,apartment,96,864108249,,seed,2025-11-09T01:06:58.558Z
+damascus,mazzeh,villa,477,4709891324,,seed,2026-02-18T00:23:17.558Z
+rif dimashq,jaramana,house,155,449231452,,seed,2025-11-23T15:27:53.558Z
+rif dimashq,qudsaya project,apartment,158,1549368924,,seed,2025-11-24T16:42:04.558Z
+damascus,muhajireen,apartment,133,1797212907,,seed,2026-02-01T03:34:23.558Z
+rif dimashq,jaramana,studio,45,127019122,,seed,2026-02-04T23:16:27.558Z
+damascus,baghdad,house,140,1057160128,,seed,2026-02-19T07:53:49.558Z
+damascus,kafr sousa,apartment,123,581262902,,seed,2026-02-26T22:04:19.558Z
+rif dimashq,artouz,house,215,978527087,,seed,2026-01-12T23:00:10.558Z
+damascus,kafr sousa,apartment,210,973956301,,seed,2025-12-03T04:26:02.558Z
+damascus,mashrou dummar,apartment,111,750029220,,seed,2026-01-11T08:45:54.558Z
+damascus,kafr sousa,apartment,177,1132062281,,seed,2026-01-28T12:47:27.558Z
+damascus,malki,apartment,106,1008868308,,seed,2025-11-25T22:02:44.558Z
+damascus,malki,apartment,162,1883963935,,seed,2025-12-18T20:20:22.558Z
+rif dimashq,harasta,house,210,388080000,,seed,2026-01-26T10:29:42.558Z
+rif dimashq,sahnaya,apartment,208,1054254888,,seed,2026-01-07T04:33:54.558Z
+damascus,malki,apartment,186,1554811200,,seed,2026-01-12T09:41:27.558Z
+damascus,kafr sousa,apartment,115,769343631,,seed,2025-11-13T19:20:33.558Z
+damascus,khaled ibn al walid,apartment,108,1222327914,,seed,2025-11-07T02:10:19.558Z
+damascus,abu rummaneh,apartment,77,820966703,,seed,2026-02-14T02:37:57.558Z
+damascus,mashrou dummar,apartment,201,1638061167,,seed,2025-12-02T04:55:34.558Z
+damascus,malki,apartment,155,1308632760,,seed,2025-12-15T20:52:42.558Z
+rif dimashq,darayya,house,137,864212990,,seed,2025-11-11T02:15:11.558Z
+damascus,malki,house,140,1247500059,,seed,2026-02-03T13:00:34.558Z
+rif dimashq,jadidat al sheibani,studio,47,250375179,,seed,2026-01-26T18:15:35.558Z
+damascus,mashrou dummar,studio,41,561913200,,seed,2025-11-05T13:53:51.558Z
+rif dimashq,sahnaya,house,244,1092033563,,seed,2025-11-22T08:46:47.558Z
+damascus,mazzeh,house,136,634164978,,seed,2025-12-03T17:56:23.558Z
+rif dimashq,qudsaya project,apartment,83,874781620,,seed,2026-02-21T09:46:57.558Z
+rif dimashq,jaramana,house,273,661945223,,seed,2026-02-08T14:06:57.558Z
+rif dimashq,sahnaya,apartment,109,585433211,,seed,2025-11-18T09:55:10.558Z
+rif dimashq,sahnaya,apartment,81,509230901,,seed,2025-11-24T02:26:13.558Z
+damascus,malki,studio,58,637905770,,seed,2025-11-24T21:29:32.558Z
+rif dimashq,sahnaya,apartment,118,432288522,,seed,2025-12-09T15:12:55.558Z
+rif dimashq,sahnaya,house,266,1438667358,,seed,2025-11-07T11:16:52.558Z
+damascus,mashrou dummar,apartment,91,890234469,,seed,2025-12-11T05:31:18.558Z
+damascus,hay al ameen,apartment,85,852110120,,seed,2025-11-11T12:54:45.558Z
+damascus,hay al ameen,studio,25,256839982,,seed,2026-02-11T11:18:51.558Z
+damascus,mazzeh,apartment,88,488864572,,seed,2026-01-07T14:39:49.558Z
+rif dimashq,harasta,apartment,159,608987808,,seed,2026-01-04T08:31:27.558Z
+damascus,kafr sousa,studio,44,286687230,,seed,2025-11-18T06:03:41.558Z
+damascus,malki,house,123,965123294,,seed,2026-02-09T09:17:59.558Z
+damascus,abu rummaneh,apartment,132,1684757284,,seed,2026-02-25T09:28:01.558Z
+damascus,khaled ibn al walid,house,192,1543157746,,seed,2025-12-28T17:53:23.558Z
+rif dimashq,darayya,studio,42,335355552,,seed,2026-01-29T04:14:00.558Z
+rif dimashq,jaramana,house,123,216919082,,seed,2025-12-16T18:16:30.558Z
+rif dimashq,qudsaya project,apartment,152,1584795351,,seed,2026-01-08T18:52:02.558Z
+damascus,midan,apartment,167,429341246,,seed,2026-01-16T23:51:46.558Z
+damascus,khaled ibn al walid,studio,29,219379806,,seed,2026-02-25T14:54:21.558Z
+rif dimashq,jadidat al sheibani,house,226,813600000,,seed,2026-01-08T20:00:18.558Z
+damascus,malki,apartment,104,1178955591,,seed,2026-01-15T10:34:14.558Z
+rif dimashq,artouz,apartment,129,985376645,,seed,2025-12-16T16:07:59.558Z
+damascus,muhajireen,studio,47,459219339,,seed,2025-12-02T12:37:00.558Z
+damascus,abu rummaneh,studio,52,528516411,,seed,2026-02-21T05:15:31.558Z
+damascus,kafr sousa,apartment,118,492237000,,seed,2025-12-07T17:15:23.558Z
+rif dimashq,sahnaya,house,270,1748502550,,seed,2025-12-17T21:14:28.558Z
+damascus,shaalaan,apartment,196,1964036158,,seed,2025-11-26T22:42:24.558Z
+damascus,shaalaan,apartment,160,1525134559,,seed,2026-01-12T10:18:15.558Z
+damascus,kafr sousa,land,503,2273459400,,seed,2026-01-23T23:48:38.558Z
+damascus,midan,apartment,218,541160789,,seed,2026-01-18T12:12:36.558Z
+damascus,abu rummaneh,apartment,218,1960179476,,seed,2026-02-05T10:53:30.558Z
+damascus,malki,apartment,103,1037368304,,seed,2026-03-03T00:40:50.558Z
+damascus,kafr sousa,apartment,211,1108707374,,seed,2026-02-01T17:49:14.558Z
+damascus,shaalaan,apartment,159,1765152744,,seed,2026-01-27T06:45:26.558Z
+damascus,kafr sousa,studio,48,362018329,,seed,2026-01-10T11:29:32.558Z
+damascus,shaalaan,studio,52,423894371,,seed,2026-01-25T22:44:02.558Z
+damascus,malki,house,114,1366632000,,seed,2025-11-23T03:23:50.558Z
+damascus,malki,apartment,192,1547791076,,seed,2025-12-07T08:00:34.558Z
+damascus,kafr sousa,villa,343,3921455150,,seed,2026-02-01T23:02:58.558Z
+damascus,mashrou dummar,apartment,204,2195487348,,seed,2025-12-09T23:15:37.558Z
+damascus,shaalaan,studio,55,538719204,,seed,2026-02-20T07:05:04.558Z
+rif dimashq,sahnaya,house,282,1060969864,,seed,2025-11-03T18:40:23.558Z
+rif dimashq,darayya,apartment,156,864337502,,seed,2026-02-10T12:28:10.558Z
+damascus,midan,apartment,214,553968007,,seed,2025-11-05T13:15:16.558Z
+damascus,mazzeh,apartment,71,573415471,,seed,2026-01-06T21:05:41.558Z
+damascus,khaled ibn al walid,house,234,2170667262,,seed,2026-02-23T20:20:25.558Z
+rif dimashq,sahnaya,apartment,75,484332148,,seed,2025-11-14T20:18:09.558Z
+rif dimashq,sahnaya,land,345,1014205448,,seed,2025-12-21T10:30:49.558Z
+damascus,malki,apartment,152,1697143382,,seed,2025-12-25T05:34:56.558Z
+damascus,baghdad,house,151,1174477349,,seed,2026-01-13T05:54:50.558Z
+damascus,rukn al-din,studio,27,107848577,,seed,2026-01-08T02:00:21.558Z
+rif dimashq,artouz,house,163,754433832,,seed,2026-01-12T05:52:00.558Z
+damascus,abu rummaneh,apartment,142,1854029876,,seed,2026-01-21T10:15:41.558Z
+damascus,muhajireen,land,166,1009545283,,seed,2025-12-12T20:33:29.558Z
+rif dimashq,jadidat al sheibani,apartment,183,1150691717,,seed,2026-02-04T02:32:40.558Z
+damascus,midan,apartment,162,448578151,,seed,2026-01-05T21:19:00.558Z
+damascus,malki,apartment,117,1678945320,,seed,2026-02-16T07:48:56.558Z
+rif dimashq,sahnaya,apartment,181,734043287,,seed,2026-01-13T20:01:06.558Z
+rif dimashq,qudsaya project,apartment,166,1422030501,,seed,2026-01-09T13:05:20.558Z
+damascus,hay al ameen,studio,27,237112161,,seed,2025-11-04T22:41:13.558Z
+damascus,kafr sousa,apartment,87,430001815,,seed,2025-11-22T14:39:19.558Z
+damascus,midan,apartment,143,399965107,,seed,2026-01-27T02:33:36.558Z
+rif dimashq,sahnaya,apartment,145,693511251,,seed,2025-12-03T12:17:10.558Z
+damascus,abu rummaneh,apartment,104,1070968254,,seed,2026-01-07T15:24:56.558Z
+rif dimashq,harasta,apartment,122,340978106,,seed,2025-11-20T06:23:57.558Z
+rif dimashq,jaramana,land,197,411989881,,seed,2025-12-28T07:34:54.558Z
+damascus,mashrou dummar,apartment,135,1003519495,,seed,2026-03-01T16:00:20.558Z
+damascus,muhajireen,land,209,1365357899,,seed,2025-11-10T17:28:18.558Z
+damascus,rukn al-din,studio,42,159169658,,seed,2026-01-26T17:13:48.558Z
+damascus,rukn al-din,apartment,220,713975212,,seed,2026-01-23T13:20:50.558Z
+damascus,hay al ameen,apartment,85,767266103,,seed,2026-01-26T23:09:29.558Z
+rif dimashq,qudsaya project,apartment,169,1285042105,,seed,2026-01-30T12:21:39.558Z
+rif dimashq,darayya,house,170,867702669,,seed,2025-12-25T02:11:05.558Z
+rif dimashq,mleiha,apartment,103,287684080,,seed,2026-01-23T00:00:56.558Z
+rif dimashq,jaramana,villa,448,2315345199,,seed,2025-12-23T12:19:22.558Z
+damascus,mazzeh,apartment,108,666669410,,seed,2025-12-07T06:41:25.558Z
+damascus,mazzeh,apartment,153,1057288115,,seed,2026-01-02T05:58:53.558Z
+damascus,khaled ibn al walid,apartment,165,1337720710,,seed,2026-01-09T16:18:11.558Z
+damascus,midan,apartment,112,394673817,,seed,2026-01-28T02:30:25.558Z
+rif dimashq,darayya,apartment,110,647567900,,seed,2025-12-09T13:01:54.558Z
+damascus,muhajireen,apartment,111,1370035428,,seed,2026-02-11T09:52:43.558Z
+rif dimashq,sahnaya,studio,31,201922114,,seed,2025-11-21T13:06:29.558Z
+rif dimashq,darayya,studio,57,273787866,,seed,2025-11-24T15:55:31.558Z
+damascus,muhajireen,studio,38,493093849,,seed,2025-11-19T22:14:01.558Z
+damascus,shaalaan,apartment,182,2510267760,,seed,2026-02-05T11:03:18.558Z
+rif dimashq,qudsaya project,apartment,151,1316032710,,seed,2025-12-08T19:41:04.558Z
+damascus,shaalaan,house,247,1853087531,,seed,2025-12-09T19:04:47.558Z
+damascus,shaalaan,studio,55,555377729,,seed,2026-02-21T07:15:47.558Z
+damascus,malki,house,120,1021462165,,seed,2025-11-17T21:32:47.558Z
+rif dimashq,darayya,apartment,200,1367616452,,seed,2026-02-23T15:38:02.558Z
+damascus,muhajireen,apartment,182,1538849563,,seed,2025-11-21T21:58:20.558Z
+damascus,kafr sousa,villa,505,4389792365,,seed,2025-12-08T07:17:12.558Z
+damascus,malki,apartment,212,2807094628,,seed,2025-12-07T02:49:39.558Z
+rif dimashq,harasta,land,635,882106081,,seed,2026-02-13T08:18:00.558Z
+rif dimashq,qudsaya project,apartment,107,774413365,,seed,2025-12-03T09:04:25.558Z
+damascus,abu rummaneh,apartment,150,1991924241,,seed,2025-12-12T23:28:43.558Z
+rif dimashq,mleiha,apartment,192,554101174,,seed,2025-11-10T00:13:04.558Z
+damascus,muhajireen,studio,32,366435585,,seed,2026-01-15T01:28:26.558Z
+damascus,malki,apartment,152,1992215614,,seed,2026-01-18T17:30:41.558Z
+damascus,kafr sousa,apartment,154,707205580,,seed,2026-01-24T00:34:50.558Z
+damascus,muhajireen,apartment,192,2153759200,,seed,2025-12-15T08:22:42.558Z
+rif dimashq,mleiha,apartment,154,418633918,,seed,2026-01-23T17:45:55.558Z
+rif dimashq,sahnaya,apartment,150,675408975,,seed,2026-02-10T07:01:51.558Z
+damascus,abu rummaneh,apartment,185,1550433060,,seed,2025-12-08T11:09:31.558Z
+damascus,mazzeh,apartment,77,340318841,,seed,2025-12-23T08:30:00.558Z
+damascus,baghdad,land,222,1140179411,,seed,2026-02-28T04:49:27.558Z
+rif dimashq,sahnaya,studio,52,324293279,,seed,2025-11-04T12:45:43.558Z
+damascus,mashrou dummar,apartment,74,607951371,,seed,2025-12-24T15:07:39.558Z
+damascus,hay al ameen,studio,45,330316147,,seed,2026-02-26T12:50:16.558Z
+rif dimashq,jaramana,land,923,2074673250,,seed,2025-12-15T08:40:18.558Z
+damascus,baghdad,studio,37,407787591,,seed,2026-02-06T06:25:06.558Z
+rif dimashq,qudsaya project,apartment,135,1324052144,,seed,2025-12-26T14:13:35.558Z
+damascus,kafr sousa,studio,46,277319290,,seed,2026-02-10T14:34:32.558Z
+damascus,mazzeh,apartment,127,715089286,,seed,2025-11-22T09:59:26.558Z
+rif dimashq,jadidat al sheibani,apartment,109,472853379,,seed,2026-01-17T16:43:22.558Z
+damascus,mazzeh,apartment,187,1200009937,,seed,2026-02-26T16:31:09.558Z
+damascus,shaalaan,studio,32,380980671,,seed,2025-12-15T23:48:27.558Z
+rif dimashq,qudsaya project,apartment,97,1194580166,,seed,2025-11-09T21:12:29.558Z
+damascus,baghdad,apartment,175,2206891496,,seed,2026-01-01T10:20:27.558Z
+damascus,malki,house,247,2062734403,,seed,2026-02-09T18:41:47.558Z
+damascus,mazzeh,apartment,169,1268477496,,seed,2025-12-08T00:44:25.558Z
+damascus,midan,apartment,83,273151055,,seed,2025-11-24T20:19:47.558Z
+rif dimashq,jadidat al sheibani,house,152,642561359,,seed,2026-02-24T02:28:20.558Z
+rif dimashq,qudsaya project,house,134,931122720,,seed,2025-11-26T05:55:11.558Z
+damascus,hay al ameen,apartment,151,1644101076,,seed,2026-01-09T20:17:30.558Z
+damascus,mazzeh,apartment,107,573758194,,seed,2026-01-09T08:32:12.558Z
+rif dimashq,qudsaya project,studio,33,336294764,,seed,2025-11-10T04:14:28.558Z
+rif dimashq,qudsaya project,apartment,141,1072169235,,seed,2026-01-14T14:09:23.558Z
+rif dimashq,sahnaya,apartment,151,771624567,,seed,2025-12-10T17:03:49.558Z
+rif dimashq,jaramana,land,344,513999157,,seed,2025-11-23T01:01:03.558Z
+damascus,abu rummaneh,house,128,1038146323,,seed,2026-01-24T09:31:17.558Z
+rif dimashq,darayya,apartment,191,1074371757,,seed,2026-01-10T19:30:37.558Z
+damascus,mazzeh,house,143,753914295,,seed,2026-02-08T17:44:00.558Z
+damascus,muhajireen,apartment,71,721275483,,seed,2025-12-27T10:40:38.558Z
+damascus,mazzeh,apartment,98,387348998,,seed,2026-01-10T04:03:02.558Z
+rif dimashq,qudsaya project,house,121,747952158,,seed,2026-01-18T00:58:55.558Z
+rif dimashq,qudsaya project,villa,261,2081120040,,seed,2025-12-20T09:50:26.558Z
+damascus,mashrou dummar,villa,405,5836414951,,seed,2025-11-13T12:08:43.558Z
+rif dimashq,jaramana,land,706,1304505364,,seed,2025-12-13T15:42:46.558Z
+damascus,khaled ibn al walid,apartment,211,1471567713,,seed,2026-01-22T08:04:45.558Z
+damascus,abu rummaneh,apartment,128,1359051344,,seed,2025-11-23T05:44:00.558Z
+damascus,mazzeh,apartment,217,1463838053,,seed,2025-12-07T04:56:13.558Z
+damascus,shaalaan,villa,207,3403527100,,seed,2026-02-07T01:56:39.558Z
+damascus,khaled ibn al walid,apartment,140,1622840292,,seed,2026-01-20T19:11:59.558Z
+damascus,kafr sousa,villa,224,1568738449,,seed,2025-12-09T08:16:29.558Z
+rif dimashq,harasta,house,126,383140891,,seed,2026-02-20T15:34:47.558Z
+rif dimashq,darayya,apartment,193,921064893,,seed,2025-11-21T06:16:36.558Z
+damascus,khaled ibn al walid,apartment,105,878427126,,seed,2026-02-16T06:30:06.558Z
+rif dimashq,harasta,apartment,145,293703300,,seed,2025-12-03T11:49:34.558Z
+rif dimashq,jaramana,apartment,112,266164839,,seed,2025-11-04T21:48:32.558Z
+rif dimashq,darayya,land,825,2268854033,,seed,2026-02-11T11:18:15.558Z
+damascus,mazzeh,apartment,94,684902986,,seed,2025-12-23T13:43:07.558Z
+damascus,shaalaan,apartment,111,1291132775,,seed,2025-12-17T21:18:25.558Z
+rif dimashq,harasta,house,117,239103569,,seed,2025-11-23T13:08:14.558Z
+damascus,hay al ameen,house,214,1319716427,,seed,2025-11-08T13:56:39.558Z
+rif dimashq,jadidat al sheibani,apartment,167,881623444,,seed,2026-01-12T00:32:58.558Z
+damascus,shaalaan,apartment,79,702749449,,seed,2026-02-06T20:19:21.558Z
+rif dimashq,darayya,land,666,1675546496,,seed,2025-11-14T10:20:39.558Z
+damascus,muhajireen,apartment,130,1551668118,,seed,2025-11-06T17:50:46.558Z
+damascus,hay al ameen,house,241,1654733880,,seed,2025-12-03T05:39:43.558Z
+rif dimashq,jadidat al sheibani,studio,31,149908851,,seed,2025-11-21T04:29:19.558Z
+damascus,mazzeh,apartment,188,799774560,,seed,2025-11-05T07:38:15.558Z
+damascus,rukn al-din,apartment,81,305497513,,seed,2025-11-13T21:53:00.558Z
+damascus,baghdad,villa,398,3652834787,,seed,2026-01-02T15:14:00.558Z
+rif dimashq,darayya,house,147,548674560,,seed,2025-12-16T14:09:22.558Z
+rif dimashq,jadidat al sheibani,house,194,1016441217,,seed,2026-01-03T00:16:42.558Z
+damascus,kafr sousa,apartment,163,752780675,,seed,2026-01-02T07:20:15.558Z
+rif dimashq,jadidat al sheibani,apartment,157,874359674,,seed,2025-12-16T07:23:58.558Z
+damascus,malki,house,247,2415230831,,seed,2026-02-15T17:22:39.558Z
+rif dimashq,darayya,land,658,1560246418,,seed,2026-02-04T12:01:32.558Z
+rif dimashq,darayya,land,285,672966798,,seed,2026-02-18T02:43:30.558Z
+damascus,mashrou dummar,house,228,1839963933,,seed,2025-11-11T20:12:13.558Z
+damascus,baghdad,house,174,1063616763,,seed,2026-01-05T20:10:31.558Z
+rif dimashq,darayya,house,245,1407255935,,seed,2025-12-25T19:57:19.558Z
+damascus,muhajireen,apartment,85,851041525,,seed,2026-02-05T04:47:32.558Z
+rif dimashq,jadidat al sheibani,apartment,148,807280142,,seed,2025-11-09T20:37:27.558Z
+rif dimashq,sahnaya,house,111,594349038,,seed,2026-01-19T11:32:04.558Z
+damascus,kafr sousa,apartment,101,458042579,,seed,2026-02-04T19:14:36.558Z
+damascus,muhajireen,apartment,182,1962477708,,seed,2026-02-06T17:02:09.558Z
+rif dimashq,darayya,studio,26,134007408,,seed,2026-01-23T05:00:43.558Z
+damascus,khaled ibn al walid,apartment,175,1127734125,,seed,2026-01-08T10:54:03.558Z
+damascus,kafr sousa,apartment,170,845695190,,seed,2026-02-19T16:53:01.558Z
+rif dimashq,qudsaya project,apartment,197,1794648659,,seed,2026-01-25T21:41:30.558Z
+damascus,shaalaan,apartment,139,1257889625,,seed,2025-12-05T23:15:47.558Z
+rif dimashq,qudsaya project,land,679,4735533665,,seed,2026-01-12T15:40:10.558Z
+rif dimashq,mleiha,villa,412,1578495600,,seed,2025-11-29T07:19:13.558Z
+damascus,abu rummaneh,apartment,146,1317507335,,seed,2026-02-11T19:55:23.558Z
+damascus,abu rummaneh,villa,255,3097776227,,seed,2025-12-29T12:49:48.558Z
+rif dimashq,harasta,villa,544,2157151100,,seed,2025-11-29T15:43:54.558Z
+rif dimashq,darayya,land,888,3567628800,,seed,2025-12-06T23:48:40.558Z
+rif dimashq,artouz,land,442,1518374407,,seed,2026-02-16T01:23:20.558Z
+damascus,abu rummaneh,villa,389,7312188600,,seed,2026-02-18T03:48:33.558Z
+damascus,mazzeh,apartment,102,594652037,,seed,2026-03-02T06:54:27.558Z
+damascus,rukn al-din,apartment,78,177450975,,seed,2026-02-18T19:26:44.558Z
+rif dimashq,jaramana,apartment,100,317781950,,seed,2026-01-07T22:16:43.558Z
+rif dimashq,qudsaya project,house,117,911024941,,seed,2025-12-22T10:29:00.558Z
+damascus,malki,apartment,192,1905927056,,seed,2026-02-04T06:50:11.558Z
+damascus,khaled ibn al walid,apartment,91,950703045,,seed,2026-02-20T08:59:44.558Z
+damascus,abu rummaneh,apartment,110,1306336593,,seed,2025-12-30T11:56:57.558Z
+damascus,baghdad,apartment,109,1282479200,,seed,2025-11-19T19:42:08.558Z
+damascus,shaalaan,villa,377,5514117951,,seed,2026-01-30T20:19:49.558Z
+rif dimashq,jaramana,apartment,129,505904423,,seed,2026-02-15T19:33:12.558Z
+damascus,hay al ameen,studio,52,521728834,,seed,2025-12-30T16:25:04.558Z
+damascus,baghdad,apartment,191,1957985778,,seed,2026-01-16T09:07:16.558Z
+rif dimashq,qudsaya project,apartment,79,958037726,,seed,2025-11-10T13:11:53.558Z
+damascus,mazzeh,apartment,84,447253632,,seed,2025-11-30T16:16:46.558Z
+rif dimashq,jaramana,apartment,86,193156739,,seed,2025-12-18T06:10:17.558Z
+rif dimashq,mleiha,land,771,1655992350,,seed,2025-11-11T04:51:37.558Z
+rif dimashq,jadidat al sheibani,apartment,125,626429349,,seed,2025-12-25T06:35:19.558Z
+damascus,muhajireen,apartment,98,975420372,,seed,2025-11-10T17:01:26.558Z
+damascus,mazzeh,villa,328,2791084572,,seed,2026-01-07T19:34:27.558Z
+damascus,malki,apartment,108,1464606140,,seed,2026-01-18T20:52:17.558Z
+damascus,rukn al-din,apartment,93,229855797,,seed,2026-01-23T10:36:02.558Z
+damascus,shaalaan,apartment,212,2341039861,,seed,2026-02-13T12:54:33.558Z
+rif dimashq,qudsaya project,apartment,95,941207627,,seed,2025-11-05T09:27:48.558Z
+rif dimashq,darayya,apartment,199,1176562088,,seed,2026-03-01T15:20:32.558Z
+damascus,muhajireen,house,209,1676514917,,seed,2026-02-01T06:27:29.558Z
+damascus,baghdad,studio,29,315617833,,seed,2026-02-07T18:30:55.558Z
+damascus,mazzeh,apartment,207,1203909067,,seed,2026-02-17T21:04:04.558Z
+damascus,khaled ibn al walid,house,99,626201718,,seed,2026-01-29T18:23:09.558Z
+damascus,mashrou dummar,apartment,80,875337701,,seed,2025-11-21T18:25:24.558Z
+damascus,baghdad,villa,481,6412744217,,seed,2025-12-20T03:09:24.558Z
+damascus,abu rummaneh,house,103,927583485,,seed,2025-11-19T18:52:40.558Z
+damascus,malki,land,713,3514642011,,seed,2025-12-04T15:11:30.558Z
+damascus,hay al ameen,apartment,201,2153501413,,seed,2026-01-09T06:32:54.558Z
+damascus,malki,apartment,100,750780000,,seed,2025-11-19T14:36:32.558Z
+damascus,mashrou dummar,apartment,158,1961319096,,seed,2025-11-16T09:37:35.558Z
+rif dimashq,darayya,apartment,84,439095438,,seed,2025-12-12T01:04:40.558Z
+damascus,rukn al-din,apartment,170,634429831,,seed,2025-12-29T17:17:00.558Z
+damascus,muhajireen,studio,32,333200749,,seed,2025-11-19T00:31:06.558Z
+damascus,mashrou dummar,apartment,203,2172423453,,seed,2026-01-13T06:03:00.558Z
+damascus,hay al ameen,apartment,122,1533753777,,seed,2026-01-26T21:54:33.558Z
+damascus,hay al ameen,apartment,127,1460805988,,seed,2025-12-19T07:17:58.558Z
+rif dimashq,artouz,apartment,98,639420853,,seed,2026-02-03T06:00:17.558Z
+rif dimashq,sahnaya,apartment,86,350828010,,seed,2026-02-03T12:09:53.558Z
+rif dimashq,harasta,land,282,336938688,,seed,2026-02-09T07:11:35.558Z
+damascus,mazzeh,apartment,216,1551599684,,seed,2025-12-28T09:18:11.558Z
+damascus,baghdad,apartment,193,1740917024,,seed,2026-02-27T01:20:28.558Z
+damascus,abu rummaneh,studio,34,434113773,,seed,2025-11-15T02:59:31.558Z
+damascus,malki,apartment,215,2046183820,,seed,2025-11-27T06:30:33.558Z
+rif dimashq,qudsaya project,studio,49,327244050,,seed,2026-02-15T10:20:02.558Z
+damascus,kafr sousa,studio,54,350506552,,seed,2026-01-15T00:10:50.558Z
+rif dimashq,artouz,house,225,963951141,,seed,2025-11-23T07:54:45.558Z
+rif dimashq,jaramana,villa,283,1056890766,,seed,2025-12-28T09:35:06.558Z
+damascus,kafr sousa,apartment,184,1162885968,,seed,2025-12-14T11:52:43.558Z
+damascus,abu rummaneh,apartment,76,1049322195,,seed,2025-11-22T10:23:27.558Z
+damascus,hay al ameen,apartment,125,1055572366,,seed,2025-11-10T04:00:33.558Z
+rif dimashq,mleiha,house,109,327927156,,seed,2025-12-28T10:39:34.558Z
+damascus,hay al ameen,house,206,1603349738,,seed,2025-11-27T15:50:17.558Z
+damascus,hay al ameen,apartment,71,503145916,,seed,2025-12-28T06:52:26.558Z
+rif dimashq,sahnaya,house,262,1190615987,,seed,2026-02-28T21:29:40.558Z
+rif dimashq,qudsaya project,apartment,138,1242162883,,seed,2025-11-29T09:13:57.558Z
+damascus,mazzeh,studio,25,116245854,,seed,2025-12-07T23:08:28.558Z
+damascus,malki,apartment,165,1508484462,,seed,2025-11-12T08:06:54.558Z
+damascus,mazzeh,apartment,87,524575264,,seed,2025-12-02T16:20:09.558Z
+damascus,mashrou dummar,apartment,154,1550932977,,seed,2025-11-12T22:48:37.558Z
+rif dimashq,harasta,house,204,376992000,,seed,2026-02-14T16:49:25.558Z
+damascus,mazzeh,apartment,122,731922674,,seed,2025-12-14T04:31:16.558Z
+damascus,kafr sousa,house,196,1258375232,,seed,2025-12-10T20:35:34.558Z
+rif dimashq,mleiha,apartment,89,205360985,,seed,2026-01-20T04:42:39.558Z
+damascus,abu rummaneh,villa,334,6102912422,,seed,2026-01-13T13:21:44.558Z
+damascus,malki,apartment,113,963742523,,seed,2025-11-30T23:48:57.558Z
+rif dimashq,jadidat al sheibani,apartment,187,1145182367,,seed,2026-01-08T14:00:54.558Z
+damascus,mazzeh,apartment,112,608147718,,seed,2025-11-29T05:15:53.558Z
+damascus,hay al ameen,apartment,157,1254927962,,seed,2025-12-18T10:54:18.558Z
+damascus,shaalaan,apartment,129,1127513819,,seed,2025-12-04T16:51:14.558Z
+damascus,mashrou dummar,house,253,1632840719,,seed,2026-02-26T23:34:43.558Z
+damascus,mashrou dummar,apartment,84,791955254,,seed,2026-01-21T03:27:50.558Z
+damascus,hay al ameen,studio,42,372654269,,seed,2026-01-22T15:43:41.558Z
+rif dimashq,darayya,apartment,209,1255167792,,seed,2026-01-13T01:33:41.558Z
+damascus,baghdad,apartment,157,1974146312,,seed,2026-02-06T23:41:57.558Z
+rif dimashq,sahnaya,house,152,824422629,,seed,2026-02-05T17:18:14.559Z
+damascus,shaalaan,apartment,80,683985438,,seed,2025-12-01T23:07:33.559Z
+damascus,abu rummaneh,apartment,128,1285831265,,seed,2025-11-23T03:52:23.559Z
+damascus,muhajireen,apartment,170,1867535617,,seed,2025-11-22T10:34:29.559Z
+rif dimashq,qudsaya project,villa,585,8396242920,,seed,2026-01-17T07:05:21.559Z
+rif dimashq,darayya,land,830,3440479304,,seed,2025-11-07T13:43:16.559Z
+damascus,rukn al-din,studio,25,99664989,,seed,2026-01-06T18:07:38.559Z
+rif dimashq,qudsaya project,house,120,980567426,,seed,2025-12-20T10:21:05.559Z
+damascus,mazzeh,apartment,149,722338869,,seed,2025-11-13T12:30:17.559Z
+rif dimashq,artouz,house,202,1380629377,,seed,2025-12-08T11:59:55.559Z
+damascus,mazzeh,apartment,81,402875083,,seed,2026-01-14T12:01:23.559Z
+damascus,shaalaan,studio,56,532167772,,seed,2025-12-24T02:12:01.559Z
+damascus,khaled ibn al walid,house,153,1427160340,,seed,2025-12-29T23:29:13.559Z
+damascus,khaled ibn al walid,apartment,128,841864320,,seed,2026-01-06T14:48:58.559Z
+rif dimashq,jaramana,house,151,308221200,,seed,2026-01-22T04:11:33.559Z
+damascus,kafr sousa,apartment,170,879014756,,seed,2026-01-11T05:18:01.559Z
+rif dimashq,sahnaya,land,910,1888095300,,seed,2025-12-16T12:55:53.559Z
+damascus,rukn al-din,apartment,220,509055030,,seed,2026-02-10T22:57:39.559Z
+damascus,kafr sousa,house,218,845866769,,seed,2025-12-03T03:17:52.559Z
+rif dimashq,harasta,apartment,83,166896204,,seed,2026-01-08T17:20:21.559Z
+rif dimashq,artouz,apartment,197,812704454,,seed,2025-11-10T21:21:27.559Z
+damascus,mazzeh,house,153,664770965,,seed,2025-12-20T03:08:13.559Z
+rif dimashq,jaramana,apartment,156,549831197,,seed,2026-02-06T05:43:03.559Z
+damascus,khaled ibn al walid,apartment,85,689770793,,seed,2025-11-15T04:02:33.559Z
+damascus,shaalaan,apartment,140,1337469326,,seed,2025-11-27T08:14:45.559Z
+damascus,baghdad,apartment,134,1550818760,,seed,2025-12-31T14:15:55.559Z
+damascus,malki,house,147,1762236000,,seed,2026-03-01T04:32:47.559Z
+damascus,midan,apartment,147,415112422,,seed,2026-01-31T09:36:37.559Z
+rif dimashq,jadidat al sheibani,apartment,110,603658558,,seed,2025-11-16T07:36:13.559Z
+damascus,muhajireen,land,567,2733358633,,seed,2026-01-14T15:32:13.559Z
+rif dimashq,mleiha,apartment,141,510522838,,seed,2025-11-13T20:48:24.559Z
+damascus,baghdad,apartment,85,550920943,,seed,2025-12-15T03:07:57.559Z
+damascus,rukn al-din,apartment,128,350114876,,seed,2026-01-05T00:16:27.559Z
+damascus,abu rummaneh,apartment,118,1258766214,,seed,2025-12-21T23:35:57.559Z
+rif dimashq,jadidat al sheibani,apartment,187,898696005,,seed,2025-11-04T17:08:30.559Z
+rif dimashq,mleiha,apartment,121,343280125,,seed,2026-01-10T10:17:03.559Z
+damascus,baghdad,apartment,170,2106742345,,seed,2026-01-05T15:08:00.559Z
+rif dimashq,qudsaya project,apartment,180,1841768039,,seed,2026-02-09T15:29:13.559Z
+damascus,rukn al-din,apartment,165,404665247,,seed,2025-12-07T13:10:25.559Z
+rif dimashq,artouz,villa,531,3360129364,,seed,2026-03-01T13:10:28.559Z
+damascus,shaalaan,apartment,180,1554152801,,seed,2026-02-28T12:28:04.559Z
+damascus,mazzeh,apartment,75,451873919,,seed,2026-01-12T09:59:10.559Z
+rif dimashq,jadidat al sheibani,apartment,144,923784710,,seed,2026-01-31T00:03:57.559Z
+rif dimashq,jaramana,studio,30,85178913,,seed,2025-12-24T01:32:00.559Z
+damascus,mazzeh,apartment,76,374014776,,seed,2026-02-18T06:49:19.559Z
+damascus,malki,apartment,75,592110000,,seed,2026-02-17T20:59:18.559Z
+rif dimashq,jadidat al sheibani,apartment,79,300561193,,seed,2026-02-07T13:32:01.559Z
+rif dimashq,jaramana,apartment,177,574407001,,seed,2025-11-27T00:44:46.559Z
+rif dimashq,jadidat al sheibani,apartment,173,797853027,,seed,2025-12-03T16:59:40.559Z
+rif dimashq,darayya,apartment,147,630592708,,seed,2026-01-06T11:46:25.559Z
+rif dimashq,jadidat al sheibani,villa,504,5028464338,,seed,2025-11-25T02:41:43.559Z
+damascus,mashrou dummar,apartment,178,2321182656,,seed,2025-12-24T15:59:52.559Z
+damascus,kafr sousa,apartment,114,563295994,,seed,2026-02-18T20:54:28.559Z
+rif dimashq,artouz,house,140,840441199,,seed,2026-01-29T20:54:21.559Z
+damascus,abu rummaneh,apartment,210,2422628046,,seed,2026-01-09T11:15:43.559Z
+rif dimashq,harasta,apartment,81,272762425,,seed,2025-11-17T13:09:19.559Z
+damascus,midan,villa,242,1305937490,,seed,2025-12-04T07:48:29.559Z
+damascus,mashrou dummar,apartment,164,1963521621,,seed,2026-02-12T04:41:12.559Z
+damascus,shaalaan,apartment,70,719729594,,seed,2025-12-05T10:05:26.559Z
+damascus,abu rummaneh,apartment,130,1286666824,,seed,2026-02-19T02:30:39.559Z
+rif dimashq,harasta,villa,345,1274101781,,seed,2025-11-11T02:16:20.559Z
+damascus,malki,apartment,70,734987557,,seed,2025-12-15T03:00:42.559Z
+rif dimashq,mleiha,apartment,160,423853468,,seed,2025-12-26T16:50:17.559Z
+damascus,abu rummaneh,apartment,125,1626796499,,seed,2025-11-17T10:15:04.559Z
+rif dimashq,jadidat al sheibani,apartment,134,735414634,,seed,2026-02-01T05:39:16.559Z
+rif dimashq,qudsaya project,apartment,160,1285574572,,seed,2025-11-15T22:46:49.559Z
+damascus,kafr sousa,house,124,642866844,,seed,2025-12-09T17:48:38.559Z
+damascus,kafr sousa,apartment,214,1193915554,,seed,2025-11-30T22:37:30.559Z
+damascus,rukn al-din,house,107,241486500,,seed,2026-01-07T11:41:48.559Z
+damascus,hay al ameen,house,146,1093274043,,seed,2026-02-26T04:51:47.559Z
+damascus,khaled ibn al walid,house,147,840325500,,seed,2026-01-31T13:16:53.559Z
+damascus,kafr sousa,apartment,163,921912148,,seed,2025-12-02T16:45:22.559Z
+rif dimashq,harasta,studio,60,156435357,,seed,2026-01-06T20:26:37.559Z
+damascus,kafr sousa,apartment,119,616420680,,seed,2026-02-05T10:09:17.559Z
+rif dimashq,harasta,apartment,74,232283601,,seed,2026-02-21T00:26:17.559Z
+rif dimashq,qudsaya project,house,148,1171477715,,seed,2025-12-21T19:47:03.559Z
+rif dimashq,artouz,apartment,78,540530172,,seed,2026-01-15T20:44:49.559Z
+rif dimashq,jaramana,land,815,1692456968,,seed,2026-02-26T05:17:26.559Z
+damascus,baghdad,apartment,126,1142173359,,seed,2025-11-14T11:55:01.559Z
+rif dimashq,jaramana,apartment,157,352809139,,seed,2025-11-19T20:01:02.559Z
+damascus,kafr sousa,apartment,175,840897020,,seed,2025-11-04T12:34:41.559Z
+damascus,hay al ameen,villa,320,4116424814,,seed,2025-12-08T06:18:08.559Z
+damascus,mazzeh,apartment,105,529088360,,seed,2025-12-17T02:47:06.559Z
+damascus,muhajireen,apartment,124,1090876034,,seed,2026-02-11T19:53:09.559Z
+damascus,kafr sousa,villa,244,1876020906,,seed,2025-11-06T17:49:48.559Z
+rif dimashq,qudsaya project,house,159,1031338947,,seed,2025-11-14T02:59:38.559Z
+rif dimashq,artouz,apartment,86,410859578,,seed,2025-12-07T16:10:59.559Z
+rif dimashq,harasta,apartment,94,261198205,,seed,2026-02-04T03:07:26.559Z
+rif dimashq,mleiha,apartment,166,487444580,,seed,2026-01-15T21:01:47.559Z
+damascus,hay al ameen,studio,59,506624201,,seed,2026-02-04T10:03:02.559Z
+damascus,malki,apartment,84,1127191674,,seed,2026-02-11T14:17:00.559Z
+damascus,muhajireen,apartment,122,1026563063,,seed,2026-02-07T06:39:40.559Z
+damascus,malki,apartment,112,969721632,,seed,2026-02-25T14:00:55.559Z
+damascus,abu rummaneh,apartment,174,1835816778,,seed,2026-02-27T07:01:00.559Z
+rif dimashq,sahnaya,apartment,118,567868517,,seed,2026-02-15T04:24:51.559Z
+damascus,malki,house,121,1020250129,,seed,2026-01-21T19:18:17.559Z
+damascus,hay al ameen,apartment,154,1608405887,,seed,2026-01-26T06:50:29.559Z
+damascus,abu rummaneh,studio,52,641361041,,seed,2026-02-20T02:54:41.559Z
+rif dimashq,sahnaya,apartment,134,970247010,,seed,2026-02-20T07:26:41.559Z
+damascus,muhajireen,apartment,157,2121522003,,seed,2025-12-20T00:27:05.559Z
+rif dimashq,harasta,villa,425,2305885180,,seed,2025-11-26T00:24:33.559Z
+damascus,malki,apartment,198,1695291404,,seed,2026-01-30T09:56:08.559Z
+damascus,mashrou dummar,apartment,151,1221827146,,seed,2025-11-18T04:07:24.559Z
+rif dimashq,sahnaya,house,293,941303520,,seed,2025-12-20T10:18:03.559Z
+damascus,mashrou dummar,villa,499,7184150583,,seed,2025-12-12T20:18:10.559Z
+damascus,abu rummaneh,apartment,77,797581579,,seed,2026-02-19T18:15:56.559Z
+rif dimashq,jaramana,apartment,116,356994479,,seed,2026-02-22T07:10:39.559Z
+damascus,hay al ameen,apartment,203,1965569430,,seed,2025-12-25T14:21:58.559Z
+rif dimashq,mleiha,apartment,102,347931195,,seed,2026-02-26T07:51:48.559Z
+damascus,abu rummaneh,house,106,1023417351,,seed,2026-02-23T14:41:07.559Z
+rif dimashq,darayya,apartment,128,579173628,,seed,2025-12-31T16:04:10.559Z
+rif dimashq,harasta,house,211,421122240,,seed,2025-11-21T11:32:36.559Z
+damascus,khaled ibn al walid,villa,422,5903524700,,seed,2026-02-10T08:52:06.559Z
+rif dimashq,darayya,studio,41,311389071,,seed,2025-12-26T15:34:33.559Z
+damascus,malki,apartment,77,699524548,,seed,2025-11-27T14:53:30.559Z
+rif dimashq,mleiha,land,488,829058801,,seed,2026-02-12T20:22:58.559Z
+rif dimashq,harasta,land,961,1581074619,,seed,2025-12-16T04:40:15.559Z
+rif dimashq,sahnaya,apartment,197,949900536,,seed,2026-01-26T23:39:44.559Z
+rif dimashq,qudsaya project,apartment,141,1230958740,,seed,2026-02-21T14:54:23.559Z
+damascus,midan,studio,28,71638560,,seed,2026-02-21T19:26:56.559Z
+rif dimashq,qudsaya project,apartment,125,859465186,,seed,2025-11-24T10:22:39.559Z
+rif dimashq,sahnaya,house,276,1080623937,,seed,2026-02-04T02:20:28.559Z
+rif dimashq,jaramana,house,264,612177759,,seed,2026-02-17T15:23:17.559Z
+rif dimashq,qudsaya project,house,199,1203342603,,seed,2025-11-07T22:09:24.559Z
+damascus,rukn al-din,apartment,122,363082773,,seed,2025-11-19T03:11:06.559Z
+damascus,mashrou dummar,apartment,142,1741912798,,seed,2026-02-14T08:32:22.559Z
+damascus,mazzeh,apartment,150,656129845,,seed,2026-02-01T13:10:22.559Z
+rif dimashq,jaramana,apartment,183,601153709,,seed,2025-11-10T10:37:46.559Z
+damascus,abu rummaneh,apartment,171,2454176692,,seed,2026-02-19T22:40:27.559Z
+rif dimashq,qudsaya project,apartment,194,1614546391,,seed,2026-01-23T20:16:39.559Z
+damascus,abu rummaneh,apartment,205,1800860832,,seed,2026-01-24T04:51:17.559Z
+rif dimashq,jadidat al sheibani,house,292,1541466662,,seed,2026-02-11T06:14:48.559Z
+rif dimashq,darayya,studio,52,304615715,,seed,2026-02-26T21:51:10.559Z
+damascus,abu rummaneh,apartment,152,1845391868,,seed,2026-02-02T05:42:53.559Z
+rif dimashq,artouz,apartment,118,629295890,,seed,2025-11-26T23:47:43.559Z
+rif dimashq,jaramana,house,166,458500035,,seed,2026-01-27T07:41:08.559Z
+damascus,mashrou dummar,apartment,157,1342933329,,seed,2026-01-31T16:09:15.559Z
+damascus,mashrou dummar,apartment,117,1275214008,,seed,2026-02-02T21:32:12.559Z
+damascus,midan,apartment,140,316948464,,seed,2025-12-14T17:16:33.559Z
+damascus,mashrou dummar,apartment,211,2391530671,,seed,2025-12-31T03:03:47.559Z
+damascus,shaalaan,apartment,84,878083185,,seed,2025-11-09T04:33:39.559Z
+damascus,malki,studio,45,579495699,,seed,2026-02-09T00:24:34.559Z
+damascus,shaalaan,house,206,2263734000,,seed,2025-11-26T15:15:33.559Z
+damascus,abu rummaneh,apartment,200,2477969815,,seed,2025-12-21T04:28:46.559Z
+damascus,kafr sousa,apartment,217,1133945940,,seed,2025-12-25T07:56:16.559Z
+damascus,baghdad,apartment,142,1423730272,,seed,2026-01-25T01:20:27.559Z
+damascus,hay al ameen,house,110,806277440,,seed,2025-11-20T19:12:29.559Z
+damascus,shaalaan,apartment,126,1283941520,,seed,2025-12-03T03:45:57.559Z
+damascus,rukn al-din,apartment,103,239768482,,seed,2025-12-31T21:35:26.559Z
+rif dimashq,jadidat al sheibani,apartment,168,933412276,,seed,2025-11-10T14:57:37.559Z
+damascus,muhajireen,apartment,157,1128946990,,seed,2025-11-26T16:17:40.559Z
+damascus,mazzeh,apartment,89,391566360,,seed,2026-01-13T13:23:16.559Z
+rif dimashq,jadidat al sheibani,house,264,1666329238,,seed,2026-03-02T16:06:53.559Z
+damascus,mashrou dummar,land,808,5020788774,,seed,2026-02-12T06:10:20.559Z
+damascus,shaalaan,house,118,926435670,,seed,2026-02-27T14:47:46.559Z
+rif dimashq,sahnaya,house,194,921317084,,seed,2025-12-28T00:46:46.559Z
+damascus,abu rummaneh,apartment,102,1147434555,,seed,2025-11-28T05:45:19.559Z
+rif dimashq,harasta,house,265,881496000,,seed,2025-12-02T23:50:34.559Z
+damascus,mazzeh,apartment,84,480068534,,seed,2026-02-07T23:10:26.559Z
+damascus,mazzeh,apartment,110,564562253,,seed,2025-11-06T08:35:46.559Z
+damascus,mashrou dummar,studio,46,459371734,,seed,2025-12-08T06:54:28.559Z
+damascus,hay al ameen,apartment,125,1039474646,,seed,2025-11-15T01:16:05.559Z
+rif dimashq,mleiha,apartment,118,393630963,,seed,2025-12-14T22:42:08.559Z
+damascus,khaled ibn al walid,studio,56,560237978,,seed,2025-12-25T09:32:32.559Z
+rif dimashq,mleiha,apartment,170,554452287,,seed,2025-12-07T13:02:07.559Z
+damascus,malki,land,314,2645136000,,seed,2026-02-06T14:10:33.559Z
+rif dimashq,jadidat al sheibani,land,709,2347891017,,seed,2026-02-16T01:12:36.559Z
+damascus,shaalaan,apartment,87,912600997,,seed,2026-01-20T23:53:05.559Z
+rif dimashq,jaramana,land,820,1728259608,,seed,2025-12-27T09:29:32.559Z
+damascus,baghdad,apartment,214,2240894395,,seed,2025-11-23T20:48:22.559Z
+damascus,muhajireen,studio,45,449154731,,seed,2025-12-11T03:20:29.559Z
+rif dimashq,qudsaya project,villa,386,3852063572,,seed,2025-12-08T05:24:37.559Z
+damascus,midan,house,226,467075664,,seed,2025-11-29T17:34:50.559Z
+damascus,mashrou dummar,apartment,179,1236745188,,seed,2025-12-23T18:13:37.559Z
+rif dimashq,jadidat al sheibani,apartment,94,415405746,,seed,2026-01-25T09:50:05.559Z
+rif dimashq,sahnaya,studio,34,227522550,,seed,2026-02-16T23:54:18.559Z
+damascus,malki,villa,307,3713618234,,seed,2026-01-05T08:22:32.559Z
+damascus,midan,land,582,845302020,,seed,2026-02-22T04:41:33.559Z
+damascus,hay al ameen,apartment,188,1535733934,,seed,2026-01-25T02:35:06.559Z
+rif dimashq,qudsaya project,land,961,4521243476,,seed,2025-12-22T07:38:06.559Z
+rif dimashq,harasta,house,163,542203200,,seed,2026-02-02T17:19:15.559Z
+damascus,kafr sousa,apartment,208,850824000,,seed,2026-02-07T21:15:42.559Z
+rif dimashq,jaramana,house,206,604999487,,seed,2025-12-28T09:09:47.559Z
+damascus,midan,land,698,1256825304,,seed,2026-01-27T23:15:51.559Z
+damascus,khaled ibn al walid,apartment,133,1104788784,,seed,2026-01-12T03:08:06.559Z
+damascus,mashrou dummar,house,243,2412033552,,seed,2025-11-30T23:25:07.559Z
+damascus,kafr sousa,apartment,212,1307345771,,seed,2025-12-20T08:47:28.559Z
+damascus,abu rummaneh,house,114,876641007,,seed,2026-01-08T09:55:59.559Z
+damascus,khaled ibn al walid,studio,49,344396293,,seed,2025-11-21T13:39:36.559Z
+rif dimashq,darayya,house,113,410278033,,seed,2025-12-02T21:13:20.559Z
+rif dimashq,jaramana,apartment,94,266694148,,seed,2025-12-12T17:05:41.559Z
+damascus,midan,house,186,414030302,,seed,2026-01-13T10:59:47.559Z
+damascus,malki,apartment,157,1652101503,,seed,2026-02-11T14:20:27.559Z
+damascus,kafr sousa,apartment,151,758000083,,seed,2025-12-04T02:10:58.559Z
+damascus,mashrou dummar,apartment,139,1169255253,,seed,2025-11-24T21:04:08.559Z
+rif dimashq,mleiha,land,795,1267178479,,seed,2026-02-23T17:30:35.559Z
+damascus,khaled ibn al walid,apartment,209,1872318212,,seed,2025-12-13T10:11:23.559Z
+damascus,baghdad,house,233,1986585300,,seed,2026-01-17T21:10:43.559Z
+rif dimashq,qudsaya project,apartment,126,1114622775,,seed,2025-12-08T02:55:57.559Z
+rif dimashq,sahnaya,apartment,106,575831349,,seed,2025-12-12T12:22:51.559Z
+damascus,rukn al-din,apartment,109,400171660,,seed,2025-11-24T18:24:11.559Z
+rif dimashq,jaramana,house,262,495180000,,seed,2026-02-01T20:30:16.559Z
+damascus,muhajireen,apartment,112,898283842,,seed,2026-01-18T04:37:09.559Z
+rif dimashq,mleiha,apartment,142,463531810,,seed,2025-11-07T15:19:58.559Z
+damascus,baghdad,apartment,140,1575710006,,seed,2026-02-25T12:37:27.559Z
+damascus,rukn al-din,apartment,105,327221821,,seed,2025-12-14T16:24:18.559Z
+rif dimashq,darayya,apartment,156,830823780,,seed,2025-11-28T14:01:25.559Z
+damascus,hay al ameen,house,258,1677466243,,seed,2026-03-02T23:28:51.559Z
+damascus,baghdad,apartment,133,985482041,,seed,2025-11-19T04:23:50.559Z
+damascus,baghdad,apartment,130,1156277753,,seed,2026-01-01T13:40:15.559Z
+damascus,khaled ibn al walid,studio,59,504445083,,seed,2025-12-26T02:22:27.559Z
+damascus,midan,house,151,397139571,,seed,2025-11-20T12:54:03.559Z
+damascus,shaalaan,studio,49,457122580,,seed,2026-01-16T09:21:51.559Z
+rif dimashq,jaramana,apartment,203,647691032,,seed,2025-11-22T12:08:56.559Z
+damascus,rukn al-din,apartment,201,509556038,,seed,2025-11-29T11:19:46.559Z
+damascus,hay al ameen,land,279,1324259057,,seed,2026-01-08T22:05:21.559Z
+damascus,abu rummaneh,apartment,180,1825358888,,seed,2025-11-24T23:06:54.559Z
+rif dimashq,jadidat al sheibani,apartment,124,601703036,,seed,2025-11-09T00:25:40.559Z
+damascus,kafr sousa,apartment,84,472744253,,seed,2026-03-01T03:18:59.559Z
+damascus,midan,apartment,185,778292934,,seed,2025-11-15T19:16:11.559Z
+damascus,hay al ameen,apartment,77,826632720,,seed,2026-01-21T01:33:27.559Z
+rif dimashq,jadidat al sheibani,house,216,1285774759,,seed,2025-12-07T07:40:26.559Z
+damascus,mazzeh,apartment,211,1519941030,,seed,2026-01-15T08:12:42.559Z
+damascus,mashrou dummar,apartment,111,1145734154,,seed,2025-12-13T06:58:54.559Z
+damascus,khaled ibn al walid,apartment,183,1648191448,,seed,2025-11-05T21:09:25.559Z
+damascus,kafr sousa,studio,57,290086110,,seed,2026-01-02T15:42:35.559Z
+rif dimashq,darayya,land,352,1459864730,,seed,2026-01-29T17:14:11.559Z
+rif dimashq,qudsaya project,apartment,132,1597412077,,seed,2026-02-13T06:50:14.559Z
+damascus,khaled ibn al walid,apartment,129,1481174421,,seed,2026-01-01T08:47:53.559Z
+rif dimashq,harasta,apartment,199,505402071,,seed,2026-01-11T13:17:02.559Z
+damascus,muhajireen,apartment,112,1011562630,,seed,2026-02-17T15:00:06.559Z
+damascus,mazzeh,apartment,188,1003878017,,seed,2026-02-24T21:52:43.559Z
+damascus,abu rummaneh,apartment,85,1129548510,,seed,2026-01-09T17:50:37.559Z
+damascus,midan,studio,49,179560917,,seed,2026-02-19T11:12:55.559Z
+damascus,mazzeh,apartment,93,496506185,,seed,2025-12-20T06:15:14.559Z
+rif dimashq,mleiha,house,107,230873108,,seed,2026-02-06T03:05:15.559Z
+rif dimashq,qudsaya project,apartment,107,812081531,,seed,2025-11-06T07:59:23.559Z
+damascus,baghdad,apartment,184,1581365293,,seed,2025-12-06T22:09:08.559Z
+damascus,khaled ibn al walid,apartment,116,1175152466,,seed,2025-11-09T15:47:37.559Z
+damascus,mashrou dummar,apartment,178,1375815679,,seed,2025-12-05T07:17:26.559Z
+damascus,mazzeh,apartment,101,391379040,,seed,2026-01-07T20:22:27.559Z
+damascus,khaled ibn al walid,apartment,110,1337203778,,seed,2025-11-11T05:37:22.559Z
+rif dimashq,sahnaya,villa,480,3619546780,,seed,2026-01-29T11:03:58.559Z
+damascus,baghdad,villa,252,3633029509,,seed,2026-01-23T11:10:11.559Z
+rif dimashq,jaramana,house,269,807939590,,seed,2025-11-15T21:07:34.559Z
+damascus,mashrou dummar,studio,42,367158966,,seed,2025-11-17T03:50:53.559Z
+damascus,malki,apartment,218,2710375862,,seed,2026-01-15T15:19:50.559Z
+damascus,mazzeh,apartment,142,677730195,,seed,2026-02-10T09:59:51.559Z
+rif dimashq,qudsaya project,land,251,1099133830,,seed,2026-02-03T11:28:34.559Z
+rif dimashq,darayya,apartment,194,1058221803,,seed,2025-11-14T15:30:36.559Z
+rif dimashq,qudsaya project,apartment,111,886578001,,seed,2025-12-27T22:26:12.559Z
+damascus,muhajireen,apartment,91,886484350,,seed,2026-02-09T20:52:40.559Z
+damascus,hay al ameen,villa,272,3352396698,,seed,2025-11-23T20:42:16.559Z
+damascus,shaalaan,apartment,133,985287740,,seed,2025-11-05T11:20:41.559Z
+rif dimashq,sahnaya,apartment,139,541599952,,seed,2026-01-02T14:00:39.559Z
+damascus,kafr sousa,apartment,152,927433832,,seed,2025-12-16T18:23:24.559Z
+rif dimashq,sahnaya,house,273,1209568865,,seed,2025-12-23T04:35:20.559Z
+damascus,muhajireen,apartment,211,1710730481,,seed,2026-02-18T08:22:29.559Z
+damascus,baghdad,apartment,127,1178656140,,seed,2026-02-09T00:56:08.559Z
+damascus,hay al ameen,apartment,92,839730103,,seed,2026-02-16T19:15:27.559Z
+rif dimashq,harasta,house,109,251423430,,seed,2025-11-27T02:36:46.559Z
+damascus,muhajireen,apartment,103,920390490,,seed,2025-12-07T21:16:14.559Z
+rif dimashq,jadidat al sheibani,apartment,121,494950500,,seed,2026-01-22T16:38:27.559Z
+damascus,mazzeh,villa,393,3613711054,,seed,2026-02-12T23:36:05.559Z
+damascus,midan,apartment,114,301262760,,seed,2026-01-12T13:14:32.559Z
+damascus,muhajireen,studio,34,503978132,,seed,2025-11-08T18:31:32.559Z
+damascus,rukn al-din,apartment,186,492079624,,seed,2025-12-20T17:02:45.559Z
+damascus,midan,apartment,87,207546315,,seed,2025-12-08T08:32:11.559Z
+damascus,baghdad,apartment,161,1866395929,,seed,2025-11-12T19:58:25.559Z
+rif dimashq,jaramana,apartment,124,354216134,,seed,2026-01-11T09:48:41.559Z
+damascus,mazzeh,apartment,148,752262005,,seed,2025-12-29T10:21:26.559Z
+rif dimashq,jaramana,land,520,666137664,,seed,2026-01-25T01:20:38.559Z
+rif dimashq,artouz,house,138,806246784,,seed,2026-01-24T03:25:55.559Z
+damascus,mazzeh,apartment,167,1155709058,,seed,2025-11-07T10:59:08.559Z
+rif dimashq,jaramana,apartment,187,563792993,,seed,2025-11-10T20:12:29.559Z
+rif dimashq,sahnaya,apartment,99,551417632,,seed,2025-12-24T00:43:14.559Z
+rif dimashq,harasta,apartment,130,359362361,,seed,2025-11-10T23:32:50.559Z
+damascus,midan,villa,278,1139410800,,seed,2025-12-28T00:59:45.559Z
+damascus,hay al ameen,apartment,123,1355757045,,seed,2026-02-24T14:48:03.559Z
+rif dimashq,mleiha,apartment,157,442911918,,seed,2026-03-01T04:06:55.559Z
+damascus,mazzeh,land,686,2947331662,,seed,2026-02-25T08:37:14.559Z
+rif dimashq,darayya,house,296,1472010179,,seed,2025-12-22T19:35:09.559Z
+rif dimashq,qudsaya project,villa,209,1666490760,,seed,2026-01-19T00:58:10.559Z
+damascus,rukn al-din,apartment,186,482121339,,seed,2026-01-04T02:43:12.559Z
+damascus,shaalaan,studio,35,332420439,,seed,2025-11-09T14:47:06.559Z
+damascus,shaalaan,apartment,105,767016382,,seed,2025-11-09T23:58:37.559Z
+rif dimashq,qudsaya project,apartment,97,724100764,,seed,2025-12-24T19:16:14.559Z
+rif dimashq,jadidat al sheibani,house,202,1204788421,,seed,2025-12-23T12:06:10.559Z
+damascus,rukn al-din,apartment,112,327328566,,seed,2026-01-31T20:55:18.559Z
+damascus,mashrou dummar,apartment,129,880641720,,seed,2025-12-05T23:14:22.559Z
+damascus,mashrou dummar,house,224,1840524576,,seed,2026-01-10T04:35:22.559Z
+damascus,mazzeh,apartment,213,908618919,,seed,2026-02-21T14:05:23.559Z
+damascus,abu rummaneh,house,194,1533083550,,seed,2025-12-04T11:11:21.559Z
+damascus,hay al ameen,apartment,211,1975894887,,seed,2026-03-01T19:17:07.559Z
+damascus,baghdad,house,166,1335277477,,seed,2025-12-12T17:55:16.559Z
+rif dimashq,qudsaya project,studio,42,335463188,,seed,2026-02-27T13:18:55.559Z
+rif dimashq,jadidat al sheibani,apartment,165,1011690345,,seed,2025-12-07T01:38:51.559Z
+damascus,abu rummaneh,apartment,84,719427687,,seed,2025-11-30T06:17:59.559Z
+rif dimashq,sahnaya,land,140,392582580,,seed,2026-01-18T23:30:10.559Z
+rif dimashq,mleiha,house,192,414722067,,seed,2025-11-09T13:08:33.559Z
+damascus,mazzeh,apartment,185,903097254,,seed,2025-12-25T02:04:47.559Z
+rif dimashq,jadidat al sheibani,villa,536,5050458549,,seed,2026-02-21T22:12:15.559Z
+rif dimashq,qudsaya project,studio,59,669318152,,seed,2026-01-21T07:19:56.559Z
+rif dimashq,qudsaya project,apartment,138,1089611898,,seed,2026-02-26T12:37:32.559Z
+rif dimashq,mleiha,land,961,2064083850,,seed,2026-02-26T13:44:49.559Z
+damascus,kafr sousa,house,233,1385904449,,seed,2026-01-19T22:06:59.559Z
+damascus,mazzeh,villa,332,2725551744,,seed,2025-12-16T14:46:25.559Z
+damascus,kafr sousa,villa,461,4749016118,,seed,2025-11-13T16:36:19.559Z
+damascus,mazzeh,studio,49,360294950,,seed,2026-02-02T05:37:48.559Z
+damascus,khaled ibn al walid,villa,408,5757062062,,seed,2025-11-12T01:08:00.559Z
+damascus,midan,apartment,89,260366044,,seed,2026-02-25T00:26:53.559Z
+rif dimashq,qudsaya project,apartment,89,821101480,,seed,2025-11-29T15:36:44.559Z
+rif dimashq,jadidat al sheibani,apartment,186,860641256,,seed,2026-02-05T17:19:35.559Z
+damascus,mazzeh,apartment,220,1318595046,,seed,2025-11-15T11:39:23.559Z
+damascus,baghdad,apartment,106,1382475476,,seed,2025-12-12T17:47:12.559Z
+damascus,muhajireen,apartment,196,1551567145,,seed,2025-11-27T22:22:24.559Z
+damascus,baghdad,apartment,105,1013970264,,seed,2026-02-18T12:26:16.559Z
+damascus,rukn al-din,studio,60,197535453,,seed,2026-02-14T08:39:39.559Z
+rif dimashq,sahnaya,villa,393,3578114902,,seed,2026-01-25T07:32:30.559Z
+damascus,shaalaan,house,196,1338091407,,seed,2025-12-13T21:10:49.559Z
+damascus,muhajireen,apartment,217,2280189759,,seed,2026-02-22T17:07:52.559Z
+rif dimashq,darayya,apartment,102,537895446,,seed,2025-11-12T02:25:33.559Z
+rif dimashq,mleiha,land,582,721772496,,seed,2026-02-10T23:26:19.559Z
+rif dimashq,jadidat al sheibani,apartment,94,747481608,,seed,2025-11-20T00:47:26.559Z
+damascus,abu rummaneh,apartment,102,1061229906,,seed,2026-01-13T04:26:53.559Z
+damascus,shaalaan,villa,388,4791816428,,seed,2025-12-12T00:49:25.559Z
+damascus,mashrou dummar,studio,36,343557986,,seed,2025-12-28T01:46:23.559Z
+rif dimashq,darayya,apartment,198,686990938,,seed,2026-01-04T09:30:27.559Z
+damascus,mashrou dummar,apartment,77,521674609,,seed,2026-01-07T01:47:31.559Z
+rif dimashq,jaramana,apartment,132,464849609,,seed,2025-11-11T13:35:47.559Z
+rif dimashq,qudsaya project,apartment,109,905916750,,seed,2025-12-24T07:02:39.559Z
+damascus,hay al ameen,apartment,114,1448012249,,seed,2025-12-28T09:19:38.559Z
+rif dimashq,mleiha,house,295,682437218,,seed,2026-02-28T03:38:42.559Z
+rif dimashq,qudsaya project,apartment,187,1786324652,,seed,2026-01-27T10:31:52.559Z
+damascus,mazzeh,apartment,182,1054730093,,seed,2025-12-25T05:13:27.559Z
+damascus,mazzeh,apartment,142,898455549,,seed,2025-11-22T22:02:33.559Z
+damascus,mashrou dummar,studio,25,271537296,,seed,2025-12-01T11:26:09.559Z
+damascus,muhajireen,apartment,150,1612970776,,seed,2025-12-10T20:17:14.559Z
+rif dimashq,jadidat al sheibani,apartment,194,1002710448,,seed,2025-12-16T08:13:20.559Z
+damascus,malki,apartment,189,2250592142,,seed,2025-11-23T03:12:16.559Z
+damascus,khaled ibn al walid,apartment,136,1216249631,,seed,2026-02-05T03:06:51.559Z
+rif dimashq,sahnaya,apartment,101,551499050,,seed,2026-01-31T15:23:35.559Z
+damascus,shaalaan,apartment,163,1437147928,,seed,2025-11-28T00:47:52.559Z
+rif dimashq,artouz,land,598,1709396008,,seed,2025-12-03T02:58:55.559Z
+damascus,rukn al-din,villa,319,1796862133,,seed,2026-01-11T21:18:06.559Z
+damascus,mashrou dummar,villa,376,4018863863,,seed,2026-01-31T04:09:12.559Z
+damascus,shaalaan,studio,49,690830910,,seed,2026-02-05T01:55:37.559Z
+rif dimashq,jaramana,house,296,688516509,,seed,2026-01-29T16:18:03.559Z
+damascus,muhajireen,apartment,146,2050643740,,seed,2025-12-12T11:04:50.559Z
+damascus,kafr sousa,studio,44,221313739,,seed,2026-02-09T06:24:20.559Z
+rif dimashq,darayya,apartment,120,814613760,,seed,2025-12-07T05:52:16.559Z
+damascus,baghdad,house,110,889200222,,seed,2026-01-23T11:00:49.559Z
+damascus,muhajireen,apartment,114,1112811731,,seed,2026-01-31T18:17:43.559Z
+damascus,abu rummaneh,apartment,152,1801169465,,seed,2026-01-05T04:15:00.559Z
+rif dimashq,sahnaya,villa,223,1813818359,,seed,2026-02-05T02:54:24.559Z
+rif dimashq,sahnaya,land,748,2604808839,,seed,2026-01-31T20:04:05.559Z
+damascus,mazzeh,studio,33,291103956,,seed,2025-11-11T13:52:22.559Z
+damascus,hay al ameen,apartment,169,1534985086,,seed,2026-02-10T01:42:22.559Z
+rif dimashq,harasta,apartment,167,413602335,,seed,2026-01-25T05:15:36.559Z
+rif dimashq,jaramana,villa,247,1315073421,,seed,2026-02-23T15:53:58.559Z
+damascus,kafr sousa,apartment,212,1514570400,,seed,2025-12-08T04:58:41.559Z
+damascus,hay al ameen,apartment,159,1578555546,,seed,2026-01-26T20:52:49.559Z
+damascus,muhajireen,apartment,113,1121981727,,seed,2025-12-30T13:21:49.559Z
+damascus,midan,apartment,142,546728400,,seed,2026-02-10T19:44:23.559Z
+damascus,malki,apartment,146,1423573274,,seed,2025-12-01T21:33:34.559Z
+damascus,baghdad,house,146,1037514236,,seed,2026-01-21T04:41:36.559Z
+rif dimashq,mleiha,land,264,517815614,,seed,2026-02-28T04:09:02.559Z
+damascus,mazzeh,apartment,119,604181280,,seed,2026-02-25T13:58:10.559Z
+damascus,midan,house,117,236953931,,seed,2026-01-08T02:17:04.559Z
+damascus,khaled ibn al walid,studio,55,482897311,,seed,2026-02-02T04:38:09.559Z
+rif dimashq,mleiha,apartment,160,529787520,,seed,2026-02-07T17:39:40.559Z
+rif dimashq,jaramana,apartment,144,365677984,,seed,2025-11-10T19:44:26.559Z
+rif dimashq,qudsaya project,studio,26,179010000,,seed,2025-11-21T04:31:11.559Z
+rif dimashq,harasta,apartment,142,533416752,,seed,2026-01-31T00:59:41.559Z
+rif dimashq,darayya,house,252,940584960,,seed,2026-02-21T07:44:38.559Z
+damascus,shaalaan,villa,346,3501912377,,seed,2026-01-01T23:02:25.559Z
+damascus,rukn al-din,apartment,188,604911354,,seed,2025-12-10T18:03:25.559Z
+rif dimashq,qudsaya project,apartment,176,1399730932,,seed,2026-01-05T12:03:56.559Z
+damascus,khaled ibn al walid,land,155,709635607,,seed,2025-11-09T06:21:57.559Z
+damascus,mazzeh,apartment,174,654029251,,seed,2026-01-24T20:31:27.559Z
+rif dimashq,artouz,apartment,150,940583193,,seed,2025-11-06T01:48:54.559Z
+rif dimashq,mleiha,studio,48,125326130,,seed,2026-01-28T20:20:06.559Z
+damascus,hay al ameen,land,498,2305574381,,seed,2026-01-15T06:53:14.559Z
+rif dimashq,qudsaya project,house,154,1368941728,,seed,2026-02-08T15:02:17.559Z
+rif dimashq,artouz,land,528,1500472777,,seed,2026-01-03T21:02:20.559Z
+damascus,baghdad,apartment,156,1377053272,,seed,2025-11-04T17:41:49.559Z
+damascus,hay al ameen,villa,220,2470782875,,seed,2026-01-21T08:12:08.559Z
+damascus,shaalaan,land,388,2367745701,,seed,2025-11-10T18:53:36.559Z
+rif dimashq,jaramana,apartment,124,302422617,,seed,2025-11-20T21:43:01.559Z
+rif dimashq,mleiha,house,292,859791178,,seed,2026-02-27T13:54:57.559Z
+damascus,kafr sousa,apartment,92,420932069,,seed,2026-01-12T10:18:07.559Z
+damascus,abu rummaneh,apartment,185,2092082131,,seed,2025-11-03T17:33:36.559Z
+damascus,malki,apartment,109,1414459122,,seed,2025-12-20T07:46:12.559Z
+damascus,mazzeh,apartment,123,923211432,,seed,2026-02-05T10:53:26.559Z
+rif dimashq,harasta,house,225,578360593,,seed,2025-12-02T21:52:38.559Z
+damascus,abu rummaneh,apartment,197,1878556795,,seed,2026-01-14T03:47:50.559Z
+damascus,muhajireen,studio,59,675745686,,seed,2025-12-11T03:32:19.559Z
+damascus,muhajireen,apartment,150,1388555128,,seed,2026-02-10T20:13:53.559Z
+damascus,mashrou dummar,apartment,100,1075406824,,seed,2025-12-14T10:57:07.559Z
+rif dimashq,artouz,studio,46,230565907,,seed,2025-12-05T05:14:30.559Z
+damascus,mashrou dummar,apartment,172,1962585294,,seed,2026-02-24T22:46:30.559Z
+damascus,shaalaan,apartment,104,1178842613,,seed,2026-01-21T02:08:17.559Z
+damascus,kafr sousa,apartment,81,421438564,,seed,2026-02-22T08:20:55.559Z
+rif dimashq,qudsaya project,apartment,141,1010299597,,seed,2026-01-01T10:25:14.559Z
+damascus,shaalaan,apartment,150,1463652279,,seed,2026-01-14T10:51:31.559Z
+rif dimashq,mleiha,house,266,580092869,,seed,2025-11-16T05:47:43.559Z
+rif dimashq,jaramana,apartment,79,219127130,,seed,2025-11-12T15:48:12.559Z
+damascus,kafr sousa,apartment,215,879457500,,seed,2025-11-11T23:42:42.559Z
+rif dimashq,sahnaya,apartment,191,946613839,,seed,2025-12-15T12:31:32.559Z
+rif dimashq,darayya,land,352,1016991385,,seed,2025-11-04T23:02:53.559Z
+rif dimashq,sahnaya,land,989,3127886875,,seed,2026-01-03T14:15:00.559Z
+rif dimashq,artouz,apartment,202,813662174,,seed,2026-02-12T04:24:51.559Z
+rif dimashq,darayya,apartment,135,537419632,,seed,2026-01-08T18:41:31.559Z
+damascus,mashrou dummar,apartment,82,759387824,,seed,2026-02-08T01:22:44.559Z
+damascus,shaalaan,apartment,185,1940558043,,seed,2026-01-20T23:25:19.559Z
+rif dimashq,sahnaya,house,242,952746606,,seed,2025-12-08T16:08:27.559Z
+damascus,malki,apartment,114,1293146497,,seed,2026-02-13T06:46:16.559Z
+damascus,baghdad,villa,261,3506130051,,seed,2025-12-07T15:47:56.559Z
+rif dimashq,jaramana,house,120,359162748,,seed,2026-01-19T09:55:35.559Z
+damascus,mazzeh,land,662,1981818839,,seed,2025-12-27T04:35:52.559Z
+damascus,abu rummaneh,studio,48,521800280,,seed,2025-12-27T21:53:54.559Z
+damascus,abu rummaneh,apartment,90,715748185,,seed,2026-01-04T16:35:07.559Z
+rif dimashq,darayya,villa,375,2617167417,,seed,2026-02-26T10:28:19.559Z
+rif dimashq,sahnaya,studio,41,255549593,,seed,2026-01-27T22:57:18.559Z
+damascus,kafr sousa,studio,28,157736388,,seed,2026-02-03T01:18:34.559Z
+rif dimashq,artouz,land,494,1465409708,,seed,2025-11-24T13:04:53.559Z
+damascus,shaalaan,studio,39,350690902,,seed,2026-02-03T17:16:47.559Z
+damascus,shaalaan,apartment,188,2114943575,,seed,2025-11-17T05:21:35.559Z
+damascus,kafr sousa,apartment,93,519010535,,seed,2025-11-30T21:03:34.559Z
+damascus,malki,studio,42,413709580,,seed,2026-01-22T03:22:29.559Z
+damascus,kafr sousa,apartment,131,654159525,,seed,2026-01-02T16:53:32.559Z
+rif dimashq,artouz,apartment,200,1425830776,,seed,2026-01-23T14:21:27.559Z
+damascus,shaalaan,apartment,171,1951192499,,seed,2026-01-21T07:45:24.559Z
+damascus,mashrou dummar,studio,28,280394241,,seed,2025-12-27T08:46:03.559Z
+damascus,rukn al-din,apartment,186,395665939,,seed,2025-12-20T19:53:36.559Z
+rif dimashq,qudsaya project,studio,31,245944159,,seed,2026-01-07T15:58:46.559Z
+rif dimashq,qudsaya project,apartment,164,1592762791,,seed,2026-01-29T01:00:28.559Z
+rif dimashq,sahnaya,apartment,131,718385430,,seed,2026-01-24T03:13:10.559Z
+rif dimashq,artouz,land,669,2078934368,,seed,2025-11-16T17:16:50.559Z
+damascus,muhajireen,studio,28,266644661,,seed,2026-02-12T09:35:57.559Z
+damascus,kafr sousa,apartment,85,602339970,,seed,2026-02-10T09:44:15.559Z
+rif dimashq,harasta,apartment,169,358934409,,seed,2025-11-14T11:23:34.559Z
+rif dimashq,artouz,studio,43,273636975,,seed,2026-01-25T09:58:28.559Z
+rif dimashq,jaramana,apartment,117,302142662,,seed,2026-02-24T16:30:45.559Z
+rif dimashq,artouz,apartment,83,477584837,,seed,2025-12-15T11:35:47.559Z
+damascus,midan,apartment,96,311166761,,seed,2026-01-26T23:53:48.559Z
+rif dimashq,sahnaya,land,958,3688225030,,seed,2026-02-09T01:08:49.559Z
+rif dimashq,jaramana,apartment,153,563121659,,seed,2026-01-12T02:00:53.559Z
+rif dimashq,qudsaya project,studio,42,389972547,,seed,2025-12-16T18:34:01.559Z
+damascus,hay al ameen,apartment,184,1437483370,,seed,2025-12-21T21:05:59.559Z
+rif dimashq,jaramana,villa,559,3155578244,,seed,2025-12-18T19:16:17.559Z
+damascus,baghdad,house,187,1218095085,,seed,2025-11-16T01:20:01.559Z
+damascus,abu rummaneh,apartment,97,964348128,,seed,2026-01-21T03:38:26.559Z
+damascus,baghdad,apartment,217,1854301608,,seed,2025-12-21T19:17:49.559Z
+damascus,midan,apartment,94,310571727,,seed,2025-12-11T05:56:35.559Z
+damascus,muhajireen,apartment,71,790206710,,seed,2026-01-18T17:35:41.559Z
+damascus,kafr sousa,apartment,160,644670062,,seed,2025-12-01T05:31:02.559Z
+damascus,abu rummaneh,apartment,106,1255225469,,seed,2026-01-23T21:55:43.559Z
+damascus,muhajireen,apartment,78,925146600,,seed,2026-01-21T03:39:25.559Z
+damascus,midan,apartment,165,437918690,,seed,2026-01-02T18:10:07.559Z
+rif dimashq,jaramana,studio,43,104490000,,seed,2026-02-19T09:28:18.559Z
+rif dimashq,qudsaya project,apartment,187,1611837421,,seed,2025-11-24T03:23:06.559Z
+rif dimashq,qudsaya project,apartment,79,722367347,,seed,2025-11-08T18:24:00.559Z
+damascus,mazzeh,apartment,213,1662339104,,seed,2025-12-19T12:06:39.560Z
+damascus,baghdad,apartment,202,1956572585,,seed,2026-03-02T13:09:11.560Z
+damascus,mazzeh,apartment,137,719934355,,seed,2026-01-31T15:09:00.560Z
+damascus,baghdad,apartment,105,1155261927,,seed,2025-11-05T23:19:17.560Z
+rif dimashq,jaramana,house,162,281685600,,seed,2026-02-07T06:24:14.560Z
+damascus,rukn al-din,apartment,90,271528149,,seed,2026-01-19T15:02:48.560Z
+damascus,malki,apartment,146,1551812438,,seed,2026-01-09T12:19:36.560Z
+damascus,kafr sousa,house,115,456919549,,seed,2026-01-06T05:37:15.560Z
+rif dimashq,jaramana,apartment,196,681259166,,seed,2026-01-15T19:39:22.560Z
+damascus,mazzeh,apartment,127,530838506,,seed,2025-12-18T14:59:30.560Z
+damascus,mazzeh,apartment,119,799394514,,seed,2025-12-16T01:24:05.560Z
+damascus,midan,apartment,163,498142554,,seed,2026-01-28T20:51:44.560Z
+damascus,baghdad,land,137,778107435,,seed,2026-01-26T18:48:00.560Z
+damascus,malki,apartment,188,1818214194,,seed,2025-11-12T15:36:00.560Z
+damascus,baghdad,apartment,116,1214038928,,seed,2026-03-01T07:15:59.560Z
+damascus,abu rummaneh,villa,512,8623679795,,seed,2025-11-26T10:19:52.560Z
+rif dimashq,artouz,house,159,726822580,,seed,2026-01-12T23:18:14.560Z
+damascus,abu rummaneh,apartment,196,1720364315,,seed,2025-12-15T23:47:52.560Z
+rif dimashq,qudsaya project,studio,58,627291252,,seed,2025-12-16T15:51:13.560Z
+rif dimashq,jaramana,apartment,131,508213845,,seed,2026-02-02T12:43:43.560Z
+damascus,kafr sousa,studio,56,397352464,,seed,2025-12-12T11:10:40.560Z
+rif dimashq,mleiha,land,829,1763251489,,seed,2026-01-28T14:11:50.560Z
+rif dimashq,jaramana,apartment,124,481057380,,seed,2025-12-21T23:48:06.560Z
+rif dimashq,artouz,apartment,190,1113000536,,seed,2026-01-12T00:57:40.560Z
+damascus,mashrou dummar,villa,448,5132443362,,seed,2025-11-26T22:44:00.560Z
+damascus,rukn al-din,house,99,277019855,,seed,2026-01-02T14:33:23.560Z
+damascus,hay al ameen,apartment,151,1033166160,,seed,2025-12-05T16:19:04.560Z
+damascus,muhajireen,apartment,204,1990035685,,seed,2025-12-02T03:44:06.560Z
+rif dimashq,jaramana,apartment,123,302924914,,seed,2025-12-07T05:19:11.560Z
+damascus,malki,apartment,118,1274310698,,seed,2026-01-16T00:00:53.560Z
+damascus,rukn al-din,apartment,129,407249446,,seed,2026-03-02T04:54:08.560Z
+damascus,abu rummaneh,apartment,174,1854518863,,seed,2026-01-10T23:20:36.560Z
+damascus,baghdad,apartment,84,578750760,,seed,2025-12-31T14:45:09.560Z
+damascus,abu rummaneh,apartment,149,1583440722,,seed,2026-01-05T23:54:12.560Z
+damascus,khaled ibn al walid,apartment,188,2148766296,,seed,2026-02-24T21:41:52.560Z
+rif dimashq,darayya,land,587,1855433400,,seed,2025-11-09T23:59:41.560Z
+damascus,mazzeh,apartment,97,523190716,,seed,2026-02-07T22:25:34.560Z
+rif dimashq,jaramana,land,601,1038895004,,seed,2026-02-15T03:09:36.560Z
+damascus,abu rummaneh,apartment,90,909102419,,seed,2025-11-30T00:41:31.560Z
+damascus,mashrou dummar,apartment,184,2353281984,,seed,2025-12-12T18:21:48.560Z
+damascus,muhajireen,land,423,2453714882,,seed,2025-12-09T05:47:04.560Z
+damascus,shaalaan,villa,439,5893217292,,seed,2025-11-27T13:01:01.560Z
+damascus,khaled ibn al walid,house,153,1416631898,,seed,2026-02-15T11:04:59.560Z
+rif dimashq,jaramana,apartment,80,231441463,,seed,2025-11-07T16:02:45.560Z
+rif dimashq,mleiha,apartment,183,612111480,,seed,2025-12-17T08:44:11.560Z
+rif dimashq,qudsaya project,apartment,106,960064923,,seed,2025-11-13T07:54:20.560Z
+damascus,malki,apartment,213,1961015341,,seed,2025-11-09T17:21:45.560Z
+damascus,baghdad,studio,32,356119008,,seed,2025-11-14T04:57:40.560Z
+damascus,shaalaan,apartment,81,957856808,,seed,2026-02-14T03:44:06.560Z
+damascus,khaled ibn al walid,apartment,83,871692939,,seed,2026-01-17T16:06:58.560Z
+damascus,abu rummaneh,apartment,128,1689086986,,seed,2026-02-21T09:02:13.560Z
+rif dimashq,sahnaya,apartment,101,547715722,,seed,2026-01-19T14:09:50.560Z
+rif dimashq,darayya,villa,491,3232890449,,seed,2026-02-06T19:00:46.560Z
+damascus,malki,apartment,140,1846787702,,seed,2025-12-11T09:49:15.560Z
+rif dimashq,artouz,apartment,177,896026992,,seed,2026-02-26T14:19:26.560Z
+damascus,muhajireen,apartment,105,870337656,,seed,2026-03-02T14:06:31.560Z
+rif dimashq,artouz,land,607,1755213159,,seed,2026-01-23T15:36:23.560Z
+damascus,shaalaan,apartment,181,1734361377,,seed,2026-03-02T00:54:05.560Z
+damascus,hay al ameen,house,131,1007948005,,seed,2025-12-08T15:57:26.560Z
+rif dimashq,artouz,house,288,1080966497,,seed,2025-11-05T22:34:23.560Z
+rif dimashq,mleiha,apartment,148,464044460,,seed,2025-11-20T17:33:33.560Z
+damascus,shaalaan,apartment,82,1089110880,,seed,2026-01-25T23:10:53.560Z
+damascus,malki,apartment,126,1814950077,,seed,2026-01-20T14:05:44.560Z
+rif dimashq,darayya,apartment,74,369428516,,seed,2026-01-25T16:29:16.560Z
+damascus,muhajireen,villa,336,5767268887,,seed,2026-02-03T15:28:13.560Z
+damascus,mashrou dummar,house,97,880508492,,seed,2026-02-20T18:26:43.560Z
+damascus,muhajireen,apartment,111,1467765793,,seed,2025-12-18T05:01:10.560Z
+rif dimashq,sahnaya,land,154,575142876,,seed,2025-11-26T02:11:49.560Z
+damascus,hay al ameen,apartment,159,1540222983,,seed,2025-12-20T09:51:55.560Z
+damascus,midan,apartment,219,736386581,,seed,2026-02-23T11:05:10.560Z
+rif dimashq,mleiha,apartment,100,332385382,,seed,2025-12-01T20:15:32.560Z
+rif dimashq,mleiha,apartment,163,449429790,,seed,2025-11-27T04:18:05.560Z
+rif dimashq,darayya,apartment,150,761754563,,seed,2026-02-20T08:37:57.560Z
+damascus,hay al ameen,apartment,127,1021028933,,seed,2026-02-16T03:28:17.560Z
+damascus,hay al ameen,apartment,160,1949935031,,seed,2026-01-05T00:18:26.560Z
+rif dimashq,sahnaya,land,773,2356792762,,seed,2026-02-27T16:01:36.560Z
+damascus,abu rummaneh,house,154,1182962174,,seed,2025-12-22T20:13:45.560Z
+damascus,khaled ibn al walid,apartment,119,1001564088,,seed,2026-02-27T05:55:42.560Z
+damascus,abu rummaneh,apartment,180,2416607370,,seed,2026-02-04T11:30:11.560Z
+damascus,abu rummaneh,house,251,2269370593,,seed,2026-01-01T02:17:52.560Z
+damascus,muhajireen,studio,38,370770656,,seed,2025-12-25T15:07:07.560Z
+damascus,kafr sousa,studio,25,106788164,,seed,2025-12-04T15:29:47.560Z
+rif dimashq,jadidat al sheibani,house,225,1141966389,,seed,2025-12-25T12:20:33.560Z
+damascus,kafr sousa,land,740,1942801674,,seed,2026-03-01T02:03:56.560Z
+damascus,midan,apartment,187,605520865,,seed,2025-11-06T06:40:20.560Z
+damascus,midan,apartment,173,398382421,,seed,2026-02-28T12:46:07.560Z
+rif dimashq,jadidat al sheibani,house,288,1621001357,,seed,2025-11-25T15:53:40.560Z
+damascus,shaalaan,apartment,213,2282228705,,seed,2026-02-26T08:48:09.560Z
+damascus,abu rummaneh,apartment,172,1753397926,,seed,2026-01-06T17:19:39.560Z
+rif dimashq,qudsaya project,apartment,74,758330633,,seed,2026-01-24T17:52:18.560Z
+damascus,malki,villa,217,2979077650,,seed,2025-12-22T11:41:40.560Z
+damascus,hay al ameen,apartment,142,1145811082,,seed,2026-01-11T09:00:53.560Z
+damascus,mazzeh,apartment,92,659904144,,seed,2026-02-17T12:07:41.560Z
+damascus,malki,studio,29,292476088,,seed,2025-11-29T03:22:29.560Z
+rif dimashq,mleiha,land,271,582067350,,seed,2025-12-24T15:47:03.560Z
+damascus,abu rummaneh,house,106,982961979,,seed,2025-11-18T18:19:52.560Z
+rif dimashq,qudsaya project,house,246,1640055618,,seed,2025-11-15T19:22:02.560Z
+rif dimashq,mleiha,land,839,1228776523,,seed,2026-02-14T17:01:50.560Z
+damascus,abu rummaneh,apartment,142,1014187061,,seed,2026-01-27T23:26:03.560Z
+damascus,abu rummaneh,apartment,98,1085192411,,seed,2025-12-22T21:55:10.560Z
+rif dimashq,darayya,apartment,123,711231921,,seed,2025-11-11T20:48:52.560Z
+damascus,muhajireen,apartment,134,1740406338,,seed,2025-11-14T10:26:49.560Z
+damascus,midan,apartment,167,533642901,,seed,2026-02-13T19:34:12.560Z
+damascus,malki,studio,36,496951832,,seed,2026-02-15T23:45:45.560Z
+rif dimashq,qudsaya project,house,176,1406199653,,seed,2026-01-12T04:17:36.560Z
+rif dimashq,harasta,apartment,95,329052817,,seed,2025-11-28T00:30:12.560Z
+damascus,malki,apartment,98,1149650211,,seed,2026-03-01T02:53:21.560Z
+damascus,abu rummaneh,apartment,165,1740065938,,seed,2026-03-02T05:59:35.560Z
+rif dimashq,sahnaya,villa,306,2768779286,,seed,2026-01-31T21:16:49.560Z
+rif dimashq,artouz,house,175,1100759263,,seed,2026-01-07T16:24:39.560Z
+rif dimashq,sahnaya,apartment,139,669810006,,seed,2026-02-15T19:28:41.560Z
+damascus,midan,villa,297,1316727551,,seed,2026-01-18T05:02:38.560Z
+damascus,malki,house,184,1633842104,,seed,2026-02-13T11:03:14.560Z
+damascus,hay al ameen,apartment,204,2284523778,,seed,2026-02-22T05:03:01.560Z
+damascus,abu rummaneh,house,237,1735929653,,seed,2026-01-16T14:59:27.560Z
+damascus,malki,house,210,2179433875,,seed,2026-02-07T17:26:31.560Z
+damascus,khaled ibn al walid,apartment,189,1644000989,,seed,2026-01-19T08:14:59.560Z
+damascus,rukn al-din,villa,451,1983128413,,seed,2026-01-09T00:07:28.560Z
+damascus,malki,land,782,5618186221,,seed,2025-11-30T07:36:53.560Z
+rif dimashq,qudsaya project,apartment,195,1786229226,,seed,2026-02-11T05:12:36.560Z
+rif dimashq,mleiha,apartment,203,569583029,,seed,2025-11-20T11:32:50.560Z
+damascus,baghdad,apartment,141,1382949899,,seed,2025-11-05T19:58:44.560Z
+rif dimashq,sahnaya,apartment,201,1169865280,,seed,2025-11-26T15:45:43.560Z
+damascus,midan,apartment,93,327994047,,seed,2026-02-26T10:47:43.560Z
+damascus,abu rummaneh,apartment,132,1330795843,,seed,2026-02-07T03:07:10.560Z
+damascus,kafr sousa,villa,180,1968300000,,seed,2025-12-08T16:51:42.560Z
+damascus,muhajireen,studio,55,425012775,,seed,2026-02-28T19:26:23.560Z
+rif dimashq,jaramana,house,205,562858408,,seed,2025-12-21T02:33:21.560Z
+rif dimashq,qudsaya project,land,890,4898436806,,seed,2026-01-09T21:28:10.560Z
+damascus,malki,house,245,1997572133,,seed,2025-12-06T13:32:12.560Z
+damascus,shaalaan,apartment,90,987978553,,seed,2025-11-24T17:10:33.560Z
+rif dimashq,sahnaya,apartment,205,1090382821,,seed,2026-01-05T18:48:50.560Z
+damascus,rukn al-din,apartment,195,581540860,,seed,2026-02-08T10:09:20.560Z
+damascus,shaalaan,apartment,172,1647370242,,seed,2026-01-28T19:13:53.560Z
+damascus,kafr sousa,house,141,651798406,,seed,2026-02-01T01:17:01.560Z
+rif dimashq,jaramana,apartment,151,342019951,,seed,2026-02-28T21:02:36.560Z
+rif dimashq,jaramana,apartment,168,548060512,,seed,2025-12-14T18:35:41.560Z
+damascus,hay al ameen,apartment,119,1281693407,,seed,2025-11-08T09:08:50.560Z
+damascus,malki,apartment,84,963722983,,seed,2026-01-04T13:08:42.560Z
+rif dimashq,mleiha,land,239,314874312,,seed,2026-01-13T21:12:10.560Z
+rif dimashq,jaramana,apartment,83,221905555,,seed,2026-02-08T14:14:54.560Z
+damascus,shaalaan,apartment,163,1485506568,,seed,2025-12-07T13:49:44.560Z
+rif dimashq,artouz,apartment,198,1023047107,,seed,2025-12-04T21:23:42.560Z
+damascus,shaalaan,apartment,162,1584985821,,seed,2026-02-28T15:50:24.560Z
+damascus,shaalaan,apartment,120,1003171073,,seed,2026-02-28T06:36:36.560Z
+damascus,hay al ameen,house,142,1003364660,,seed,2025-12-09T13:08:05.560Z
+damascus,mazzeh,land,452,1352737776,,seed,2026-01-21T17:07:28.560Z
+rif dimashq,mleiha,villa,361,1280647500,,seed,2026-03-02T20:48:03.560Z
+damascus,shaalaan,land,160,775106895,,seed,2026-02-23T19:23:03.560Z
+damascus,abu rummaneh,house,122,1415604181,,seed,2025-11-05T00:03:54.560Z
+damascus,mazzeh,studio,33,200541609,,seed,2025-11-30T17:38:10.560Z
+damascus,baghdad,apartment,206,2187499551,,seed,2025-11-20T09:24:16.560Z
+damascus,khaled ibn al walid,house,150,1283821040,,seed,2025-11-04T06:08:07.560Z
+damascus,muhajireen,house,187,1612437963,,seed,2025-11-20T11:14:16.560Z
+damascus,malki,apartment,133,1821351482,,seed,2026-02-04T10:03:10.560Z
+damascus,kafr sousa,apartment,116,703606758,,seed,2026-01-01T11:36:59.560Z
+rif dimashq,darayya,land,680,2001041400,,seed,2026-01-07T15:04:24.560Z
+damascus,khaled ibn al walid,villa,205,2018171700,,seed,2025-12-20T03:07:58.560Z
+rif dimashq,mleiha,villa,321,1751388904,,seed,2026-01-22T22:02:57.560Z
+damascus,khaled ibn al walid,house,143,911052963,,seed,2026-02-15T23:44:04.560Z
+damascus,kafr sousa,apartment,137,732394065,,seed,2025-12-16T15:51:55.560Z
+damascus,muhajireen,apartment,116,1343518237,,seed,2026-02-20T16:06:12.560Z
+damascus,mazzeh,apartment,112,476461440,,seed,2026-02-27T18:45:07.560Z
+damascus,mazzeh,apartment,190,1210313556,,seed,2025-11-08T01:27:13.560Z
+rif dimashq,mleiha,apartment,139,311499819,,seed,2025-11-13T21:35:41.560Z
+rif dimashq,sahnaya,apartment,129,866677813,,seed,2026-01-04T01:28:42.560Z
+rif dimashq,sahnaya,apartment,132,756098084,,seed,2026-02-19T16:53:34.560Z
+rif dimashq,qudsaya project,apartment,83,997857738,,seed,2026-02-03T02:36:04.560Z
+damascus,mashrou dummar,house,256,2121530375,,seed,2026-01-06T20:14:20.560Z
+rif dimashq,qudsaya project,villa,322,4396711763,,seed,2026-02-20T14:51:17.560Z
+damascus,mashrou dummar,apartment,220,1599047582,,seed,2025-12-23T06:44:14.560Z
+damascus,mazzeh,villa,449,2836782000,,seed,2025-11-21T03:41:35.560Z
+rif dimashq,harasta,apartment,187,521700231,,seed,2025-11-30T17:46:57.560Z
+rif dimashq,qudsaya project,apartment,165,1163327352,,seed,2025-12-20T19:33:39.560Z
+damascus,malki,apartment,147,1149157800,,seed,2026-01-27T10:10:48.560Z
+rif dimashq,jaramana,house,258,526629600,,seed,2025-12-24T14:49:42.560Z
+rif dimashq,qudsaya project,apartment,161,1143207919,,seed,2026-02-09T18:32:54.560Z
+damascus,khaled ibn al walid,apartment,176,1969141983,,seed,2026-01-12T22:07:08.560Z
+rif dimashq,jadidat al sheibani,land,810,2159621308,,seed,2026-03-01T03:49:25.560Z
+rif dimashq,mleiha,apartment,148,288663839,,seed,2026-02-23T19:51:28.560Z
+damascus,rukn al-din,studio,25,65407500,,seed,2025-11-27T14:58:33.560Z
+damascus,mashrou dummar,house,124,1102760202,,seed,2025-12-25T12:16:46.560Z
+rif dimashq,artouz,apartment,100,468539774,,seed,2026-02-10T12:39:18.560Z
+damascus,kafr sousa,apartment,201,1320664263,,seed,2025-12-25T14:49:40.560Z
+damascus,hay al ameen,villa,333,3628209609,,seed,2025-12-30T17:32:12.560Z
+damascus,malki,apartment,98,1002174360,,seed,2026-02-09T06:09:53.560Z
+rif dimashq,mleiha,house,234,388795680,,seed,2026-02-18T21:11:03.560Z
+damascus,rukn al-din,studio,56,162199545,,seed,2025-12-12T04:02:32.560Z
+rif dimashq,jadidat al sheibani,apartment,105,750141000,,seed,2026-01-13T07:00:45.560Z
+damascus,rukn al-din,apartment,150,394595800,,seed,2025-11-14T00:19:23.560Z
+damascus,mazzeh,villa,452,3990536256,,seed,2026-01-29T17:07:46.560Z
+damascus,shaalaan,apartment,103,1000542351,,seed,2025-11-30T09:02:40.560Z
+damascus,mashrou dummar,apartment,76,578671528,,seed,2025-12-01T19:55:14.560Z
+damascus,midan,apartment,199,443399315,,seed,2026-02-17T20:06:27.560Z
+rif dimashq,darayya,house,196,963281802,,seed,2025-11-21T20:25:16.560Z
+damascus,rukn al-din,studio,48,213282115,,seed,2026-02-25T19:54:56.560Z
+damascus,khaled ibn al walid,studio,35,404313599,,seed,2025-12-08T10:02:43.560Z
+damascus,shaalaan,villa,487,4896924510,,seed,2026-01-09T07:04:14.560Z
+damascus,muhajireen,apartment,209,1939169942,,seed,2025-12-16T18:55:47.560Z
+damascus,kafr sousa,land,819,2262738504,,seed,2026-02-05T05:50:30.560Z
+damascus,rukn al-din,apartment,165,617127579,,seed,2026-02-23T02:26:27.560Z
+rif dimashq,artouz,land,229,651606477,,seed,2026-01-18T02:39:07.560Z
+damascus,shaalaan,apartment,207,1883755926,,seed,2025-12-23T10:00:21.560Z
+damascus,mazzeh,house,180,926356833,,seed,2026-02-19T18:32:52.560Z
+damascus,shaalaan,apartment,135,1383311081,,seed,2026-02-21T06:28:59.560Z
+damascus,mazzeh,apartment,208,876096000,,seed,2026-01-12T09:07:44.560Z
+damascus,hay al ameen,apartment,103,1078078387,,seed,2026-02-19T09:48:45.560Z
+damascus,muhajireen,studio,36,345899501,,seed,2025-12-07T19:35:54.560Z
+damascus,khaled ibn al walid,house,216,1153735666,,seed,2025-11-13T19:20:19.560Z
+damascus,midan,studio,42,145939468,,seed,2025-11-19T08:50:52.560Z
+damascus,malki,apartment,137,1028568600,,seed,2025-12-19T16:09:35.560Z
+rif dimashq,jaramana,land,436,649938497,,seed,2025-12-21T14:04:19.560Z
+damascus,mashrou dummar,studio,51,615739993,,seed,2026-02-10T21:13:10.560Z
+damascus,mazzeh,apartment,158,932829365,,seed,2026-02-23T05:52:10.560Z
+rif dimashq,darayya,house,105,415088848,,seed,2025-12-02T05:06:29.560Z
+rif dimashq,jadidat al sheibani,apartment,112,677038260,,seed,2026-02-22T19:35:48.560Z
+rif dimashq,jaramana,land,366,674709627,,seed,2025-12-16T00:57:19.560Z
+rif dimashq,mleiha,apartment,114,293198066,,seed,2026-01-01T11:04:14.560Z
+rif dimashq,jadidat al sheibani,studio,50,403515000,,seed,2026-02-04T21:10:49.560Z
+rif dimashq,sahnaya,apartment,196,1126735761,,seed,2025-11-27T19:41:52.560Z
+damascus,mazzeh,studio,29,170061379,,seed,2025-12-10T00:26:58.560Z
+damascus,abu rummaneh,apartment,166,2160940023,,seed,2025-11-24T17:49:43.560Z
+damascus,rukn al-din,apartment,90,257871687,,seed,2025-11-18T14:12:06.560Z
+damascus,muhajireen,apartment,79,797911019,,seed,2026-02-21T18:02:08.560Z
+damascus,rukn al-din,studio,35,127436959,,seed,2025-12-08T13:30:55.560Z
+damascus,khaled ibn al walid,apartment,192,2349173007,,seed,2025-12-02T04:08:39.560Z
+rif dimashq,sahnaya,studio,38,266723867,,seed,2025-12-31T05:15:46.560Z
+damascus,mashrou dummar,apartment,178,1936553650,,seed,2026-02-06T01:38:34.560Z
+damascus,rukn al-din,studio,54,199308095,,seed,2026-02-09T06:08:42.560Z
+damascus,muhajireen,apartment,172,1241085780,,seed,2025-12-30T03:39:11.560Z
+damascus,mashrou dummar,house,123,941395237,,seed,2025-11-15T10:36:17.560Z
+damascus,abu rummaneh,studio,26,289225555,,seed,2026-02-15T21:46:50.560Z
+damascus,shaalaan,apartment,166,1382759495,,seed,2025-11-04T15:45:21.560Z
+damascus,rukn al-din,house,153,431101559,,seed,2026-01-27T11:48:59.560Z
+rif dimashq,mleiha,apartment,204,475198370,,seed,2026-02-26T03:52:42.560Z
+damascus,kafr sousa,apartment,177,915372201,,seed,2025-11-15T09:23:22.560Z
+damascus,mashrou dummar,apartment,140,1525341194,,seed,2026-01-14T00:23:33.560Z
+damascus,mazzeh,villa,453,5563832976,,seed,2026-01-04T07:41:13.560Z
+damascus,kafr sousa,apartment,87,542337130,,seed,2025-12-08T19:40:52.560Z
+damascus,muhajireen,studio,27,273554861,,seed,2026-01-01T08:27:38.560Z
+rif dimashq,jaramana,house,226,605188044,,seed,2026-02-05T11:17:57.560Z
+rif dimashq,qudsaya project,apartment,143,1255593083,,seed,2025-12-27T17:21:38.560Z
+rif dimashq,jaramana,apartment,99,376612335,,seed,2025-12-03T20:52:50.560Z
+damascus,hay al ameen,villa,475,8498973600,,seed,2026-02-26T23:14:22.560Z
+rif dimashq,qudsaya project,apartment,188,2034781751,,seed,2025-12-05T02:07:34.560Z
+damascus,muhajireen,studio,35,295286779,,seed,2026-02-16T21:32:05.560Z
+rif dimashq,mleiha,house,216,502405772,,seed,2025-12-29T21:40:03.560Z
+damascus,baghdad,apartment,183,1389508020,,seed,2026-01-10T01:59:47.560Z
+damascus,abu rummaneh,villa,308,3669626916,,seed,2025-11-18T14:43:45.560Z
+damascus,shaalaan,apartment,177,2154025162,,seed,2025-11-08T20:41:02.560Z
+damascus,mashrou dummar,studio,55,761323860,,seed,2025-11-19T13:34:02.560Z
+damascus,baghdad,apartment,72,662829810,,seed,2025-11-22T08:34:31.560Z
+damascus,hay al ameen,studio,51,501270780,,seed,2025-12-14T01:45:25.560Z
+rif dimashq,jadidat al sheibani,apartment,188,679473360,,seed,2026-02-27T18:46:04.560Z
+rif dimashq,jaramana,apartment,171,579339653,,seed,2026-01-04T01:26:16.560Z
+damascus,rukn al-din,apartment,165,496848832,,seed,2026-01-08T15:54:25.560Z
+damascus,mashrou dummar,apartment,187,1315668420,,seed,2026-01-24T06:27:30.560Z
+damascus,midan,apartment,93,235737862,,seed,2025-12-25T09:03:24.560Z
+damascus,kafr sousa,land,412,1296204945,,seed,2025-12-10T10:14:42.560Z
+damascus,shaalaan,house,206,2075694180,,seed,2026-01-12T09:03:30.560Z
+damascus,abu rummaneh,studio,33,366852477,,seed,2026-02-20T07:29:33.560Z
+rif dimashq,mleiha,house,180,404074419,,seed,2025-11-22T00:21:46.560Z
+damascus,baghdad,apartment,137,1401342188,,seed,2026-01-14T16:12:48.560Z
+rif dimashq,sahnaya,land,640,2230467008,,seed,2025-12-22T18:12:29.560Z
+rif dimashq,mleiha,house,232,458003781,,seed,2026-01-23T11:16:34.560Z
+damascus,khaled ibn al walid,studio,53,573702762,,seed,2026-02-15T06:25:22.560Z
+damascus,khaled ibn al walid,apartment,158,1352836985,,seed,2025-12-11T07:14:03.560Z
+rif dimashq,mleiha,apartment,191,614146531,,seed,2026-01-16T19:23:04.560Z
+rif dimashq,jaramana,apartment,162,499637882,,seed,2025-12-12T11:17:29.560Z
+damascus,mazzeh,studio,41,367854683,,seed,2026-03-03T04:29:17.560Z
+damascus,rukn al-din,land,817,1365044934,,seed,2025-11-20T10:37:25.560Z
+damascus,rukn al-din,apartment,173,401726823,,seed,2025-11-24T01:55:21.560Z
+rif dimashq,darayya,house,102,551740673,,seed,2026-01-20T18:39:26.560Z
+damascus,malki,apartment,123,1189466261,,seed,2025-12-22T21:29:43.560Z
+damascus,rukn al-din,house,112,223440000,,seed,2026-02-23T09:00:15.560Z
+damascus,mashrou dummar,house,214,2179105719,,seed,2025-11-29T18:08:51.560Z
+damascus,shaalaan,house,201,2102335956,,seed,2025-12-25T22:18:13.560Z
+rif dimashq,sahnaya,house,159,701684831,,seed,2025-11-26T00:45:16.560Z
+damascus,mazzeh,apartment,114,541306764,,seed,2026-01-23T01:01:07.560Z
+damascus,mazzeh,apartment,100,645947767,,seed,2026-01-30T21:24:47.560Z
+rif dimashq,mleiha,apartment,120,336435741,,seed,2026-03-02T13:44:33.560Z
+rif dimashq,harasta,house,129,259186695,,seed,2025-11-12T04:38:20.560Z
+rif dimashq,artouz,villa,525,5626057500,,seed,2026-02-10T04:51:55.560Z
+damascus,shaalaan,apartment,199,1978886881,,seed,2025-12-01T18:36:04.560Z
+rif dimashq,harasta,apartment,177,543853047,,seed,2026-01-30T08:43:41.560Z
+damascus,shaalaan,studio,40,509946119,,seed,2025-11-09T10:44:30.560Z
+damascus,rukn al-din,house,213,445249041,,seed,2025-11-23T05:52:56.560Z
+damascus,baghdad,apartment,178,1903057556,,seed,2025-12-28T15:19:17.560Z
+damascus,shaalaan,studio,48,579859579,,seed,2025-12-06T02:08:42.560Z
+damascus,kafr sousa,apartment,133,711968003,,seed,2026-02-27T14:52:54.560Z
+damascus,abu rummaneh,studio,39,538487453,,seed,2025-12-25T19:59:18.560Z
+rif dimashq,sahnaya,land,990,3771997414,,seed,2026-02-17T01:23:35.560Z
+damascus,kafr sousa,apartment,189,834952860,,seed,2025-11-08T13:39:22.560Z
+damascus,midan,apartment,92,230598576,,seed,2025-12-17T07:30:12.560Z
+damascus,abu rummaneh,apartment,166,1682548918,,seed,2026-01-08T19:53:17.560Z
+damascus,mashrou dummar,apartment,200,1379268000,,seed,2026-01-05T23:07:07.560Z
+damascus,hay al ameen,studio,60,662580641,,seed,2026-03-01T15:41:56.560Z
+damascus,shaalaan,apartment,219,2269197790,,seed,2026-02-18T16:12:17.560Z
+damascus,rukn al-din,villa,425,2619190194,,seed,2025-12-13T02:44:52.560Z
+damascus,kafr sousa,apartment,212,1380684676,,seed,2026-02-06T21:51:51.560Z
+damascus,shaalaan,apartment,90,735812389,,seed,2026-02-12T20:13:23.560Z
+damascus,shaalaan,apartment,81,759116421,,seed,2025-11-16T10:59:17.560Z
+damascus,abu rummaneh,apartment,161,1838451832,,seed,2025-12-14T02:57:16.560Z
+damascus,midan,house,212,580562193,,seed,2025-12-06T08:15:20.560Z
+damascus,abu rummaneh,apartment,173,1780233303,,seed,2025-11-22T04:54:32.560Z
+rif dimashq,qudsaya project,land,296,1709452687,,seed,2026-03-01T19:19:11.560Z
+rif dimashq,darayya,apartment,137,793152504,,seed,2026-01-22T09:08:21.560Z
+rif dimashq,qudsaya project,land,643,2252068920,,seed,2025-12-24T09:14:44.560Z
+damascus,kafr sousa,apartment,137,867129404,,seed,2025-12-31T08:28:50.560Z
+rif dimashq,mleiha,land,919,1309096734,,seed,2025-12-07T23:08:18.560Z
+damascus,midan,apartment,154,440969486,,seed,2025-12-22T21:29:06.560Z
+rif dimashq,qudsaya project,apartment,75,695366147,,seed,2026-02-25T02:59:03.560Z
+rif dimashq,jadidat al sheibani,apartment,133,660240199,,seed,2026-02-12T20:28:01.560Z
+damascus,rukn al-din,apartment,187,413036250,,seed,2025-12-29T09:06:15.560Z
+damascus,muhajireen,villa,255,3058165212,,seed,2025-12-05T16:25:28.560Z
+rif dimashq,darayya,house,280,940097364,,seed,2026-02-16T22:13:59.560Z
+rif dimashq,darayya,apartment,193,788438861,,seed,2025-12-02T23:21:22.560Z
+rif dimashq,darayya,land,571,1732415501,,seed,2026-01-06T19:03:32.560Z
+rif dimashq,artouz,land,166,602755538,,seed,2025-12-07T14:04:44.560Z
+rif dimashq,artouz,house,112,436518449,,seed,2026-01-07T02:44:52.560Z
+rif dimashq,darayya,apartment,80,355908750,,seed,2025-11-18T13:24:59.560Z
+damascus,rukn al-din,apartment,77,189159897,,seed,2026-02-10T17:40:54.560Z
+damascus,kafr sousa,apartment,86,489187724,,seed,2025-11-24T02:09:00.560Z
+rif dimashq,qudsaya project,house,154,1177179626,,seed,2026-02-12T21:10:48.560Z
+damascus,kafr sousa,studio,36,261386830,,seed,2025-12-29T00:02:42.560Z
+rif dimashq,jadidat al sheibani,house,247,1240001788,,seed,2025-12-02T06:11:20.560Z
+damascus,mazzeh,apartment,95,400140000,,seed,2026-02-10T04:59:29.560Z
+rif dimashq,jaramana,house,180,556533464,,seed,2026-01-02T02:09:32.560Z
+damascus,abu rummaneh,apartment,181,1738322674,,seed,2025-11-23T23:59:33.560Z
+damascus,hay al ameen,studio,26,212735820,,seed,2026-02-22T07:06:39.560Z
+damascus,abu rummaneh,apartment,143,1573572969,,seed,2026-01-12T14:05:50.560Z
+damascus,mashrou dummar,apartment,135,1256780022,,seed,2025-12-31T04:57:25.560Z
+rif dimashq,qudsaya project,land,752,3874739910,,seed,2025-11-05T22:59:19.560Z
+damascus,khaled ibn al walid,land,626,3324303672,,seed,2026-01-14T05:39:40.560Z
+damascus,mazzeh,apartment,169,990783367,,seed,2025-12-04T20:07:31.560Z
+damascus,mazzeh,apartment,212,1074684848,,seed,2025-12-27T11:32:02.560Z
+rif dimashq,sahnaya,land,196,526814674,,seed,2025-11-07T19:37:36.560Z
+damascus,muhajireen,apartment,180,1659041929,,seed,2025-12-09T15:30:25.560Z
+rif dimashq,jadidat al sheibani,apartment,115,792235819,,seed,2025-12-23T18:13:16.560Z
+damascus,khaled ibn al walid,studio,35,375087688,,seed,2026-02-28T15:50:49.560Z
+damascus,kafr sousa,apartment,202,1290478327,,seed,2026-01-16T00:01:54.560Z
+rif dimashq,mleiha,villa,518,3307689000,,seed,2025-11-06T20:23:13.560Z
+damascus,midan,apartment,106,358381038,,seed,2026-02-22T21:02:37.560Z
+damascus,midan,apartment,144,344725780,,seed,2025-12-04T07:15:36.560Z
+damascus,khaled ibn al walid,apartment,144,1279685565,,seed,2025-11-09T08:59:30.560Z
+damascus,abu rummaneh,apartment,201,1900244402,,seed,2026-03-02T00:24:40.560Z
+rif dimashq,mleiha,house,135,312862658,,seed,2025-11-04T23:47:43.560Z
+damascus,muhajireen,studio,30,284619337,,seed,2026-02-07T06:42:55.560Z
+rif dimashq,qudsaya project,villa,238,3164005216,,seed,2026-01-26T13:34:41.560Z
+damascus,mazzeh,apartment,209,972107347,,seed,2026-02-01T02:10:08.560Z
+damascus,baghdad,apartment,191,2031392006,,seed,2026-01-18T05:36:29.560Z
+rif dimashq,harasta,apartment,158,519271854,,seed,2025-12-24T05:07:05.560Z
+damascus,rukn al-din,apartment,153,484731168,,seed,2025-12-10T13:32:42.560Z
+damascus,muhajireen,apartment,106,960403227,,seed,2026-01-27T13:42:03.560Z
+damascus,hay al ameen,apartment,183,1673810927,,seed,2026-01-06T19:58:05.560Z
+damascus,khaled ibn al walid,apartment,138,1696172376,,seed,2025-12-05T09:03:49.560Z
+damascus,kafr sousa,apartment,184,1145538599,,seed,2026-01-05T06:46:35.560Z
+damascus,rukn al-din,villa,337,1689931100,,seed,2025-12-29T21:54:20.560Z
+damascus,baghdad,apartment,191,1588389776,,seed,2025-11-12T01:09:12.560Z
+damascus,shaalaan,apartment,157,1707002979,,seed,2026-02-22T11:05:50.560Z
+rif dimashq,sahnaya,apartment,184,851726227,,seed,2025-11-23T18:46:01.560Z
+damascus,mashrou dummar,apartment,204,1786449172,,seed,2025-11-08T18:20:59.560Z
+damascus,abu rummaneh,apartment,141,1329352355,,seed,2025-11-07T05:59:02.560Z
+damascus,hay al ameen,apartment,208,1584967592,,seed,2025-11-27T09:35:24.560Z
+damascus,mazzeh,apartment,97,465717808,,seed,2025-11-07T18:33:30.560Z
+rif dimashq,sahnaya,apartment,209,1001565338,,seed,2026-01-19T23:51:42.560Z
+rif dimashq,darayya,house,190,763449860,,seed,2026-01-15T19:02:51.560Z
+damascus,hay al ameen,apartment,137,1288251809,,seed,2025-12-29T19:50:42.560Z
+rif dimashq,mleiha,house,117,343924226,,seed,2025-11-11T04:34:48.560Z
+rif dimashq,qudsaya project,apartment,144,1228454174,,seed,2026-02-05T09:49:17.560Z
+damascus,abu rummaneh,house,231,2208192584,,seed,2025-12-14T20:30:09.560Z
+rif dimashq,qudsaya project,villa,234,3777976346,,seed,2026-01-31T09:27:08.560Z
+damascus,hay al ameen,apartment,136,1148797180,,seed,2025-11-15T07:33:45.560Z
+damascus,kafr sousa,apartment,203,1253488762,,seed,2026-01-09T17:31:08.560Z
+damascus,midan,apartment,104,263521026,,seed,2025-11-11T01:19:21.560Z
+rif dimashq,darayya,land,178,677331264,,seed,2025-11-12T02:42:42.560Z
+damascus,muhajireen,apartment,206,2640144500,,seed,2025-12-12T09:32:39.560Z
+damascus,malki,apartment,112,1056093101,,seed,2026-02-12T08:41:36.560Z
+damascus,abu rummaneh,apartment,181,1848549705,,seed,2026-02-08T10:45:32.560Z
+rif dimashq,darayya,apartment,81,583394385,,seed,2026-02-26T13:19:51.560Z
+rif dimashq,sahnaya,apartment,77,430215358,,seed,2025-12-31T16:29:45.560Z
+rif dimashq,artouz,villa,248,1968975567,,seed,2026-02-03T06:52:38.560Z
+damascus,khaled ibn al walid,villa,272,3220099853,,seed,2026-01-05T08:01:37.560Z
+rif dimashq,qudsaya project,apartment,106,986249481,,seed,2026-02-15T19:02:41.560Z
+damascus,muhajireen,house,202,1600906015,,seed,2026-02-21T23:10:49.560Z
+rif dimashq,jadidat al sheibani,apartment,183,945039073,,seed,2025-12-06T06:58:25.560Z
+damascus,shaalaan,apartment,130,877856849,,seed,2026-01-25T19:05:23.560Z
+damascus,malki,villa,229,3454524198,,seed,2025-12-26T20:00:56.560Z
+damascus,mashrou dummar,house,184,1319793463,,seed,2025-11-08T18:17:13.560Z
+rif dimashq,jaramana,apartment,140,364714493,,seed,2026-01-20T19:13:36.560Z
+rif dimashq,qudsaya project,apartment,205,1395981825,,seed,2026-01-30T20:30:14.560Z
+damascus,shaalaan,villa,346,5544355125,,seed,2026-02-08T03:56:17.560Z
+damascus,mazzeh,apartment,99,657330973,,seed,2025-11-22T13:33:22.560Z
+damascus,mazzeh,apartment,94,439215414,,seed,2025-12-21T12:44:36.560Z
+rif dimashq,mleiha,apartment,107,220364895,,seed,2025-12-19T20:28:38.560Z
+damascus,mashrou dummar,apartment,77,628378376,,seed,2025-11-28T19:45:50.560Z
+rif dimashq,artouz,studio,52,391776767,,seed,2025-12-24T01:58:31.560Z
+rif dimashq,darayya,apartment,156,926599413,,seed,2025-12-08T00:59:44.560Z
+damascus,khaled ibn al walid,studio,54,675353923,,seed,2026-01-26T09:04:57.560Z
+rif dimashq,artouz,studio,34,214389726,,seed,2025-11-10T17:27:48.560Z
+damascus,kafr sousa,studio,38,257639644,,seed,2025-12-14T09:18:21.560Z
+damascus,muhajireen,studio,37,363107279,,seed,2025-12-26T20:43:54.560Z
+damascus,baghdad,apartment,171,1511843506,,seed,2026-01-16T04:48:44.560Z
+rif dimashq,mleiha,house,255,703836144,,seed,2025-11-21T13:52:53.560Z
+damascus,mashrou dummar,apartment,81,651895594,,seed,2026-01-20T07:24:36.560Z
+damascus,khaled ibn al walid,land,755,3557523385,,seed,2025-11-27T05:37:44.560Z
+damascus,mashrou dummar,apartment,162,1360451711,,seed,2025-12-05T15:30:56.560Z
+rif dimashq,jadidat al sheibani,apartment,191,763404165,,seed,2025-11-09T07:09:48.560Z
+damascus,baghdad,villa,434,6961576416,,seed,2026-01-25T10:17:23.560Z
+rif dimashq,artouz,apartment,131,701420964,,seed,2025-11-06T23:16:24.560Z
+damascus,abu rummaneh,studio,27,286086356,,seed,2025-12-20T08:48:41.560Z
+damascus,muhajireen,studio,39,394960101,,seed,2025-11-26T12:02:49.560Z
+rif dimashq,qudsaya project,house,262,1464318000,,seed,2025-11-30T23:09:06.560Z
+rif dimashq,sahnaya,house,259,1281202489,,seed,2025-12-24T00:39:30.560Z
+rif dimashq,mleiha,apartment,202,735970042,,seed,2026-01-02T07:55:03.560Z
+damascus,muhajireen,studio,39,313800435,,seed,2025-12-04T22:08:53.560Z
+damascus,muhajireen,apartment,115,1128897604,,seed,2026-02-09T10:25:32.560Z
+damascus,mashrou dummar,apartment,125,1140967207,,seed,2025-11-08T20:28:45.560Z
+rif dimashq,jaramana,apartment,97,273079301,,seed,2025-11-11T08:39:33.560Z
+rif dimashq,jadidat al sheibani,apartment,183,863636668,,seed,2026-01-27T08:06:41.560Z
+damascus,baghdad,studio,59,546566362,,seed,2026-02-07T13:53:50.560Z
+rif dimashq,harasta,house,203,375144000,,seed,2025-12-15T09:51:15.560Z
+damascus,abu rummaneh,apartment,74,944898176,,seed,2025-11-17T15:57:51.560Z
+rif dimashq,sahnaya,apartment,125,866652351,,seed,2025-12-28T15:58:24.560Z
+damascus,rukn al-din,apartment,157,493043217,,seed,2025-12-08T10:09:23.560Z
+rif dimashq,darayya,studio,44,264373361,,seed,2025-12-09T19:50:40.560Z
+damascus,rukn al-din,villa,310,2063730465,,seed,2026-01-12T17:00:11.560Z
+damascus,mashrou dummar,apartment,166,2004128589,,seed,2025-12-05T08:12:44.560Z
+damascus,hay al ameen,apartment,123,943772184,,seed,2026-03-01T08:07:36.560Z
+damascus,shaalaan,apartment,125,1186450894,,seed,2026-02-26T15:09:30.560Z
+rif dimashq,jaramana,house,298,564469310,,seed,2026-01-27T14:52:30.560Z
+damascus,malki,apartment,108,1312815405,,seed,2025-12-02T08:28:09.560Z
+damascus,mazzeh,apartment,93,626678591,,seed,2025-12-09T09:20:23.560Z
+rif dimashq,artouz,apartment,187,844003538,,seed,2026-01-05T03:59:03.560Z
+rif dimashq,sahnaya,land,855,2377744951,,seed,2026-02-04T13:49:39.560Z
+damascus,khaled ibn al walid,apartment,189,1595981428,,seed,2026-02-25T18:53:15.560Z
+rif dimashq,qudsaya project,apartment,116,923875293,,seed,2026-02-24T16:31:03.560Z
+damascus,mashrou dummar,apartment,97,682459020,,seed,2026-01-20T20:25:18.560Z
+rif dimashq,darayya,apartment,161,1100463801,,seed,2025-11-07T15:47:02.560Z
+damascus,baghdad,apartment,169,1430810739,,seed,2026-01-10T21:54:02.560Z
+damascus,khaled ibn al walid,apartment,73,579302015,,seed,2026-01-10T01:14:51.560Z
+rif dimashq,artouz,house,207,730296000,,seed,2025-12-06T04:16:57.560Z
+rif dimashq,jadidat al sheibani,land,613,1864029656,,seed,2025-12-28T04:24:01.560Z
+rif dimashq,qudsaya project,apartment,128,1143240447,,seed,2025-11-04T03:40:43.560Z
+damascus,baghdad,apartment,109,1434559464,,seed,2025-11-26T12:26:15.560Z
+rif dimashq,sahnaya,apartment,186,1209772604,,seed,2026-01-15T08:16:50.560Z
+damascus,baghdad,studio,45,388887261,,seed,2025-11-06T05:57:07.560Z
+damascus,baghdad,apartment,188,1602831224,,seed,2026-02-22T05:52:36.560Z
+damascus,mazzeh,apartment,147,885940304,,seed,2026-01-28T17:09:56.560Z
+damascus,midan,apartment,203,480107758,,seed,2025-11-30T08:20:33.560Z
+damascus,midan,apartment,108,367634441,,seed,2026-02-14T09:04:03.560Z
+damascus,midan,apartment,109,464259946,,seed,2026-01-10T05:18:51.560Z
+damascus,hay al ameen,apartment,158,1289809037,,seed,2026-01-09T01:03:45.560Z
+damascus,kafr sousa,house,170,789429026,,seed,2026-01-19T17:17:21.560Z
+damascus,muhajireen,villa,220,3365928158,,seed,2025-11-04T02:40:48.560Z
+damascus,mashrou dummar,house,146,1098148861,,seed,2026-02-11T05:12:19.560Z
+rif dimashq,qudsaya project,apartment,120,727643088,,seed,2026-02-23T17:02:37.560Z
+rif dimashq,darayya,apartment,161,828857568,,seed,2025-11-16T00:01:03.560Z
+damascus,malki,villa,374,5473750590,,seed,2026-01-29T22:42:33.560Z
+damascus,rukn al-din,apartment,217,650785121,,seed,2025-12-26T02:38:53.560Z
+rif dimashq,artouz,apartment,163,732027408,,seed,2026-01-02T09:29:23.560Z
+damascus,midan,apartment,99,256140409,,seed,2026-02-24T17:55:40.560Z
+damascus,kafr sousa,apartment,157,821188723,,seed,2026-01-27T17:50:41.560Z
+damascus,khaled ibn al walid,land,855,5730938508,,seed,2026-01-02T18:07:00.560Z
+rif dimashq,qudsaya project,apartment,90,702466901,,seed,2026-01-07T08:23:04.560Z
+damascus,kafr sousa,house,135,651732899,,seed,2026-02-21T16:51:03.560Z
+damascus,mazzeh,apartment,184,1084790747,,seed,2025-11-10T15:18:19.560Z
+rif dimashq,mleiha,studio,37,118654230,,seed,2025-11-24T23:46:35.560Z
+damascus,malki,apartment,152,1787410166,,seed,2025-12-26T03:44:23.560Z
+rif dimashq,sahnaya,studio,55,305931365,,seed,2026-01-31T03:34:39.560Z
+rif dimashq,mleiha,apartment,137,308710224,,seed,2025-11-29T21:28:02.560Z
+rif dimashq,artouz,villa,422,2845365037,,seed,2026-01-04T13:53:53.560Z
+damascus,muhajireen,apartment,133,1256066885,,seed,2026-01-15T21:58:10.560Z
+rif dimashq,darayya,studio,30,150280382,,seed,2026-02-16T05:13:03.560Z
+damascus,shaalaan,apartment,133,1125855195,,seed,2025-12-11T08:03:28.560Z
+damascus,baghdad,studio,41,394407265,,seed,2026-01-30T18:09:56.560Z
+damascus,khaled ibn al walid,villa,432,6205522179,,seed,2025-12-22T21:01:21.560Z
+damascus,malki,apartment,129,1293433185,,seed,2025-11-19T04:46:05.560Z
+damascus,mazzeh,studio,47,308833619,,seed,2026-01-13T02:05:06.560Z
+rif dimashq,qudsaya project,house,268,1635077883,,seed,2026-02-24T01:46:17.560Z
+damascus,baghdad,studio,57,515773362,,seed,2026-02-14T17:41:47.560Z
+rif dimashq,sahnaya,house,207,902982640,,seed,2026-02-09T08:25:00.560Z
+damascus,shaalaan,apartment,181,2492646323,,seed,2025-11-24T04:56:47.560Z
+damascus,abu rummaneh,studio,33,388372283,,seed,2025-12-06T07:28:34.560Z
+damascus,khaled ibn al walid,land,181,959376102,,seed,2026-02-08T15:53:06.560Z
+damascus,malki,apartment,218,2817473420,,seed,2026-01-13T09:43:39.560Z
+damascus,hay al ameen,house,196,1518094434,,seed,2025-11-26T08:35:20.560Z
+damascus,shaalaan,apartment,204,1930650368,,seed,2026-01-17T17:16:34.560Z
+damascus,rukn al-din,house,139,411173081,,seed,2026-01-01T18:21:59.560Z
+rif dimashq,darayya,house,223,1181589837,,seed,2025-12-19T13:10:19.560Z
+damascus,hay al ameen,studio,54,484339050,,seed,2026-02-26T13:43:37.560Z
+damascus,hay al ameen,apartment,161,1316387870,,seed,2026-02-23T00:41:31.560Z
+damascus,shaalaan,apartment,140,1575726372,,seed,2026-02-12T08:57:33.560Z
+damascus,khaled ibn al walid,house,127,1044404139,,seed,2025-11-11T21:37:29.560Z
+rif dimashq,harasta,house,198,407015910,,seed,2025-11-14T22:18:18.560Z
+damascus,hay al ameen,studio,60,553651138,,seed,2026-01-28T11:09:51.560Z
+rif dimashq,sahnaya,apartment,122,721621760,,seed,2025-12-17T14:46:17.560Z
+damascus,midan,apartment,146,499286959,,seed,2026-01-25T17:38:02.560Z
+rif dimashq,jadidat al sheibani,apartment,129,882620242,,seed,2025-12-09T18:52:24.560Z
+damascus,malki,apartment,153,2195543880,,seed,2025-11-26T07:53:27.560Z
+damascus,kafr sousa,apartment,82,405717206,,seed,2026-01-27T10:59:24.560Z
+damascus,khaled ibn al walid,apartment,137,1687435713,,seed,2026-01-31T19:23:42.560Z
+rif dimashq,mleiha,studio,41,181460726,,seed,2025-11-26T11:44:33.560Z
+rif dimashq,qudsaya project,apartment,74,568195908,,seed,2025-12-10T22:29:33.561Z
+rif dimashq,darayya,apartment,124,641759962,,seed,2026-01-26T10:40:00.561Z
+damascus,mazzeh,studio,25,132740690,,seed,2026-01-27T03:43:47.561Z
+damascus,hay al ameen,apartment,203,1401773884,,seed,2025-11-29T13:52:44.561Z
+damascus,baghdad,apartment,220,1907750264,,seed,2026-01-28T12:51:57.561Z
+damascus,mashrou dummar,studio,43,397564947,,seed,2025-12-14T20:10:06.561Z
+tartus,al raml,apartment,126,334803302,,seed,2025-12-07T11:22:31.561Z
+latakia,project 7,studio,47,308696532,,seed,2026-01-21T11:22:10.561Z
+homs,al waer,apartment,122,170313798,,seed,2026-01-22T01:38:22.561Z
+tartus,al raml,land,255,302721975,,seed,2026-02-27T03:56:16.561Z
+aleppo,aziziyeh,studio,44,146736085,,seed,2026-02-01T15:30:08.561Z
+aleppo,aziziyeh,house,262,480874800,,seed,2026-01-26T06:05:13.561Z
+tartus,al raml,house,173,405197439,,seed,2025-11-23T20:42:54.561Z
+hama,al hamidiyah,apartment,168,264687529,,seed,2026-02-25T09:56:40.561Z
+hama,al hamidiyah,apartment,166,315814719,,seed,2026-01-13T10:35:45.561Z
+tartus,al raml,apartment,151,383338625,,seed,2026-01-27T12:08:34.561Z
+aleppo,aziziyeh,studio,45,149362626,,seed,2026-01-06T10:43:58.561Z
+hama,al hamidiyah,land,324,244944000,,seed,2025-12-03T14:06:23.561Z
+tartus,al raml,apartment,79,201272542,,seed,2026-01-11T07:03:08.561Z
+aleppo,aziziyeh,apartment,165,638751641,,seed,2025-12-08T10:14:32.561Z
+tartus,al raml,studio,36,113107891,,seed,2026-01-04T03:54:20.561Z
+latakia,project 7,apartment,127,634057246,,seed,2026-01-26T21:35:28.561Z
+hama,al hamidiyah,apartment,188,288833517,,seed,2025-12-09T02:16:08.561Z
+aleppo,aziziyeh,apartment,141,468729546,,seed,2025-11-30T14:44:12.561Z
+aleppo,aziziyeh,studio,55,167548434,,seed,2025-11-08T03:55:14.561Z
+hama,al hamidiyah,villa,442,1261476454,,seed,2026-01-25T02:46:48.561Z
+hama,al hamidiyah,apartment,168,225175823,,seed,2026-01-26T03:25:02.561Z
+aleppo,aziziyeh,apartment,90,262511887,,seed,2026-02-15T19:23:36.561Z
+tartus,al raml,apartment,122,346181068,,seed,2025-11-26T23:11:04.561Z
+aleppo,aziziyeh,apartment,167,705751190,,seed,2025-12-21T13:38:43.561Z
+latakia,project 7,land,152,610675200,,seed,2025-12-17T11:06:56.561Z
+hama,al hamidiyah,apartment,68,120488268,,seed,2025-12-18T10:01:56.561Z
+tartus,al raml,apartment,68,257829136,,seed,2026-01-16T05:54:33.561Z
+hama,al hamidiyah,apartment,66,163813736,,seed,2026-01-20T10:46:22.561Z
+latakia,project 7,villa,316,2743956661,,seed,2026-02-24T16:04:05.561Z
+tartus,al raml,apartment,65,163869350,,seed,2025-11-10T08:17:10.561Z
+homs,al waer,apartment,158,304013765,,seed,2026-01-13T06:30:04.561Z
+homs,al waer,studio,28,69553670,,seed,2026-01-09T12:51:30.561Z
+homs,al waer,apartment,178,284013715,,seed,2026-01-10T12:03:18.561Z
+aleppo,aziziyeh,apartment,148,445468913,,seed,2025-12-09T10:05:37.561Z
+aleppo,aziziyeh,apartment,149,572290263,,seed,2026-01-07T06:28:42.561Z
+tartus,al raml,apartment,133,538348356,,seed,2026-01-24T09:18:25.561Z
+homs,al waer,villa,190,753843580,,seed,2026-01-29T01:07:36.561Z
+tartus,al raml,apartment,125,385219195,,seed,2025-12-11T22:41:33.561Z
+tartus,al raml,apartment,143,364145506,,seed,2026-01-29T04:56:43.561Z
+aleppo,aziziyeh,land,257,410656564,,seed,2025-12-12T12:02:54.561Z
+aleppo,aziziyeh,apartment,88,268322766,,seed,2025-12-05T04:49:57.561Z
+latakia,project 7,house,186,649656541,,seed,2026-01-19T09:43:09.561Z
+latakia,project 7,house,90,344667187,,seed,2025-12-09T16:41:04.561Z
+latakia,project 7,apartment,83,390467816,,seed,2026-01-06T05:17:51.561Z
+latakia,project 7,studio,44,270076539,,seed,2026-01-21T05:13:57.561Z
+hama,al hamidiyah,apartment,90,137657687,,seed,2025-11-05T03:57:28.561Z
+hama,al hamidiyah,house,154,181573934,,seed,2025-11-07T15:01:55.561Z
+latakia,project 7,studio,43,374478785,,seed,2025-11-20T03:27:06.561Z
+hama,al hamidiyah,house,116,189680343,,seed,2026-01-13T13:30:45.561Z
+aleppo,aziziyeh,apartment,95,315852818,,seed,2026-01-31T14:35:26.561Z
+latakia,project 7,land,798,2642935091,,seed,2026-02-04T22:18:51.561Z
+aleppo,aziziyeh,house,122,322906154,,seed,2025-12-22T22:07:15.561Z
+aleppo,aziziyeh,apartment,149,646175467,,seed,2025-11-04T09:57:51.561Z
+aleppo,aziziyeh,apartment,143,411241737,,seed,2026-02-07T17:59:14.561Z
+latakia,project 7,studio,46,374854999,,seed,2026-01-15T09:54:54.561Z
+aleppo,aziziyeh,studio,43,111397950,,seed,2026-02-20T13:32:22.561Z
+tartus,al raml,house,267,720184232,,seed,2025-12-03T01:39:27.561Z
+hama,al hamidiyah,house,227,417528297,,seed,2025-11-27T23:10:12.561Z
+tartus,al raml,house,147,468342878,,seed,2026-01-17T10:23:02.561Z
+tartus,al raml,apartment,88,323541385,,seed,2026-02-13T12:51:40.561Z
+hama,al hamidiyah,studio,26,70366725,,seed,2025-11-09T19:11:35.561Z
+hama,al hamidiyah,studio,43,107228148,,seed,2026-01-05T12:21:08.561Z
+latakia,project 7,apartment,116,789729024,,seed,2026-01-08T08:33:23.561Z
+aleppo,aziziyeh,apartment,82,224188592,,seed,2025-11-22T20:05:53.561Z
+latakia,project 7,apartment,180,720835200,,seed,2025-11-19T14:58:47.561Z
+homs,al waer,house,154,279141947,,seed,2026-02-26T11:49:07.561Z
+homs,al waer,land,811,782787294,,seed,2026-03-01T03:56:49.561Z
+aleppo,aziziyeh,apartment,150,407036369,,seed,2026-02-27T12:36:55.561Z
+hama,al hamidiyah,house,181,315803192,,seed,2026-02-21T16:59:07.561Z
+hama,al hamidiyah,land,286,256585954,,seed,2025-12-11T12:15:02.561Z
+aleppo,aziziyeh,apartment,182,709114770,,seed,2025-12-09T06:30:51.561Z
+aleppo,aziziyeh,apartment,145,380651419,,seed,2026-01-10T17:48:31.561Z
+aleppo,aziziyeh,apartment,153,554840298,,seed,2026-01-03T08:49:11.561Z
+latakia,project 7,apartment,67,301228310,,seed,2026-01-05T15:36:10.561Z
+aleppo,aziziyeh,land,779,1183365117,,seed,2026-01-17T12:40:06.561Z
+aleppo,aziziyeh,house,139,400401855,,seed,2026-02-02T16:38:47.561Z
+homs,al waer,apartment,72,150857323,,seed,2025-11-09T03:48:32.561Z
+homs,al waer,studio,54,95794388,,seed,2025-12-01T14:37:57.561Z
+aleppo,aziziyeh,apartment,63,239505277,,seed,2025-12-12T07:50:29.561Z
+hama,al hamidiyah,house,123,243499914,,seed,2026-02-16T05:39:32.561Z
+aleppo,aziziyeh,house,171,461455418,,seed,2026-03-01T06:12:01.561Z
+aleppo,aziziyeh,house,198,597951839,,seed,2025-12-20T07:40:40.561Z
+aleppo,aziziyeh,land,422,719157608,,seed,2026-01-10T03:02:03.561Z
+aleppo,aziziyeh,house,181,649607199,,seed,2025-12-02T07:49:20.561Z
+hama,al hamidiyah,apartment,117,195297730,,seed,2025-11-04T10:24:52.561Z
+aleppo,aziziyeh,apartment,120,332131944,,seed,2026-01-08T04:36:36.561Z
+aleppo,aziziyeh,apartment,144,329337363,,seed,2025-11-23T17:06:57.561Z
+homs,al waer,villa,461,1841148079,,seed,2026-01-23T12:45:43.561Z
+homs,al waer,land,363,324292372,,seed,2026-02-08T09:51:52.561Z
+hama,al hamidiyah,apartment,162,255342853,,seed,2025-11-04T12:30:24.561Z
+hama,al hamidiyah,house,207,328704139,,seed,2026-01-25T20:51:31.561Z
+aleppo,aziziyeh,villa,341,2117844352,,seed,2025-11-22T17:52:34.561Z
+aleppo,aziziyeh,apartment,77,193936152,,seed,2026-01-12T20:26:47.561Z
+latakia,project 7,apartment,140,841169445,,seed,2026-02-21T07:11:00.561Z
+tartus,al raml,villa,330,1298594101,,seed,2026-02-07T02:08:56.561Z
+tartus,al raml,house,155,518101262,,seed,2026-01-01T07:53:04.561Z
+hama,al hamidiyah,apartment,180,323609905,,seed,2025-11-15T02:41:01.561Z
+aleppo,aziziyeh,house,229,511913218,,seed,2026-02-10T19:43:42.561Z
+homs,al waer,apartment,153,186058656,,seed,2026-02-02T19:39:59.561Z
+homs,al waer,villa,423,1193072736,,seed,2026-01-19T00:04:56.561Z
+homs,al waer,apartment,76,100035000,,seed,2025-11-23T04:12:14.561Z
+hama,al hamidiyah,apartment,134,178141275,,seed,2025-12-24T23:49:50.561Z
+aleppo,aziziyeh,apartment,146,377524369,,seed,2025-12-25T02:36:17.561Z
+aleppo,aziziyeh,land,718,946413750,,seed,2026-02-27T03:16:56.561Z
+aleppo,aziziyeh,apartment,172,555319000,,seed,2025-11-06T21:48:05.561Z
+aleppo,aziziyeh,apartment,156,436416488,,seed,2026-02-15T07:40:25.561Z
+aleppo,aziziyeh,apartment,185,625712368,,seed,2025-11-29T22:44:53.561Z
+latakia,project 7,house,171,865580753,,seed,2025-12-15T23:31:20.561Z
+tartus,al raml,apartment,100,378306591,,seed,2026-01-23T12:46:57.561Z
+aleppo,aziziyeh,land,784,1418558001,,seed,2026-01-06T21:46:39.561Z
+homs,al waer,land,690,938952000,,seed,2026-02-17T23:45:18.561Z
+latakia,project 7,house,224,875823936,,seed,2025-11-13T18:57:28.561Z
+latakia,project 7,land,613,1697896061,,seed,2026-02-25T18:27:54.561Z
+aleppo,aziziyeh,villa,365,1577854090,,seed,2025-11-12T16:53:34.561Z
+tartus,al raml,studio,45,150310125,,seed,2025-12-02T20:12:28.561Z
+aleppo,aziziyeh,apartment,171,515471825,,seed,2025-11-30T04:13:27.561Z
+latakia,project 7,house,156,721503386,,seed,2025-12-28T13:37:44.561Z
+hama,al hamidiyah,apartment,83,125330309,,seed,2026-01-26T04:26:35.561Z
+aleppo,aziziyeh,house,141,325323622,,seed,2026-01-13T15:35:02.561Z
+homs,al waer,apartment,187,254690248,,seed,2025-11-11T12:03:52.561Z
+homs,al waer,house,180,231752493,,seed,2025-12-24T15:07:52.561Z
+aleppo,aziziyeh,apartment,133,389619406,,seed,2026-02-10T13:26:36.561Z
+hama,al hamidiyah,house,115,190407175,,seed,2026-02-01T03:13:32.561Z
+aleppo,aziziyeh,house,116,316073491,,seed,2025-12-20T02:01:40.561Z
+aleppo,aziziyeh,land,508,1113920438,,seed,2026-02-08T08:34:38.561Z
+aleppo,aziziyeh,apartment,184,535084411,,seed,2026-01-30T02:09:03.561Z
+tartus,al raml,villa,483,2323831180,,seed,2025-11-20T15:10:54.561Z
+tartus,al raml,apartment,190,528900073,,seed,2025-11-22T16:44:42.561Z
+hama,al hamidiyah,house,101,169447429,,seed,2025-12-22T09:34:09.561Z
+tartus,al raml,house,229,760691889,,seed,2026-01-20T18:42:59.561Z
+tartus,al raml,apartment,105,387010801,,seed,2025-11-13T14:32:44.561Z
+homs,al waer,studio,40,68564760,,seed,2026-02-23T20:56:08.561Z
+aleppo,aziziyeh,house,100,254257112,,seed,2026-02-22T01:30:11.561Z
+hama,al hamidiyah,land,703,522935291,,seed,2025-11-25T22:31:42.561Z
+homs,al waer,apartment,139,171688491,,seed,2026-02-08T13:16:50.561Z
+aleppo,aziziyeh,studio,35,161595000,,seed,2026-02-11T18:20:37.561Z
+latakia,project 7,house,250,933120000,,seed,2026-01-23T00:35:30.561Z
+tartus,al raml,apartment,177,389991933,,seed,2026-01-29T16:33:12.561Z
+hama,al hamidiyah,apartment,94,155257372,,seed,2026-01-19T09:05:40.561Z
+aleppo,aziziyeh,land,602,836637388,,seed,2026-01-18T17:46:30.561Z
+homs,al waer,house,106,172367896,,seed,2025-11-28T11:17:32.561Z
+tartus,al raml,apartment,146,385341733,,seed,2026-01-24T17:26:25.561Z
+hama,al hamidiyah,apartment,90,177192887,,seed,2025-11-18T07:34:38.561Z
+latakia,project 7,house,226,848401236,,seed,2025-11-25T11:21:25.561Z
+aleppo,aziziyeh,house,110,234450506,,seed,2025-11-12T06:35:27.561Z
+homs,al waer,house,175,309246539,,seed,2025-12-17T16:40:25.561Z
+aleppo,aziziyeh,apartment,119,373107898,,seed,2025-11-18T15:31:48.561Z
+tartus,al raml,apartment,188,476072615,,seed,2025-12-05T12:03:15.561Z
+homs,al waer,house,257,368847049,,seed,2025-11-20T01:10:55.561Z
+aleppo,aziziyeh,apartment,132,436365680,,seed,2025-11-16T00:52:42.561Z
+homs,al waer,house,94,153847514,,seed,2026-01-10T04:03:46.561Z
+latakia,project 7,house,206,1014527386,,seed,2025-11-11T21:11:44.561Z
+aleppo,aziziyeh,apartment,151,528207835,,seed,2026-01-15T13:45:58.561Z
+hama,al hamidiyah,land,762,622823956,,seed,2026-01-14T21:57:11.561Z
+latakia,project 7,studio,51,332862722,,seed,2025-11-28T16:48:24.561Z
+tartus,al raml,apartment,143,439447579,,seed,2026-01-04T23:10:49.561Z
+tartus,al raml,house,186,379087532,,seed,2026-01-23T19:44:05.561Z
+latakia,project 7,studio,43,200756463,,seed,2025-12-01T12:00:49.561Z
+latakia,project 7,apartment,79,453850756,,seed,2025-12-03T17:00:47.561Z
+latakia,project 7,house,114,662134500,,seed,2025-12-05T11:33:21.561Z
+tartus,al raml,studio,33,97371074,,seed,2026-01-07T12:27:49.561Z
+latakia,project 7,apartment,172,860228909,,seed,2025-11-21T13:29:35.561Z
+aleppo,aziziyeh,apartment,116,347556834,,seed,2026-02-24T07:14:25.561Z
+homs,al waer,apartment,116,256889594,,seed,2026-01-08T15:31:38.561Z
+aleppo,aziziyeh,land,767,1715327090,,seed,2026-01-15T12:02:45.561Z
+tartus,al raml,apartment,174,526225527,,seed,2025-11-17T21:41:57.561Z
+tartus,al raml,apartment,136,307546088,,seed,2025-12-25T05:24:56.561Z
+tartus,al raml,house,100,254460563,,seed,2025-12-26T07:18:12.561Z
+latakia,project 7,house,235,931860963,,seed,2026-02-18T07:49:04.561Z
+latakia,project 7,apartment,145,933586560,,seed,2026-02-20T23:00:05.561Z
+hama,al hamidiyah,land,482,557839182,,seed,2026-02-09T13:44:32.561Z
+aleppo,aziziyeh,studio,47,177342545,,seed,2026-01-07T08:14:47.561Z
+homs,al waer,apartment,150,233447788,,seed,2026-01-03T14:52:32.561Z
+homs,al waer,apartment,162,271547947,,seed,2026-01-17T01:41:39.561Z
+aleppo,aziziyeh,apartment,96,222474988,,seed,2025-11-10T01:47:15.561Z
+aleppo,aziziyeh,house,218,541954559,,seed,2026-02-05T01:32:34.561Z
+aleppo,aziziyeh,studio,48,148989235,,seed,2025-12-31T13:13:13.561Z
+aleppo,aziziyeh,apartment,97,200290248,,seed,2025-11-22T11:06:48.561Z
+hama,al hamidiyah,house,238,280257154,,seed,2025-12-11T16:23:46.561Z
+homs,al waer,apartment,127,240486273,,seed,2025-12-18T07:51:17.561Z
+homs,al waer,house,197,339308464,,seed,2026-02-28T22:41:27.561Z
+aleppo,aziziyeh,land,814,1848780360,,seed,2026-02-22T08:34:39.561Z
+aleppo,aziziyeh,house,256,619144201,,seed,2025-11-07T03:05:53.561Z
+hama,al hamidiyah,house,112,214881422,,seed,2025-12-16T15:53:47.561Z
+aleppo,aziziyeh,apartment,100,258975308,,seed,2025-12-10T05:15:02.561Z
+aleppo,aziziyeh,apartment,168,437040572,,seed,2026-02-10T16:55:35.561Z
+hama,al hamidiyah,apartment,144,276141146,,seed,2026-02-11T11:35:13.561Z
+aleppo,aziziyeh,land,691,1355420343,,seed,2025-12-11T21:32:32.561Z
+homs,al waer,apartment,61,104452611,,seed,2025-11-21T18:19:54.561Z
+hama,al hamidiyah,house,105,130126500,,seed,2026-01-16T20:44:37.561Z
+aleppo,aziziyeh,apartment,97,316877408,,seed,2025-12-27T02:05:20.561Z
+latakia,project 7,apartment,185,1248983413,,seed,2025-11-13T10:08:19.561Z
+homs,al waer,house,173,182636100,,seed,2026-01-23T00:40:01.561Z
+latakia,project 7,land,367,1283007829,,seed,2025-12-31T07:43:46.561Z
+aleppo,aziziyeh,apartment,74,182325335,,seed,2025-12-23T04:41:46.561Z
+homs,al waer,house,109,176895709,,seed,2025-12-14T08:16:42.561Z
+latakia,project 7,house,252,1246454066,,seed,2025-12-07T22:06:56.561Z
+tartus,al raml,studio,46,158764336,,seed,2025-12-23T09:19:41.561Z
+hama,al hamidiyah,apartment,177,284511033,,seed,2025-11-09T11:46:27.561Z
+aleppo,aziziyeh,house,129,403078636,,seed,2025-12-22T06:14:11.561Z
+homs,al waer,apartment,103,166723802,,seed,2025-12-22T17:20:27.561Z
+homs,al waer,apartment,171,340888582,,seed,2026-02-13T10:21:21.561Z
+homs,al waer,apartment,80,163233411,,seed,2025-11-13T09:26:00.561Z
+aleppo,aziziyeh,apartment,83,177826463,,seed,2025-12-12T00:31:07.561Z
+homs,al waer,house,218,306442987,,seed,2025-12-19T06:15:40.561Z
+aleppo,aziziyeh,apartment,127,441596112,,seed,2026-01-23T23:14:23.561Z
+hama,al hamidiyah,house,262,526683853,,seed,2025-11-13T15:51:05.561Z
+aleppo,aziziyeh,apartment,173,603216600,,seed,2026-01-19T16:41:36.561Z
+aleppo,aziziyeh,villa,416,2355938770,,seed,2026-02-28T05:49:23.561Z
+aleppo,aziziyeh,land,598,1363497646,,seed,2026-02-17T00:09:37.561Z
+aleppo,aziziyeh,land,224,297564520,,seed,2026-02-13T06:59:51.561Z
+homs,al waer,apartment,60,116685892,,seed,2026-01-01T11:00:12.561Z
+aleppo,aziziyeh,house,246,786584467,,seed,2026-01-25T06:25:04.561Z
+hama,al hamidiyah,apartment,186,294863973,,seed,2026-02-02T11:10:43.561Z
+latakia,project 7,villa,377,3198059850,,seed,2026-03-01T09:43:38.561Z
+hama,al hamidiyah,apartment,99,209317551,,seed,2025-11-25T13:15:29.561Z
+aleppo,aziziyeh,apartment,118,400239827,,seed,2025-11-07T02:25:49.561Z
+latakia,project 7,apartment,172,996140969,,seed,2025-12-14T08:10:40.561Z
+aleppo,aziziyeh,land,843,1354231243,,seed,2026-02-19T04:24:12.561Z
+aleppo,aziziyeh,land,239,398049186,,seed,2025-11-13T21:10:45.561Z
+tartus,al raml,apartment,149,484216460,,seed,2026-01-30T12:58:51.561Z
+latakia,project 7,apartment,172,730753159,,seed,2025-12-17T23:09:53.561Z
+aleppo,aziziyeh,house,192,406551230,,seed,2026-02-13T20:30:08.561Z
+latakia,project 7,villa,439,3209042925,,seed,2026-02-16T21:15:28.561Z
+hama,al hamidiyah,apartment,138,271040969,,seed,2026-01-24T12:29:21.561Z
+tartus,al raml,house,110,338194115,,seed,2026-01-22T21:48:43.561Z
+latakia,project 7,apartment,133,923337924,,seed,2025-12-04T01:53:34.561Z
+aleppo,aziziyeh,apartment,101,306145261,,seed,2025-12-02T10:26:05.561Z
+aleppo,aziziyeh,land,352,611139276,,seed,2026-02-21T16:33:19.561Z
+latakia,project 7,studio,45,199616400,,seed,2026-02-03T23:53:47.561Z
+homs,al waer,villa,363,1331037676,,seed,2025-11-27T19:24:21.561Z
+homs,al waer,apartment,85,167550667,,seed,2026-02-19T14:00:59.561Z
+latakia,project 7,apartment,164,854284576,,seed,2026-03-01T13:26:24.561Z
+hama,al hamidiyah,house,260,391380898,,seed,2026-01-28T22:00:05.561Z
+tartus,al raml,apartment,94,326486949,,seed,2026-01-31T14:18:21.561Z
+aleppo,aziziyeh,apartment,134,321194221,,seed,2025-12-22T00:44:27.561Z
+hama,al hamidiyah,house,109,219883737,,seed,2026-01-14T12:23:24.561Z
+homs,al waer,studio,51,103213016,,seed,2026-02-26T09:29:09.561Z
+latakia,project 7,apartment,114,766728822,,seed,2026-01-16T20:10:01.561Z
+hama,al hamidiyah,apartment,172,373327210,,seed,2026-02-21T09:58:16.561Z
+homs,al waer,villa,378,887846858,,seed,2026-01-17T00:37:39.561Z
+homs,al waer,house,105,129354116,,seed,2025-11-15T18:18:49.561Z
+aleppo,aziziyeh,apartment,187,623797375,,seed,2026-01-18T20:50:02.561Z
+tartus,al raml,house,140,315898571,,seed,2026-02-03T18:27:02.561Z
+hama,al hamidiyah,studio,43,119480130,,seed,2026-02-20T08:31:31.561Z
+latakia,project 7,apartment,176,984515669,,seed,2025-11-06T01:34:20.561Z
+hama,al hamidiyah,apartment,135,221282092,,seed,2026-01-16T09:39:39.561Z
+homs,al waer,apartment,104,184649139,,seed,2025-12-17T08:08:39.561Z
+homs,al waer,house,264,383690773,,seed,2026-02-01T10:54:57.561Z
+aleppo,aziziyeh,villa,384,1384416000,,seed,2025-12-30T16:24:40.561Z
+homs,al waer,studio,49,132043247,,seed,2025-12-29T01:34:43.561Z
+hama,al hamidiyah,land,592,805593600,,seed,2025-12-30T23:09:08.561Z
+latakia,project 7,apartment,60,323287066,,seed,2025-12-25T06:57:27.561Z
+aleppo,aziziyeh,apartment,130,406136455,,seed,2026-01-05T16:11:29.561Z
+aleppo,aziziyeh,studio,50,187449100,,seed,2025-12-16T15:03:40.561Z
+latakia,project 7,land,817,2515810739,,seed,2025-12-22T09:32:14.561Z
+homs,al waer,apartment,90,167145498,,seed,2025-11-05T07:02:28.561Z
+tartus,al raml,apartment,150,501814101,,seed,2026-02-06T18:16:07.561Z
+tartus,al raml,house,246,597115526,,seed,2026-03-01T04:55:45.561Z
+hama,al hamidiyah,house,270,404804736,,seed,2026-02-28T04:58:39.561Z
+latakia,project 7,apartment,131,594488287,,seed,2025-11-17T13:21:35.561Z
+tartus,al raml,house,261,857639562,,seed,2025-11-29T16:40:42.561Z
+latakia,project 7,house,259,971742882,,seed,2026-02-27T09:13:03.561Z
+latakia,project 7,apartment,89,490621652,,seed,2025-11-04T09:04:39.561Z
+aleppo,aziziyeh,house,97,262413739,,seed,2025-12-26T08:33:26.561Z
+latakia,project 7,house,166,587469006,,seed,2026-02-24T00:01:20.561Z
+homs,al waer,apartment,103,274097585,,seed,2026-02-16T19:51:03.561Z
+aleppo,aziziyeh,apartment,145,337112537,,seed,2026-01-25T18:26:43.561Z
+latakia,project 7,apartment,92,443603206,,seed,2025-12-22T02:31:32.561Z
+tartus,al raml,apartment,113,355503657,,seed,2026-03-03T06:32:15.561Z
+tartus,al raml,apartment,66,191097869,,seed,2026-01-14T17:00:27.561Z
+aleppo,aziziyeh,villa,208,1229820506,,seed,2025-12-07T13:36:14.561Z
+latakia,project 7,apartment,67,331164929,,seed,2025-12-24T06:14:23.561Z
+homs,al waer,house,220,370833791,,seed,2025-12-09T08:06:09.561Z
+aleppo,aziziyeh,house,110,324630438,,seed,2026-01-20T04:30:20.561Z
+hama,al hamidiyah,house,173,253387737,,seed,2026-01-22T20:01:50.561Z
+aleppo,aziziyeh,house,91,305035651,,seed,2026-03-03T09:21:31.561Z
+hama,al hamidiyah,land,230,301932023,,seed,2026-02-03T18:55:12.561Z
+aleppo,aziziyeh,apartment,117,258423750,,seed,2026-02-05T08:39:18.561Z
+tartus,al raml,house,261,674973738,,seed,2025-12-24T15:50:22.561Z
+hama,al hamidiyah,villa,350,1273163564,,seed,2025-12-08T21:57:46.561Z
+homs,al waer,apartment,144,246699050,,seed,2026-02-12T15:35:29.561Z
+homs,al waer,apartment,155,227920527,,seed,2025-11-14T03:39:04.561Z
+homs,al waer,apartment,95,225018736,,seed,2025-12-14T20:28:56.561Z
+hama,al hamidiyah,house,254,314782200,,seed,2025-12-28T08:17:03.561Z
+tartus,al raml,apartment,158,418541558,,seed,2026-01-01T09:07:35.561Z
+latakia,project 7,land,192,555988095,,seed,2025-11-17T17:42:16.561Z
+aleppo,aziziyeh,apartment,134,422349234,,seed,2026-02-04T20:50:40.561Z
+tartus,al raml,studio,52,219072583,,seed,2025-12-01T14:07:49.561Z
+homs,al waer,house,245,279245839,,seed,2026-02-01T00:30:59.561Z
+homs,al waer,studio,28,42284124,,seed,2025-12-12T19:09:35.561Z
+latakia,project 7,apartment,188,883405229,,seed,2026-02-06T12:23:48.561Z
+hama,al hamidiyah,studio,34,62077295,,seed,2026-02-05T11:35:13.561Z
+latakia,project 7,house,227,1181719078,,seed,2026-02-27T10:07:42.561Z
+hama,al hamidiyah,studio,31,83646934,,seed,2025-11-13T22:53:48.561Z
+homs,al waer,apartment,139,264505157,,seed,2025-12-25T14:38:46.561Z
+hama,al hamidiyah,apartment,132,207661975,,seed,2026-01-14T21:18:28.561Z
+homs,al waer,apartment,111,168989726,,seed,2025-11-19T10:32:22.561Z
+hama,al hamidiyah,house,249,514309500,,seed,2026-02-27T19:40:10.561Z
+hama,al hamidiyah,studio,37,92573854,,seed,2026-02-17T14:47:00.561Z
