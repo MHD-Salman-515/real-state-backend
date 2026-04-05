@@ -251,7 +251,13 @@ export class AuthService {
 
   private async runLegacyLoginFlow(
     dto: LoginDto,
-  ): Promise<{ trace: LegacyLoginTrace; token?: string; user?: Record<string, unknown>; statusCode: number }> {
+  ): Promise<{
+    trace: LegacyLoginTrace;
+    token?: string;
+    refreshToken?: string;
+    user?: Record<string, unknown>;
+    statusCode: number;
+  }> {
     const trace: LegacyLoginTrace = {
       step: 'start',
       normalizedEmail: '',
@@ -330,9 +336,17 @@ export class AuthService {
       }
 
       const token = await this.issueAccessToken(user);
+      const refreshToken = await this.issueRefreshToken(user);
+      await this.prisma.refreshToken.create({
+        data: {
+          userId: user.id,
+          tokenHash: this.hashValue(refreshToken),
+          expiresAt: new Date(Date.now() + this.refreshTtlSeconds() * 1000),
+        },
+      });
       const { password: _password, ...safeUser } = user;
       trace.step = 'done';
-      return { trace, token, user: safeUser, statusCode: 200 };
+      return { trace, token, refreshToken, user: safeUser, statusCode: 200 };
     } catch (error) {
       trace.errorMessageIfAny = error instanceof Error ? error.message : 'Internal server error';
       return { trace, statusCode: 500 };
@@ -347,6 +361,7 @@ export class AuthService {
   async runLegacyLoginFlowPublic(dto: LoginDto): Promise<{
     trace: LegacyLoginTrace;
     token?: string;
+    refreshToken?: string;
     user?: Record<string, unknown>;
     statusCode: number;
   }> {

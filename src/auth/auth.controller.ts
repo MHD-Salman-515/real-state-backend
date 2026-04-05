@@ -57,12 +57,20 @@ export class AuthController {
       refreshToken,
       this.buildAuthCookieOptions(Number(process.env.REFRESH_TOKEN_TTL ?? 604800) * 1000),
     );
+
+    // Compatibility cookie name for clients expecting camelCase refresh token key.
+    res.cookie(
+      'refreshToken',
+      refreshToken,
+      this.buildAuthCookieOptions(Number(process.env.REFRESH_TOKEN_TTL ?? 604800) * 1000),
+    );
   }
 
   private clearAuthCookies(res: Response) {
     const baseCookie = this.buildAuthCookieOptions(0);
     res.clearCookie('access_token', baseCookie);
     res.clearCookie('refresh_token', baseCookie);
+    res.clearCookie('refreshToken', baseCookie);
   }
 
   @Post('sign-up')
@@ -101,7 +109,9 @@ export class AuthController {
   @Post('sign-out')
   @HttpCode(200)
   async signOut(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    const refreshToken = req.cookies?.refresh_token as string | undefined;
+    const refreshToken =
+      (req.cookies?.refresh_token as string | undefined) ||
+      (req.cookies?.refreshToken as string | undefined);
     await this.authService.signOut(refreshToken);
     this.clearAuthCookies(res);
     return { ok: true };
@@ -110,7 +120,9 @@ export class AuthController {
   @Post('refresh')
   @HttpCode(200)
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    const refreshToken = req.cookies?.refresh_token as string | undefined;
+    const refreshToken =
+      (req.cookies?.refresh_token as string | undefined) ||
+      (req.cookies?.refreshToken as string | undefined);
     if (!refreshToken) {
       throw new UnauthorizedException('Missing refresh token');
     }
@@ -119,6 +131,7 @@ export class AuthController {
     this.setAuthCookies(res, result.accessToken, result.refreshToken);
     return {
       ok: true,
+      accessToken: result.accessToken,
       role: result.role,
       redirectTo: result.redirectTo,
     };
@@ -185,7 +198,7 @@ export class AuthController {
   @Post('login')
   @UseGuards(ThrottlerGuard)
   @Throttle({ default: { limit: 10, ttl: 60_000 } })
-  async login(@Body() dto: LoginDto) {
+  async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
     const email = String(dto?.email || '').trim();
     const password = String(dto?.password || '');
     if (!email || !password) {
@@ -195,6 +208,9 @@ export class AuthController {
     try {
       const result = await this.authService.runLegacyLoginFlowPublic(dto);
       if (result.statusCode === 200) {
+        if (result.token && result.refreshToken) {
+          this.setAuthCookies(res, result.token, result.refreshToken);
+        }
         return { token: result.token, user: result.user };
       }
       if (result.statusCode === 401) {
