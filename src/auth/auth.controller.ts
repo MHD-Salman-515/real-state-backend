@@ -42,22 +42,9 @@ export class AuthController {
     };
   }
 
-  private setAuthCookies(res: Response, accessToken: string, refreshToken: string) {
-    res.cookie(
-      'access_token',
-      accessToken,
-      this.buildAuthCookieOptions(Number(process.env.ACCESS_TOKEN_TTL ?? 900) * 1000),
-    );
-
+  private setAuthCookies(res: Response, refreshToken: string) {
     res.cookie(
       'refresh_token',
-      refreshToken,
-      this.buildAuthCookieOptions(Number(process.env.REFRESH_TOKEN_TTL ?? 604800) * 1000),
-    );
-
-    // Compatibility cookie name for clients expecting camelCase refresh token key.
-    res.cookie(
-      'refreshToken',
       refreshToken,
       this.buildAuthCookieOptions(Number(process.env.REFRESH_TOKEN_TTL ?? 604800) * 1000),
     );
@@ -65,9 +52,7 @@ export class AuthController {
 
   private clearAuthCookies(res: Response) {
     const baseCookie = this.buildAuthCookieOptions(0);
-    res.clearCookie('access_token', baseCookie);
     res.clearCookie('refresh_token', baseCookie);
-    res.clearCookie('refreshToken', baseCookie);
   }
 
   @Post('sign-up')
@@ -86,7 +71,7 @@ export class AuthController {
   @HttpCode(200)
   async verifyOtp(@Body() dto: VerifyOtpDto, @Res({ passthrough: true }) res: Response) {
     const result = await this.authService.verifyOtp(dto);
-    this.setAuthCookies(res, result.accessToken, result.refreshToken);
+    this.setAuthCookies(res, result.refreshToken);
 
     return {
       ok: true,
@@ -106,9 +91,7 @@ export class AuthController {
   @Post('sign-out')
   @HttpCode(200)
   async signOut(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    const refreshToken =
-      (req.cookies?.refresh_token as string | undefined) ||
-      (req.cookies?.refreshToken as string | undefined);
+    const refreshToken = req.cookies?.refresh_token as string | undefined;
     await this.authService.signOut(refreshToken);
     this.clearAuthCookies(res);
     return { ok: true };
@@ -117,16 +100,14 @@ export class AuthController {
   @Post('refresh')
   @HttpCode(200)
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    console.log('REFRESH HIT');
-    const refreshToken =
-      (req.cookies?.refresh_token as string | undefined) ||
-      (req.cookies?.refreshToken as string | undefined);
+    console.log('REFRESH HIT', req.cookies);
+    const refreshToken = req.cookies?.refresh_token as string | undefined;
     if (!refreshToken) {
       throw new UnauthorizedException('Missing refresh token');
     }
 
     const result = await this.authService.refresh(refreshToken);
-    this.setAuthCookies(res, result.accessToken, result.refreshToken);
+    this.setAuthCookies(res, result.refreshToken);
     return {
       ok: true,
       accessToken: result.accessToken,
@@ -207,9 +188,9 @@ export class AuthController {
       const result = await this.authService.runLegacyLoginFlowPublic(dto);
       if (result.statusCode === 200) {
         if (result.token && result.refreshToken) {
-          this.setAuthCookies(res, result.token, result.refreshToken);
+          this.setAuthCookies(res, result.refreshToken);
         }
-        return { token: result.token, user: result.user };
+        return { token: result.token, accessToken: result.token, user: result.user };
       }
       if (result.statusCode === 401) {
         throw new UnauthorizedException('Invalid credentials');
