@@ -27,19 +27,16 @@ import { OtpRequestDto } from './dto/otp-request.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { Roles } from './decorators/roles.decorator';
-import { isProduction } from '../config/runtime-env';
 
 @Controller(['auth', 'api/auth'])
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   private buildAuthCookieOptions(maxAge: number): CookieOptions {
-    const secure = isProduction();
-
     return {
       httpOnly: true,
-      secure,
-      sameSite: secure ? 'none' : 'lax',
+      secure: true,
+      sameSite: 'none',
       path: '/',
       maxAge,
     };
@@ -120,6 +117,7 @@ export class AuthController {
   @Post('refresh')
   @HttpCode(200)
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    console.log('REFRESH HIT');
     const refreshToken =
       (req.cookies?.refresh_token as string | undefined) ||
       (req.cookies?.refreshToken as string | undefined);
