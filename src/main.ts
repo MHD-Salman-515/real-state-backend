@@ -127,12 +127,24 @@ async function bootstrap() {
   let mysqlReachable = false;
   let hotfixStatus: 'skipped' | 'applied' | 'failed' = 'skipped';
 
+  const origins = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',').map((o) => o.trim())
+    : ['*'];
+  console.log('CORS ORIGINS:', origins);
+
   app.enableCors({
-    origin: process.env.CORS_ORIGIN
-      ? process.env.CORS_ORIGIN.split(',')
-          .map((o) => o.trim())
-      : ['http://localhost:5173'],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+
+      if (origins.includes(origin) || origins.includes('*')) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('Not allowed by CORS'));
+    },
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
   });
   app.use(cookieParser());
   app.useGlobalPipes(
