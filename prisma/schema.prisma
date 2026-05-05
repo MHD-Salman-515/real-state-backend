@@ -561,6 +561,7 @@ model BuyerChatMessage {
 enum Role {
   ADMIN
   ACCOUNTANT
+  AGENT
   CLIENT
   OWNER
   SUPPLIER
