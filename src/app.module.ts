@@ -59,7 +59,7 @@ import { AuthLoginTraceMiddleware } from './auth/auth-login-trace.middleware';
     BuyerHistoryModule,
     MarketIntelligenceModule,
     MarketDataModule,
-    DebugModule,
+    ...(process.env.NODE_ENV !== 'production' ? [DebugModule] : []),
     OpsModule,
   ],
   providers: [AuthLoginTraceMiddleware],

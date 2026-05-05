@@ -734,11 +734,6 @@ export class AuthService {
     const rawEmail = dto.email;
     const normalizedEmail = this.normalizeEmail(dto.email);
 
-    if (isDev) {
-      console.log('[auth/register] raw_email:', rawEmail);
-      console.log('[auth/register] normalized_email:', normalizedEmail);
-    }
-
     await this.assertValidEmailOtpToken(dto.otpToken, normalizedEmail);
 
     const exists = await this.prisma.user.findUnique({ where: { email: normalizedEmail } });
@@ -784,7 +779,6 @@ export class AuthService {
     }
 
     if (isDev) {
-      console.log('[auth/register] created_user_email:', user.email);
       if (!String(password).startsWith('$2')) {
         console.warn('[auth/register] warning: stored password hash does not look like bcrypt');
       }
@@ -861,22 +855,9 @@ export class AuthService {
 
   async login(dto: LoginDto) {
     const isDev = String(process.env.NODE_ENV || '').toLowerCase() !== 'production';
-    console.log('[HIT] AuthService.login()', {
-      email: dto?.email,
-      hasPassword: Boolean(dto?.password),
-    });
 
     try {
-      const rawEmail = dto.email;
-      const email = this.normalizeEmail(dto.email);
-      if (isDev) {
-        console.log('[auth/login] raw_email:', rawEmail);
-        console.log('[auth/login] normalized_email:', email);
-      }
       const result = await this.runLegacyLoginFlow(dto);
-      if (isDev) {
-        console.log('[auth/login] trace:', result.trace);
-      }
 
       if (result.statusCode === 200) {
         return { token: result.token, user: result.user };
