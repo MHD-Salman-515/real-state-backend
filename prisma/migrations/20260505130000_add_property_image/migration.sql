@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS `PropertyImage` (
+  `id`         BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `propertyId` INT NOT NULL,
+  `url`        TEXT NOT NULL,
+  `room`       ENUM('LIVING','KITCHEN','BATHROOM','BEDROOM','EXTERIOR','BALCONY') NOT NULL,
+  `caption`    VARCHAR(255) NULL,
+  `sortOrder`  INT NOT NULL DEFAULT 0,
+  `createdAt`  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt`  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_propertyimage_property`
+    FOREIGN KEY (`propertyId`) REFERENCES `Property`(`id`) ON DELETE CASCADE
+);
+CREATE INDEX `PropertyImage_propertyId_idx` ON `PropertyImage`(`propertyId`);

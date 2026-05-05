@@ -134,6 +134,7 @@ model Property {
   appointments       Appointment[]       @relation("AppointmentProperty")
   invoices           Invoice[]
   maintenanceTickets MaintenanceTicket[]
+  images             PropertyImage[]
 
   @@index([ownerId], map: "Property_ownerId_fkey")
   @@map("Property")
@@ -623,4 +624,29 @@ enum ChatMessageRole {
 enum BuyerChatMessageRole {
   USER
   ASSISTANT
+}
+
+enum RoomType {
+  LIVING
+  KITCHEN
+  BATHROOM
+  BEDROOM
+  EXTERIOR
+  BALCONY
+}
+
+model PropertyImage {
+  id         BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  propertyId Int
+  url        String   @db.Text
+  room       RoomType
+  caption    String?  @db.VarChar(255)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId])
+  @@map("PropertyImage")
 }
