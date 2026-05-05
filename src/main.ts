@@ -127,10 +127,7 @@ async function bootstrap() {
   let mysqlReachable = false;
   let hotfixStatus: 'skipped' | 'applied' | 'failed' = 'skipped';
 
-  const origins = [
-    'https://urbanex-frontend.vercel.app',
-    'https://real-state-steel-one.vercel.app',
-  ];
+  const origins = parseCorsOrigins(process.env.CORS_ORIGIN);
   console.log('CORS ORIGINS:', origins);
   app.enableCors({
     origin: origins,
