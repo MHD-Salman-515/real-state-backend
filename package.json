@@ -35,7 +35,8 @@
     "start:clean": "npm run port:free && npm run start:dev",
     "props:seed": "node ../my-real-state-front-end/my-real-state/scripts/generate-and-import-properties.mjs",
     "demo:images:fetch": "node scripts/fetch-demo-images.mjs",
-    "props:images:regen": "ts-node scripts/regen-property-images.ts"
+    "props:images:regen": "ts-node scripts/regen-property-images.ts",
+    "seed:images": "ts-node scripts/seed-property-images.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
