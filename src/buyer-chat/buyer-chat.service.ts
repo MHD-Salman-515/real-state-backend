@@ -219,7 +219,7 @@ export class BuyerChatService {
         role: 'ASSISTANT',
         content: dispatch.text,
         intent: dispatch.intent,
-        payloadJson: dispatch.payloadJson,
+        payloadJson: dispatch.payloadJson as Prisma.InputJsonValue,
       },
       select: {
         id: true,

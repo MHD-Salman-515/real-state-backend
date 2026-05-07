@@ -30,6 +30,7 @@ import { OwnerAiHistoryService } from '../property/owner-ai-history.service';
 import { OwnerPortfolioService } from '../property/owner-portfolio.service';
 import { OwnerStrategyService } from '../property/owner-strategy.service';
 import { OwnerSuggestionsService } from '../property/owner-suggestions.service';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { MarketStatsService } from '../market-intelligence/market-stats.service';
 import { detectOwnerChatIntent, OwnerChatIntent } from './owner-chat.intent';
@@ -336,7 +337,7 @@ export class OwnerChatService {
           role: 'TOOL',
           text: tool.text,
           intent: 'TOOL_EXECUTION',
-          payloadJson: tool.payloadJson,
+          payloadJson: tool.payloadJson as Prisma.InputJsonValue,
         },
         select: {
           id: true,
@@ -360,7 +361,7 @@ export class OwnerChatService {
           data: dispatch.response.data,
           suggested_actions: dispatch.response.suggested_actions,
           explain_trace: this.extractExplainTrace(dispatch.response.data),
-        },
+        } as Prisma.InputJsonValue,
       },
       select: {
         id: true,
@@ -1970,7 +1971,7 @@ export class OwnerChatService {
     return rows
       .reverse()
       .map((row: { role: string; text: string }) => ({
-        role: row.role === 'USER' ? 'user' : 'assistant',
+        role: (row.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant',
         content: String(row.text || '').trim(),
       }))
       .filter((row) => row.content.length > 0);
