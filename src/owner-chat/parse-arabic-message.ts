@@ -8,6 +8,50 @@ export interface ParsedArabicMessage {
   listing_intent?: 'SELL' | 'BUY' | 'RENT' | 'ESTIMATE' | 'INVEST';
 }
 
+const DISTRICT_MAP: Array<{ triggers: string[]; district: string; city: string }> = [
+  // Damascus Ultra
+  { triggers: ['المالكي', 'مالكي', 'malki'], district: 'malki', city: 'damascus' },
+  { triggers: ['أبو رمانة', 'ابو رمانة', 'abu rummaneh'], district: 'abu rummaneh', city: 'damascus' },
+  { triggers: ['المهاجرين', 'مهاجرين', 'muhajireen'], district: 'muhajireen', city: 'damascus' },
+  { triggers: ['بغداد', 'baghdad street', 'شارع بغداد'], district: 'baghdad', city: 'damascus' },
+  { triggers: ['الشعلان', 'شعلان', 'shaalan', 'shaalaan'], district: 'shaalaan', city: 'damascus' },
+  { triggers: ['حي الأمين', 'الأمين', 'hay al ameen'], district: 'hay al ameen', city: 'damascus' },
+  { triggers: ['خالد بن الوليد', 'خالد ابن الوليد'], district: 'khaled ibn al walid', city: 'damascus' },
+  { triggers: ['مشروع دمر', 'دمر'], district: 'mashrou dummar', city: 'damascus' },
+  // Damascus High
+  { triggers: ['المزة', 'مزة', 'mazzeh', 'mazeeh'], district: 'mazzeh', city: 'damascus' },
+  { triggers: ['كفرسوسة', 'كفر سوسة', 'kafr souseh', 'kafar souseh', 'kafr sousa'], district: 'kafr sousa', city: 'damascus' },
+  { triggers: ['الصالحية', 'صالحية', 'salihiyeh'], district: 'salihiyeh', city: 'damascus' },
+  { triggers: ['الروضة', 'روضة', 'rawda'], district: 'rawda', city: 'damascus' },
+  // Damascus Medium
+  { triggers: ['ركن الدين', 'ركن دين', 'rukn al-din'], district: 'rukn al-din', city: 'damascus' },
+  { triggers: ['الميدان', 'ميدان', 'midan'], district: 'midan', city: 'damascus' },
+  { triggers: ['البرامكة', 'برامكة', 'baramkeh'], district: 'baramkeh', city: 'damascus' },
+  { triggers: ['القصاع', 'قصاع', 'qassaa'], district: 'qassaa', city: 'damascus' },
+  // Damascus Historic
+  { triggers: ['دمشق القديمة', 'المدينة القديمة', 'old damascus'], district: 'old damascus', city: 'damascus' },
+  { triggers: ['باب شرقي', 'bab sharqi'], district: 'bab sharqi', city: 'damascus' },
+  // Damascus Low
+  { triggers: ['جوبر', 'jobar'], district: 'jobar', city: 'damascus' },
+  { triggers: ['التضامن', 'تضامن', 'tadamon'], district: 'tadamon', city: 'damascus' },
+  { triggers: ['القدم', 'قدم', 'qadam'], district: 'qadam', city: 'damascus' },
+  // Rif Dimashq
+  { triggers: ['قدسيا', 'ضاحية قدسيا', 'qudsaya'], district: 'qudsaya project', city: 'rif dimashq' },
+  { triggers: ['جرمانا', 'jaramana'], district: 'jaramana', city: 'rif dimashq' },
+  { triggers: ['داريا', 'darayya'], district: 'darayya', city: 'rif dimashq' },
+  { triggers: ['حرستا', 'harasta'], district: 'harasta', city: 'rif dimashq' },
+  { triggers: ['جديدة الشيباني', 'الشيباني'], district: 'jadidat al sheibani', city: 'rif dimashq' },
+  { triggers: ['عرطوز', 'artouz'], district: 'artouz', city: 'rif dimashq' },
+  { triggers: ['صحنايا', 'sahnaya'], district: 'sahnaya', city: 'rif dimashq' },
+  { triggers: ['المليحة', 'مليحة', 'mleiha'], district: 'mleiha', city: 'rif dimashq' },
+  // Aleppo
+  { triggers: ['العزيزية', 'عزيزية', 'aziziyeh'], district: 'aziziyeh', city: 'aleppo' },
+  { triggers: ['الحمدانية', 'حمدانية', 'hamdaniyeh'], district: 'hamdaniyeh', city: 'aleppo' },
+  // Homs
+  { triggers: ['الوعر', 'وعر', 'al waer'], district: 'al waer', city: 'homs' },
+  { triggers: ['الحميدية', 'حميدية', 'al hamidiyah'], district: 'al hamidiyah', city: 'homs' },
+];
+
 export function parseArabicMessage(message: string): ParsedArabicMessage {
   const normalized = normalizeMessage(message);
   const parsed: ParsedArabicMessage = {};
@@ -18,37 +62,15 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
     parsed.days_window = 90;
   }
 
-  if (
-    normalized.includes('المزة') ||
-    normalized.includes('مزة') ||
-    normalized.includes('mazzeh') ||
-    normalized.includes('mazeeh')
-  ) {
-    parsed.district = 'mazzeh';
-    parsed.city = 'damascus';
+  for (const { triggers, district, city } of DISTRICT_MAP) {
+    if (triggers.some((t) => normalized.includes(t.toLowerCase()))) {
+      parsed.district = district;
+      parsed.city = city;
+      break;
+    }
   }
 
-  if (
-    normalized.includes('كفرسوسة') ||
-    normalized.includes('كفر سوسة') ||
-    normalized.includes('kafr souseh') ||
-    normalized.includes('kafar souseh')
-  ) {
-    parsed.district = 'kafr souseh';
-    parsed.city = parsed.city ?? 'damascus';
-  }
-
-  if (normalized.includes('الشعلان') || normalized.includes('shaalan')) {
-    parsed.district = 'shaalan';
-    parsed.city = parsed.city ?? 'damascus';
-  }
-
-  if (normalized.includes('مشروع دمر')) {
-    parsed.district = 'mashrou dummar';
-    parsed.city = parsed.city ?? 'damascus';
-  }
-
-  if (normalized.includes('ريف دمشق') || normalized.includes('rif dimashq')) {
+  if (!parsed.city && (normalized.includes('ريف دمشق') || normalized.includes('rif dimashq'))) {
     parsed.city = 'rif dimashq';
   }
 

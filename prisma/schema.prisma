@@ -559,6 +559,25 @@ model BuyerChatMessage {
   @@map("buyer_chat_messages")
 }
 
+model District {
+  id              Int      @id @default(autoincrement())
+  nameAr          String   @db.VarChar(100)
+  nameEn          String   @db.VarChar(100)
+  city            String   @db.VarChar(50)
+  tier            String   @db.VarChar(20)
+  priceMultiplier Float    @default(1.0)
+  lat             Float?
+  lng             Float?
+  isOrganized     Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([nameEn, city])
+  @@index([city])
+  @@index([tier])
+  @@map("districts")
+}
+
 enum Role {
   ADMIN
   ACCOUNTANT
