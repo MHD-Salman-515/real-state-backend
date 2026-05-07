@@ -332,7 +332,7 @@ export class AiService {
 
     let raw = '';
     try {
-      raw = await this.chat([
+      raw = await this.chatWithFallback([
         { role: 'system', content: REAL_ESTATE_SYSTEM_PROMPT },
         { role: 'user', content: userPrompt },
       ]);
@@ -413,7 +413,7 @@ export class AiService {
 
     try {
       const systemPrompt = this.resolveComposerSystemPrompt(input.mode);
-      const composed = await this.chat(
+      const composed = await this.chatWithFallback(
         this.buildConversationMessages({
           systemPrompt,
           userMessage: userPrompt,
@@ -606,6 +606,61 @@ export class AiService {
       return normalized;
     }
     return `${normalized.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…`;
+  }
+
+  private async callOpenAI(messages: OllamaChatMessage[]): Promise<string> {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) throw new Error('OPENAI_API_KEY not set');
+
+    const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30_000);
+
+    try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model,
+          temperature: 0.3,
+          max_tokens: 1000,
+          messages,
+        }),
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`OpenAI request failed (${response.status}): ${text}`);
+      }
+
+      const data = (await response.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      const content = data.choices?.[0]?.message?.content?.trim();
+      if (!content) throw new Error('OpenAI response is empty');
+
+      this.logger.log(`OPENAI_RESPONSE success=true textLength=${content.length}`);
+      return content;
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  private async chatWithFallback(messages: OllamaChatMessage[]): Promise<string> {
+    if (process.env.OPENAI_API_KEY) {
+      try {
+        return await this.callOpenAI(messages);
+      } catch (error) {
+        this.logger.warn(
+          `OPENAI_FAILED_FALLING_BACK_TO_OLLAMA reason=${(error as Error)?.message || error}`,
+        );
+      }
+    }
+    return this.chat(messages);
   }
 
   private formatSyp(n: number): string {
