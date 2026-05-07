@@ -90,7 +90,7 @@ export class BuyerChatService {
 
   async createSession(params: { buyerId: number; title?: string }) {
     const buyerId = this.validateBuyerId(params.buyerId);
-    const sessionDelegate = (this.prisma as any).buyerChatSession;
+    const sessionDelegate = this.prisma.buyerChatSession;
     const created = await sessionDelegate.create({
       data: {
         buyerId,
@@ -117,7 +117,7 @@ export class BuyerChatService {
     const buyerId = this.validateBuyerId(params.buyerId);
     const limit = this.validateLimit(params.limit, 1, 100, 20);
 
-    const sessionDelegate = (this.prisma as any).buyerChatSession;
+    const sessionDelegate = this.prisma.buyerChatSession;
     const rows = await sessionDelegate.findMany({
       where: { buyerId },
       orderBy: { createdAt: 'desc' },
@@ -142,7 +142,7 @@ export class BuyerChatService {
     const session = await this.assertBuyerSession(params.buyerId, params.sessionId);
     const limit = this.validateLimit(params.limit, 1, 200, 50);
 
-    const messageDelegate = (this.prisma as any).buyerChatMessage;
+    const messageDelegate = this.prisma.buyerChatMessage;
     const rows = await messageDelegate.findMany({
       where: { sessionId: session.id },
       orderBy: { createdAt: 'asc' },
@@ -174,7 +174,7 @@ export class BuyerChatService {
       throw new BadRequestException('message must be between 1 and 2000 characters');
     }
 
-    const messageDelegate = (this.prisma as any).buyerChatMessage;
+    const messageDelegate = this.prisma.buyerChatMessage;
     const userMsg = await messageDelegate.create({
       data: {
         sessionId: session.id,
@@ -1175,7 +1175,7 @@ export class BuyerChatService {
       throw new BadRequestException('session id must be a positive integer');
     }
 
-    const sessionDelegate = (this.prisma as any).buyerChatSession;
+    const sessionDelegate = this.prisma.buyerChatSession;
     const session = await sessionDelegate.findUnique({
       where: { id: sessionId },
       select: { id: true, buyerId: true, metaJson: true },
@@ -1237,7 +1237,7 @@ export class BuyerChatService {
   }
 
   private async getLatestAssistantMessage(sessionId: number): Promise<AssistantTurnContext> {
-    const messageDelegate = (this.prisma as any).buyerChatMessage;
+    const messageDelegate = this.prisma.buyerChatMessage;
     const latestAssistant = await messageDelegate.findFirst({
       where: {
         sessionId,
@@ -1300,7 +1300,7 @@ export class BuyerChatService {
     propertyState?: Record<string, unknown>;
     sortMode?: BuyerSortMode;
   }) {
-    const sessionDelegate = (this.prisma as any).buyerChatSession;
+    const sessionDelegate = this.prisma.buyerChatSession;
     const meta = this.toRecord(params.existingMeta) || {};
     if (params.queryState) {
       meta.last_query = params.queryState;
@@ -1341,7 +1341,7 @@ export class BuyerChatService {
         why_short: String(item?.why_short || ''),
       }));
 
-      const delegate = (this.prisma as any).buyerRecommendationLog;
+      const delegate = this.prisma.buyerRecommendationLog;
       await delegate.create({
         data: {
           buyerId: Number(params.buyerId),

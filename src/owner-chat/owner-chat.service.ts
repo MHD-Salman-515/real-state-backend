@@ -124,7 +124,7 @@ export class OwnerChatService {
   ) {}
 
   async createSession(params: { ownerId: number; title?: string }) {
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     const created = await sessionDelegate.create({
       data: {
         ownerId: params.ownerId,
@@ -148,7 +148,7 @@ export class OwnerChatService {
   }
 
   async listSessions(params: { ownerId: number; limit: number }) {
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     const sessions = await sessionDelegate.findMany({
       where: { ownerId: params.ownerId },
       orderBy: { updatedAt: 'desc' },
@@ -177,7 +177,7 @@ export class OwnerChatService {
 
   async listMessages(params: { ownerId: number; sessionId: number; limit: number }) {
     const session = await this.assertOwnerSession(params.ownerId, params.sessionId);
-    const messageDelegate = (this.prisma as any).chatMessage;
+    const messageDelegate = this.prisma.chatMessage;
 
     const rows = await messageDelegate.findMany({
       where: { sessionId: session.id },
@@ -209,7 +209,7 @@ export class OwnerChatService {
       await this.getOwnedProperty(params.ownerId, params.propertyId);
     }
 
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     const currentMeta = this.toRecord(session.metaJson) || {};
     const nextMeta = { ...currentMeta };
     const nextContext = this.toRecord(nextMeta.context) || {};
@@ -290,7 +290,7 @@ export class OwnerChatService {
       state: mergedState,
     });
 
-    const messageDelegate = (this.prisma as any).chatMessage;
+    const messageDelegate = this.prisma.chatMessage;
     const userMsg = await messageDelegate.create({
       data: {
         sessionId: session.id,
@@ -384,7 +384,7 @@ export class OwnerChatService {
       propertyId: contextPropertyId ?? null,
     });
 
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     if (!session.title) {
       await sessionDelegate.update({
         where: { id: session.id },
@@ -447,7 +447,7 @@ export class OwnerChatService {
         .catch(() => {});
     }
 
-    const messageDelegate = (this.prisma as any).chatMessage;
+    const messageDelegate = this.prisma.chatMessage;
     const toolMessage = await messageDelegate.create({
       data: {
         sessionId: params.sessionId,
@@ -485,7 +485,7 @@ export class OwnerChatService {
 
   async archiveSession(params: { ownerId: number; sessionId: number }) {
     const session = await this.assertOwnerSession(params.ownerId, params.sessionId);
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     const updated = await sessionDelegate.update({
       where: { id: session.id },
       data: { status: 'ARCHIVED' },
@@ -500,7 +500,7 @@ export class OwnerChatService {
 
   async deleteSession(params: { ownerId: number; sessionId: number }) {
     const session = await this.assertOwnerSession(params.ownerId, params.sessionId);
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     await sessionDelegate.delete({ where: { id: session.id } });
     return { success: true };
   }
@@ -1835,7 +1835,7 @@ export class OwnerChatService {
   }
 
   private async assertOwnerSession(ownerId: number, sessionId: number) {
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     const session = await sessionDelegate.findUnique({
       where: { id: sessionId },
       select: { id: true, ownerId: true, title: true, status: true, metaJson: true },
@@ -1877,7 +1877,7 @@ export class OwnerChatService {
     propertyId: number;
     price: number;
   }): Promise<{ logId?: string; action?: TrackAction } | null> {
-    const messageDelegate = (this.prisma as any).chatMessage;
+    const messageDelegate = this.prisma.chatMessage;
     const latestAssistant = await messageDelegate.findFirst({
       where: {
         sessionId: params.sessionId,
@@ -1924,7 +1924,7 @@ export class OwnerChatService {
   }
 
   private async getLatestAssistantMessage(sessionId: number): Promise<AssistantTurnContext> {
-    const messageDelegate = (this.prisma as any).chatMessage;
+    const messageDelegate = this.prisma.chatMessage;
     const latestAssistant = await messageDelegate.findFirst({
       where: {
         sessionId,
@@ -1951,7 +1951,7 @@ export class OwnerChatService {
     sessionId: number,
     limit = 6,
   ): Promise<AiConversationTurn[]> {
-    const messageDelegate = (this.prisma as any).chatMessage;
+    const messageDelegate = this.prisma.chatMessage;
     const rows = await messageDelegate.findMany({
       where: {
         sessionId,
@@ -2395,7 +2395,7 @@ export class OwnerChatService {
     propertyId: number | null;
     state: DeterministicContextState;
   }): Promise<void> {
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     const currentMeta = this.toRecord(params.metaJson) || {};
     const nextMeta = { ...currentMeta };
     const nextContext = this.toRecord(nextMeta.context) || {};
@@ -2453,7 +2453,7 @@ export class OwnerChatService {
       return;
     }
 
-    const sessionDelegate = (this.prisma as any).chatSession;
+    const sessionDelegate = this.prisma.chatSession;
     const existing = await sessionDelegate.findUnique({
       where: { id: params.sessionId },
       select: { metaJson: true },
