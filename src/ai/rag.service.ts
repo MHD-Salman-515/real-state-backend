@@ -83,8 +83,38 @@ export class RagService {
       property_id: property.id,
       area_m2: property.area == null ? null : Number(property.area),
       price: property.price == null ? null : Number(property.price),
-      district: property.address ?? null,
+      district: this.extractDistrictFromAddress(property.address ?? null),
       type: property.type ? String(property.type) : null,
     };
+  }
+
+  // Splits a full street address and returns the last non-city token as the
+  // neighborhood/district name.
+  // "شارع الثورة، جرمانا" → "جرمانا"
+  // "المالكي، دمشق"       → "المالكي"
+  // "جرمانا"              → "جرمانا"
+  private extractDistrictFromAddress(address: string | null): string | null {
+    if (!address) return null;
+
+    const CITY_NAMES = new Set([
+      'دمشق', 'حلب', 'حمص', 'حماة', 'اللاذقية', 'طرطوس', 'دير الزور',
+      'درعا', 'السويداء', 'القنيطرة', 'الرقة', 'إدلب', 'سوريا',
+      'damascus', 'aleppo', 'homs', 'syria',
+    ]);
+
+    const parts = address
+      .split(/[،,\-\/]/)
+      .map((p) => p.trim())
+      .filter(Boolean);
+
+    if (parts.length === 0) return null;
+
+    for (let i = parts.length - 1; i >= 0; i--) {
+      if (!CITY_NAMES.has(parts[i].toLowerCase())) {
+        return parts[i];
+      }
+    }
+
+    return parts[parts.length - 1];
   }
 }
