@@ -1,0 +1,26 @@
+name: Seed Districts (one-time)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: urbanex-backend/urbanex-backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run seed:districts
+        run: npm run seed:districts
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
