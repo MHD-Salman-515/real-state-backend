@@ -35,6 +35,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { MarketStatsService } from '../market-intelligence/market-stats.service';
 import { detectOwnerChatIntent, OwnerChatIntent } from './owner-chat.intent';
 import { parseArabicMessage } from './parse-arabic-message';
+import { PricingFactors, PricingFactorsService } from '../pricing/pricing-factors.service';
+import { LocationServicesService } from '../pricing/location-services.service';
 
 type OwnedProperty = {
   id: number;
@@ -122,6 +124,8 @@ export class OwnerChatService {
     private readonly ownerAiHistoryService: OwnerAiHistoryService,
     @Optional() private readonly ollamaOrchestrator?: OllamaOrchestratorService,
     @Optional() private readonly aiService?: AiService,
+    @Optional() private readonly pricingFactorsService?: PricingFactorsService,
+    @Optional() private readonly locationServicesService?: LocationServicesService,
   ) {}
 
   async createSession(params: { ownerId: number; title?: string }) {
@@ -973,6 +977,30 @@ export class OwnerChatService {
         };
       }
 
+      // Resolve district tier + location context for pricing adjustment
+      const pricingFactors: PricingFactors = {};
+      if (district && this.pricingFactorsService) {
+        const districtRow = await this.prisma.district.findFirst({
+          where: { nameEn: district, city },
+          select: { tier: true, lat: true, lng: true, isOrganized: true },
+        });
+        if (districtRow) {
+          pricingFactors.districtTier = districtRow.tier as PricingFactors['districtTier'];
+          if (districtRow.isOrganized && districtRow.lat != null && districtRow.lng != null && this.locationServicesService) {
+            const locCtx = await this.locationServicesService.getLocationContext(districtRow.lat, districtRow.lng);
+            pricingFactors.nearHospital = locCtx.nearHospital;
+            pricingFactors.nearSchool = locCtx.nearSchool;
+            pricingFactors.nearSupermarket = locCtx.nearSupermarket;
+            pricingFactors.nearPark = locCtx.nearPark;
+            pricingFactors.nearMainRoad = locCtx.nearMainRoad;
+          }
+        }
+        pricingFactors.floor = parsedArabic.floor;
+        pricingFactors.hasElevator = parsedArabic.hasElevator;
+        pricingFactors.buildingAge = parsedArabic.buildingAge as PricingFactors['buildingAge'];
+        pricingFactors.finishQuality = parsedArabic.finishQuality as PricingFactors['finishQuality'];
+      }
+
       if (inRealEstateFlow && sellerFlowActive && district && areaM2) {
         this.logger.log('CHAT_ROUTE: LEGACY_SELLER_PRICE handler=advisor_seller_price final_selected_handler=advisor_seller_price');
         const seller = await this.advisorService.getSellerPriceSuggestion({
@@ -982,13 +1010,16 @@ export class OwnerChatService {
           area_m2: areaM2,
           user_message: params.message,
         });
+        const pm = this.pricingFactorsService
+          ? this.pricingFactorsService.calculateAdjustment(pricingFactors).totalMultiplier
+          : 1.0;
         const sellerReply = buildSellerPriceReply({
           district,
           area_m2: areaM2,
           result: {
-            optimal_price_syp: seller.optimal_price_syp,
+            optimal_price_syp: Math.round(seller.optimal_price_syp * pm),
             optimal_range_syp: seller.optimal_range_syp,
-            fast_sale_price_syp: seller.fast_sale_price_syp,
+            fast_sale_price_syp: Math.round(seller.fast_sale_price_syp * pm),
             fast_sale_range_syp: seller.fast_sale_range_syp,
             confidence: seller.confidence,
           },
@@ -1006,10 +1037,10 @@ export class OwnerChatService {
                 district,
                 property_type: propertyType,
                 area_m2: areaM2,
-                best_price: seller.optimal_price_syp,
+                best_price: Math.round(seller.optimal_price_syp * pm),
                 best_price_min: seller.optimal_range_syp.min,
                 best_price_max: seller.optimal_range_syp.max,
-                quick_sale_price: seller.fast_sale_price_syp,
+                quick_sale_price: Math.round(seller.fast_sale_price_syp * pm),
                 quick_sale_price_min: seller.fast_sale_range_syp.min,
                 quick_sale_price_max: seller.fast_sale_range_syp.max,
                 confidence: seller.confidence,
@@ -1017,7 +1048,7 @@ export class OwnerChatService {
               lockedValues: [
                 district || '',
                 areaM2 || '',
-                seller.optimal_price_syp,
+                Math.round(seller.optimal_price_syp * pm),
                 seller.optimal_range_syp.min,
                 seller.optimal_range_syp.max,
               ],

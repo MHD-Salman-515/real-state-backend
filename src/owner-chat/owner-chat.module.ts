@@ -5,6 +5,7 @@ import { ChatModule } from '../chat/chat.module';
 import { MarketIntelligenceModule } from '../market-intelligence/market-intelligence.module';
 import { PrismaModule } from '../prisma/prisma.module';
 import { PropertyModule } from '../property/property.module';
+import { PricingModule } from '../pricing/pricing.module';
 import { OwnerChatController } from './owner-chat.controller';
 import { OwnerChatService } from './owner-chat.service';
 
@@ -16,6 +17,7 @@ import { OwnerChatService } from './owner-chat.service';
     AiModule,
     MarketIntelligenceModule,
     ChatModule,
+    PricingModule,
   ],
   controllers: [OwnerChatController],
   providers: [OwnerChatService],

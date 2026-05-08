@@ -6,6 +6,10 @@ export interface ParsedArabicMessage {
   area_m2?: number;
   budget_syp?: number;
   listing_intent?: 'SELL' | 'BUY' | 'RENT' | 'ESTIMATE' | 'INVEST';
+  floor?: number;
+  hasElevator?: boolean;
+  buildingAge?: 'new' | 'modern' | 'normal' | 'old' | 'very_old';
+  finishQuality?: 'luxury' | 'high' | 'medium' | 'basic';
 }
 
 const DISTRICT_MAP: Array<{ triggers: string[]; district: string; city: string }> = [
@@ -145,6 +149,45 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
 
   if (normalized.includes('أرض') || normalized.includes('ارض')) {
     parsed.property_type = 'land';
+  }
+
+  // Floor
+  if (normalized.includes('طابق أرضي') || normalized.includes('ارضي') || normalized.includes('الأرضي')) {
+    parsed.floor = 0;
+  } else if (normalized.includes('طابق أول') || normalized.includes('الأول') || normalized.includes('الاول')) {
+    parsed.floor = 1;
+  } else if (normalized.includes('طابق ثاني') || normalized.includes('الثاني')) {
+    parsed.floor = 2;
+  } else if (normalized.includes('طابق ثالث') || normalized.includes('الثالث')) {
+    parsed.floor = 3;
+  } else if (normalized.includes('طابق رابع') || normalized.includes('الرابع')) {
+    parsed.floor = 4;
+  } else if (normalized.includes('طابق خامس') || normalized.includes('الخامس')) {
+    parsed.floor = 5;
+  }
+
+  if (normalized.includes('بدون مصعد') || normalized.includes('ما في مصعد')) {
+    parsed.hasElevator = false;
+  } else if (normalized.includes('مع مصعد') || normalized.includes('في مصعد')) {
+    parsed.hasElevator = true;
+  }
+
+  if (normalized.includes('جديد') || normalized.includes('جديدة') || normalized.includes('new')) {
+    parsed.buildingAge = 'new';
+  } else if (normalized.includes('حديث') || normalized.includes('حديثة')) {
+    parsed.buildingAge = 'modern';
+  } else if (normalized.includes('قديم') || normalized.includes('قديمة')) {
+    parsed.buildingAge = 'old';
+  } else if (normalized.includes('مهترئ') || normalized.includes('خربان')) {
+    parsed.buildingAge = 'very_old';
+  }
+
+  if (normalized.includes('فاخر') || normalized.includes('فاخرة') || normalized.includes('luxury')) {
+    parsed.finishQuality = 'luxury';
+  } else if (normalized.includes('تشطيب عالي') || normalized.includes('سوبر ديلوكس')) {
+    parsed.finishQuality = 'high';
+  } else if (normalized.includes('تشطيب بسيط') || normalized.includes('عادي')) {
+    parsed.finishQuality = 'medium';
   }
 
   if (/للبيع|بيع|ابيع|أبيع|بدي ابيع|sell/i.test(normalized)) {
