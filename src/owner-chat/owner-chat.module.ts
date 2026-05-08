@@ -6,6 +6,7 @@ import { MarketIntelligenceModule } from '../market-intelligence/market-intellig
 import { PrismaModule } from '../prisma/prisma.module';
 import { PropertyModule } from '../property/property.module';
 import { PricingModule } from '../pricing/pricing.module';
+import { NotificationsModule } from '../notifications/notifications.module';
 import { OwnerChatController } from './owner-chat.controller';
 import { OwnerChatService } from './owner-chat.service';
 
@@ -18,6 +19,7 @@ import { OwnerChatService } from './owner-chat.service';
     MarketIntelligenceModule,
     ChatModule,
     PricingModule,
+    NotificationsModule,
   ],
   controllers: [OwnerChatController],
   providers: [OwnerChatService],

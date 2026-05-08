@@ -37,6 +37,7 @@ import { detectOwnerChatIntent, OwnerChatIntent } from './owner-chat.intent';
 import { parseArabicMessage } from './parse-arabic-message';
 import { PricingFactors, PricingFactorsService } from '../pricing/pricing-factors.service';
 import { LocationServicesService } from '../pricing/location-services.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 type OwnedProperty = {
   id: number;
@@ -126,6 +127,7 @@ export class OwnerChatService {
     @Optional() private readonly aiService?: AiService,
     @Optional() private readonly pricingFactorsService?: PricingFactorsService,
     @Optional() private readonly locationServicesService?: LocationServicesService,
+    @Optional() private readonly notifications?: NotificationsService,
   ) {}
 
   async createSession(params: { ownerId: number; title?: string }) {
@@ -376,6 +378,18 @@ export class OwnerChatService {
         createdAt: true,
       },
     });
+
+    if (dispatch.response.intent === 'SELLER_PRICE' && this.notifications) {
+      try {
+        await this.notifications.create({
+          userId: params.ownerId,
+          type: 'PRICE_ALERT',
+          title: 'تحليل سعر جديد متاح',
+          body: 'تم تحليل سعر عقارك بناءً على بيانات السوق. تحقق من توصية السعر.',
+          sendEmail: false,
+        });
+      } catch {}
+    }
 
     await this.persistSessionTaskState({
       sessionId: session.id,

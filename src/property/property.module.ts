@@ -20,9 +20,10 @@ import { AuthModule } from '../auth/auth.module';
 import { UrbanexPrismaModule } from '../prisma/urbanex-prisma.module';
 import { AdvisorModule } from '../advisor/advisor.module';
 import { AiModule } from '../ai/ai.module';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
-  imports: [AuthModule, UrbanexPrismaModule, AdvisorModule, AiModule],
+  imports: [AuthModule, UrbanexPrismaModule, AdvisorModule, AiModule, NotificationsModule],
   providers: [
     PropertyService,
     OwnerStrategyService,

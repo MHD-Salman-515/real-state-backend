@@ -1,6 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Optional } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 type PropertyImageRow = {
   url: string;
@@ -11,7 +12,10 @@ type PropertyImageRow = {
 
 @Injectable()
 export class PropertyService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Optional() private readonly notifications?: NotificationsService,
+  ) {}
 
   private async getOwnedPropertyOrThrow(ownerId: number, propertyId: number) {
     const property = await this.prisma.property.findFirst({
@@ -98,6 +102,17 @@ export class PropertyService {
 
     const created = await this.prisma.property.create({ data: payload });
     await this.logPropertyOperation('CREATE_PROPERTY', created.id, actorUserId ?? ownerId, { type: created.type });
+
+    try {
+      await this.notifications?.create({
+        userId: ownerId,
+        type: 'PROPERTY_APPROVED',
+        title: 'تم إضافة عقارك بنجاح',
+        body: 'تم نشر عقارك على منصة Urbanex وأصبح متاحاً للزوار.',
+        sendEmail: false,
+      });
+    } catch {}
+
     return created;
   }
 
