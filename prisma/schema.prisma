@@ -38,6 +38,7 @@ model User {
   buyerRecommendationLogs BuyerRecommendationLog[]
   emailOtps EmailOtp[]
   refreshTokens RefreshToken[]
+  notifications Notification[]
 
   @@map("User")
 }
@@ -557,6 +558,24 @@ model BuyerChatMessage {
   @@index([sessionId], map: "buyer_chat_messages_session_id_idx")
   @@index([sessionId, createdAt], map: "buyer_chat_messages_session_id_created_at_idx")
   @@map("buyer_chat_messages")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  type      String   @db.VarChar(50)
+  title     String   @db.VarChar(200)
+  body      String   @db.Text
+  isRead    Boolean  @default(false)
+  metadata  Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, isRead])
+  @@map("notifications")
 }
 
 model District {

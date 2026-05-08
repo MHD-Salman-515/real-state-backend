@@ -26,6 +26,7 @@ import { BuyerHistoryModule } from './buyer-history/buyer-history.module';
 import { DebugModule } from './debug/debug.module';
 import { OpsModule } from './ops/ops.module';
 import { MarketDataModule } from './market-data/market-data.module';
+import { NotificationsModule } from './notifications/notifications.module';
 import { AuthLoginTraceMiddleware } from './auth/auth-login-trace.middleware';
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { AuthLoginTraceMiddleware } from './auth/auth-login-trace.middleware';
     BuyerHistoryModule,
     MarketIntelligenceModule,
     MarketDataModule,
+    NotificationsModule,
     ...(process.env.NODE_ENV !== 'production' ? [DebugModule] : []),
     OpsModule,
   ],
