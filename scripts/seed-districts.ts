@@ -174,7 +174,7 @@ function parseDbUrl(raw: string): mysql.ConnectionOptions {
     password: decodeURIComponent(u.password),
     database: u.pathname.replace(/^\//, ''),
   };
-  if (u.searchParams.get('ssl-mode') === 'REQUIRED') opts.ssl = {};
+  if (u.searchParams.get('ssl-mode') === 'REQUIRED') opts.ssl = { rejectUnauthorized: false };
   return opts;
 }
 
