@@ -1,4 +1,5 @@
 import { Injectable, OnModuleDestroy } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { MailService } from '../mail/mail.service';
 
@@ -34,7 +35,7 @@ export class NotificationsService implements OnModuleDestroy {
         title: dto.title,
         body: dto.body,
         isRead: false,
-        metadata: dto.metadata ?? undefined,
+        metadata: (dto.metadata ?? undefined) as Prisma.InputJsonValue,
       },
     });
 
