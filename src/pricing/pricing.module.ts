@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { PricingFactorsService } from './pricing-factors.service';
+import { LocationServicesService } from './location-services.service';
 
 @Module({
-  providers: [PricingFactorsService],
-  exports: [PricingFactorsService],
+  providers: [PricingFactorsService, LocationServicesService],
+  exports: [PricingFactorsService, LocationServicesService],
 })
 export class PricingModule {}
