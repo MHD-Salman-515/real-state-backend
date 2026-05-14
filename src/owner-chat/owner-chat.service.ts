@@ -646,6 +646,9 @@ export class OwnerChatService {
           params.lastAssistant?.text || '',
         ].filter(Boolean),
       });
+      if (domain.domain === 'OUT_OF_SCOPE' && state.district && state.area_m2) {
+        (domain as any).domain = 'IN_SCOPE_REAL_ESTATE';
+      }
       const inRealEstateFlow = domain.domain === 'IN_SCOPE_REAL_ESTATE';
       const currentPropertyState = this.pickPropertyState({
         city,
