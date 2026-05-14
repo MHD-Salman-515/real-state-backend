@@ -668,7 +668,10 @@ export class OwnerChatService {
         parsedArabic.listing_intent === 'ESTIMATE' ||
         /عندي شقة|عندي عقار|عندي بيت|كم تسوى|كم يسوى|بدي ابيع/i.test(params.message);
 
-      if (this.ollamaOrchestrator && !(hasSellerSignal && parsedArabic.district && parsedArabic.area_m2)) {
+      const sessionDistrict = parsedArabic.district ?? state.district;
+      const sessionArea = parsedArabic.area_m2 ?? state.area_m2;
+
+      if (this.ollamaOrchestrator && !(hasSellerSignal && sessionDistrict && sessionArea)) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
             (this.toRecord(params.lastAssistant.payloadJson.data)?.market_evaluation ||
