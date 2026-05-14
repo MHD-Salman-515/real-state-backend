@@ -622,8 +622,8 @@ export class OwnerChatService {
         askPrice ??
         this.toPositiveNumber(parsedArabic.budget_syp) ??
         this.toPositiveNumber(state.budget_syp);
-      const listingIntent = parsedArabic.listing_intent ?? state.listing_intent;
-      const sellerFlowActive =
+      let listingIntent = parsedArabic.listing_intent ?? state.listing_intent;
+      let sellerFlowActive =
         listingIntent === 'SELL' || listingIntent === 'ESTIMATE' || isSellerQuery;
       const domain = classifyRealEstateRequest({
         message: params.message,
@@ -674,7 +674,10 @@ export class OwnerChatService {
       const sessionDistrict = parsedArabic.district ?? state.district;
       const sessionArea = parsedArabic.area_m2 ?? state.area_m2;
 
-      if (this.ollamaOrchestrator && !(hasSellerSignal && sessionDistrict && sessionArea)) {
+      if (state.district && state.area_m2 && state.ask_price) {
+        sellerFlowActive = true;
+        listingIntent = 'ESTIMATE';
+      } else if (this.ollamaOrchestrator && !(hasSellerSignal && sessionDistrict && sessionArea)) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
             (this.toRecord(params.lastAssistant.payloadJson.data)?.market_evaluation ||
