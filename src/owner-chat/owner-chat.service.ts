@@ -617,6 +617,7 @@ export class OwnerChatService {
         this.toPositiveNumber(state.bedrooms);
       const askPrice =
         this.toPositiveNumber(explicitProperty.ask_price) ??
+        this.toPositiveNumber(parsedArabic.ask_price) ??
         this.toPositiveNumber(state.ask_price);
       const budgetSyp =
         askPrice ??
@@ -677,6 +678,7 @@ export class OwnerChatService {
       if (state.district && state.area_m2 && state.ask_price) {
         sellerFlowActive = true;
         listingIntent = 'ESTIMATE';
+        state.listing_intent = 'ESTIMATE';
       } else if (this.ollamaOrchestrator && !(hasSellerSignal && sessionDistrict && sessionArea)) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
@@ -1041,17 +1043,36 @@ export class OwnerChatService {
         const pm = this.pricingFactorsService
           ? this.pricingFactorsService.calculateAdjustment(pricingFactors).totalMultiplier
           : 1.0;
+        const optimalPricePm = Math.round(seller.optimal_price_syp * pm);
+        const fastPricePm = Math.round(seller.fast_sale_price_syp * pm);
+
+        let priceComparisonText = '';
+        const userAskPrice = askPrice ?? state.ask_price;
+        if (userAskPrice && userAskPrice > 0) {
+          const diff = ((userAskPrice - optimalPricePm) / optimalPricePm) * 100;
+          const absDiff = Math.abs(diff).toFixed(1);
+          if (diff > 10) {
+            priceComparisonText = `\n• سعرك الحالي أعلى من السوق بنسبة ${absDiff}% — قد يصعب البيع`;
+          } else if (diff < -10) {
+            priceComparisonText = `\n• سعرك الحالي أقل من السوق بنسبة ${absDiff}% — فرصة للرفع`;
+          } else {
+            priceComparisonText = `\n• سعرك قريب من السوق (فرق ${absDiff}%)`;
+          }
+        }
+
         const sellerReply = buildSellerPriceReply({
           district,
           area_m2: areaM2,
           result: {
-            optimal_price_syp: Math.round(seller.optimal_price_syp * pm),
+            optimal_price_syp: optimalPricePm,
             optimal_range_syp: seller.optimal_range_syp,
-            fast_sale_price_syp: Math.round(seller.fast_sale_price_syp * pm),
+            fast_sale_price_syp: fastPricePm,
             fast_sale_range_syp: seller.fast_sale_range_syp,
             confidence: seller.confidence,
           },
         });
+
+        const contextPropertyId = params.context?.propertyId;
 
         return {
           response: {
@@ -1060,23 +1081,24 @@ export class OwnerChatService {
               mode: 'SELLER_GUIDANCE',
               language: domain.language,
               userMessage: params.message,
-              draft: sellerReply.text,
+              draft: sellerReply.text + priceComparisonText,
               facts: {
                 district,
                 property_type: propertyType,
                 area_m2: areaM2,
-                best_price: Math.round(seller.optimal_price_syp * pm),
+                best_price: optimalPricePm,
                 best_price_min: seller.optimal_range_syp.min,
                 best_price_max: seller.optimal_range_syp.max,
-                quick_sale_price: Math.round(seller.fast_sale_price_syp * pm),
+                quick_sale_price: fastPricePm,
                 quick_sale_price_min: seller.fast_sale_range_syp.min,
                 quick_sale_price_max: seller.fast_sale_range_syp.max,
                 confidence: seller.confidence,
+                ...(userAskPrice ? { user_ask_price: userAskPrice } : {}),
               },
               lockedValues: [
                 district || '',
                 areaM2 || '',
-                Math.round(seller.optimal_price_syp * pm),
+                optimalPricePm,
                 seller.optimal_range_syp.min,
                 seller.optimal_range_syp.max,
               ],
@@ -1085,8 +1107,34 @@ export class OwnerChatService {
               seller_price: seller,
               explain_trace: seller.explain_trace ?? null,
               summary: sellerReply.summary ?? null,
+              ...(userAskPrice ? { user_ask_price: userAskPrice } : {}),
             },
-            suggested_actions: [],
+            suggested_actions: [
+              ...(contextPropertyId
+                ? [
+                    {
+                      type: 'APPLY_PRICE' as const,
+                      label_ar: `طبّق السعر الأمثل: ${this.formatSyp(optimalPricePm)} ل.س`,
+                      property_id: contextPropertyId,
+                      price: optimalPricePm,
+                    },
+                    {
+                      type: 'APPLY_PRICE' as const,
+                      label_ar: `بيع سريع: ${this.formatSyp(fastPricePm)} ل.س`,
+                      property_id: contextPropertyId,
+                      price: fastPricePm,
+                    },
+                  ]
+                : []),
+              {
+                type: 'OPEN_STRATEGY' as const,
+                label_ar: 'عرض الاستراتيجية الكاملة',
+                url: contextPropertyId
+                  ? `/owner/properties/${contextPropertyId}/strategy`
+                  : '/owner/properties',
+                ...(contextPropertyId ? { property_id: contextPropertyId } : {}),
+              },
+            ],
           },
           toolMessages: [
             {
@@ -2437,6 +2485,7 @@ export class OwnerChatService {
         undefined,
       ask_price:
         this.toPositiveNumber(extracted.ask_price) ??
+        this.toPositiveNumber(parsed.ask_price) ??
         (preserveNumericContext ? this.toPositiveNumber(ctx.ask_price) : undefined) ??
         undefined,
       budget_syp:

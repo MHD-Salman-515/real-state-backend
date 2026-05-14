@@ -5,6 +5,7 @@ export interface ParsedArabicMessage {
   property_type?: string;
   area_m2?: number;
   budget_syp?: number;
+  ask_price?: number;
   listing_intent?: 'SELL' | 'BUY' | 'RENT' | 'ESTIMATE' | 'INVEST';
   floor?: number;
   hasElevator?: boolean;
@@ -223,6 +224,26 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
     const raw = Number(budgetHintMatch[1]);
     if (Number.isFinite(raw) && raw > 0) {
       parsed.budget_syp = raw >= 1_000_000 ? Math.round(raw) : Math.round(raw * 1_000_000);
+    }
+  }
+
+  // Ask price — seller's declared price from natural speech
+  const askPriceMatch = normalized.match(
+    /(?:بسعر|سعره|سعرها|سعرهم|عرضه|عرضها|أطلب|طالب)\s*:?\s*([\d,،]+(?:\.\d+)?)\s*(مليون|ألف|الف)?/i,
+  );
+  if (askPriceMatch?.[1]) {
+    const raw = Number(String(askPriceMatch[1]).replace(/[,،]/g, ''));
+    const unit = String(askPriceMatch[2] || '').toLowerCase();
+    if (Number.isFinite(raw) && raw > 0) {
+      if (unit.includes('مليون')) {
+        parsed.ask_price = Math.round(raw * 1_000_000);
+      } else if (unit.includes('الف') || unit.includes('ألف')) {
+        parsed.ask_price = Math.round(raw * 1_000);
+      } else if (raw >= 1_000_000) {
+        parsed.ask_price = Math.round(raw);
+      } else if (raw >= 100) {
+        parsed.ask_price = Math.round(raw * 1_000_000);
+      }
     }
   }
 
