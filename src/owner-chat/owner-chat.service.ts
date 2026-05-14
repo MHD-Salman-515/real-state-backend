@@ -2523,7 +2523,7 @@ export class OwnerChatService {
   private isSellerQuery(message: string): boolean {
     const text = String(message || '').toLowerCase();
     return (
-      /بيع|ابيع|بدي بيع|سعر|تسعير|قيم|قيّم|تقييم|price|sell/.test(text)
+      /بيع|ابيع|بدي بيع|سعر|تسعير|قيم|قيّم|تقييم|price|sell|عندي شقة|عندي بيت|عندي عقار|عندي فيلا|عندي أرض|عندي محل|كم تسوى|كم يسوى|كم تساوي|كم يساوي|قيمتها|قيمته|ثمنها|ثمنه/.test(text)
     );
   }
 

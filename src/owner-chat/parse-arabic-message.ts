@@ -196,7 +196,7 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
     parsed.listing_intent = 'BUY';
   } else if (/للإيجار|للايجار|إيجار|ايجار|rent/i.test(normalized)) {
     parsed.listing_intent = 'RENT';
-  } else if (/تقييم|تسعير|كم سعر|سعرها|سعره|estimate|valuation/i.test(normalized)) {
+  } else if (/تقييم|تسعير|كم سعر|سعرها|سعره|estimate|valuation|عندي شقة|عندي بيت|عندي عقار|عندي فيلا|عندي أرض|عندي محل|كم تسوى|كم يسوى|كم تساوي|كم يساوي|قيمتها|قيمته|ثمنها|ثمنه/i.test(normalized)) {
     parsed.listing_intent = 'ESTIMATE';
   } else if (/استثمار|للاستثمار|roi|yield|investment/i.test(normalized)) {
     parsed.listing_intent = 'INVEST';

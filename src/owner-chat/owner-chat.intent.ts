@@ -42,14 +42,26 @@ export function detectOwnerChatIntent(params: {
   }
 
   if (
+    matches(text, [
+      /سعر/i,
+      /تقييم/i,
+      /تسعير/i,
+      /كم تسوى/i,
+      /كم يسوى/i,
+      /عندي شقة/i,
+      /عندي عقار/i,
+    ])
+  ) {
+    return 'PROPERTY_STRATEGY';
+  }
+
+  if (
     params.contextPropertyId &&
     matches(text, [
       /\bstrategy\b/i,
       /قي[ّ]?م/i,
       /سعر عقار/i,
-      /تسعير/i,
       /اقترح سعر/i,
-      /سعر/i,
     ])
   ) {
     return 'PROPERTY_STRATEGY';
