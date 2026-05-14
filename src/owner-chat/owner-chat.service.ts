@@ -663,7 +663,12 @@ export class OwnerChatService {
       );
       this.logger.log(`OWNER_CHAT_ROUTE intent=${advisorIntent} domain=${domain.domain}`);
 
-      if (this.ollamaOrchestrator) {
+      const hasSellerSignal =
+        parsedArabic.listing_intent === 'SELL' ||
+        parsedArabic.listing_intent === 'ESTIMATE' ||
+        /عندي شقة|عندي عقار|عندي بيت|كم تسوى|كم يسوى|بدي ابيع/i.test(params.message);
+
+      if (this.ollamaOrchestrator && !(hasSellerSignal && parsedArabic.district && parsedArabic.area_m2)) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
             (this.toRecord(params.lastAssistant.payloadJson.data)?.market_evaluation ||
