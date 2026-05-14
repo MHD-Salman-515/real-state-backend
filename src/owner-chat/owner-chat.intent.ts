@@ -42,6 +42,7 @@ export function detectOwnerChatIntent(params: {
   }
 
   if (
+    params.contextPropertyId &&
     matches(text, [
       /سعر/i,
       /تقييم/i,
