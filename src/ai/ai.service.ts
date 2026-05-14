@@ -703,7 +703,58 @@ export class AiService {
     }
   }
 
+  private async callGroq(messages: OllamaChatMessage[]): Promise<string> {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) throw new Error('GROQ_API_KEY not set');
+
+    const model = process.env.GROQ_MODEL || 'llama3-8b-8192';
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30_000);
+
+    try {
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model,
+          messages: messages.map(m => ({ role: m.role, content: m.content })),
+          temperature: 0.3,
+          max_tokens: 1000,
+        }),
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Groq request failed (${response.status}): ${text}`);
+      }
+
+      const data = (await response.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+
+      const content = data.choices?.[0]?.message?.content?.trim();
+      if (!content) throw new Error('Groq response is empty');
+
+      this.logger.log(`GROQ_RESPONSE success=true textLength=${content.length}`);
+      return content;
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
   private async chatWithFallback(messages: OllamaChatMessage[]): Promise<string> {
+    if (process.env.GROQ_API_KEY) {
+      try {
+        return await this.callGroq(messages);
+      } catch (error) {
+        this.logger.warn(`GROQ_FAILED reason=${(error as Error)?.message || error}`);
+      }
+    }
     if (process.env.GEMINI_API_KEY) {
       try {
         return await this.callGemini(messages);
@@ -715,9 +766,7 @@ export class AiService {
       try {
         return await this.callOpenAI(messages);
       } catch (error) {
-        this.logger.warn(
-          `OPENAI_FAILED_FALLING_BACK_TO_OLLAMA reason=${(error as Error)?.message || error}`,
-        );
+        this.logger.warn(`OPENAI_FAILED reason=${(error as Error)?.message || error}`);
       }
     }
     return this.chat(messages);
