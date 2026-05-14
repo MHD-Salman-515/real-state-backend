@@ -650,7 +650,67 @@ export class AiService {
     }
   }
 
+  private async callGemini(messages: OllamaChatMessage[]): Promise<string> {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) throw new Error('GEMINI_API_KEY not set');
+
+    const model = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+
+    const systemMsg = messages.find(m => m.role === 'system');
+    const chatMessages = messages.filter(m => m.role !== 'system');
+
+    const contents = chatMessages.map(m => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }],
+    }));
+
+    const body: Record<string, unknown> = { contents };
+    if (systemMsg) {
+      body.systemInstruction = { parts: [{ text: systemMsg.content }] };
+    }
+    body.generationConfig = { temperature: 0.3, maxOutputTokens: 1000 };
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30_000);
+
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+          signal: controller.signal,
+        },
+      );
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Gemini request failed (${response.status}): ${text}`);
+      }
+
+      const data = (await response.json()) as {
+        candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+      };
+
+      const content = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+      if (!content) throw new Error('Gemini response is empty');
+
+      this.logger.log(`GEMINI_RESPONSE success=true textLength=${content.length}`);
+      return content;
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
   private async chatWithFallback(messages: OllamaChatMessage[]): Promise<string> {
+    if (process.env.GEMINI_API_KEY) {
+      try {
+        return await this.callGemini(messages);
+      } catch (error) {
+        this.logger.warn(`GEMINI_FAILED reason=${(error as Error)?.message || error}`);
+      }
+    }
     if (process.env.OPENAI_API_KEY) {
       try {
         return await this.callOpenAI(messages);
