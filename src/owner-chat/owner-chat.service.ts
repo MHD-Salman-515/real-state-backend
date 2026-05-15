@@ -96,6 +96,31 @@ type AssistantTurnContext = {
   payloadJson: Record<string, unknown> | null;
 } | null;
 
+interface PropertyEvaluationState {
+  stage: 'initial' | 'asking_location' | 'asking_ownership' | 'asking_details' | 'complete';
+  exact_location?: string;
+  coordinates?: { lat: number; lng: number };
+  nearby_services?: {
+    nearHospital: boolean;
+    nearSchool: boolean;
+    nearSupermarket: boolean;
+    nearPark: boolean;
+    nearMainRoad: boolean;
+    places: Array<{ type: string; name: string; distanceMeters: number }>;
+  };
+  ownership_type?: string;
+  shares_count?: number;
+  is_debt_free?: boolean;
+  is_inheritance?: boolean;
+  has_legal_dispute?: boolean;
+  has_parking?: boolean;
+  has_view?: boolean;
+  floor?: number;
+  has_elevator?: boolean;
+  building_age?: string;
+  finish_quality?: string;
+}
+
 type DeterministicContextState = {
   listing_intent?: 'SELL' | 'BUY' | 'RENT' | 'ESTIMATE' | 'INVEST';
   city?: string;
@@ -106,6 +131,7 @@ type DeterministicContextState = {
   ask_price?: number;
   budget_syp?: number;
   pending_slot?: 'ask_price' | 'area_m2' | 'property_type' | 'district' | 'city';
+  evalState?: PropertyEvaluationState;
 };
 
 @Injectable()
@@ -573,6 +599,23 @@ export class OwnerChatService {
     recentHistory?: AiConversationTurn[];
   }): Promise<DispatchResult> {
     try {
+      const REAL_ESTATE_KEYWORDS =
+        /عقار|شقة|شقه|بيت|بيوت|فيلا|أرض|ارض|محل|مكتب|مستودع|سعر|إيجار|ايجار|بيع|شراء|تقييم|تسعير|استثمار|منطقة|حي|مالكي|مزة|مزه|كفرسوسة|شعلان|مهاجرين|جرمانا|دمشق|حلب|حمص|طابق|مصعد|بناء|تشطيب|موقف|طابو|ملكية|سهم|ذمة|ميراث|ورثة|property|apartment|villa|house|price|rent|buy|sell|real estate|invest|district|floor|elevator/i;
+      if (!REAL_ESTATE_KEYWORDS.test(params.message)) {
+        const aiSvc = this.getAiService();
+        const aiReply = aiSvc
+          ? await aiSvc
+              .generateOwnerAdvisorReply({ message: params.message, ownerId: params.ownerId })
+              .then((r) => String(r?.message || ''))
+              .catch(() => '')
+          : '';
+        return this.buildScopedReply({
+          intent: 'SMALL_TALK',
+          text: aiReply || buildRealEstateGreetingReply('ar'),
+          data: null,
+        });
+      }
+
       const explicit = this.extractGeoInputs(params.message);
       const parsedArabic = parseArabicMessage(params.message);
       const explicitProperty = await this.chatIntentService.extractPropertyData(params.message);
@@ -1039,6 +1082,16 @@ export class OwnerChatService {
       }
 
       if (inRealEstateFlow && sellerFlowActive && district && areaM2) {
+        const activeEvalStage = state.evalState?.stage;
+        if ((parsedArabic.district || parsedArabic.area_m2) || (activeEvalStage && activeEvalStage !== 'complete')) {
+          this.logger.log('CHAT_ROUTE: PROPERTY_EVALUATION handler=handlePropertyEvaluation');
+          return this.handlePropertyEvaluation({
+            ownerId: params.ownerId,
+            message: params.message,
+            state,
+            parsedArabic,
+          });
+        }
         this.logger.log('CHAT_ROUTE: LEGACY_SELLER_PRICE handler=advisor_seller_price final_selected_handler=advisor_seller_price');
         const seller = await this.advisorService.getSellerPriceSuggestion({
           city,
@@ -1931,6 +1984,300 @@ export class OwnerChatService {
     };
   }
 
+  private async handlePropertyEvaluation(params: {
+    ownerId: number;
+    message: string;
+    state: DeterministicContextState;
+    parsedArabic: ReturnType<typeof parseArabicMessage>;
+  }): Promise<DispatchResult> {
+    const { state, parsedArabic } = params;
+    const city = state.city || 'damascus';
+    const district = state.district!;
+    const areaM2 = state.area_m2!;
+    const propertyType = state.property_type || 'apartment';
+
+    // Merge current message fields into evalState
+    const prev: PropertyEvaluationState = state.evalState ?? { stage: 'initial' };
+    const ev: PropertyEvaluationState = { ...prev };
+
+    if (parsedArabic.exact_location && !ev.exact_location) ev.exact_location = parsedArabic.exact_location;
+    if (parsedArabic.ownership_type && !ev.ownership_type) ev.ownership_type = parsedArabic.ownership_type;
+    if (parsedArabic.shares_count != null && ev.shares_count == null) ev.shares_count = parsedArabic.shares_count;
+    if (parsedArabic.is_debt_free != null && ev.is_debt_free == null) ev.is_debt_free = parsedArabic.is_debt_free;
+    if (parsedArabic.is_inheritance != null && ev.is_inheritance == null) ev.is_inheritance = parsedArabic.is_inheritance;
+    if (parsedArabic.has_legal_dispute != null && ev.has_legal_dispute == null) ev.has_legal_dispute = parsedArabic.has_legal_dispute;
+    if (parsedArabic.has_parking != null && ev.has_parking == null) ev.has_parking = parsedArabic.has_parking;
+    if (parsedArabic.has_view != null && ev.has_view == null) ev.has_view = parsedArabic.has_view;
+    if (parsedArabic.floor != null && ev.floor == null) ev.floor = parsedArabic.floor;
+    if (parsedArabic.hasElevator != null && ev.has_elevator == null) ev.has_elevator = parsedArabic.hasElevator;
+    if (parsedArabic.buildingAge && !ev.building_age) ev.building_age = parsedArabic.buildingAge;
+    if (parsedArabic.finishQuality && !ev.finish_quality) ev.finish_quality = parsedArabic.finishQuality;
+
+    // Stage 1: need exact location
+    if (!ev.exact_location) {
+      ev.stage = 'asking_location';
+      state.evalState = ev;
+      return {
+        response: {
+          intent: 'PROPERTY_EVALUATION',
+          text_ar: [
+            'عنوان: تقييم عقارك — خطوة ١ من ٣',
+            `- المنطقة: ${district} | المساحة: ${areaM2} م²`,
+            '- لأعطيك تقييماً دقيقاً، أحتاج الموقع الدقيق للعقار.',
+            '- مثال: "شارع الجلاء، مقابل المدرسة الأهلية" أو "بناء رقم ١٢، زقاق الورود"',
+          ].join('\n'),
+          data: { stage: 'asking_location', district, area_m2: areaM2 },
+          suggested_actions: [
+            { type: 'ASK_FOR_FIELDS', label_ar: 'أرسل الموقع الدقيق', note: 'مثال: شارع كذا، بجانب كذا' },
+          ],
+        },
+        toolMessages: [],
+      };
+    }
+
+    // Stage 2: geocode once if we have location but no coordinates
+    if (!ev.coordinates && this.locationServicesService) {
+      try {
+        const coords = await this.locationServicesService.getCoordinatesForDistrict(district, city);
+        if (coords) {
+          ev.coordinates = coords;
+          const nearby = await this.locationServicesService.getLocationContext(coords.lat, coords.lng);
+          ev.nearby_services = {
+            nearHospital: nearby.nearHospital,
+            nearSchool: nearby.nearSchool,
+            nearSupermarket: nearby.nearSupermarket,
+            nearPark: nearby.nearPark,
+            nearMainRoad: nearby.nearMainRoad,
+            places: nearby.places,
+          };
+        }
+      } catch {
+        // continue without coordinates — non-fatal
+      }
+    }
+
+    // Stage 3: need ownership info
+    if (!ev.ownership_type) {
+      ev.stage = 'asking_ownership';
+      state.evalState = ev;
+      const nearbyHint = ev.nearby_services?.places?.length
+        ? `\n- الخدمات القريبة: ${ev.nearby_services.places.slice(0, 3).map((p) => p.name).join('، ')}`
+        : '';
+      return {
+        response: {
+          intent: 'PROPERTY_EVALUATION',
+          text_ar: [
+            'عنوان: تقييم عقارك — خطوة ٢ من ٣',
+            `- الموقع الدقيق: ${ev.exact_location}${nearbyHint}`,
+            '- ما نوع وثيقة الملكية؟',
+            '  ١. طابو أخضر (الأقوى قانونياً)',
+            '  ٢. حكم محكمة',
+            '  ٣. عقد ابتدائي',
+            '  ٤. وكالة',
+            '- وهل العقار خالٍ من الديون؟ وهل هو ميراث؟',
+          ].join('\n'),
+          data: { stage: 'asking_ownership', exact_location: ev.exact_location },
+          suggested_actions: [
+            { type: 'ASK_FOR_FIELDS', label_ar: 'طابو أخضر', note: 'الأقوى قانونياً' },
+            { type: 'ASK_FOR_FIELDS', label_ar: 'حكم محكمة' },
+            { type: 'ASK_FOR_FIELDS', label_ar: 'عقد ابتدائي' },
+            { type: 'ASK_FOR_FIELDS', label_ar: 'وكالة' },
+          ],
+        },
+        toolMessages: [],
+      };
+    }
+
+    // Stage 4: need property physical details
+    if (ev.floor == null || !ev.building_age) {
+      ev.stage = 'asking_details';
+      state.evalState = ev;
+      return {
+        response: {
+          intent: 'PROPERTY_EVALUATION',
+          text_ar: [
+            'عنوان: تقييم عقارك — خطوة ٣ من ٣',
+            `- الملكية: ${this.ownershipTypeLabel(ev.ownership_type)}`,
+            '- أخبرني عن حالة العقار:',
+            '  • رقم الطابق (مثال: ٣)',
+            '  • عمر البناء: جديد / حديث / عادي / قديم / مهترئ',
+            '  • التشطيب: فاخر / عالي / عادي / بسيط',
+            '  • هل يوجد مصعد؟ موقف سيارة؟ إطلالة؟',
+            '- مثال: "طابق ٢، بناء حديث، تشطيب عالي، مع مصعد وموقف"',
+          ].join('\n'),
+          data: { stage: 'asking_details', ownership_type: ev.ownership_type },
+          suggested_actions: [
+            { type: 'ASK_FOR_FIELDS', label_ar: 'أرسل تفاصيل العقار', note: 'الطابق، العمر، التشطيب، المصعد' },
+          ],
+        },
+        toolMessages: [],
+      };
+    }
+
+    // Stage 5: complete — run full pricing
+    ev.stage = 'complete';
+    state.evalState = ev;
+
+    const seller = await this.advisorService.getSellerPriceSuggestion({
+      city,
+      district,
+      property_type: propertyType as any,
+      area_m2: areaM2,
+      user_message: params.message,
+    });
+
+    const pricingFactors: PricingFactors = {
+      floor: ev.floor,
+      hasElevator: ev.has_elevator,
+      buildingAge: ev.building_age as PricingFactors['buildingAge'],
+      finishQuality: ev.finish_quality as PricingFactors['finishQuality'],
+    };
+
+    if (ev.nearby_services) {
+      pricingFactors.nearHospital = ev.nearby_services.nearHospital;
+      pricingFactors.nearSchool = ev.nearby_services.nearSchool;
+      pricingFactors.nearSupermarket = ev.nearby_services.nearSupermarket;
+      pricingFactors.nearPark = ev.nearby_services.nearPark;
+      pricingFactors.nearMainRoad = ev.nearby_services.nearMainRoad;
+    }
+
+    try {
+      const districtRow = await this.prisma.district.findFirst({
+        where: { nameEn: district, city },
+        select: { tier: true },
+      });
+      if (districtRow?.tier) pricingFactors.districtTier = districtRow.tier as PricingFactors['districtTier'];
+    } catch {
+      // non-fatal
+    }
+
+    const adjustment = this.pricingFactorsService
+      ? this.pricingFactorsService.calculateAdjustment(pricingFactors)
+      : { totalMultiplier: 1.0, breakdown: {} as Record<string, number>, explanation: [] as string[] };
+
+    const adjustedOptimal = Math.round(seller.optimal_price_syp * adjustment.totalMultiplier);
+    const adjustedFast = Math.round(seller.fast_sale_price_syp * adjustment.totalMultiplier);
+
+    const ownershipLine = this.buildOwnershipRiskLine(ev);
+
+    let priceComparisonText = '';
+    const userAskPrice = state.ask_price;
+    if (userAskPrice && userAskPrice > 0) {
+      const diff = ((userAskPrice - adjustedOptimal) / adjustedOptimal) * 100;
+      const absDiff = Math.abs(diff).toFixed(1);
+      if (diff > 10) {
+        priceComparisonText = `• سعرك الحالي أعلى من السوق بنسبة ${absDiff}% — قد يصعب البيع`;
+      } else if (diff < -10) {
+        priceComparisonText = `• سعرك الحالي أقل من السوق بنسبة ${absDiff}% — فرصة للرفع`;
+      } else {
+        priceComparisonText = `• سعرك قريب من السوق (فرق ${absDiff}%)`;
+      }
+    }
+
+    const nearbyLine = ev.nearby_services?.places?.length
+      ? `• الخدمات القريبة: ${ev.nearby_services.places.slice(0, 4).map((p) => `${p.name} (${Math.round(p.distanceMeters)}م)`).join('، ')}`
+      : '';
+
+    const factorsLine = adjustment.explanation.length
+      ? `• عوامل التعديل: ${adjustment.explanation.join(' | ')}`
+      : '';
+
+    const parkingLine = ev.has_parking ? '• موقف سيارة: متوفر ✓' : '';
+    const viewLine = ev.has_view ? '• إطلالة: متوفرة ✓' : '';
+
+    const textLines = [
+      'عنوان: تقييم عقارك الكامل',
+      `- المنطقة: ${district} | المساحة: ${areaM2} م² | النوع: ${propertyType}`,
+      `- الموقع الدقيق: ${ev.exact_location}`,
+      `- السعر الأمثل: ${this.formatSyp(adjustedOptimal)} ل.س`,
+      `- سعر البيع السريع: ${this.formatSyp(adjustedFast)} ل.س`,
+      `- معامل التعديل: ×${adjustment.totalMultiplier} | الثقة: ${(Number(seller.confidence || 0) * 100).toFixed(1)}%`,
+      ...(ownershipLine ? [ownershipLine] : []),
+      ...(nearbyLine ? [nearbyLine] : []),
+      ...(factorsLine ? [factorsLine] : []),
+      ...(parkingLine ? [parkingLine] : []),
+      ...(viewLine ? [viewLine] : []),
+      ...(priceComparisonText ? [priceComparisonText] : []),
+    ].join('\n');
+
+    return {
+      response: {
+        intent: 'SELLER_PRICE',
+        text_ar: textLines,
+        data: {
+          seller_price: seller,
+          adjusted_optimal_syp: adjustedOptimal,
+          adjusted_fast_syp: adjustedFast,
+          adjustment,
+          eval_state: ev,
+          ownership_risk: this.ownershipRiskScore(ev.ownership_type),
+          ...(userAskPrice ? { user_ask_price: userAskPrice } : {}),
+        },
+        suggested_actions: [
+          {
+            type: 'OPEN_STRATEGY',
+            label_ar: 'عرض الاستراتيجية الكاملة',
+            url: '/owner/properties',
+          },
+          {
+            type: 'OPEN_SUGGESTIONS',
+            label_ar: 'أضف عقارك للمنصة للحصول على تقييم كامل',
+            url: '/owner/properties',
+          },
+        ],
+      },
+      toolMessages: [
+        {
+          toolName: 'advisor_seller_price_full_eval',
+          text: 'TOOL advisor_seller_price_full_eval executed',
+          payloadJson: {
+            input: { city, district, property_type: propertyType, area_m2: areaM2 },
+            optimal_price_syp: seller.optimal_price_syp,
+            adjusted_optimal_syp: adjustedOptimal,
+            adjustment_multiplier: adjustment.totalMultiplier,
+            ownership_type: ev.ownership_type,
+          },
+        },
+      ],
+    };
+  }
+
+  private buildOwnershipRiskLine(ev: PropertyEvaluationState): string {
+    const riskMap: Record<string, string> = {
+      tabu_akhdar: 'طابو أخضر — ملكية قوية، لا مخاطر',
+      hukm_mahkama: 'حكم محكمة — مخاطر متوسطة، يحتاج توثيق',
+      aqd_ibtidai: 'عقد ابتدائي — مخاطر متوسطة-عالية، يحتاج إتمام',
+      wakala: 'وكالة — مخاطر عالية، راعِ خصماً تعويضياً',
+      unknown: 'نوع ملكية غير محدد',
+    };
+    let line = ev.ownership_type ? `• الملكية: ${riskMap[ev.ownership_type] ?? ev.ownership_type}` : '';
+    if (ev.is_inheritance) line += ' | ميراث';
+    if (ev.has_legal_dispute) line += ' ⚠️ نزاع قانوني — يؤثر على السعر';
+    if (ev.is_debt_free === false) line += ' | قد تكون هناك ذمة مالية';
+    if (ev.shares_count && ev.shares_count > 1) line += ` | ${ev.shares_count} أسهم`;
+    return line;
+  }
+
+  private ownershipTypeLabel(type?: string): string {
+    const map: Record<string, string> = {
+      tabu_akhdar: 'طابو أخضر',
+      hukm_mahkama: 'حكم محكمة',
+      aqd_ibtidai: 'عقد ابتدائي',
+      wakala: 'وكالة',
+    };
+    return type ? (map[type] ?? type) : 'غير محدد';
+  }
+
+  private ownershipRiskScore(type?: string): string {
+    const map: Record<string, string> = {
+      tabu_akhdar: 'low',
+      hukm_mahkama: 'medium',
+      aqd_ibtidai: 'medium_high',
+      wakala: 'high',
+    };
+    return map[type ?? ''] ?? 'unknown';
+  }
+
   private handleFallback(): DispatchResult {
     return {
       response: {
@@ -2509,6 +2856,7 @@ export class OwnerChatService {
         this.toPositiveNumber(parsed.budget_syp) ??
         (preserveNumericContext ? this.toPositiveNumber(ctx.budget_syp) : undefined) ??
         undefined,
+      evalState: ctx.evalState != null ? (ctx.evalState as PropertyEvaluationState) : undefined,
     };
 
     return merged;
@@ -2539,6 +2887,7 @@ export class OwnerChatService {
     if (params.state.bedrooms != null) nextContext.bedrooms = params.state.bedrooms;
     if (params.state.ask_price != null) nextContext.ask_price = params.state.ask_price;
     if (params.state.budget_syp != null) nextContext.budget_syp = params.state.budget_syp;
+    if (params.state.evalState != null) nextContext.evalState = params.state.evalState;
     if (params.state.pending_slot) {
       nextContext.pending_slot = params.state.pending_slot;
       this.logger.log(`CHAT_ROUTE: PENDING_SLOT set slot=${params.state.pending_slot}`);

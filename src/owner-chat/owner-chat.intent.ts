@@ -6,6 +6,7 @@ export type OwnerChatIntent =
   | 'AI_HISTORY'
   | 'SELLER_PRICE'
   | 'BUYER_EVALUATE'
+  | 'PROPERTY_EVALUATION'
   | 'SMALL_TALK'
   | 'FALLBACK';
 

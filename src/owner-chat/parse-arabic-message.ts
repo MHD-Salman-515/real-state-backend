@@ -11,6 +11,14 @@ export interface ParsedArabicMessage {
   hasElevator?: boolean;
   buildingAge?: 'new' | 'modern' | 'normal' | 'old' | 'very_old';
   finishQuality?: 'luxury' | 'high' | 'medium' | 'basic';
+  exact_location?: string;
+  ownership_type?: 'tabu_akhdar' | 'hukm_mahkama' | 'aqd_ibtidai' | 'wakala' | 'unknown';
+  shares_count?: number;
+  is_debt_free?: boolean;
+  is_inheritance?: boolean;
+  has_legal_dispute?: boolean;
+  has_parking?: boolean;
+  has_view?: boolean;
 }
 
 const DISTRICT_MAP: Array<{ triggers: string[]; district: string; city: string }> = [
@@ -250,6 +258,52 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
   // Infer ESTIMATE when owner declares a price with full property context
   if (parsed.ask_price && parsed.district && parsed.area_m2 && !parsed.listing_intent) {
     parsed.listing_intent = 'ESTIMATE';
+  }
+
+  // Exact location (street / landmark)
+  const locationMatch = normalized.match(/(?:شارع|حارة|زقاق|قرب|جنب)\s+([^،,\n]{3,40})/i);
+  if (locationMatch?.[1]) parsed.exact_location = locationMatch[1].trim();
+
+  // Ownership type
+  if (/طابو أخضر|طابو اخضر|tabu/i.test(normalized)) {
+    parsed.ownership_type = 'tabu_akhdar';
+  } else if (/حكم محكمة|حكم قضائي/i.test(normalized)) {
+    parsed.ownership_type = 'hukm_mahkama';
+  } else if (/عقد ابتدائي|عقد بيع/i.test(normalized)) {
+    parsed.ownership_type = 'aqd_ibtidai';
+  } else if (/وكالة|توكيل/i.test(normalized)) {
+    parsed.ownership_type = 'wakala';
+  }
+
+  // Shares count
+  const sharesMatch = normalized.match(/(\d+)\s*سهم/i);
+  if (sharesMatch?.[1]) parsed.shares_count = parseInt(sharesMatch[1], 10);
+
+  // Debt status
+  if (/بريء من الذمة|خالي من الذمة|نظيف قانونياً|نظيف قانونيا/i.test(normalized)) {
+    parsed.is_debt_free = true;
+  } else if (/عليه ذمة|فيه ذمة|مرهون|عليه دين/i.test(normalized)) {
+    parsed.is_debt_free = false;
+  }
+
+  // Inheritance
+  if (/ميراث|ورثة|إرث|من والدي|من جدي|من المتوفى/i.test(normalized)) {
+    parsed.is_inheritance = true;
+  }
+
+  // Legal dispute (exclude "محكمة" alone to avoid matching ownership type)
+  if (/نزاع|خلاف قانوني|متنازع/i.test(normalized)) {
+    parsed.has_legal_dispute = true;
+  }
+
+  // Parking
+  if (/موقف|كراج|garage|parking/i.test(normalized)) {
+    parsed.has_parking = true;
+  }
+
+  // View
+  if (/إطلالة|اطلالة|مطل\b|view/i.test(normalized)) {
+    parsed.has_view = true;
   }
 
   if (parsed.area_m2 == null && parsed.budget_syp == null) {
