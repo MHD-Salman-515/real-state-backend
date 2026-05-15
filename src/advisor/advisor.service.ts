@@ -39,6 +39,7 @@ interface AreasPriceRow {
   district: string;
   property_type: string;
   avg_price_per_m2: number | string;
+  avg_price_per_m2_syp?: number | string | null;
   sample_count: number | string | null;
   updated_at: Date | string;
 }
@@ -207,11 +208,12 @@ export class AdvisorService {
     const areaRow = await this.findAreaPriceRow(normalizedInput);
     const fxRate = await this.findLatestFxRate();
 
-    const baselinePricePerM2Usd = this.toPositiveNumber(areaRow.avg_price_per_m2);
     const sampleCount = this.toSafeNonNegativeNumber(areaRow.sample_count);
 
-    const baselineUsd = baselinePricePerM2Usd * dto.area_m2;
-    const baselineSyp = baselineUsd * fxRate.usd_to_syp;
+    const ppm2Syp = areaRow.avg_price_per_m2_syp != null ? Number(areaRow.avg_price_per_m2_syp) : NaN;
+    const baselineSyp = Number.isFinite(ppm2Syp) && ppm2Syp > 0
+      ? ppm2Syp * dto.area_m2
+      : this.toPositiveNumber(areaRow.avg_price_per_m2) * dto.area_m2 * fxRate.usd_to_syp;
     const askSyp = this.resolveAskPriceSyp(dto, fxRate.usd_to_syp);
 
     const fairMin = Math.round(baselineSyp * 0.93);
@@ -234,7 +236,7 @@ export class AdvisorService {
       data_sources: {
         areas_price: {
           area_key: `${areaRow.city}|${areaRow.district}|${areaRow.property_type}`,
-          avg_price_per_m2_usd: baselinePricePerM2Usd,
+          avg_price_per_m2_syp: Number.isFinite(ppm2Syp) && ppm2Syp > 0 ? ppm2Syp : null,
           sample_count: sampleCount,
           updated_at: new Date(areaRow.updated_at).toISOString(),
         },
@@ -252,12 +254,8 @@ export class AdvisorService {
       },
       computation_steps: [
         {
-          step: 'baseline_ppm2_usd * area_m2 => baseline_total_usd',
-          value: { baseline_ppm2_usd: baselinePricePerM2Usd, area_m2: dto.area_m2, baseline_total_usd: baselineUsd },
-        },
-        {
-          step: 'baseline_total_usd * fx => baseline_total_syp',
-          value: { baseline_total_syp: Math.round(baselineSyp) },
+          step: 'baseline_ppm2_syp * area_m2 => baseline_total_syp',
+          value: { baseline_ppm2_syp: Number.isFinite(ppm2Syp) && ppm2Syp > 0 ? ppm2Syp : null, area_m2: dto.area_m2, baseline_total_syp: Math.round(baselineSyp) },
         },
         {
           step: 'fair_range = baseline_total_syp * [0.93, 1.07]',
@@ -745,15 +743,16 @@ export class AdvisorService {
     const areaRow = await this.findAreaPriceRow(normalizedInput);
     const fxRate = await this.findLatestFxRate();
 
-    const baselinePricePerM2Usd = this.toPositiveNumber(areaRow.avg_price_per_m2);
     const sampleCount = this.toSafeNonNegativeNumber(areaRow.sample_count);
 
-    const medianUsd = baselinePricePerM2Usd * dto.area_m2;
-    const optimalUsd = medianUsd * 1.04;
-    const fastUsd = medianUsd * 0.96;
-
-    const optimalSyp = Math.round(optimalUsd * fxRate.usd_to_syp);
-    const fastSyp = Math.round(fastUsd * fxRate.usd_to_syp);
+    // Prefer avg_price_per_m2_syp (stored in SYP, no FX conversion needed).
+    // Fall back to avg_price_per_m2 treated as USD only when SYP column is absent.
+    const ppm2Syp = areaRow.avg_price_per_m2_syp != null ? Number(areaRow.avg_price_per_m2_syp) : NaN;
+    const medianSyp = Number.isFinite(ppm2Syp) && ppm2Syp > 0
+      ? ppm2Syp * dto.area_m2
+      : this.toPositiveNumber(areaRow.avg_price_per_m2) * dto.area_m2 * fxRate.usd_to_syp;
+    const optimalSyp = Math.round(medianSyp * 1.04);
+    const fastSyp = Math.round(medianSyp * 0.96);
     const confidenceData = await this.computeConfidenceData({
       sampleCount,
       updatedAt: new Date(areaRow.updated_at),
@@ -769,7 +768,7 @@ export class AdvisorService {
       data_sources: {
         areas_price: {
           area_key: `${areaRow.city}|${areaRow.district}|${areaRow.property_type}`,
-          avg_price_per_m2_usd: baselinePricePerM2Usd,
+          avg_price_per_m2_syp: Number.isFinite(ppm2Syp) && ppm2Syp > 0 ? ppm2Syp : null,
           sample_count: sampleCount,
           updated_at: new Date(areaRow.updated_at).toISOString(),
         },
@@ -787,16 +786,12 @@ export class AdvisorService {
       },
       computation_steps: [
         {
-          step: 'baseline_total_usd = avg_price_per_m2_usd * area_m2',
-          value: { baseline_total_usd: medianUsd },
+          step: 'baseline_total_syp = avg_price_per_m2_syp * area_m2',
+          value: { baseline_total_syp: medianSyp },
         },
         {
-          step: 'optimal_usd = baseline_total_usd * 1.04, fast_usd = baseline_total_usd * 0.96',
-          value: { optimal_usd: optimalUsd, fast_usd: fastUsd },
-        },
-        {
-          step: 'convert USD totals to SYP by latest FX',
-          value: { optimal_price_syp: optimalSyp, fast_sale_price_syp: fastSyp },
+          step: 'optimal_syp = baseline_total_syp * 1.04, fast_syp = baseline_total_syp * 0.96',
+          value: { optimal_syp: optimalSyp, fast_syp: fastSyp },
         },
         {
           step: 'build +/-5% ranges around each target price',
@@ -835,7 +830,7 @@ export class AdvisorService {
     normalizedInput: NormalizedSellerInput,
   ): Promise<AreasPriceRow> {
     const rows = await this.urbanexPrisma.$queryRaw<AreasPriceRow[]>(Prisma.sql`
-      SELECT city, district, property_type, avg_price_per_m2, sample_count, updated_at
+      SELECT city, district, property_type, avg_price_per_m2, avg_price_per_m2_syp, sample_count, updated_at
       FROM areas_price
       WHERE city = ${normalizedInput.city_norm}
         AND district = ${normalizedInput.district_norm}
@@ -849,7 +844,7 @@ export class AdvisorService {
 
     // Transitional fallback until ingestion normalizes stored values.
     const fallbackRows = await this.urbanexPrisma.$queryRaw<AreasPriceRow[]>(Prisma.sql`
-      SELECT city, district, property_type, avg_price_per_m2, sample_count, updated_at
+      SELECT city, district, property_type, avg_price_per_m2, avg_price_per_m2_syp, sample_count, updated_at
       FROM areas_price
       WHERE LOWER(city) = LOWER(${normalizedInput.city_norm})
         AND LOWER(district) = LOWER(${normalizedInput.district_norm})

@@ -995,7 +995,7 @@ export class OwnerChatService {
         };
       }
 
-      if (inRealEstateFlow && budgetSyp != null && district && areaM2) {
+      if (inRealEstateFlow && budgetSyp != null && district && areaM2 && !sellerFlowActive) {
         this.logger.log('CHAT_ROUTE: LEGACY_SEARCH handler=advisor_buyer_evaluate final_selected_handler=advisor_buyer_evaluate');
         const buyer = await this.advisorService.buyerEvaluate({
           city,
