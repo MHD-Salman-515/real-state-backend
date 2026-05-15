@@ -777,6 +777,18 @@ export class OwnerChatService {
         );
       }
 
+      // Third path — first message with district + area (even without ask_price yet)
+      const hasPropertyEvalSignal =
+        parsedArabic.listing_intent === 'SELL' ||
+        parsedArabic.listing_intent === 'ESTIMATE' ||
+        parsedArabic.ask_price !== undefined ||
+        /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|ابيع|بدي ابيع/i.test(params.message);
+
+      if (!sellerFlowActive && hasPropertyEvalSignal && sessionDistrict && sessionArea) {
+        sellerFlowActive = true;
+        this.logger.log(`CHAT_ROUTE: SELLER_FLOW_ACTIVATED_FROM_PROPERTY_SIGNAL district=${sessionDistrict} area=${sessionArea}`);
+      }
+
       if (domain.domain === 'OUT_OF_SCOPE') {
         this.logger.log('CHAT_ROUTE: FINAL handler=out_of_scope');
         this.logger.log('FINAL_RESPONSE_SOURCE source=formatter');
@@ -1083,7 +1095,7 @@ export class OwnerChatService {
 
       if (inRealEstateFlow && sellerFlowActive && district && areaM2) {
         const activeEvalStage = state.evalState?.stage;
-        if ((parsedArabic.district || parsedArabic.area_m2) || (activeEvalStage && activeEvalStage !== 'complete')) {
+        if (sessionDistrict || parsedArabic.district || parsedArabic.area_m2 || (activeEvalStage && activeEvalStage !== 'complete')) {
           this.logger.log('CHAT_ROUTE: PROPERTY_EVALUATION handler=handlePropertyEvaluation');
           return this.handlePropertyEvaluation({
             ownerId: params.ownerId,
