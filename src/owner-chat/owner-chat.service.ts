@@ -708,7 +708,8 @@ export class OwnerChatService {
       }
 
       const investmentPriority = this.isInvestmentPriorityMessage(params.message);
-      if (investmentPriority) {
+      const hasFullPropertyContext = Boolean(state.district && state.area_m2 && state.ask_price);
+      if (investmentPriority && !hasFullPropertyContext) {
         this.logger.log(
           'CHAT_ROUTE: BLOCKED_LEGACY_ROUTE reason=investment_priority blocked=legacy_refine,legacy_search,legacy_seller_price',
         );
@@ -726,6 +727,11 @@ export class OwnerChatService {
           this.logger.log('CHAT_ROUTE: FINAL handler=market_intelligence_hard_stop');
           return forcedInvestmentRoute;
         }
+      } else if (investmentPriority && hasFullPropertyContext) {
+        sellerFlowActive = true;
+        this.logger.log(
+          'CHAT_ROUTE: UNBLOCKED_SELLER_PRICE reason=full_property_context overrides investment_priority',
+        );
       }
 
       if (domain.domain === 'OUT_OF_SCOPE') {
@@ -766,6 +772,7 @@ export class OwnerChatService {
 
       if (
         advisorIntent === 'GENERAL_QUESTION' &&
+        !hasFullPropertyContext &&
         this.isPartialPropertyStateUpdate({
           message: params.message,
           state,
