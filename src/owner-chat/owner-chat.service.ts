@@ -1134,6 +1134,15 @@ export class OwnerChatService {
                   : '/owner/properties',
                 ...(contextPropertyId ? { property_id: contextPropertyId } : {}),
               },
+              ...(!contextPropertyId
+                ? [
+                    {
+                      type: 'OPEN_SUGGESTIONS' as const,
+                      label_ar: 'أضف عقارك للمنصة للحصول على تقييم كامل',
+                      url: '/owner/properties',
+                    },
+                  ]
+                : []),
             ],
           },
           toolMessages: [

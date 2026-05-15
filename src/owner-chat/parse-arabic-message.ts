@@ -197,7 +197,7 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
     parsed.listing_intent = 'BUY';
   } else if (/للإيجار|للايجار|إيجار|ايجار|rent/i.test(normalized)) {
     parsed.listing_intent = 'RENT';
-  } else if (/تقييم|تسعير|كم سعر|سعرها|سعره|estimate|valuation|عندي شقة|عندي بيت|عندي عقار|عندي فيلا|عندي أرض|عندي محل|كم تسوى|كم يسوى|كم تساوي|كم يساوي|قيمتها|قيمته|ثمنها|ثمنه/i.test(normalized)) {
+  } else if (/تقييم|تسعير|كم سعر|سعرها|سعره|بسعر|عرضه|عرضها|أطلب|طالب|estimate|valuation|عندي شقة|عندي بيت|عندي عقار|عندي فيلا|عندي أرض|عندي محل|كم تسوى|كم يسوى|كم تساوي|كم يساوي|قيمتها|قيمته|ثمنها|ثمنه/i.test(normalized)) {
     parsed.listing_intent = 'ESTIMATE';
   } else if (/استثمار|للاستثمار|roi|yield|investment/i.test(normalized)) {
     parsed.listing_intent = 'INVEST';
@@ -245,6 +245,11 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
         parsed.ask_price = Math.round(raw * 1_000_000);
       }
     }
+  }
+
+  // Infer ESTIMATE when owner declares a price with full property context
+  if (parsed.ask_price && parsed.district && parsed.area_m2 && !parsed.listing_intent) {
+    parsed.listing_intent = 'ESTIMATE';
   }
 
   if (parsed.area_m2 == null && parsed.budget_syp == null) {
