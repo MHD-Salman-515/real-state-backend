@@ -2002,6 +2002,8 @@ export class OwnerChatService {
     state: DeterministicContextState;
     parsedArabic: ReturnType<typeof parseArabicMessage>;
   }): Promise<DispatchResult> {
+    this.logger.log(`PROPERTY_EVAL_START district=${params.state?.district} area=${params.state?.area_m2} stage=${(params.state as any)?.evalState?.stage ?? 'initial'}`);
+    try {
     const { state, parsedArabic } = params;
     const city = state.city || 'damascus';
     const district = state.district!;
@@ -2305,6 +2307,18 @@ export class OwnerChatService {
         },
       ],
     };
+    } catch (err) {
+      this.logger.error(`PROPERTY_EVAL_CRASH: ${(err as Error).message}\n${(err as Error).stack}`);
+      return {
+        response: {
+          intent: 'PROPERTY_EVALUATION',
+          text_ar: 'ممتاز! لأعطيك تقييماً دقيقاً، أخبرني:\n\n📍 ما هو الموقع بالضبط؟ (اسم الشارع أو أقرب معلم)',
+          data: { stage: 'asking_location' },
+          suggested_actions: [],
+        },
+        toolMessages: [],
+      };
+    }
   }
 
   private buildOwnershipRiskLine(ev: PropertyEvaluationState): string {
