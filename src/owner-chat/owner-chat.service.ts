@@ -2008,323 +2008,187 @@ export class OwnerChatService {
     state: DeterministicContextState;
     parsedArabic: ReturnType<typeof parseArabicMessage>;
   }): Promise<DispatchResult> {
-    this.logger.log(`PROPERTY_EVAL_START district=${params.state?.district} area=${params.state?.area_m2} stage=${(params.state as any)?.evalState?.stage ?? 'initial'}`);
+    this.logger.log(`PROPERTY_EVAL_START district=${params.state?.district} area=${params.state?.area_m2}`);
     try {
-    const { state, parsedArabic } = params;
-    const city = state.city || 'damascus';
-    const district = state.district!;
-    const areaM2 = state.area_m2!;
-    const propertyType = state.property_type || 'apartment';
+      const { state, parsedArabic } = params;
 
-    // Merge current message fields into evalState
-    const prev: PropertyEvaluationState = state.evalState ?? { stage: 'initial' };
-    const ev: PropertyEvaluationState = { ...prev };
+      const district = state.district ?? parsedArabic.district;
+      const areaM2 = state.area_m2 ?? parsedArabic.area_m2;
+      const city = state.city ?? parsedArabic.city ?? 'damascus';
+      const propertyType = state.property_type ?? parsedArabic.property_type ?? 'apartment';
 
-    if (parsedArabic.exact_location && !ev.exact_location) ev.exact_location = parsedArabic.exact_location;
-    if (parsedArabic.ownership_type && !ev.ownership_type) ev.ownership_type = parsedArabic.ownership_type;
-    if (parsedArabic.shares_count != null && ev.shares_count == null) ev.shares_count = parsedArabic.shares_count;
-    if (parsedArabic.is_debt_free != null && ev.is_debt_free == null) ev.is_debt_free = parsedArabic.is_debt_free;
-    if (parsedArabic.is_inheritance != null && ev.is_inheritance == null) ev.is_inheritance = parsedArabic.is_inheritance;
-    if (parsedArabic.has_legal_dispute != null && ev.has_legal_dispute == null) ev.has_legal_dispute = parsedArabic.has_legal_dispute;
-    if (parsedArabic.has_parking != null && ev.has_parking == null) ev.has_parking = parsedArabic.has_parking;
-    if (parsedArabic.has_view != null && ev.has_view == null) ev.has_view = parsedArabic.has_view;
-    if (parsedArabic.floor != null && ev.floor == null) ev.floor = parsedArabic.floor;
-    if (parsedArabic.hasElevator != null && ev.has_elevator == null) ev.has_elevator = parsedArabic.hasElevator;
-    if (parsedArabic.buildingAge && !ev.building_age) ev.building_age = parsedArabic.buildingAge;
-    if (parsedArabic.finishQuality && !ev.finish_quality) ev.finish_quality = parsedArabic.finishQuality;
-
-    // If user replied to the location question, treat the raw message as the location answer
-    if (ev.stage === 'asking_location' && params.message && !ev.exact_location) {
-      ev.exact_location = params.message.trim();
-    }
-
-    // Stage 1: need exact location
-    if (!ev.exact_location) {
-      ev.stage = 'asking_location';
+      // Merge optional enrichment fields from message into persisted evalState
+      const ev: PropertyEvaluationState = state.evalState ?? { stage: 'initial' };
+      if (parsedArabic.exact_location && !ev.exact_location) ev.exact_location = parsedArabic.exact_location;
+      if (parsedArabic.ownership_type && !ev.ownership_type) ev.ownership_type = parsedArabic.ownership_type;
+      if (parsedArabic.shares_count != null && ev.shares_count == null) ev.shares_count = parsedArabic.shares_count;
+      if (parsedArabic.is_debt_free != null && ev.is_debt_free == null) ev.is_debt_free = parsedArabic.is_debt_free;
+      if (parsedArabic.is_inheritance != null && ev.is_inheritance == null) ev.is_inheritance = parsedArabic.is_inheritance;
+      if (parsedArabic.has_legal_dispute != null && ev.has_legal_dispute == null) ev.has_legal_dispute = parsedArabic.has_legal_dispute;
+      if (parsedArabic.has_parking != null && ev.has_parking == null) ev.has_parking = parsedArabic.has_parking;
+      if (parsedArabic.has_view != null && ev.has_view == null) ev.has_view = parsedArabic.has_view;
+      if (parsedArabic.floor != null && ev.floor == null) ev.floor = parsedArabic.floor;
+      if (parsedArabic.hasElevator != null && ev.has_elevator == null) ev.has_elevator = parsedArabic.hasElevator;
+      if (parsedArabic.buildingAge && !ev.building_age) ev.building_age = parsedArabic.buildingAge;
+      if (parsedArabic.finishQuality && !ev.finish_quality) ev.finish_quality = parsedArabic.finishQuality;
       state.evalState = ev;
-      return {
-        response: {
-          intent: 'PROPERTY_EVALUATION',
-          text_ar: [
-            'عنوان: تقييم عقارك — خطوة ١ من ٣',
-            `- المنطقة: ${district} | المساحة: ${areaM2} م²`,
-            '- لأعطيك تقييماً دقيقاً، أحتاج الموقع الدقيق للعقار.',
-            '- مثال: "شارع الجلاء، مقابل المدرسة الأهلية" أو "بناء رقم ١٢، زقاق الورود"',
-          ].join('\n'),
-          data: { stage: 'asking_location', district, area_m2: areaM2 },
-          suggested_actions: [
-            { type: 'ASK_FOR_FIELDS', label_ar: 'أرسل الموقع الدقيق', note: 'مثال: شارع كذا، بجانب كذا' },
-          ],
-        },
-        toolMessages: [],
-      };
-    }
 
-    // Stage 2: geocode once if we have location but no coordinates
-    if (!ev.coordinates && this.locationServicesService) {
-      try {
-        const coords = await this.locationServicesService.getCoordinatesForDistrict(district, city);
-        if (coords) {
-          ev.coordinates = coords;
-          const nearby = await this.locationServicesService.getLocationContext(coords.lat, coords.lng);
-          ev.nearby_services = {
-            nearHospital: nearby.nearHospital,
-            nearSchool: nearby.nearSchool,
-            nearSupermarket: nearby.nearSupermarket,
-            nearPark: nearby.nearPark,
-            nearMainRoad: nearby.nearMainRoad,
-            places: nearby.places,
-          };
-        }
-      } catch {
-        // continue without coordinates — non-fatal
-      }
-    }
+      // Ask for missing critical info in ONE message
+      const missing: string[] = [];
+      if (!district) missing.push('المنطقة (مثال: المزة، الشعلان)');
+      if (!areaM2) missing.push('المساحة بالمتر المربع');
 
-    // Stage 3: need ownership info
-    if (!ev.ownership_type) {
-      ev.stage = 'asking_ownership';
-      state.evalState = ev;
-      const nearbyHint = ev.nearby_services?.places?.length
-        ? `\n- الخدمات القريبة: ${ev.nearby_services.places.slice(0, 3).map((p) => p.name).join('، ')}`
-        : '';
-      return {
-        response: {
-          intent: 'PROPERTY_EVALUATION',
-          text_ar: [
-            'عنوان: تقييم عقارك — خطوة ٢ من ٣',
-            `- الموقع الدقيق: ${ev.exact_location}${nearbyHint}`,
-            '- ما نوع وثيقة الملكية؟',
-            '  ١. طابو أخضر (الأقوى قانونياً)',
-            '  ٢. حكم محكمة',
-            '  ٣. عقد ابتدائي',
-            '  ٤. وكالة',
-            '- وهل العقار خالٍ من الديون؟ وهل هو ميراث؟',
-          ].join('\n'),
-          data: { stage: 'asking_ownership', exact_location: ev.exact_location },
-          suggested_actions: [
-            { type: 'ASK_FOR_FIELDS', label_ar: 'طابو أخضر', note: 'الأقوى قانونياً' },
-            { type: 'ASK_FOR_FIELDS', label_ar: 'حكم محكمة' },
-            { type: 'ASK_FOR_FIELDS', label_ar: 'عقد ابتدائي' },
-            { type: 'ASK_FOR_FIELDS', label_ar: 'وكالة' },
-          ],
-        },
-        toolMessages: [],
-      };
-    }
-
-    // Stage 4: need property physical details
-    if (ev.floor == null || !ev.building_age) {
-      ev.stage = 'asking_details';
-      state.evalState = ev;
-      return {
-        response: {
-          intent: 'PROPERTY_EVALUATION',
-          text_ar: [
-            'عنوان: تقييم عقارك — خطوة ٣ من ٣',
-            `- الملكية: ${this.ownershipTypeLabel(ev.ownership_type)}`,
-            '- أخبرني عن حالة العقار:',
-            '  • رقم الطابق (مثال: ٣)',
-            '  • عمر البناء: جديد / حديث / عادي / قديم / مهترئ',
-            '  • التشطيب: فاخر / عالي / عادي / بسيط',
-            '  • هل يوجد مصعد؟ موقف سيارة؟ إطلالة؟',
-            '- مثال: "طابق ٢، بناء حديث، تشطيب عالي، مع مصعد وموقف"',
-          ].join('\n'),
-          data: { stage: 'asking_details', ownership_type: ev.ownership_type },
-          suggested_actions: [
-            { type: 'ASK_FOR_FIELDS', label_ar: 'أرسل تفاصيل العقار', note: 'الطابق، العمر، التشطيب، المصعد' },
-          ],
-        },
-        toolMessages: [],
-      };
-    }
-
-    // Stage 5: complete — run full pricing
-    ev.stage = 'complete';
-    state.evalState = ev;
-
-    const NEARBY_FALLBACK: Record<string, string> = {
-      jaramana: 'midan',
-      harasta: 'douma',
-      mleiha: 'jaramana',
-      artouz: 'darayya',
-      sahnaya: 'darayya',
-      adra: 'douma',
-      'yarmouk camp': 'midan',
-      qadam: 'midan',
-      tadamon: 'midan',
-      jobar: 'baramkeh',
-      barzeh: 'rukn al-din',
-      qaboun: 'baramkeh',
-    };
-
-    let seller: Awaited<ReturnType<typeof this.advisorService.getSellerPriceSuggestion>>;
-    let fallbackNote = '';
-
-    try {
-      seller = await this.advisorService.getSellerPriceSuggestion({
-        city,
-        district,
-        property_type: propertyType as any,
-        area_m2: areaM2,
-        user_message: params.message,
-      });
-    } catch {
-      const fallbackDistrict = NEARBY_FALLBACK[district ?? ''] ?? 'midan';
-      try {
-        seller = await this.advisorService.getSellerPriceSuggestion({
-          city,
-          district: fallbackDistrict,
-          property_type: propertyType as any,
-          area_m2: areaM2,
-          user_message: params.message,
-        });
-        fallbackNote = `• تنبيه: تقدير استرشادي مبني على بيانات منطقة ${fallbackDistrict} المجاورة (لا تتوفر بيانات مباشرة لـ${district})`;
-        this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_FALLBACK district=${district} fallback=${fallbackDistrict}`);
-      } catch {
-        this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_NO_DATA district=${district}`);
+      if (missing.length > 0) {
         return {
           response: {
             intent: 'PROPERTY_EVALUATION',
-            text_ar: [
-              'عنوان: لا تتوفر بيانات سوق',
-              `- لا تتوفر حالياً بيانات تسعير لمنطقة ${district ?? 'المحددة'}.`,
-              '- يُنصح بمراجعة وسيط عقاري محلي للحصول على تقدير دقيق.',
-              '- يمكنك أيضاً تجربة منطقة مجاورة.',
-            ].join('\n'),
-            data: { stage: 'no_data', district, eval_state: ev },
-            suggested_actions: [
-              { type: 'OPEN_SUGGESTIONS', label_ar: 'أضف عقارك للمنصة', url: '/owner/properties' },
-            ],
+            text_ar: `لأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}`,
+            data: { stage: 'asking_info' },
+            suggested_actions: [],
           },
           toolMessages: [],
         };
       }
-    }
 
-    const pricingFactors: PricingFactors = {
-      floor: ev.floor,
-      hasElevator: ev.has_elevator,
-      buildingAge: ev.building_age as PricingFactors['buildingAge'],
-      finishQuality: ev.finish_quality as PricingFactors['finishQuality'],
-    };
+      // Fetch price data with nearby-district fallback
+      const NEARBY_FALLBACK: Record<string, string> = {
+        jaramana: 'midan', harasta: 'douma', mleiha: 'jaramana',
+        artouz: 'darayya', sahnaya: 'darayya', adra: 'douma',
+        'yarmouk camp': 'midan', qadam: 'midan', tadamon: 'midan',
+        jobar: 'baramkeh', barzeh: 'rukn al-din', qaboun: 'baramkeh',
+      };
 
-    if (ev.nearby_services) {
-      pricingFactors.nearHospital = ev.nearby_services.nearHospital;
-      pricingFactors.nearSchool = ev.nearby_services.nearSchool;
-      pricingFactors.nearSupermarket = ev.nearby_services.nearSupermarket;
-      pricingFactors.nearPark = ev.nearby_services.nearPark;
-      pricingFactors.nearMainRoad = ev.nearby_services.nearMainRoad;
-    }
+      let seller: Awaited<ReturnType<typeof this.advisorService.getSellerPriceSuggestion>>;
+      let fallbackNote = '';
 
-    try {
-      const districtRow = await this.prisma.district.findFirst({
-        where: { nameEn: district, city },
-        select: { tier: true },
-      });
-      if (districtRow?.tier) pricingFactors.districtTier = districtRow.tier as PricingFactors['districtTier'];
-    } catch {
-      // non-fatal
-    }
-
-    const adjustment = this.pricingFactorsService
-      ? this.pricingFactorsService.calculateAdjustment(pricingFactors)
-      : { totalMultiplier: 1.0, breakdown: {} as Record<string, number>, explanation: [] as string[] };
-
-    const adjustedOptimal = Math.round(seller.optimal_price_syp * adjustment.totalMultiplier);
-    const adjustedFast = Math.round(seller.fast_sale_price_syp * adjustment.totalMultiplier);
-
-    const ownershipLine = this.buildOwnershipRiskLine(ev);
-
-    let priceComparisonText = '';
-    const userAskPrice = state.ask_price;
-    if (userAskPrice && userAskPrice > 0) {
-      const diff = ((userAskPrice - adjustedOptimal) / adjustedOptimal) * 100;
-      const absDiff = Math.abs(diff).toFixed(1);
-      if (diff > 10) {
-        priceComparisonText = `• سعرك الحالي أعلى من السوق بنسبة ${absDiff}% — قد يصعب البيع`;
-      } else if (diff < -10) {
-        priceComparisonText = `• سعرك الحالي أقل من السوق بنسبة ${absDiff}% — فرصة للرفع`;
-      } else {
-        priceComparisonText = `• سعرك قريب من السوق (فرق ${absDiff}%)`;
+      try {
+        seller = await this.advisorService.getSellerPriceSuggestion({
+          city,
+          district: district!,
+          property_type: propertyType as any,
+          area_m2: areaM2!,
+          user_message: params.message,
+        });
+      } catch {
+        const fallbackDistrict = NEARBY_FALLBACK[district ?? ''] ?? 'midan';
+        try {
+          seller = await this.advisorService.getSellerPriceSuggestion({
+            city,
+            district: fallbackDistrict,
+            property_type: propertyType as any,
+            area_m2: areaM2!,
+            user_message: params.message,
+          });
+          fallbackNote = `• تنبيه: تقدير استرشادي مبني على بيانات منطقة ${fallbackDistrict} المجاورة (لا تتوفر بيانات مباشرة لـ${district})`;
+          this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_FALLBACK district=${district} fallback=${fallbackDistrict}`);
+        } catch {
+          this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_NO_DATA district=${district}`);
+          return {
+            response: {
+              intent: 'PROPERTY_EVALUATION',
+              text_ar: `لا تتوفر حالياً بيانات تسعير لمنطقة ${district ?? 'المحددة'}. يُنصح بمراجعة وسيط عقاري محلي للحصول على تقدير دقيق.`,
+              data: { stage: 'no_data', district },
+              suggested_actions: [],
+            },
+            toolMessages: [],
+          };
+        }
       }
-    }
 
-    const nearbyLine = ev.nearby_services?.places?.length
-      ? `• الخدمات القريبة: ${ev.nearby_services.places.slice(0, 4).map((p) => `${p.name} (${Math.round(p.distanceMeters)}م)`).join('، ')}`
-      : '';
+      // Apply pricing factor adjustments
+      const pricingFactors: PricingFactors = {
+        floor: ev.floor,
+        hasElevator: ev.has_elevator,
+        buildingAge: ev.building_age as PricingFactors['buildingAge'],
+        finishQuality: ev.finish_quality as PricingFactors['finishQuality'],
+      };
 
-    const factorsLine = adjustment.explanation.length
-      ? `• عوامل التعديل: ${adjustment.explanation.join(' | ')}`
-      : '';
+      const adjustment = this.pricingFactorsService
+        ? this.pricingFactorsService.calculateAdjustment(pricingFactors)
+        : { totalMultiplier: 1.0, breakdown: {} as Record<string, number>, explanation: [] as string[] };
 
-    const parkingLine = ev.has_parking ? '• موقف سيارة: متوفر ✓' : '';
-    const viewLine = ev.has_view ? '• إطلالة: متوفرة ✓' : '';
+      const adjustedOptimal = Math.round(seller.optimal_price_syp * adjustment.totalMultiplier);
+      const adjustedFast = Math.round(seller.fast_sale_price_syp * adjustment.totalMultiplier);
 
-    const textLines = [
-      fallbackNote ? 'عنوان: تقييم عقارك — تقدير استرشادي' : 'عنوان: تقييم عقارك الكامل',
-      `- المنطقة: ${district} | المساحة: ${areaM2} م² | النوع: ${propertyType}`,
-      `- الموقع الدقيق: ${ev.exact_location}`,
-      `- السعر الأمثل: ${this.formatSyp(adjustedOptimal)} ل.س`,
-      `- سعر البيع السريع: ${this.formatSyp(adjustedFast)} ل.س`,
-      `- معامل التعديل: ×${adjustment.totalMultiplier} | الثقة: ${(Number(seller.confidence || 0) * 100).toFixed(1)}%`,
-      ...(ownershipLine ? [ownershipLine] : []),
-      ...(nearbyLine ? [nearbyLine] : []),
-      ...(factorsLine ? [factorsLine] : []),
-      ...(parkingLine ? [parkingLine] : []),
-      ...(viewLine ? [viewLine] : []),
-      ...(priceComparisonText ? [priceComparisonText] : []),
-      ...(fallbackNote ? [fallbackNote] : []),
-    ].join('\n');
+      // Price comparison vs user's ask price
+      let priceComparisonText = '';
+      const userAskPrice = state.ask_price;
+      if (userAskPrice && userAskPrice > 0) {
+        const diff = ((userAskPrice - adjustedOptimal) / adjustedOptimal) * 100;
+        const absDiff = Math.abs(diff).toFixed(1);
+        if (diff > 10) {
+          priceComparisonText = `• سعرك الحالي أعلى من السوق بنسبة ${absDiff}% — قد يصعب البيع`;
+        } else if (diff < -10) {
+          priceComparisonText = `• سعرك الحالي أقل من السوق بنسبة ${absDiff}% — فرصة للرفع`;
+        } else {
+          priceComparisonText = `• سعرك قريب من السوق (فرق ${absDiff}%)`;
+        }
+      }
 
-    return {
-      response: {
-        intent: 'SELLER_PRICE',
-        text_ar: textLines,
-        data: {
-          seller_price: seller,
-          adjusted_optimal_syp: adjustedOptimal,
-          adjusted_fast_syp: adjustedFast,
-          adjustment,
-          eval_state: ev,
-          ownership_risk: this.ownershipRiskScore(ev.ownership_type),
-          is_fallback_estimate: fallbackNote !== '',
-          ...(userAskPrice ? { user_ask_price: userAskPrice } : {}),
-        },
-        suggested_actions: [
-          {
-            type: 'OPEN_STRATEGY',
-            label_ar: 'عرض الاستراتيجية الكاملة',
-            url: '/owner/properties',
+      const ownershipLine = this.buildOwnershipRiskLine(ev);
+      const factorsLine = adjustment.explanation.length
+        ? `• عوامل التعديل: ${adjustment.explanation.join(' | ')}`
+        : '';
+      const parkingLine = ev.has_parking ? '• موقف سيارة: متوفر ✓' : '';
+      const viewLine = ev.has_view ? '• إطلالة: متوفرة ✓' : '';
+
+      const textLines = [
+        fallbackNote ? 'عنوان: تقييم عقارك — تقدير استرشادي' : 'عنوان: تقييم عقارك',
+        `- المنطقة: ${district} | المساحة: ${areaM2} م² | النوع: ${propertyType}`,
+        `- السعر الأمثل: ${this.formatSyp(adjustedOptimal)} ل.س`,
+        `- سعر البيع السريع: ${this.formatSyp(adjustedFast)} ل.س`,
+        `- الثقة: ${(Number(seller.confidence || 0) * 100).toFixed(1)}%`,
+        ...(ownershipLine ? [ownershipLine] : []),
+        ...(factorsLine ? [factorsLine] : []),
+        ...(parkingLine ? [parkingLine] : []),
+        ...(viewLine ? [viewLine] : []),
+        ...(priceComparisonText ? [priceComparisonText] : []),
+        ...(fallbackNote ? [fallbackNote] : []),
+      ].join('\n');
+
+      ev.stage = 'complete';
+      state.evalState = ev;
+
+      return {
+        response: {
+          intent: 'SELLER_PRICE',
+          text_ar: textLines,
+          data: {
+            seller_price: seller,
+            adjusted_optimal_syp: adjustedOptimal,
+            adjusted_fast_syp: adjustedFast,
+            adjustment,
+            eval_state: ev,
+            ownership_risk: this.ownershipRiskScore(ev.ownership_type),
+            is_fallback_estimate: fallbackNote !== '',
+            ...(userAskPrice ? { user_ask_price: userAskPrice } : {}),
           },
+          suggested_actions: [
+            { type: 'OPEN_STRATEGY', label_ar: 'عرض الاستراتيجية الكاملة', url: '/owner/properties' },
+            { type: 'OPEN_SUGGESTIONS', label_ar: 'أضف عقارك للمنصة للحصول على تقييم كامل', url: '/owner/properties' },
+          ],
+        },
+        toolMessages: [
           {
-            type: 'OPEN_SUGGESTIONS',
-            label_ar: 'أضف عقارك للمنصة للحصول على تقييم كامل',
-            url: '/owner/properties',
+            toolName: 'advisor_seller_price_full_eval',
+            text: 'TOOL advisor_seller_price_full_eval executed',
+            payloadJson: {
+              input: { city, district, property_type: propertyType, area_m2: areaM2 },
+              optimal_price_syp: seller.optimal_price_syp,
+              adjusted_optimal_syp: adjustedOptimal,
+              adjustment_multiplier: adjustment.totalMultiplier,
+              ownership_type: ev.ownership_type,
+            },
           },
         ],
-      },
-      toolMessages: [
-        {
-          toolName: 'advisor_seller_price_full_eval',
-          text: 'TOOL advisor_seller_price_full_eval executed',
-          payloadJson: {
-            input: { city, district, property_type: propertyType, area_m2: areaM2 },
-            optimal_price_syp: seller.optimal_price_syp,
-            adjusted_optimal_syp: adjustedOptimal,
-            adjustment_multiplier: adjustment.totalMultiplier,
-            ownership_type: ev.ownership_type,
-          },
-        },
-      ],
-    };
+      };
     } catch (err) {
       this.logger.error(`PROPERTY_EVAL_CRASH: ${(err as Error).message}\n${(err as Error).stack}`);
       return {
         response: {
           intent: 'PROPERTY_EVALUATION',
-          text_ar: 'ممتاز! لأعطيك تقييماً دقيقاً، أخبرني:\n\n📍 ما هو الموقع بالضبط؟ (اسم الشارع أو أقرب معلم)',
-          data: { stage: 'asking_location' },
+          text_ar: 'حدث خطأ أثناء التقييم. يرجى المحاولة مرة أخرى.',
+          data: {},
           suggested_actions: [],
         },
         toolMessages: [],
