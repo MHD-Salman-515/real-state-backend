@@ -2029,6 +2029,11 @@ export class OwnerChatService {
     if (parsedArabic.buildingAge && !ev.building_age) ev.building_age = parsedArabic.buildingAge;
     if (parsedArabic.finishQuality && !ev.finish_quality) ev.finish_quality = parsedArabic.finishQuality;
 
+    // If user replied to the location question, treat the raw message as the location answer
+    if (ev.stage === 'asking_location' && params.message && !ev.exact_location) {
+      ev.exact_location = params.message.trim();
+    }
+
     // Stage 1: need exact location
     if (!ev.exact_location) {
       ev.stage = 'asking_location';
