@@ -1240,6 +1240,7 @@ export class OwnerChatService {
       if (!aiService) {
         this.logger.log('CHAT_ROUTE: FINAL handler=static_ai_failure_no_ai_service');
         this.logger.log('FINAL_RESPONSE_SOURCE source=emergency_fallback');
+        this.logger.error('AI_SERVICE_NULL — falling back to static failure. Check AI_SERVICE_LAZY_INIT_FAILED logs above.');
         return this.handleStaticAiFailure(domain.language);
       }
 
@@ -1634,7 +1635,8 @@ export class OwnerChatService {
       const ragService = new RagService(this.prisma);
       const marketBrainService = new MarketBrainService(this.prisma);
       this.localAiService = new AiService(ragService, marketBrainService);
-    } catch {
+    } catch (err) {
+      this.logger.error(`AI_SERVICE_LAZY_INIT_FAILED: ${(err as Error).message}\n${(err as Error).stack}`);
       this.localAiService = null;
     }
 
