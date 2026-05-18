@@ -2130,13 +2130,64 @@ export class OwnerChatService {
     ev.stage = 'complete';
     state.evalState = ev;
 
-    const seller = await this.advisorService.getSellerPriceSuggestion({
-      city,
-      district,
-      property_type: propertyType as any,
-      area_m2: areaM2,
-      user_message: params.message,
-    });
+    const NEARBY_FALLBACK: Record<string, string> = {
+      jaramana: 'midan',
+      harasta: 'douma',
+      mleiha: 'jaramana',
+      artouz: 'darayya',
+      sahnaya: 'darayya',
+      adra: 'douma',
+      'yarmouk camp': 'midan',
+      qadam: 'midan',
+      tadamon: 'midan',
+      jobar: 'baramkeh',
+      barzeh: 'rukn al-din',
+      qaboun: 'baramkeh',
+    };
+
+    let seller: Awaited<ReturnType<typeof this.advisorService.getSellerPriceSuggestion>>;
+    let fallbackNote = '';
+
+    try {
+      seller = await this.advisorService.getSellerPriceSuggestion({
+        city,
+        district,
+        property_type: propertyType as any,
+        area_m2: areaM2,
+        user_message: params.message,
+      });
+    } catch {
+      const fallbackDistrict = NEARBY_FALLBACK[district ?? ''] ?? 'midan';
+      try {
+        seller = await this.advisorService.getSellerPriceSuggestion({
+          city,
+          district: fallbackDistrict,
+          property_type: propertyType as any,
+          area_m2: areaM2,
+          user_message: params.message,
+        });
+        fallbackNote = `• تنبيه: تقدير استرشادي مبني على بيانات منطقة ${fallbackDistrict} المجاورة (لا تتوفر بيانات مباشرة لـ${district})`;
+        this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_FALLBACK district=${district} fallback=${fallbackDistrict}`);
+      } catch {
+        this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_NO_DATA district=${district}`);
+        return {
+          response: {
+            intent: 'PROPERTY_EVALUATION',
+            text_ar: [
+              'عنوان: لا تتوفر بيانات سوق',
+              `- لا تتوفر حالياً بيانات تسعير لمنطقة ${district ?? 'المحددة'}.`,
+              '- يُنصح بمراجعة وسيط عقاري محلي للحصول على تقدير دقيق.',
+              '- يمكنك أيضاً تجربة منطقة مجاورة.',
+            ].join('\n'),
+            data: { stage: 'no_data', district, eval_state: ev },
+            suggested_actions: [
+              { type: 'OPEN_SUGGESTIONS', label_ar: 'أضف عقارك للمنصة', url: '/owner/properties' },
+            ],
+          },
+          toolMessages: [],
+        };
+      }
+    }
 
     const pricingFactors: PricingFactors = {
       floor: ev.floor,
@@ -2198,7 +2249,7 @@ export class OwnerChatService {
     const viewLine = ev.has_view ? '• إطلالة: متوفرة ✓' : '';
 
     const textLines = [
-      'عنوان: تقييم عقارك الكامل',
+      fallbackNote ? 'عنوان: تقييم عقارك — تقدير استرشادي' : 'عنوان: تقييم عقارك الكامل',
       `- المنطقة: ${district} | المساحة: ${areaM2} م² | النوع: ${propertyType}`,
       `- الموقع الدقيق: ${ev.exact_location}`,
       `- السعر الأمثل: ${this.formatSyp(adjustedOptimal)} ل.س`,
@@ -2210,6 +2261,7 @@ export class OwnerChatService {
       ...(parkingLine ? [parkingLine] : []),
       ...(viewLine ? [viewLine] : []),
       ...(priceComparisonText ? [priceComparisonText] : []),
+      ...(fallbackNote ? [fallbackNote] : []),
     ].join('\n');
 
     return {
@@ -2223,6 +2275,7 @@ export class OwnerChatService {
           adjustment,
           eval_state: ev,
           ownership_risk: this.ownershipRiskScore(ev.ownership_type),
+          is_fallback_estimate: fallbackNote !== '',
           ...(userAskPrice ? { user_ask_price: userAskPrice } : {}),
         },
         suggested_actions: [
