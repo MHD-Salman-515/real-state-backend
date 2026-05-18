@@ -51,6 +51,7 @@ const DISTRICT_MAP: Array<{ triggers: string[]; district: string; city: string }
   { triggers: ['كشكول', 'kashkoul'], district: 'kashkoul', city: 'damascus' },
   { triggers: ['الورود', 'ورود', 'wuroud'], district: 'wuroud', city: 'damascus' },
   // Damascus Historic
+  { triggers: ['الشام', 'شام', 'دمشق القديمة', 'المدينة', 'العاصمة'], district: 'midan', city: 'damascus' },
   { triggers: ['دمشق القديمة', 'المدينة القديمة', 'old damascus'], district: 'old damascus', city: 'damascus' },
   { triggers: ['القيمرية', 'qaymariyeh'], district: 'qaymariyeh', city: 'damascus' },
   { triggers: ['باب شرقي', 'bab sharqi'], district: 'bab sharqi', city: 'damascus' },
