@@ -352,14 +352,16 @@ export class OwnerChatService {
     });
 
     const returnedContextState = this.toRecord(dispatch.response.data)?.context_state;
-    if (returnedContextState) {
-      await this.persistSessionContextState({
-        sessionId: session.id,
-        metaJson: session.metaJson ?? null,
-        propertyId: contextPropertyId ?? null,
-        state: returnedContextState as DeterministicContextState,
-      });
-    }
+    // Always persist after dispatch — handlePropertyEvaluation mutates mergedState.evalState
+    // in-place, so we must re-save even when no context_state is returned in response.data.
+    await this.persistSessionContextState({
+      sessionId: session.id,
+      metaJson: session.metaJson ?? null,
+      propertyId: contextPropertyId ?? null,
+      state: returnedContextState
+        ? (returnedContextState as DeterministicContextState)
+        : mergedState,
+    });
 
     const toolRows: any[] = [];
     for (const tool of dispatch.toolMessages) {
