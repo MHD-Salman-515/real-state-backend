@@ -1379,8 +1379,8 @@ export class OwnerChatService {
         },
         toolMessages: [],
       };
-    } catch {
-      this.logger.log('CHAT_ROUTE: FINAL handler=static_ai_failure_exception');
+    } catch (outerErr) {
+      this.logger.error(`CHAT_ROUTE: FINAL handler=static_ai_failure_exception error=${(outerErr as Error)?.message} stack=${(outerErr as Error)?.stack?.split('\n').slice(0,5).join(' | ')}`);
       this.logger.log('FINAL_RESPONSE_SOURCE source=emergency_fallback');
       return this.handleStaticAiFailure('ar');
     }
