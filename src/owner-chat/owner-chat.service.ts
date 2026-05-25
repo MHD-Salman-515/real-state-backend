@@ -810,10 +810,13 @@ export class OwnerChatService {
         /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|ابيع|بدي ابيع/i.test(params.message);
 
       const sessionCity = parsedArabic.city ?? state.city;
-      const hasLocationContext = !!(sessionDistrict || sessionCity);
-      if (!sellerFlowActive && hasPropertyEvalSignal && hasLocationContext && sessionArea) {
+      const hasEnoughToStartEval =
+        hasPropertyEvalSignal &&
+        sessionArea &&
+        (state.ask_price ?? parsedArabic.ask_price);
+      if (!sellerFlowActive && hasEnoughToStartEval) {
         sellerFlowActive = true;
-        this.logger.log(`CHAT_ROUTE: SELLER_FLOW_ACTIVATED_FROM_PROPERTY_SIGNAL district=${sessionDistrict} city=${sessionCity} area=${sessionArea}`);
+        this.logger.log(`CHAT_ROUTE: SELLER_FLOW_ACTIVATED area=${sessionArea} ask_price=${state.ask_price ?? parsedArabic.ask_price}`);
       }
 
       if (domain.domain === 'OUT_OF_SCOPE') {
@@ -1124,9 +1127,9 @@ export class OwnerChatService {
         pricingFactors.finishQuality = parsedArabic.finishQuality as PricingFactors['finishQuality'];
       }
 
-      if (inRealEstateFlow && sellerFlowActive && district && areaM2) {
+      if (inRealEstateFlow && sellerFlowActive && areaM2) {
         const activeEvalStage = state.evalState?.stage;
-        if (sessionDistrict || sessionCity || parsedArabic.district || parsedArabic.city || parsedArabic.area_m2 || (activeEvalStage && activeEvalStage !== 'complete')) {
+        if (sessionArea || parsedArabic.area_m2 || (activeEvalStage && activeEvalStage !== 'complete')) {
           this.logger.log('CHAT_ROUTE: PROPERTY_EVALUATION handler=handlePropertyEvaluation');
           return this.handlePropertyEvaluation({
             ownerId: params.ownerId,
