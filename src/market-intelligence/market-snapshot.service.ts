@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { UrbanexPrismaService } from '../prisma/urbanex-prisma.service';
 
@@ -12,6 +12,7 @@ interface MarketRow {
 
 @Injectable()
 export class MarketSnapshotService {
+  private readonly logger = new Logger(MarketSnapshotService.name);
   constructor(private readonly urbanexPrisma: UrbanexPrismaService) {}
 
   async rebuildSnapshots(days = 365): Promise<{
@@ -28,13 +29,19 @@ export class MarketSnapshotService {
     const from = new Date();
     from.setDate(from.getDate() - days);
 
-    const rows = await this.urbanexPrisma.$queryRaw<MarketRow[]>(Prisma.sql`
-      SELECT city, district, property_type, price_per_m2_syp, created_at
-      FROM market_data
-      WHERE created_at >= ${from}
-        AND (is_outlier = 0 OR is_outlier IS NULL)
-        AND price_per_m2_syp IS NOT NULL
-    `);
+    let rows: MarketRow[];
+    try {
+      rows = await this.urbanexPrisma.$queryRaw<MarketRow[]>(Prisma.sql`
+        SELECT city, district, property_type, price_per_m2_syp, created_at
+        FROM market_data
+        WHERE created_at >= ${from}
+          AND (is_outlier = 0 OR is_outlier IS NULL)
+          AND price_per_m2_syp IS NOT NULL
+      `);
+    } catch (err) {
+      this.logger.error(`MARKET_SNAPSHOT_SOURCE_QUERY_FAILED: ${(err as Error).message}`);
+      return { days, source_rows: 0, grouped_snapshots: 0, upserted_rows: 0, skipped_rows: 0 };
+    }
 
     const grouped = new Map<
       string,
@@ -96,47 +103,51 @@ export class MarketSnapshotService {
       const stddev = this.stddevPopulation(bucket.values, avg);
       const volatility = avg > 0 ? stddev / avg : 0;
 
-      await this.urbanexPrisma.$executeRaw(Prisma.sql`
-        INSERT INTO market_snapshot_daily
-        (
-          city,
-          district,
-          property_type,
-          snapshot_date,
-          avg_price_per_m2_syp,
-          median_price_per_m2_syp,
-          min_price_per_m2_syp,
-          max_price_per_m2_syp,
-          sample_count,
-          volatility,
-          trend_direction,
-          created_at
-        )
-        VALUES
-        (
-          ${bucket.city},
-          ${bucket.district},
-          ${bucket.property_type},
-          ${bucket.snapshot_date},
-          ${avg},
-          ${median},
-          ${min},
-          ${max},
-          ${sampleCount},
-          ${volatility},
-          NULL,
-          NOW(3)
-        )
-        ON DUPLICATE KEY UPDATE
-          avg_price_per_m2_syp = VALUES(avg_price_per_m2_syp),
-          median_price_per_m2_syp = VALUES(median_price_per_m2_syp),
-          min_price_per_m2_syp = VALUES(min_price_per_m2_syp),
-          max_price_per_m2_syp = VALUES(max_price_per_m2_syp),
-          sample_count = VALUES(sample_count),
-          volatility = VALUES(volatility)
-      `);
-
-      upserted += 1;
+      try {
+        await this.urbanexPrisma.$executeRaw(Prisma.sql`
+          INSERT INTO market_snapshot_daily
+          (
+            city,
+            district,
+            property_type,
+            snapshot_date,
+            avg_price_per_m2_syp,
+            median_price_per_m2_syp,
+            min_price_per_m2_syp,
+            max_price_per_m2_syp,
+            sample_count,
+            volatility,
+            trend_direction,
+            created_at
+          )
+          VALUES
+          (
+            ${bucket.city},
+            ${bucket.district},
+            ${bucket.property_type},
+            ${bucket.snapshot_date},
+            ${avg},
+            ${median},
+            ${min},
+            ${max},
+            ${sampleCount},
+            ${volatility},
+            NULL,
+            NOW(3)
+          )
+          ON DUPLICATE KEY UPDATE
+            avg_price_per_m2_syp = VALUES(avg_price_per_m2_syp),
+            median_price_per_m2_syp = VALUES(median_price_per_m2_syp),
+            min_price_per_m2_syp = VALUES(min_price_per_m2_syp),
+            max_price_per_m2_syp = VALUES(max_price_per_m2_syp),
+            sample_count = VALUES(sample_count),
+            volatility = VALUES(volatility)
+        `);
+        upserted += 1;
+      } catch (err) {
+        this.logger.error(`MARKET_SNAPSHOT_UPSERT_FAILED bucket=${bucket.city}|${bucket.district}|${bucket.property_type}|${bucket.snapshot_date}: ${(err as Error).message}`);
+        skipped += 1;
+      }
     }
 
     return {

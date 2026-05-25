@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { normalizeAreaValue } from '../advisor/utils/area-normalization';
 import { UrbanexPrismaService } from '../prisma/urbanex-prisma.service';
@@ -8,8 +8,16 @@ interface SnapshotRow {
   snapshot_date: Date;
 }
 
+const STABLE_DEFAULT = {
+  trend_direction: 'STABLE' as const,
+  change_pct: 0,
+  volatility: 0,
+  sparkline: [] as number[],
+};
+
 @Injectable()
 export class MarketTrendService {
+  private readonly logger = new Logger(MarketTrendService.name);
   constructor(private readonly urbanexPrisma: UrbanexPrismaService) {}
 
   async getTrend(params: {
@@ -38,23 +46,24 @@ export class MarketTrendService {
     const from = new Date();
     from.setDate(from.getDate() - days);
 
-    const rows = await this.urbanexPrisma.$queryRaw<SnapshotRow[]>(Prisma.sql`
-      SELECT avg_price_per_m2_syp, snapshot_date
-      FROM market_snapshot_daily
-      WHERE city = ${city}
-        AND district = ${district}
-        AND property_type = ${propertyType}
-        AND snapshot_date >= ${from}
-      ORDER BY snapshot_date ASC
-    `);
+    let rows: SnapshotRow[];
+    try {
+      rows = await this.urbanexPrisma.$queryRaw<SnapshotRow[]>(Prisma.sql`
+        SELECT avg_price_per_m2_syp, snapshot_date
+        FROM market_snapshot_daily
+        WHERE city = ${city}
+          AND district = ${district}
+          AND property_type = ${propertyType}
+          AND snapshot_date >= ${from}
+        ORDER BY snapshot_date ASC
+      `);
+    } catch (err) {
+      this.logger.error(`MARKET_TREND_QUERY_FAILED: ${(err as Error).message}`);
+      return STABLE_DEFAULT;
+    }
 
     if (!rows.length) {
-      return {
-        trend_direction: 'STABLE',
-        change_pct: 0,
-        volatility: 0,
-        sparkline: [],
-      };
+      return STABLE_DEFAULT;
     }
 
     const sparkline = rows
@@ -62,12 +71,7 @@ export class MarketTrendService {
       .filter((value) => Number.isFinite(value) && value > 0);
 
     if (!sparkline.length) {
-      return {
-        trend_direction: 'STABLE',
-        change_pct: 0,
-        volatility: 0,
-        sparkline: [],
-      };
+      return STABLE_DEFAULT;
     }
 
     const first = sparkline[0];
