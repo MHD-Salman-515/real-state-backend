@@ -63,7 +63,8 @@ type SuggestedAction = {
     | 'OPEN_SUGGESTIONS'
     | 'OPEN_PORTFOLIO'
     | 'OPEN_HISTORY'
-    | 'ASK_FOR_FIELDS';
+    | 'ASK_FOR_FIELDS'
+    | 'PICK_LOCATION';
   label_ar: string;
   property_id?: number;
   price?: number;
@@ -982,7 +983,7 @@ export class OwnerChatService {
           response: {
             intent: 'FALLBACK',
             text_ar:
-              'أحتاج المنطقة فقط حتى أكمل معك التقييم بشكل أدق.\nمثال: الشعلان أو كفرسوسة أو المزة.',
+              'أحتاج المنطقة فقط حتى أكمل معك التقييم بشكل أدق.\nمثال: الشعلان أو كفرسوسة أو المزة.\n\nأو يمكنك 📍 حدد الموقع على الخريطة لتحديد المنطقة تلقائياً.',
             data: {
               required: 'district',
               context_state: state,
@@ -992,6 +993,10 @@ export class OwnerChatService {
                 type: 'ASK_FOR_FIELDS',
                 label_ar: 'أرسل المنطقة',
                 note: 'مثال: المزة',
+              },
+              {
+                type: 'PICK_LOCATION',
+                label_ar: '📍 حدد الموقع على الخريطة',
               },
             ],
           },
@@ -2084,12 +2089,15 @@ export class OwnerChatService {
       if (!areaM2) missing.push('المساحة بالمتر المربع');
 
       if (missing.length > 0) {
+        const needsDistrict = !district;
         return {
           response: {
             intent: 'PROPERTY_EVALUATION',
-            text_ar: `أهلاً! سأساعدك في تقييم عقارك 🏠\n\nلأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}\n\nمثال: "عندي شقة بالمزة 150 متر بسعر 900 مليون"`,
+            text_ar: `أهلاً! سأساعدك في تقييم عقارك 🏠\n\nلأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}\n\nمثال: "عندي شقة بالمزة 150 متر بسعر 900 مليون"${needsDistrict ? '\n\nأو يمكنك 📍 حدد الموقع على الخريطة لتحديد المنطقة تلقائياً.' : ''}`,
             data: { stage: 'asking_info' },
-            suggested_actions: [],
+            suggested_actions: needsDistrict
+              ? [{ type: 'PICK_LOCATION' as const, label_ar: '📍 حدد الموقع على الخريطة' }]
+              : [],
           },
           toolMessages: [],
         };
