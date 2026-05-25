@@ -98,7 +98,7 @@ type AssistantTurnContext = {
 } | null;
 
 interface PropertyEvaluationState {
-  stage: 'initial' | 'asking_location' | 'asking_ownership' | 'asking_details' | 'complete';
+  stage: 'initial' | 'asking_location' | 'asking_ownership' | 'asking_legal' | 'asking_building' | 'asking_details' | 'complete';
   exact_location?: string;
   coordinates?: { lat: number; lng: number };
   nearby_services?: {
@@ -2086,21 +2086,68 @@ export class OwnerChatService {
       if (parsedArabic.finishQuality && !ev.finish_quality) ev.finish_quality = parsedArabic.finishQuality;
       state.evalState = ev;
 
-      // Ask for missing critical info in ONE message
+      // ── Step 1: location (district + area) ────────────────────────────────
       const missing: string[] = [];
       if (!district) missing.push('المنطقة (مثال: المزة، الشعلان)');
       if (!areaM2) missing.push('المساحة بالمتر المربع');
 
       if (missing.length > 0) {
         const needsDistrict = !district;
+        ev.stage = 'asking_location';
         return {
           response: {
             intent: 'PROPERTY_EVALUATION',
             text_ar: `أهلاً! سأساعدك في تقييم عقارك 🏠\n\nلأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}\n\nمثال: "عندي شقة بالمزة 150 متر بسعر 900 مليون"${needsDistrict ? '\n\nأو يمكنك 📍 حدد الموقع على الخريطة لتحديد المنطقة تلقائياً.' : ''}`,
-            data: { stage: 'asking_info' },
+            data: { stage: 'asking_location' },
             suggested_actions: needsDistrict
               ? [{ type: 'PICK_LOCATION' as const, label_ar: '📍 حدد الموقع على الخريطة' }]
               : [],
+          },
+          toolMessages: [],
+        };
+      }
+
+      // ── Step 2: ownership document type ───────────────────────────────────
+      if (!ev.ownership_type) {
+        ev.stage = 'asking_ownership';
+        return {
+          response: {
+            intent: 'PROPERTY_EVALUATION',
+            text_ar: `شكراً! الآن نحتاج معلومات الملكية:\n\n📋 ما نوع وثيقة العقار؟\n• طابو أخضر\n• حكم محكمة\n• عقد بيع ابتدائي\n• ساعة كهرباء فقط\n• استملاك\n• أوقاف / للدولة\n• قطاع خاص`,
+            data: { stage: 'asking_ownership' },
+            suggested_actions: [],
+          },
+          toolMessages: [],
+        };
+      }
+
+      // ── Step 3: legal details (shares, debt, inheritance) ─────────────────
+      const hasSharesInfo =
+        ev.shares_count != null || ev.is_debt_free != null || ev.is_inheritance != null;
+      if (!hasSharesInfo) {
+        ev.stage = 'asking_legal';
+        return {
+          response: {
+            intent: 'PROPERTY_EVALUATION',
+            text_ar: `ممتاز! بعض التفاصيل القانونية:\n\n🔢 كم عدد الأسهم؟ (مثال: 2400 سهم)\n✅ هل العقار بريء من الذمة المالية؟\n👥 هل هو ملك أصلي أم ميراث (ورثة)؟\n⚖️ هل مكتسب الدرجة القطعية؟`,
+            data: { stage: 'asking_legal' },
+            suggested_actions: [],
+          },
+          toolMessages: [],
+        };
+      }
+
+      // ── Step 4: building details ──────────────────────────────────────────
+      const hasBuildingInfo =
+        ev.floor != null || ev.has_elevator != null || ev.building_age || ev.finish_quality;
+      if (!hasBuildingInfo) {
+        ev.stage = 'asking_building';
+        return {
+          response: {
+            intent: 'PROPERTY_EVALUATION',
+            text_ar: `آخر خطوة — تفاصيل البناء:\n\n🏢 الطابق؟ (أرضي، أول، ثاني...)\n🛗 هل يوجد مصعد؟\n🏗️ عمر البناء؟ (جديد / حديث / قديم)\n✨ التشطيب؟ (فاخر / عالي / عادي / بسيط)\n🚗 موقف سيارة؟\n🌅 إطلالة؟`,
+            data: { stage: 'asking_building' },
+            suggested_actions: [],
           },
           toolMessages: [],
         };
