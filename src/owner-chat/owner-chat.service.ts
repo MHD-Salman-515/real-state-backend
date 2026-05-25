@@ -601,6 +601,23 @@ export class OwnerChatService {
     recentHistory?: AiConversationTurn[];
   }): Promise<DispatchResult> {
     try {
+      const SMALL_TALK =
+        /^(صباح|مساء|كيف|هلا|مرحبا|أهلا|اهلا|سلام|هاي|hi\b|hello|good\s*morning|good\s*evening|شكرا|شكراً|ممتاز|تمام\b|ok\b|okay|يسلمو|الله يسلمك|وين|شو اخبار|كيفك|عامل|زابط|بخير)[\s!،.؟?]*$/i;
+      if (SMALL_TALK.test(params.message.trim())) {
+        const aiSvc = this.getAiService();
+        const reply = aiSvc
+          ? await aiSvc
+              .generateOwnerAdvisorReply({ message: params.message, ownerId: params.ownerId })
+              .then((r) => String(r?.message || ''))
+              .catch(() => '')
+          : '';
+        return this.buildScopedReply({
+          intent: 'SMALL_TALK',
+          text: reply || 'أهلاً وسهلاً! كيف يمكنني مساعدتك اليوم؟',
+          data: null,
+        });
+      }
+
       const REAL_ESTATE_KEYWORDS =
         /عقار|شقة|شقه|بيت|بيوت|فيلا|أرض|ارض|محل|مكتب|مستودع|سعر|إيجار|ايجار|بيع|شراء|تقييم|تسعير|استثمار|منطقة|حي|مالكي|مزة|مزه|كفرسوسة|شعلان|مهاجرين|جرمانا|دمشق|حلب|حمص|طابق|مصعد|بناء|تشطيب|موقف|طابو|ملكية|سهم|ذمة|ميراث|ورثة|property|apartment|villa|house|price|rent|buy|sell|real estate|invest|district|floor|elevator/i;
       if (!REAL_ESTATE_KEYWORDS.test(params.message)) {
