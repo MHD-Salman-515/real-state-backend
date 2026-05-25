@@ -2017,6 +2017,29 @@ export class OwnerChatService {
       const city = state.city ?? parsedArabic.city ?? 'damascus';
       const propertyType = state.property_type ?? parsedArabic.property_type ?? 'apartment';
 
+      const DISTRICT_AR: Record<string, string> = {
+        'mazzeh': 'المزة', 'malki': 'المالكي', 'midan': 'الميدان',
+        'kafr sousa': 'كفرسوسة', 'kafr_sousa': 'كفرسوسة',
+        'bab touma': 'باب توما', 'shaalan': 'الشعلان',
+        'qassaa': 'القصاع', 'baramkeh': 'البرامكة',
+        'rukn al-din': 'ركن الدين', 'rukn_al_din': 'ركن الدين',
+        'abu rummaneh': 'أبو رمانة', 'abu_rummaneh': 'أبو رمانة',
+        'jaramana': 'جرمانا', 'douma': 'دوما', 'harasta': 'حرستا',
+        'darayya': 'داريا', 'sahnaya': 'صحنايا', 'tal': 'تل',
+        'adra': 'عدرا', 'qaboun': 'القابون', 'barzeh': 'برزة',
+        'jobar': 'جوبر', 'qadam': 'القدم', 'tadamon': 'التضامن',
+        'yarmouk camp': 'مخيم اليرموك', 'yarmouk_camp': 'مخيم اليرموك',
+        'damascus': 'دمشق', 'aleppo': 'حلب', 'homs': 'حمص',
+        'latakia': 'اللاذقية', 'tartus': 'طرطوس',
+        'dummar': 'ضمار', 'qudsaya': 'قدسيا', 'zabadani': 'الزبداني',
+        'mleiha': 'مليحة', 'artouz': 'أرتوز', 'ghouta': 'الغوطة',
+        'old damascus': 'دمشق القديمة', 'bab sharqi': 'باب شرقي',
+        'mezze': 'المزة', 'meze': 'المزة',
+        'rif dimashq': 'ريف دمشق',
+      };
+      const districtAr = (d?: string | null) => d ? (DISTRICT_AR[d.toLowerCase()] ?? d) : '';
+      const cityAr = (c?: string | null) => c ? (DISTRICT_AR[c.toLowerCase()] ?? c) : '';
+
       // Merge optional enrichment fields from message into persisted evalState
       const ev: PropertyEvaluationState = state.evalState ?? { stage: 'initial' };
       if (parsedArabic.exact_location && !ev.exact_location) ev.exact_location = parsedArabic.exact_location;
@@ -2042,7 +2065,7 @@ export class OwnerChatService {
         return {
           response: {
             intent: 'PROPERTY_EVALUATION',
-            text_ar: `لأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}`,
+            text_ar: `أهلاً! سأساعدك في تقييم عقارك 🏠\n\nلأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}\n\nمثال: "عندي شقة بالمزة 150 متر بسعر 900 مليون"`,
             data: { stage: 'asking_info' },
             suggested_actions: [],
           },
@@ -2079,14 +2102,14 @@ export class OwnerChatService {
             area_m2: areaM2!,
             user_message: params.message,
           });
-          fallbackNote = `• تنبيه: تقدير استرشادي مبني على بيانات منطقة ${fallbackDistrict} المجاورة (لا تتوفر بيانات مباشرة لـ${district})`;
+          fallbackNote = `• تنبيه: تقدير استرشادي مبني على بيانات منطقة ${districtAr(fallbackDistrict)} المجاورة (لا تتوفر بيانات مباشرة لـ${districtAr(district)})`;
           this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_FALLBACK district=${district} fallback=${fallbackDistrict}`);
         } catch {
           this.logger.log(`CHAT_ROUTE: PROPERTY_EVAL_NO_DATA district=${district}`);
           return {
             response: {
               intent: 'PROPERTY_EVALUATION',
-              text_ar: `لا تتوفر حالياً بيانات تسعير لمنطقة ${district ?? 'المحددة'}. يُنصح بمراجعة وسيط عقاري محلي للحصول على تقدير دقيق.`,
+              text_ar: `لا تتوفر حالياً بيانات تسعير لمنطقة ${districtAr(district) || 'المحددة'}. يُنصح بمراجعة وسيط عقاري محلي للحصول على تقدير دقيق.`,
               data: { stage: 'no_data', district },
               suggested_actions: [],
             },
@@ -2134,7 +2157,7 @@ export class OwnerChatService {
 
       const textLines = [
         fallbackNote ? 'عنوان: تقييم عقارك — تقدير استرشادي' : 'عنوان: تقييم عقارك',
-        `- المنطقة: ${district} | المساحة: ${areaM2} م² | النوع: ${propertyType}`,
+        `- المنطقة: ${districtAr(district)} | المساحة: ${areaM2} م² | النوع: ${propertyType}`,
         `- السعر الأمثل: ${this.formatSyp(adjustedOptimal)} ل.س`,
         `- سعر البيع السريع: ${this.formatSyp(adjustedFast)} ل.س`,
         `- الثقة: ${(Number(seller.confidence || 0) * 100).toFixed(1)}%`,
