@@ -258,6 +258,16 @@ export class AiService {
         ? Number(propertyContext?.area_m2)
         : areaFromMessage;
 
+    const GREETING_CHECK =
+      /^(صباح|مساء|كيف|هلا|مرحبا|أهلا|اهلا|السلام|سلام|شكرا|شكراً|تمام|ممتاز|بخير|hi|hello|hey|ok|okay|bye|thanks|good\s)[\s\w!،.؟?]*/i;
+    if (GREETING_CHECK.test(input.message?.trim() ?? '')) {
+      return {
+        message: 'أهلاً وسهلاً! كيف يمكنني مساعدتك في العقارات اليوم؟',
+        action: 'NONE',
+        payload: { intent: 'GREETING' },
+      };
+    }
+
     if (!normalizedDistrict) {
       return {
         message:
