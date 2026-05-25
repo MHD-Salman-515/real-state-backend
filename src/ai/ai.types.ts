@@ -15,6 +15,7 @@ export interface GenerateOwnerAdvisorReplyInput {
   ownerId: number;
   propertyId?: number;
   district?: string;
+  systemPromptOverride?: string;
 }
 
 export interface MarketContext {

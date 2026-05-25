@@ -607,7 +607,12 @@ export class OwnerChatService {
         const aiSvc = this.getAiService();
         const reply = aiSvc
           ? await aiSvc
-              .generateOwnerAdvisorReply({ message: params.message, ownerId: params.ownerId })
+              .generateOwnerAdvisorReply({
+                message: params.message,
+                ownerId: params.ownerId,
+                systemPromptOverride:
+                  'أنت مساعد عقاري ودود متخصص في سوق العقارات السورية. الرسالة الواردة هي تحية أو محادثة عامة. رد بجملة أو جملتين ودودتين وطبيعيتين باللغة ذاتها (عربي أو إنجليزي حسب الرسالة). لا تذكر أرقاماً أو أسعاراً في هذا الرد.',
+              })
               .then((r) => String(r?.message || ''))
               .catch(() => '')
           : '';

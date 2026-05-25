@@ -258,6 +258,23 @@ export class AiService {
         ? Number(propertyContext?.area_m2)
         : areaFromMessage;
 
+    if (input.systemPromptOverride) {
+      let overrideRaw = '';
+      try {
+        overrideRaw = await this.chatWithFallback([
+          { role: 'system', content: input.systemPromptOverride },
+          { role: 'user', content: input.message },
+        ]);
+      } catch {
+        overrideRaw = '';
+      }
+      return {
+        message: overrideRaw || 'أهلاً! كيف يمكنني مساعدتك؟',
+        action: 'NONE',
+        payload: { intent: 'SMALL_TALK' },
+      };
+    }
+
     const GREETING_CHECK =
       /^(صباح|مساء|كيف|هلا|مرحبا|أهلا|اهلا|السلام|سلام|شكرا|شكراً|تمام|ممتاز|بخير|hi|hello|hey|ok|okay|bye|thanks|good\s)[\s\w!،.؟?]*/i;
     if (GREETING_CHECK.test(input.message?.trim() ?? '')) {
