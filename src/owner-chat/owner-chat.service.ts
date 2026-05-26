@@ -738,7 +738,8 @@ export class OwnerChatService {
       const hasSellerSignal =
         parsedArabic.listing_intent === 'SELL' ||
         parsedArabic.listing_intent === 'ESTIMATE' ||
-        /عندي شقة|عندي عقار|عندي بيت|كم تسوى|كم يسوى|بدي ابيع/i.test(params.message);
+        parsedArabic.ask_price !== undefined ||
+        /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|عندي فيلا|عندي أرض|عندي محل|لدي شقة|لدي بيت|لدي عقار|لدي فيلا|لدي أرض|ابيع|بدي ابيع|للبيع|i have|i own|my apartment|my house|my property/i.test(params.message);
 
       const sessionDistrict = parsedArabic.district ?? state.district;
       const sessionArea = parsedArabic.area_m2 ?? state.area_m2;
@@ -747,7 +748,7 @@ export class OwnerChatService {
         sellerFlowActive = true;
         listingIntent = 'ESTIMATE';
         state.listing_intent = 'ESTIMATE';
-      } else if (this.ollamaOrchestrator && !(hasSellerSignal && sessionDistrict && sessionArea)) {
+      } else if (this.ollamaOrchestrator && !(hasSellerSignal && sessionArea && (parsedArabic.ask_price ?? state.ask_price))) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
             (this.toRecord(params.lastAssistant.payloadJson.data)?.market_evaluation ||
