@@ -750,7 +750,7 @@ export class OwnerChatService {
         parsedArabic.ask_price !== undefined ||
         /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|عندي فيلا|عندي أرض|عندي محل|لدي شقة|لدي بيت|لدي عقار|لدي فيلا|لدي أرض|ابيع|بدي ابيع|للبيع|i have|i own|my apartment|my house|my property/i.test(params.message);
 
-      const isLocationConfirmation = /^الموقع[:\s]/.test(params.message.trim());
+      const isLocationConfirmation = /^الموقع[:\s]|\(\d+\.\d+,\s*\d+\.\d+\)/.test(params.message.trim());
 
       const sessionDistrict = parsedArabic.district ?? state.district;
       const sessionArea = parsedArabic.area_m2 ?? state.area_m2;
