@@ -2887,6 +2887,7 @@ export class OwnerChatService {
     const ctx = this.toRecord(this.toRecord(params.metaJson)?.context) || {};
     const parsed = params.parsedArabic;
     const extracted = params.extractedProperty;
+    const isLocationMsg = /^الموقع[:\s]/.test(params.message?.trim() ?? '');
     const propertyTypeFromProperty = this.mapPropertyType(params.contextProperty?.type);
     const clearContinuation = this.isClearPropertyContinuation({
       message: params.message,
@@ -2928,8 +2929,7 @@ export class OwnerChatService {
         this.normalizeListingIntent(ctx.listing_intent) ||
         undefined,
       area_m2:
-        this.toPositiveNumber(extracted.area_m2) ??
-        this.toPositiveNumber(parsed.area_m2) ??
+        (!isLocationMsg ? (this.toPositiveNumber(extracted.area_m2) ?? this.toPositiveNumber(parsed.area_m2)) : undefined) ??
         (preserveNumericContext ? this.toPositiveNumber(ctx.area_m2) : undefined) ??
         this.toPositiveNumber(params.contextProperty?.area) ??
         undefined,
