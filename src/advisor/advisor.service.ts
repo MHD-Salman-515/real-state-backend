@@ -89,6 +89,58 @@ export class AdvisorService {
     @Inject(ADVISOR_CACHE) private readonly cacheService: AdvisorCachePort,
   ) {}
 
+  private readonly DISTRICT_COORDS: Record<string, { lat: number; lng: number }> = {
+    'mazzeh':       { lat: 33.5045, lng: 36.2634 },
+    'midan':        { lat: 33.4920, lng: 36.3100 },
+    'kafr sousa':   { lat: 33.4980, lng: 36.2760 },
+    'shaalan':      { lat: 33.5150, lng: 36.2920 },
+    'qassaa':       { lat: 33.5200, lng: 36.3050 },
+    'baramkeh':     { lat: 33.5100, lng: 36.3100 },
+    'rukn al-din':  { lat: 33.5300, lng: 36.3000 },
+    'abu rummaneh': { lat: 33.5160, lng: 36.2870 },
+    'malki':        { lat: 33.5180, lng: 36.2810 },
+    'barzeh':       { lat: 33.5450, lng: 36.3200 },
+    'qaboun':       { lat: 33.5360, lng: 36.3400 },
+    'jaramana':     { lat: 33.4750, lng: 36.3650 },
+    'douma':        { lat: 33.5720, lng: 36.3980 },
+    'harasta':      { lat: 33.5580, lng: 36.3820 },
+    'darayya':      { lat: 33.4600, lng: 36.2400 },
+    'sarouja':      { lat: 33.5145, lng: 36.3034 },
+    'qanawat':      { lat: 33.5120, lng: 36.3080 },
+    'muhajirin':    { lat: 33.5250, lng: 36.2800 },
+    'dummar':       { lat: 33.5440, lng: 36.2500 },
+    'rabweh':       { lat: 33.5100, lng: 36.2760 },
+  };
+
+  private haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  async findNearestDistrictWithData(targetDistrict: string): Promise<string> {
+    const key = targetDistrict.toLowerCase();
+    const targetCoords = this.DISTRICT_COORDS[key];
+    const candidates = Object.keys(this.DISTRICT_COORDS).filter((d) => d !== key);
+    if (!targetCoords || candidates.length === 0) return 'midan';
+
+    let nearest = 'midan';
+    let minDist = Infinity;
+    for (const d of candidates) {
+      const coords = this.DISTRICT_COORDS[d];
+      const dist = this.haversineDistance(targetCoords.lat, targetCoords.lng, coords.lat, coords.lng);
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = d;
+      }
+    }
+    return nearest;
+  }
+
   async evaluateMarketPrice(params: {
     city: string;
     district?: string;

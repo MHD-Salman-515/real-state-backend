@@ -2226,14 +2226,6 @@ export class OwnerChatService {
         };
       }
 
-      // Fetch price data with nearby-district fallback
-      const NEARBY_FALLBACK: Record<string, string> = {
-        jaramana: 'midan', harasta: 'douma', mleiha: 'jaramana',
-        artouz: 'darayya', sahnaya: 'darayya', adra: 'douma',
-        'yarmouk camp': 'midan', qadam: 'midan', tadamon: 'midan',
-        jobar: 'baramkeh', barzeh: 'rukn al-din', qaboun: 'baramkeh',
-      };
-
       let seller: Awaited<ReturnType<typeof this.advisorService.getSellerPriceSuggestion>>;
       let fallbackNote = '';
 
@@ -2246,7 +2238,7 @@ export class OwnerChatService {
           user_message: params.message,
         });
       } catch {
-        const fallbackDistrict = NEARBY_FALLBACK[district ?? ''] ?? 'midan';
+        const fallbackDistrict = await this.advisorService.findNearestDistrictWithData(district ?? '');
         try {
           seller = await this.advisorService.getSellerPriceSuggestion({
             city,
