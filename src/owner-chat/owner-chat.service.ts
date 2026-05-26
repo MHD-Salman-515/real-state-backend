@@ -982,7 +982,7 @@ export class OwnerChatService {
       }
 
       // Deterministic state machine first, but only for real-estate flow.
-      if (inRealEstateFlow && (sellerFlowActive || budgetSyp != null) && !district) {
+      if (inRealEstateFlow && (sellerFlowActive || budgetSyp != null) && !district && !hasEnoughToStartEval) {
         this.logger.log('CHAT_ROUTE: LEGACY_REFINE missing=district handler=legacy_refine final_selected_handler=legacy_refine');
         return {
           response: {
