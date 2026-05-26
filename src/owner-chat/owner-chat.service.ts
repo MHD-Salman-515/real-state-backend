@@ -2076,6 +2076,7 @@ export class OwnerChatService {
 
       // Merge optional enrichment fields from message into persisted evalState
       const ev: PropertyEvaluationState = state.evalState ?? { stage: 'initial' };
+      this.logger.log(`EVAL_STATE_LOADED stage=${ev.stage} hasOwnership=${!!ev.ownership_type} hasBuilding=${ev.floor !== undefined}`);
       if (parsedArabic.exact_location && !ev.exact_location) ev.exact_location = parsedArabic.exact_location;
       if (parsedArabic.ownership_type && !ev.ownership_type) ev.ownership_type = parsedArabic.ownership_type;
       if (parsedArabic.shares_count != null && ev.shares_count == null) ev.shares_count = parsedArabic.shares_count;
@@ -2112,6 +2113,7 @@ export class OwnerChatService {
         else if (/إطلالة|اطلالة|مطل/i.test(params.message)) ev.has_view = true;
         ev.stage = 'complete';
       }
+      this.logger.log(`EVAL_STATE_AFTER_MERGE stage=${ev.stage}`);
 
       // ── Step 1: location (district + area) ────────────────────────────────
       const missing: string[] = [];
