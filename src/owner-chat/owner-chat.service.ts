@@ -2087,8 +2087,26 @@ export class OwnerChatService {
       const cityAr = (c?: string | null) => c ? (DISTRICT_AR[c.toLowerCase()] ?? c) : '';
 
       // Merge optional enrichment fields from message into persisted evalState
-      const ev: PropertyEvaluationState = state.evalState ?? { stage: 'initial' };
+      let ev: PropertyEvaluationState = state.evalState ?? { stage: 'initial' };
       this.logger.log(`EVAL_STATE_LOADED stage=${ev.stage} hasOwnership=${!!ev.ownership_type} hasBuilding=${ev.floor !== undefined}`);
+
+      // Stage already complete — reset for new property or bail out
+      if (ev.stage === 'complete') {
+        if (/عندي|لدي|بدي أبيع|عقار جديد/i.test(params.message)) {
+          ev = { stage: 'initial' };
+          state.evalState = ev;
+        } else {
+          return {
+            response: {
+              intent: 'SMALL_TALK',
+              text_ar: 'تم التقييم بنجاح 🎉 هل تريد تقييم عقار آخر؟ أو يمكنني مساعدتك بأي سؤال عقاري آخر.',
+              data: { stage: 'complete', context_state: state },
+              suggested_actions: [],
+            },
+            toolMessages: [],
+          };
+        }
+      }
       if (parsedArabic.exact_location && !ev.exact_location) ev.exact_location = parsedArabic.exact_location;
       if (parsedArabic.ownership_type && !ev.ownership_type) ev.ownership_type = parsedArabic.ownership_type;
       if (parsedArabic.shares_count != null && ev.shares_count == null) ev.shares_count = parsedArabic.shares_count;
@@ -2175,7 +2193,7 @@ export class OwnerChatService {
         return {
           response: {
             intent: 'PROPERTY_EVALUATION',
-            text_ar: `شكراً على تحديد الموقع! 🏠\n\nالآن أحتاج معلومات الملكية:\n\n📋 **نوع وثيقة الملكية؟**\n• طابو أخضر\n• حكم محكمة\n• عقد بيع ابتدائي\n• ساعة كهرباء فقط\n• استملاك / أوقاف / للدولة\n• قطاع خاص\n\n🔢 **كم عدد الأسهم؟** (مثال: 2400 سهم)\n\n⚖️ **هل العقار بريء من الذمة المالية؟**\n• نعم، بريء من الذمة\n• لا، عليه ذمة مالية\n\n👥 **هل الملكية من مالك أصلي أم ميراث (ورثة)؟**`,
+            text_ar: `شكراً على تحديد الموقع! 🏠\n\nالآن أحتاج معلومات الملكية:\n\n📋 نوع وثيقة الملكية؟\n• طابو أخضر\n• حكم محكمة\n• عقد بيع ابتدائي\n• ساعة كهرباء فقط\n• استملاك / أوقاف / للدولة\n• قطاع خاص\n\n🔢 كم عدد الأسهم؟ (مثال: 2400 سهم)\n\n⚖️ هل العقار بريء من الذمة المالية؟\n• نعم، بريء من الذمة\n• لا، عليه ذمة مالية\n\n👥 هل الملكية من مالك أصلي أم ميراث (ورثة)؟`,
             data: { stage: 'asking_legal' },
             suggested_actions: [],
           },
