@@ -125,13 +125,27 @@ export class AdvisorService {
   async findNearestDistrictWithData(targetDistrict: string): Promise<string> {
     const key = targetDistrict.toLowerCase();
     const targetCoords = this.DISTRICT_COORDS[key];
-    const candidates = Object.keys(this.DISTRICT_COORDS).filter((d) => d !== key);
-    if (!targetCoords || candidates.length === 0) return 'midan';
 
-    let nearest = 'midan';
+    // Query which districts actually have pricing data in the DB
+    let available: string[] = [];
+    try {
+      const rows = await this.urbanexPrisma.$queryRaw<{ district: string }[]>(
+        Prisma.sql`SELECT DISTINCT LOWER(district) AS district FROM areas_price WHERE district IS NOT NULL`,
+      );
+      available = rows.map((r) => r.district).filter(Boolean);
+    } catch {
+      available = Object.keys(this.DISTRICT_COORDS).filter((d) => d !== key);
+    }
+
+    if (available.length === 0) return 'midan';
+    if (!targetCoords) return available[0];
+
+    let nearest = available[0];
     let minDist = Infinity;
-    for (const d of candidates) {
+    for (const d of available) {
+      if (d === key) continue;
       const coords = this.DISTRICT_COORDS[d];
+      if (!coords) continue;
       const dist = this.haversineDistance(targetCoords.lat, targetCoords.lng, coords.lat, coords.lng);
       if (dist < minDist) {
         minDist = dist;
