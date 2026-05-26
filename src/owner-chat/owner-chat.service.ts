@@ -857,6 +857,7 @@ export class OwnerChatService {
       }
 
       if (
+        !hasEnoughToStartEval &&
         advisorIntent === 'GENERAL_QUESTION' &&
         !hasFullPropertyContext &&
         this.isPartialPropertyStateUpdate({
