@@ -2090,6 +2090,29 @@ export class OwnerChatService {
       if (parsedArabic.finishQuality && !ev.finish_quality) ev.finish_quality = parsedArabic.finishQuality;
       state.evalState = ev;
 
+      // When user replies to asking_building — extract inline and force complete
+      if (ev.stage === 'asking_building' && params.message) {
+        const floorMatch = params.message.match(/طابق\s*(أرضي|أول|ثاني|ثالث|رابع|خامس|\d+)/);
+        if (floorMatch) {
+          const floorMap: Record<string, number> = { 'أرضي': 0, 'أول': 1, 'ثاني': 2, 'ثالث': 3, 'رابع': 4, 'خامس': 5 };
+          ev.floor = floorMap[floorMatch[1]] ?? parseInt(floorMatch[1], 10);
+        }
+        if (/بدون مصعد|لا يوجد مصعد/i.test(params.message)) ev.has_elevator = false;
+        else if (/مصعد|elevator/i.test(params.message)) ev.has_elevator = true;
+        if (/جديد/i.test(params.message)) ev.building_age = 'new';
+        else if (/حديث/i.test(params.message)) ev.building_age = 'modern';
+        else if (/قديم/i.test(params.message)) ev.building_age = 'old';
+        if (/فاخر/i.test(params.message)) ev.finish_quality = 'luxury';
+        else if (/عالي/i.test(params.message)) ev.finish_quality = 'high';
+        else if (/عادي/i.test(params.message)) ev.finish_quality = 'medium';
+        else if (/بسيط/i.test(params.message)) ev.finish_quality = 'basic';
+        if (/بدون موقف|لا يوجد موقف/i.test(params.message)) ev.has_parking = false;
+        else if (/موقف|كراج|parking/i.test(params.message)) ev.has_parking = true;
+        if (/بدون إطلالة|بدون اطلالة|لا إطلالة/i.test(params.message)) ev.has_view = false;
+        else if (/إطلالة|اطلالة|مطل/i.test(params.message)) ev.has_view = true;
+        ev.stage = 'complete';
+      }
+
       // ── Step 1: location (district + area) ────────────────────────────────
       const missing: string[] = [];
       if (!district) missing.push('المنطقة (مثال: المزة، الشعلان)');

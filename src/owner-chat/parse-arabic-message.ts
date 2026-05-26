@@ -176,9 +176,9 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
     parsed.floor = 5;
   }
 
-  if (normalized.includes('بدون مصعد') || normalized.includes('ما في مصعد')) {
+  if (/بدون مصعد|ما في مصعد|لا يوجد مصعد/i.test(normalized)) {
     parsed.hasElevator = false;
-  } else if (normalized.includes('مع مصعد') || normalized.includes('في مصعد')) {
+  } else if (/مصعد|elevator/i.test(normalized)) {
     parsed.hasElevator = true;
   }
 
@@ -305,7 +305,9 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
   }
 
   // View
-  if (/إطلالة|اطلالة|مطل\b|view/i.test(normalized)) {
+  if (/بدون إطلالة|بدون اطلالة|لا إطلالة|لا اطلالة/i.test(normalized)) {
+    parsed.has_view = false;
+  } else if (/إطلالة|اطلالة|مطل\b|view/i.test(normalized)) {
     parsed.has_view = true;
   }
 
