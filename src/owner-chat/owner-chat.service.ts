@@ -626,17 +626,26 @@ export class OwnerChatService {
 
       const REAL_ESTATE_KEYWORDS =
         /عقار|شقة|شقه|بيت|بيوت|فيلا|أرض|ارض|محل|مكتب|مستودع|سعر|إيجار|ايجار|بيع|شراء|تقييم|تسعير|استثمار|منطقة|حي|مالكي|مزة|مزه|كفرسوسة|شعلان|مهاجرين|جرمانا|دمشق|حلب|حمص|طابق|مصعد|بناء|تشطيب|موقف|طابو|ملكية|سهم|ذمة|ميراث|ورثة|property|apartment|villa|house|price|rent|buy|sell|real estate|invest|district|floor|elevator/i;
-      if (!REAL_ESTATE_KEYWORDS.test(params.message)) {
+      const isGeneralQuestion =
+        !REAL_ESTATE_KEYWORDS.test(params.message) &&
+        params.message.trim().length > 0 &&
+        !(params.deterministicState?.area_m2 && params.deterministicState?.ask_price);
+
+      if (isGeneralQuestion) {
         const aiSvc = this.getAiService();
-        const aiReply = aiSvc
+        const reply = aiSvc
           ? await aiSvc
-              .generateOwnerAdvisorReply({ message: params.message, ownerId: params.ownerId })
-              .then((r) => String(r?.message || ''))
-              .catch(() => '')
-          : '';
+              .generateOwnerAdvisorReply({
+                message: params.message,
+                ownerId: params.ownerId,
+                systemPromptOverride:
+                  'أنت مساعد عقاري ودود. إذا كان السؤال غير متعلق بالعقارات، أجب بلطف أنك متخصص في العقارات فقط وعرض مساعدتك في العقارات. الرد يكون مختصراً وودياً.',
+              })
+              .catch(() => null)
+          : null;
         return this.buildScopedReply({
           intent: 'SMALL_TALK',
-          text: aiReply || buildRealEstateGreetingReply('ar'),
+          text: reply?.message || 'أنا متخصص في العقارات فقط. هل تريد تقييم عقار أو معرفة أسعار السوق؟',
           data: null,
         });
       }
@@ -2166,7 +2175,7 @@ export class OwnerChatService {
         return {
           response: {
             intent: 'PROPERTY_EVALUATION',
-            text_ar: `ممتاز! بعض التفاصيل القانونية:\n\n🔢 كم عدد الأسهم؟ (مثال: 2400 سهم)\n✅ هل العقار بريء من الذمة المالية؟\n👥 هل هو ملك أصلي أم ميراث (ورثة)؟\n⚖️ هل مكتسب الدرجة القطعية؟`,
+            text_ar: `شكراً على تحديد الموقع! 🏠\n\nالآن أحتاج معلومات الملكية:\n\n📋 **نوع وثيقة الملكية؟**\n• طابو أخضر\n• حكم محكمة\n• عقد بيع ابتدائي\n• ساعة كهرباء فقط\n• استملاك / أوقاف / للدولة\n• قطاع خاص\n\n🔢 **كم عدد الأسهم؟** (مثال: 2400 سهم)\n\n⚖️ **هل العقار بريء من الذمة المالية؟**\n• نعم، بريء من الذمة\n• لا، عليه ذمة مالية\n\n👥 **هل الملكية من مالك أصلي أم ميراث (ورثة)؟**`,
             data: { stage: 'asking_legal' },
             suggested_actions: [],
           },
