@@ -931,7 +931,10 @@ export class OwnerChatService {
         });
       }
 
-      if (domain.intent === 'CONFIRMATION_YES' || domain.intent === 'CONFIRMATION_NO') {
+      if (
+        (domain.intent === 'CONFIRMATION_YES' || domain.intent === 'CONFIRMATION_NO') &&
+        !state.evalState?.stage?.startsWith('asking')
+      ) {
         this.logger.log('CHAT_ROUTE: FINAL handler=confirmation');
         this.logger.log('FINAL_RESPONSE_SOURCE source=formatter');
         return this.buildScopedReply({
@@ -2114,6 +2117,11 @@ export class OwnerChatService {
         ev.stage = 'complete';
       }
       this.logger.log(`EVAL_STATE_AFTER_MERGE stage=${ev.stage}`);
+
+      // Advance from asking_location once district/area arrive
+      if (ev.stage === 'asking_location' && (district || /^الموقع[:\s]/.test(params.message.trim()))) {
+        ev.stage = 'asking_legal';
+      }
 
       // ── Step 1: location (district + area) ────────────────────────────────
       const missing: string[] = [];
