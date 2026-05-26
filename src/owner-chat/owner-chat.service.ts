@@ -807,7 +807,7 @@ export class OwnerChatService {
         parsedArabic.listing_intent === 'SELL' ||
         parsedArabic.listing_intent === 'ESTIMATE' ||
         parsedArabic.ask_price !== undefined ||
-        /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|ابيع|بدي ابيع/i.test(params.message);
+        /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|عندي فيلا|عندي أرض|عندي محل|لدي شقة|لدي بيت|لدي عقار|لدي فيلا|لدي أرض|ابيع|بدي ابيع|للبيع|i have|i own|my apartment|my house|my property/i.test(params.message);
 
       const sessionCity = parsedArabic.city ?? state.city;
       const hasEnoughToStartEval =

@@ -238,13 +238,15 @@ export function parseArabicMessage(message: string): ParsedArabicMessage {
 
   // Ask price — seller's declared price from natural speech
   const askPriceMatch = normalized.match(
-    /(?:بسعر|سعره|سعرها|سعرهم|عرضه|عرضها|أطلب|طالب)\s*:?\s*([\d,،]+(?:\.\d+)?)\s*(مليون|ألف|الف)?/i,
+    /(?:بسعر|سعره|سعرها|سعرهم|عرضه|عرضها|أطلب|طالب|بـسعر|سعر)\s*:?\s*([\d,،.]+)\s*(مليار|مليون|ألف|الف)?/i,
   );
   if (askPriceMatch?.[1]) {
     const raw = Number(String(askPriceMatch[1]).replace(/[,،]/g, ''));
     const unit = String(askPriceMatch[2] || '').toLowerCase();
     if (Number.isFinite(raw) && raw > 0) {
-      if (unit.includes('مليون')) {
+      if (unit.includes('مليار')) {
+        parsed.ask_price = Math.round(raw * 1_000_000_000);
+      } else if (unit.includes('مليون')) {
         parsed.ask_price = Math.round(raw * 1_000_000);
       } else if (unit.includes('الف') || unit.includes('ألف')) {
         parsed.ask_price = Math.round(raw * 1_000);
