@@ -40,9 +40,81 @@ for (const migration of PROBLEM_MIGRATIONS) {
   }
 }
 
-// Run the learned_vocabulary SQL directly since it was skipped
+// Run all table creation SQL directly (idempotent — IF NOT EXISTS)
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+
+async function createBuyerChatTables() {
+  try {
+    console.log('[fix-migration] Creating buyer_chat_sessions table...');
+    await prisma.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS \`buyer_chat_sessions\` (
+        \`id\` INTEGER NOT NULL AUTO_INCREMENT,
+        \`buyer_id\` INTEGER NOT NULL,
+        \`title\` VARCHAR(255) NULL,
+        \`meta_json\` TEXT NULL,
+        \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        \`updated_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+        PRIMARY KEY (\`id\`),
+        INDEX \`buyer_chat_sessions_buyer_id_idx\`(\`buyer_id\`)
+      ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+    `);
+    console.log('[fix-migration] buyer_chat_sessions created ✅');
+
+    await prisma.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS \`buyer_chat_messages\` (
+        \`id\` INTEGER NOT NULL AUTO_INCREMENT,
+        \`session_id\` INTEGER NOT NULL,
+        \`role\` VARCHAR(20) NOT NULL,
+        \`content\` TEXT NOT NULL,
+        \`payload_json\` TEXT NULL,
+        \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        PRIMARY KEY (\`id\`),
+        INDEX \`buyer_chat_messages_session_id_idx\`(\`session_id\`),
+        CONSTRAINT \`buyer_chat_messages_session_id_fkey\`
+          FOREIGN KEY (\`session_id\`) REFERENCES \`buyer_chat_sessions\`(\`id\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+      ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+    `);
+    console.log('[fix-migration] buyer_chat_messages created ✅');
+
+    await prisma.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS \`buyer_recommendation_logs\` (
+        \`id\` INTEGER NOT NULL AUTO_INCREMENT,
+        \`session_id\` INTEGER NOT NULL,
+        \`property_id\` INTEGER NOT NULL,
+        \`score\` DOUBLE NULL,
+        \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        PRIMARY KEY (\`id\`),
+        CONSTRAINT \`buyer_recommendation_logs_session_id_fkey\`
+          FOREIGN KEY (\`session_id\`) REFERENCES \`buyer_chat_sessions\`(\`id\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+      ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+    `);
+    console.log('[fix-migration] buyer_recommendation_logs created ✅');
+  } catch (e) {
+    console.warn('[fix-migration] Buyer chat tables skipped:', e.message?.split('\n')[0]);
+  }
+}
+
+async function createBuyerSavedSearches() {
+  try {
+    await prisma.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS \`buyer_saved_searches\` (
+        \`id\` INTEGER NOT NULL AUTO_INCREMENT,
+        \`buyer_id\` INTEGER NOT NULL,
+        \`filters_json\` TEXT NOT NULL,
+        \`label\` VARCHAR(255) NULL,
+        \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        PRIMARY KEY (\`id\`),
+        INDEX \`buyer_saved_searches_buyer_id_idx\`(\`buyer_id\`)
+      ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+    `);
+    console.log('[fix-migration] buyer_saved_searches created ✅');
+  } catch (e) {
+    console.warn('[fix-migration] buyer_saved_searches skipped:', e.message?.split('\n')[0]);
+  }
+}
 
 async function createVocabularyTables() {
   try {
@@ -82,11 +154,17 @@ async function createVocabularyTables() {
     console.log('[fix-migration] vocabulary_learning_log created ✅');
   } catch (e) {
     console.warn('[fix-migration] Table creation skipped (may already exist):', e.message?.split('\n')[0]);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
-createVocabularyTables();
+(async () => {
+  try {
+    await createBuyerChatTables();
+    await createBuyerSavedSearches();
+    await createVocabularyTables();
+  } finally {
+    await prisma.$disconnect();
+  }
+})();
 
 console.log('[fix-migration] Done! Running deploy...');
