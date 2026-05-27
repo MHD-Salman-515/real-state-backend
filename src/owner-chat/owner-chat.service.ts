@@ -1182,7 +1182,8 @@ export class OwnerChatService {
         pricingFactors.finishQuality = parsedArabic.finishQuality as PricingFactors['finishQuality'];
       }
 
-      if (inRealEstateFlow && sellerFlowActive && areaM2) {
+      const hasPendingVocab = !!(state as any).evalState?.pendingVocabTerm;
+      if (inRealEstateFlow && sellerFlowActive && (areaM2 || hasPendingVocab)) {
         const activeEvalStage = state.evalState?.stage;
         if (sessionArea || parsedArabic.area_m2 || (activeEvalStage && activeEvalStage !== 'complete')) {
           this.logger.log('CHAT_ROUTE: PROPERTY_EVALUATION handler=handlePropertyEvaluation');
