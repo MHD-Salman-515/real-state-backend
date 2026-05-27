@@ -27,6 +27,7 @@ import { DebugModule } from './debug/debug.module';
 import { OpsModule } from './ops/ops.module';
 import { MarketDataModule } from './market-data/market-data.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { VocabularyModule } from './vocabulary/vocabulary.module';
 import { AuthLoginTraceMiddleware } from './auth/auth-login-trace.middleware';
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { AuthLoginTraceMiddleware } from './auth/auth-login-trace.middleware';
     MarketIntelligenceModule,
     MarketDataModule,
     NotificationsModule,
+    VocabularyModule,
     ...(process.env.NODE_ENV !== 'production' ? [DebugModule] : []),
     OpsModule,
   ],
