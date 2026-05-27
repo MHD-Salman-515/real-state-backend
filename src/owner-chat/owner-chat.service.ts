@@ -38,6 +38,7 @@ import { parseArabicMessage } from './parse-arabic-message';
 import { PricingFactors, PricingFactorsService } from '../pricing/pricing-factors.service';
 import { LocationServicesService } from '../pricing/location-services.service';
 import { NotificationsService } from '../notifications/notifications.service';
+import { VocabularyService } from '../vocabulary/vocabulary.service';
 
 type OwnedProperty = {
   id: number;
@@ -120,6 +121,8 @@ interface PropertyEvaluationState {
   has_elevator?: boolean;
   building_age?: string;
   finish_quality?: string;
+  pendingVocabTerm?: string;
+  pendingVocabCategory?: string;
 }
 
 type DeterministicContextState = {
@@ -155,6 +158,7 @@ export class OwnerChatService {
     @Optional() private readonly pricingFactorsService?: PricingFactorsService,
     @Optional() private readonly locationServicesService?: LocationServicesService,
     @Optional() private readonly notifications?: NotificationsService,
+    @Optional() private readonly vocabularyService?: VocabularyService,
   ) {}
 
   async createSession(params: { ownerId: number; title?: string }) {
@@ -752,8 +756,24 @@ export class OwnerChatService {
 
       const isLocationConfirmation = /^الموقع[:\s]|\(\d+\.\d+,\s*\d+\.\d+\)/.test(params.message.trim());
 
-      const sessionDistrict = parsedArabic.district ?? state.district;
+      let sessionDistrict = parsedArabic.district ?? state.district;
       const sessionArea = parsedArabic.area_m2 ?? state.area_m2;
+
+      // Check learned vocabulary for unrecognized district terms
+      if (!sessionDistrict && this.vocabularyService) {
+        const words = params.message.trim().split(/\s+/);
+        for (const word of words) {
+          if (word.length > 2) {
+            const vocab = await this.vocabularyService.lookup(word);
+            if (vocab?.category === 'district') {
+              parsedArabic.district = vocab.mappedTo;
+              sessionDistrict = vocab.mappedTo;
+              this.logger.log(`VOCAB_HIT term="${word}" → district="${vocab.mappedTo}" confidence=${vocab.confidence}`);
+              break;
+            }
+          }
+        }
+      }
 
       if (state.district && state.area_m2 && state.ask_price) {
         sellerFlowActive = true;
@@ -2167,10 +2187,26 @@ export class OwnerChatService {
       if (missing.length > 0) {
         const needsDistrict = !district;
         ev.stage = 'asking_location';
+
+        // Vocabulary clarification — detect unknown location word and store for learning
+        let locationText = `أهلاً! سأساعدك في تقييم عقارك 🏠\n\nلأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}\n\nمثال: "عندي شقة بالمزة 150 متر بسعر 900 مليون"${needsDistrict ? '\n\nأو يمكنك 📍 حدد الموقع على الخريطة لتحديد المنطقة تلقائياً.' : ''}`;
+        if (needsDistrict && this.vocabularyService) {
+          const unknownWord = this.extractPossibleDistrictWord(params.message);
+          if (unknownWord) {
+            ev.pendingVocabTerm = unknownWord;
+            ev.pendingVocabCategory = 'district';
+            locationText = this.vocabularyService.buildClarificationQuestion(
+              unknownWord,
+              'district',
+              ['المزة', 'الشعلان', 'ساروجة', 'المالكي', 'أبو رمانة'],
+            );
+          }
+        }
+
         return {
           response: {
             intent: 'PROPERTY_EVALUATION',
-            text_ar: `أهلاً! سأساعدك في تقييم عقارك 🏠\n\nلأعطيك تقييماً دقيقاً، أحتاج:\n${missing.map((m) => `• ${m}`).join('\n')}\n\nمثال: "عندي شقة بالمزة 150 متر بسعر 900 مليون"${needsDistrict ? '\n\nأو يمكنك 📍 حدد الموقع على الخريطة لتحديد المنطقة تلقائياً.' : ''}`,
+            text_ar: locationText,
             data: { stage: 'asking_location' },
             suggested_actions: needsDistrict
               ? [{ type: 'PICK_LOCATION' as const, label_ar: '📍 حدد الموقع على الخريطة' }]
@@ -2178,6 +2214,19 @@ export class OwnerChatService {
           },
           toolMessages: [],
         };
+      }
+
+      // Vocab learning — when district is now confirmed and a pending term exists
+      if (district && ev.pendingVocabTerm && ev.pendingVocabCategory === 'district' && this.vocabularyService) {
+        await this.vocabularyService.learn(
+          ev.pendingVocabTerm,
+          district,
+          'district',
+          params.ownerId,
+          params.message,
+        );
+        ev.pendingVocabTerm = undefined;
+        ev.pendingVocabCategory = undefined;
       }
 
       // ── Step 2: ownership document type ───────────────────────────────────
@@ -3204,5 +3253,24 @@ export class OwnerChatService {
     const n = Number(value || 90);
     if (!Number.isFinite(n)) return 90;
     return Math.max(1, Math.min(365, Math.trunc(n)));
+  }
+
+  private extractPossibleDistrictWord(message: string): string | null {
+    // Strip known non-district words and extract candidate location token
+    const STOP_WORDS = new Set([
+      'عندي', 'عندك', 'لدي', 'لديه', 'لديها', 'شقة', 'شقه', 'بيت', 'منزل', 'فيلا', 'أرض', 'ارض', 'محل', 'عقار',
+      'مساحة', 'مساحه', 'متر', 'مربع', 'غرفة', 'غرفه', 'غرف', 'طابق', 'دور', 'اريد', 'أريد', 'بدي', 'ابيع',
+      'للبيع', 'بسعر', 'سعر', 'سعره', 'سعرها', 'مليون', 'مليار', 'ألف', 'الف', 'في', 'من', 'على', 'إلى',
+      'الى', 'هي', 'هو', 'و', 'أو', 'او', 'مع', 'بدون', 'بدن', 'فيها', 'فيه', 'تقييم', 'قيمة', 'رأيك',
+    ]);
+    const words = message
+      .replace(/[.,،؟?!()]/g, ' ')
+      .trim()
+      .split(/\s+/)
+      .filter((w) => w.length > 2 && !STOP_WORDS.has(w) && !/^\d+$/.test(w));
+
+    // Prefer words starting with ال (definite article) or that look like place names
+    const candidate = words.find((w) => w.startsWith('ال') || /^[أ-ي]{3,}$/.test(w));
+    return candidate ?? words[0] ?? null;
   }
 }

@@ -7,6 +7,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { PropertyModule } from '../property/property.module';
 import { PricingModule } from '../pricing/pricing.module';
 import { NotificationsModule } from '../notifications/notifications.module';
+import { VocabularyModule } from '../vocabulary/vocabulary.module';
 import { OwnerChatController } from './owner-chat.controller';
 import { OwnerChatService } from './owner-chat.service';
 
@@ -20,6 +21,7 @@ import { OwnerChatService } from './owner-chat.service';
     ChatModule,
     PricingModule,
     NotificationsModule,
+    VocabularyModule,
   ],
   controllers: [OwnerChatController],
   providers: [OwnerChatService],
