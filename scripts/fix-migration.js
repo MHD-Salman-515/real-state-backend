@@ -40,4 +40,53 @@ for (const migration of PROBLEM_MIGRATIONS) {
   }
 }
 
+// Run the learned_vocabulary SQL directly since it was skipped
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+async function createVocabularyTables() {
+  try {
+    console.log('[fix-migration] Creating learned_vocabulary table...');
+    await prisma.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS \`learned_vocabulary\` (
+        \`id\` INTEGER NOT NULL AUTO_INCREMENT,
+        \`raw_term\` VARCHAR(255) NOT NULL,
+        \`mapped_to\` VARCHAR(255) NOT NULL,
+        \`category\` VARCHAR(50) NOT NULL,
+        \`confidence\` DOUBLE NOT NULL DEFAULT 0.5,
+        \`usage_count\` INTEGER NOT NULL DEFAULT 1,
+        \`confirmed_count\` INTEGER NOT NULL DEFAULT 0,
+        \`rejected_count\` INTEGER NOT NULL DEFAULT 0,
+        \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        \`updated_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+        UNIQUE INDEX \`learned_vocabulary_raw_term_mapped_to_key\`(\`raw_term\`, \`mapped_to\`),
+        PRIMARY KEY (\`id\`)
+      ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+    `);
+    console.log('[fix-migration] learned_vocabulary created ✅');
+
+    await prisma.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS \`vocabulary_learning_log\` (
+        \`id\` INTEGER NOT NULL AUTO_INCREMENT,
+        \`term_id\` INTEGER NOT NULL,
+        \`user_id\` INTEGER NOT NULL,
+        \`action\` VARCHAR(20) NOT NULL,
+        \`context\` TEXT NULL,
+        \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        PRIMARY KEY (\`id\`),
+        CONSTRAINT \`vocabulary_learning_log_term_id_fkey\`
+          FOREIGN KEY (\`term_id\`) REFERENCES \`learned_vocabulary\`(\`id\`)
+          ON DELETE RESTRICT ON UPDATE CASCADE
+      ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+    `);
+    console.log('[fix-migration] vocabulary_learning_log created ✅');
+  } catch (e) {
+    console.warn('[fix-migration] Table creation skipped (may already exist):', e.message?.split('\n')[0]);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+createVocabularyTables();
+
 console.log('[fix-migration] Done! Running deploy...');
