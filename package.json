@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "start:prod": "prisma migrate deploy && node dist/main.js",
+    "start:prod": "node scripts/fix-migration.js && prisma migrate deploy && node dist/main.js",
     "build": "tsc -p tsconfig.build.json",
     "build:render": "npm run build",
     "start": "nest start",
