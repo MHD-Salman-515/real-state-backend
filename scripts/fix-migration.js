@@ -3,6 +3,9 @@ const { execSync } = require('child_process');
 const FAILED_MIGRATIONS = [
   '20260304113000_add_buyer_chat_session_meta_json',
   '20260304113000_add_chat_session_meta',
+  '20260304120000_add_buyer_saved_searches',
+  '20260304124500_add_buyer_recommendation_logs',
+  '20260304183000_add_buyer_chat_tables',
 ];
 
 for (const migration of FAILED_MIGRATIONS) {
