@@ -1,15 +1,25 @@
 const { execSync } = require('child_process');
 
-const migration = '20260304113000_add_buyer_chat_session_meta_json';
+const FAILED_MIGRATION = '20260304113000_add_buyer_chat_session_meta_json';
 
 try {
-  console.log(`[fix-migration] Marking ${migration} as rolled-back...`);
+  console.log(`[fix-migration] Marking ${FAILED_MIGRATION} as rolled-back...`);
   execSync(
-    `node node_modules/prisma/build/index.js migrate resolve --rolled-back "${migration}"`,
-    { env: { ...process.env }, stdio: 'inherit' },
+    `node node_modules/prisma/build/index.js migrate resolve --rolled-back "${FAILED_MIGRATION}"`,
+    { stdio: 'inherit' }
   );
-  console.log('[fix-migration] Done.');
-} catch (err) {
-  // Already resolved or never failed — safe to continue
-  console.warn('[fix-migration] Resolve skipped (may already be clean):', err.message);
+  console.log('[fix-migration] Rolled back.');
+} catch (e) {
+  console.warn('[fix-migration] Already clean:', e.message);
+}
+
+try {
+  console.log(`[fix-migration] Marking ${FAILED_MIGRATION} as applied (skip)...`);
+  execSync(
+    `node node_modules/prisma/build/index.js migrate resolve --applied "${FAILED_MIGRATION}"`,
+    { stdio: 'inherit' }
+  );
+  console.log('[fix-migration] Marked as applied. Done.');
+} catch (e) {
+  console.warn('[fix-migration] Could not mark as applied:', e.message);
 }
