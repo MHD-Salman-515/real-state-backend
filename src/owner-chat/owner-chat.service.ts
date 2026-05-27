@@ -138,6 +138,15 @@ type DeterministicContextState = {
   evalState?: PropertyEvaluationState;
 };
 
+const DAMASCUS_DISTRICTS = [
+  'المزة', 'الشعلان', 'كفرسوسة', 'المالكي', 'أبو رمانة',
+  'ركن الدين', 'البرامكة', 'ساروجة', 'القنوات', 'المهاجرين',
+  'الصالحية', 'الميدان', 'القصاع', 'الشاغور', 'العمارة',
+  'المزرعة', 'برزة', 'القابون', 'جوبر', 'حرستا',
+  'دوما', 'جرمانا', 'داريا', 'المعضمية', 'دمر',
+  'الربوة', 'قدسيا', 'ضاحية الأسد', 'عدرا', 'الزبداني',
+];
+
 @Injectable()
 export class OwnerChatService {
   private readonly logger = new Logger(OwnerChatService.name);
@@ -747,6 +756,12 @@ export class OwnerChatService {
         )} current_session_last_property=${JSON.stringify(currentPropertyState)} final_selected_handler=pending`,
       );
       this.logger.log(`OWNER_CHAT_ROUTE intent=${advisorIntent} domain=${domain.domain}`);
+
+      // If eval is mid-flow with a pending vocab clarification, bypass orchestrator
+      const activeEvalState = (state as any).evalState as PropertyEvaluationState | undefined;
+      if (activeEvalState?.pendingVocabTerm) {
+        sellerFlowActive = true;
+      }
 
       const hasSellerSignal =
         parsedArabic.listing_intent === 'SELL' ||
@@ -2199,10 +2214,11 @@ export class OwnerChatService {
           if (unknownWord) {
             ev.pendingVocabTerm = unknownWord;
             ev.pendingVocabCategory = 'district';
+            const suggestions = DAMASCUS_DISTRICTS.slice(0, 5);
             locationText = this.vocabularyService.buildClarificationQuestion(
               unknownWord,
               'district',
-              ['المزة', 'الشعلان', 'ساروجة', 'المالكي', 'أبو رمانة'],
+              suggestions,
             );
           }
         }
@@ -3264,18 +3280,19 @@ export class OwnerChatService {
   }
 
   private extractPossibleDistrictWord(message: string): string | null {
-    // Strip known non-district words and extract candidate location token
     const STOP_WORDS = new Set([
       'عندي', 'عندك', 'لدي', 'لديه', 'لديها', 'شقة', 'شقه', 'بيت', 'منزل', 'فيلا', 'أرض', 'ارض', 'محل', 'عقار',
       'مساحة', 'مساحه', 'متر', 'مربع', 'غرفة', 'غرفه', 'غرف', 'طابق', 'دور', 'اريد', 'أريد', 'بدي', 'ابيع',
       'للبيع', 'بسعر', 'سعر', 'سعره', 'سعرها', 'مليون', 'مليار', 'ألف', 'الف', 'في', 'من', 'على', 'إلى',
       'الى', 'هي', 'هو', 'و', 'أو', 'او', 'مع', 'بدون', 'بدن', 'فيها', 'فيه', 'تقييم', 'قيمة', 'رأيك',
     ]);
+    const knownDistricts = new Set(DAMASCUS_DISTRICTS);
     const words = message
       .replace(/[.,،؟?!()]/g, ' ')
       .trim()
       .split(/\s+/)
-      .filter((w) => w.length > 2 && !STOP_WORDS.has(w) && !/^\d+$/.test(w));
+      // Skip stop words, pure digits, and already-known district names
+      .filter((w) => w.length > 2 && !STOP_WORDS.has(w) && !/^\d+$/.test(w) && !knownDistricts.has(w));
 
     // Prefer words starting with ال (definite article) or that look like place names
     const candidate = words.find((w) => w.startsWith('ال') || /^[أ-ي]{3,}$/.test(w));
