@@ -10,7 +10,7 @@ export class VocabularyService {
   async lookup(rawTerm: string): Promise<{ mappedTo: string; category: string; confidence: number } | null> {
     const term = await this.prisma.learnedVocabulary.findFirst({
       where: {
-        rawTerm: { equals: rawTerm.trim(), mode: 'insensitive' },
+        rawTerm: rawTerm.trim().toLowerCase(),
         confidence: { gte: 0.5 },
       },
       orderBy: { confidence: 'desc' },
@@ -25,7 +25,7 @@ export class VocabularyService {
 
   async learn(rawTerm: string, mappedTo: string, category: string, userId: number, context?: string): Promise<void> {
     const existing = await this.prisma.learnedVocabulary.findFirst({
-      where: { rawTerm: rawTerm.trim(), mappedTo },
+      where: { rawTerm: rawTerm.trim().toLowerCase(), mappedTo },
     });
 
     if (existing) {
@@ -44,7 +44,7 @@ export class VocabularyService {
       this.logger.log(`VOCAB_LEARNED reinforced="${rawTerm}" → "${mappedTo}" confidence=${newConfidence}`);
     } else {
       const newTerm = await this.prisma.learnedVocabulary.create({
-        data: { rawTerm: rawTerm.trim(), mappedTo, category, confidence: 0.6 },
+        data: { rawTerm: rawTerm.trim().toLowerCase(), mappedTo, category, confidence: 0.6 },
       });
       await this.prisma.vocabularyLearningLog.create({
         data: { termId: newTerm.id, userId, action: 'auto_learned', context },
@@ -55,7 +55,7 @@ export class VocabularyService {
 
   async reject(rawTerm: string, mappedTo: string, userId: number): Promise<void> {
     const existing = await this.prisma.learnedVocabulary.findFirst({
-      where: { rawTerm: rawTerm.trim(), mappedTo },
+      where: { rawTerm: rawTerm.trim().toLowerCase(), mappedTo },
     });
     if (!existing) return;
     const newConfidence = Math.max(0.0, existing.confidence - 0.2);
