@@ -688,3 +688,32 @@ model PropertyImage {
   @@index([propertyId])
   @@map("PropertyImage")
 }
+
+model LearnedVocabulary {
+  id             Int      @id @default(autoincrement())
+  rawTerm        String   @map("raw_term") @db.VarChar(255)
+  mappedTo       String   @map("mapped_to") @db.VarChar(255)
+  category       String   @db.VarChar(50)
+  confidence     Float    @default(0.5)
+  usageCount     Int      @default(1)   @map("usage_count")
+  confirmedCount Int      @default(0)   @map("confirmed_count")
+  rejectedCount  Int      @default(0)   @map("rejected_count")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt     @map("updated_at")
+  logs           VocabularyLearningLog[]
+
+  @@unique([rawTerm, mappedTo])
+  @@map("learned_vocabulary")
+}
+
+model VocabularyLearningLog {
+  id        Int      @id @default(autoincrement())
+  termId    Int      @map("term_id")
+  userId    Int      @map("user_id")
+  action    String   @db.VarChar(20)
+  context   String?  @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  term      LearnedVocabulary @relation(fields: [termId], references: [id])
+
+  @@map("vocabulary_learning_log")
+}
