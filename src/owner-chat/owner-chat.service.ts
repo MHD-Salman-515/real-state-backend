@@ -764,12 +764,16 @@ export class OwnerChatService {
         const words = params.message.trim().split(/\s+/);
         for (const word of words) {
           if (word.length > 2) {
-            const vocab = await this.vocabularyService.lookup(word);
-            if (vocab?.category === 'district') {
-              parsedArabic.district = vocab.mappedTo;
-              sessionDistrict = vocab.mappedTo;
-              this.logger.log(`VOCAB_HIT term="${word}" → district="${vocab.mappedTo}" confidence=${vocab.confidence}`);
-              break;
+            try {
+              const vocab = await this.vocabularyService.lookup(word);
+              if (vocab?.category === 'district') {
+                parsedArabic.district = vocab.mappedTo;
+                sessionDistrict = vocab.mappedTo;
+                this.logger.log(`VOCAB_HIT term="${word}" → district="${vocab.mappedTo}" confidence=${vocab.confidence}`);
+                break;
+              }
+            } catch (vocabErr) {
+              this.logger.warn(`VOCAB_LOOKUP_SKIP: ${(vocabErr as Error).message?.split('\n')[0]}`);
             }
           }
         }
@@ -2218,13 +2222,17 @@ export class OwnerChatService {
 
       // Vocab learning — when district is now confirmed and a pending term exists
       if (district && ev.pendingVocabTerm && ev.pendingVocabCategory === 'district' && this.vocabularyService) {
-        await this.vocabularyService.learn(
-          ev.pendingVocabTerm,
-          district,
-          'district',
-          params.ownerId,
-          params.message,
-        );
+        try {
+          await this.vocabularyService.learn(
+            ev.pendingVocabTerm,
+            district,
+            'district',
+            params.ownerId,
+            params.message,
+          );
+        } catch (vocabErr) {
+          this.logger.warn(`VOCAB_LEARN_SKIP: ${(vocabErr as Error).message?.split('\n')[0]}`);
+        }
         ev.pendingVocabTerm = undefined;
         ev.pendingVocabCategory = undefined;
       }
