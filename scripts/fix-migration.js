@@ -61,8 +61,10 @@ async function createBuyerChatTables() {
     `);
     console.log('[fix-migration] buyer_chat_sessions created ✅');
 
+    // Drop and recreate buyer_chat_messages with all required columns
+    await prisma.$executeRawUnsafe(`DROP TABLE IF EXISTS \`buyer_chat_messages\``).catch(() => {});
     await prisma.$executeRawUnsafe(`
-      CREATE TABLE IF NOT EXISTS \`buyer_chat_messages\` (
+      CREATE TABLE \`buyer_chat_messages\` (
         \`id\` INTEGER NOT NULL AUTO_INCREMENT,
         \`session_id\` INTEGER NOT NULL,
         \`role\` VARCHAR(20) NOT NULL,
@@ -77,16 +79,7 @@ async function createBuyerChatTables() {
           ON DELETE CASCADE ON UPDATE CASCADE
       ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
     `);
-    console.log('[fix-migration] buyer_chat_messages created ✅');
-
-    // Add intent column if not exists (MySQL compatible)
-    await prisma.$executeRawUnsafe(`
-      ALTER TABLE \`buyer_chat_messages\` ADD COLUMN \`intent\` VARCHAR(100) NULL
-    `).catch((e) => {
-      if (!e.message?.includes('Duplicate column')) {
-        console.warn('[fix-migration] intent column:', e.message?.split('\n')[0]);
-      }
-    });
+    console.log('[fix-migration] buyer_chat_messages recreated with intent column ✅');
 
     await prisma.$executeRawUnsafe(`
       CREATE TABLE IF NOT EXISTS \`buyer_recommendation_logs\` (
