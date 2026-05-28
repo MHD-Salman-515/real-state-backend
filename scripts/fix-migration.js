@@ -67,6 +67,7 @@ async function createBuyerChatTables() {
         \`session_id\` INTEGER NOT NULL,
         \`role\` VARCHAR(20) NOT NULL,
         \`content\` TEXT NOT NULL,
+        \`intent\` VARCHAR(100) NULL,
         \`payload_json\` TEXT NULL,
         \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
         PRIMARY KEY (\`id\`),
@@ -77,6 +78,12 @@ async function createBuyerChatTables() {
       ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
     `);
     console.log('[fix-migration] buyer_chat_messages created ✅');
+
+    // Add intent column if table already existed without it
+    await prisma.$executeRawUnsafe(`
+      ALTER TABLE \`buyer_chat_messages\`
+      ADD COLUMN IF NOT EXISTS \`intent\` VARCHAR(100) NULL
+    `).catch(() => {});
 
     await prisma.$executeRawUnsafe(`
       CREATE TABLE IF NOT EXISTS \`buyer_recommendation_logs\` (
