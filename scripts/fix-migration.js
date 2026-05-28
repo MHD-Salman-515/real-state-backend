@@ -79,11 +79,14 @@ async function createBuyerChatTables() {
     `);
     console.log('[fix-migration] buyer_chat_messages created ✅');
 
-    // Add intent column if table already existed without it
+    // Add intent column if not exists (MySQL compatible)
     await prisma.$executeRawUnsafe(`
-      ALTER TABLE \`buyer_chat_messages\`
-      ADD COLUMN IF NOT EXISTS \`intent\` VARCHAR(100) NULL
-    `).catch(() => {});
+      ALTER TABLE \`buyer_chat_messages\` ADD COLUMN \`intent\` VARCHAR(100) NULL
+    `).catch((e) => {
+      if (!e.message?.includes('Duplicate column')) {
+        console.warn('[fix-migration] intent column:', e.message?.split('\n')[0]);
+      }
+    });
 
     await prisma.$executeRawUnsafe(`
       CREATE TABLE IF NOT EXISTS \`buyer_recommendation_logs\` (
