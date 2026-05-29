@@ -71,7 +71,7 @@ export class ExpensesService {
         ticket: { select: { id: true, category: true } },
         contractor: { select: { id: true, fullName: true, role: true } },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { expenseDate: 'desc' },
     });
   }
 
