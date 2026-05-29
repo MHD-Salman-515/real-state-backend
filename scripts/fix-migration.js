@@ -162,23 +162,24 @@ async function createVocabularyTables() {
 
 async function createPaymentTable() {
   try {
+    await prisma.$executeRawUnsafe(`DROP TABLE IF EXISTS \`payment\``);
     await prisma.$executeRawUnsafe(`
-      CREATE TABLE IF NOT EXISTS \`payment\` (
+      CREATE TABLE \`payment\` (
         \`id\` INTEGER NOT NULL AUTO_INCREMENT,
-        \`invoice_id\` INTEGER NOT NULL,
+        \`invoiceId\` INTEGER NOT NULL,
         \`amount\` DOUBLE NOT NULL,
         \`method\` VARCHAR(50) NOT NULL DEFAULT 'CASH',
         \`date\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
         \`note\` TEXT NULL,
-        \`created_at\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        \`createdAt\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
         PRIMARY KEY (\`id\`),
-        INDEX \`payment_invoice_id_idx\`(\`invoice_id\`),
-        CONSTRAINT \`payment_invoice_id_fkey\`
-          FOREIGN KEY (\`invoice_id\`) REFERENCES \`Invoice\`(\`id\`)
+        INDEX \`payment_invoiceId_idx\`(\`invoiceId\`),
+        CONSTRAINT \`payment_invoiceId_fkey\`
+          FOREIGN KEY (\`invoiceId\`) REFERENCES \`Invoice\`(\`id\`)
           ON DELETE CASCADE ON UPDATE CASCADE
       ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
     `);
-    console.log('[fix-migration] payment table created ✅');
+    console.log('[fix-migration] payment table recreated ✅');
   } catch (e) {
     console.warn('[fix-migration] payment skipped:', e.message?.split('\n')[0]);
   }
