@@ -185,15 +185,18 @@ async function createPaymentTable() {
   }
 }
 
-(async () => {
+// Run table creation in background — don't block startup
+setImmediate(async () => {
   try {
     await createBuyerChatTables();
     await createBuyerSavedSearches();
     await createVocabularyTables();
     await createPaymentTable();
+  } catch (e) {
+    console.warn('[fix-migration] table creation error:', e.message?.split('\n')[0]);
   } finally {
     await prisma.$disconnect();
   }
-})();
+});
 
 console.log('[fix-migration] Done! Running deploy...');
