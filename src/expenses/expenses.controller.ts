@@ -20,7 +20,7 @@ export class ExpensesController {
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'ACCOUNTANT')
   async findAll() {
-    return this.service.findAll();
+    return this.expensesService.findAll();
   }
 
   // كل مصاريف هذا المورد
