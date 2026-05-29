@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { ExpensesService } from './expenses.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Controller('expenses')
@@ -11,6 +13,14 @@ export class ExpensesController {
   @Post()
   async create(@Body() data: any, @Req() req: any) {
     return this.expensesService.createWithInvoice(data, req.user.sub);
+  }
+
+  // كل المصاريف — للمحاسب والمدير فقط
+  @Get()
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'ACCOUNTANT')
+  async findAll() {
+    return this.service.findAll();
   }
 
   // كل مصاريف هذا المورد

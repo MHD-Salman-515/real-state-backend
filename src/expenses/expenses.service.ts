@@ -65,6 +65,16 @@ export class ExpensesService {
     return { message: 'تم تسجيل المصروف وإنشاء الفاتورة', expense, invoice };
   }
 
+  async findAll() {
+    return this.prisma.expense.findMany({
+      include: {
+        ticket: { select: { id: true, category: true } },
+        contractor: { select: { id: true, fullName: true, role: true } },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
   findMy(supplierId: number) {
     return this.prisma.expense.findMany({
       where: { contractorId: supplierId },
