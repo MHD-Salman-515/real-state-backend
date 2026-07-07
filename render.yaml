@@ -3,7 +3,7 @@ services:
     name: housing-backend
     env: node
     rootDir: .
-    buildCommand: npm install && npm run build:render
+    buildCommand: npm install && npx prisma generate && npx prisma migrate deploy && npm run build:render
     preDeployCommand: npm run prisma:migrate:deploy && npm run prisma:migrate:deploy:urbanex
     startCommand: npm run start:prod
     healthCheckPath: /health

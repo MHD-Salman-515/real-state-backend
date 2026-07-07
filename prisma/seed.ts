@@ -635,7 +635,11 @@ async function main() {
     if (user) await ensureNotification(template, user.id);
   }
 
-  await ensureMarketData();
+  try {
+    await ensureMarketData();
+  } catch (e: unknown) {
+    console.log('Market data skipped (table may not exist yet):', e instanceof Error ? e.message : String(e));
+  }
 
   const counts = {
     users:             await prisma.user.count(),
