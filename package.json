@@ -38,6 +38,7 @@
     "props:images:regen": "ts-node scripts/regen-property-images.ts",
     "seed:images": "ts-node scripts/seed-property-images.ts",
     "seed:districts": "ts-node scripts/seed-districts.ts",
+    "seed": "node node_modules/prisma/build/index.js db push && node node_modules/ts-node/dist/bin.js prisma/seed.ts",
     "keep-alive": "node scripts/keep-alive.js"
   },
   "dependencies": {
