@@ -185,8 +185,12 @@ async function createPaymentTable() {
   }
 }
 
-// Run table creation in background — don't block startup
-setImmediate(async () => {
+setTimeout(() => {
+  console.log('[fix-migration] Timeout safety — forcing exit');
+  process.exit(0);
+}, 30000); // 30 seconds max
+
+async function main() {
   try {
     await createBuyerChatTables();
     await createBuyerSavedSearches();
@@ -197,6 +201,12 @@ setImmediate(async () => {
   } finally {
     await prisma.$disconnect();
   }
-});
+}
 
-console.log('[fix-migration] Done! Running deploy...');
+main().then(() => {
+  console.log('[fix-migration] Done');
+  process.exit(0);
+}).catch((e) => {
+  console.error('[fix-migration] Error:', e.message);
+  process.exit(0); // exit 0 even on error — do not block the app
+});
