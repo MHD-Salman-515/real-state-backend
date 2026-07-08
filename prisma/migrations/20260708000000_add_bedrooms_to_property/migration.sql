@@ -1,0 +1,1 @@
+ALTER TABLE `Property` ADD COLUMN `bedrooms` INT NULL DEFAULT 0;
