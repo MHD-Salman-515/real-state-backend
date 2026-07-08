@@ -123,11 +123,21 @@ export class PropertyService {
   async findPublic(page = 1, limit = 20) {
     const pagination = this.buildPublicPagination(page, limit);
 
-    return this.prisma.property.findMany({
-      include: { owner: true },
+    const props = await this.prisma.property.findMany({
+      include: {
+        owner: true,
+        images: { take: 1, orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }] },
+      },
       orderBy: { createdAt: 'desc' },
       ...pagination,
     });
+
+    return props.map((p) => ({
+      ...p,
+      area_m2: p.area,
+      bedrooms: p.bedrooms ?? 0,
+      image: p.image || p.images[0]?.url || null,
+    }));
   }
 
   async findAllAdmin(page = 1, limit = 50) {
