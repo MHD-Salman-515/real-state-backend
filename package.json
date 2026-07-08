@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start:prod": "node scripts/fix-migration.js && prisma migrate deploy && node dist/main.js",
-    "build": "npx prisma migrate deploy && tsc -p tsconfig.build.json",
+    "build": "npx prisma migrate deploy && npx prisma generate && tsc -p tsconfig.build.json",
     "build:render": "npm run build",
     "start": "nest start",
     "start:dev": "kill-port 3000 && nest start --watch",

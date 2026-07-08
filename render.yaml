@@ -15,7 +15,7 @@ services:
       - key: URBANEX_DATABASE_URL
         sync: false
       - key: CORS_ORIGIN
-        value: https://urbanex-frontend.vercel.app
+        value: https://urbanex-frontend.vercel.app,https://urbanex-frontend-git-main-mhd-salman-515s-projects.vercel.app
       - key: JWT_ACCESS_SECRET
         sync: false
       - key: JWT_REFRESH_SECRET
