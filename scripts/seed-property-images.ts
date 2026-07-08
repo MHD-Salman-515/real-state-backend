@@ -177,7 +177,7 @@ async function main() {
   const connection = await mysql.createConnection(parseDbUrl(dbUrl));
 
   try {
-    const [rows] = await connection.query('SELECT id FROM `Property` ORDER BY id ASC');
+    const [rows] = await connection.query('SELECT id FROM `Property` ORDER BY createdAt DESC LIMIT 15');
     const properties = rows as { id: number }[];
 
     if (!properties.length) {
@@ -185,8 +185,11 @@ async function main() {
       return;
     }
 
-    console.log(`Found ${properties.length} properties. Seeding images...`);
-    let inserted = 0;
+    const selectedCount = properties.length;
+    let deletedImages = 0;
+    let insertedImages = 0;
+
+    console.log(`Selected ${selectedCount} properties for demo image seeding.`);
 
     for (let i = 0; i < properties.length; i++) {
       const { id } = properties[i];
@@ -202,7 +205,9 @@ async function main() {
 
       await connection.beginTransaction();
       try {
-        await connection.execute('DELETE FROM `PropertyImage` WHERE propertyId = ?', [id]);
+        const [deleteResult] = await connection.execute('DELETE FROM `PropertyImage` WHERE propertyId = ?', [id]);
+        const deletedRows = (deleteResult as { affectedRows?: number }).affectedRows ?? 0;
+        deletedImages += deletedRows;
 
         const values: (string | number)[] = [];
         const placeholders = images
@@ -212,29 +217,29 @@ async function main() {
           })
           .join(', ');
 
-        await connection.execute(
+        const [insertResult] = await connection.execute(
           `INSERT INTO \`PropertyImage\` (propertyId, url, room, caption, sortOrder, createdAt, updatedAt) VALUES ${placeholders}`,
           values,
         );
+        const insertedRows = (insertResult as { affectedRows?: number }).affectedRows ?? images.length;
+        insertedImages += insertedRows;
 
         await connection.execute(
           'UPDATE `Property` SET image = ?, updatedAt = NOW() WHERE id = ?',
           [livingUrl, id],
         );
 
-        inserted += images.length;
         await connection.commit();
       } catch (err) {
         await connection.rollback();
         throw err;
       }
-
-      if ((i + 1) % 100 === 0 || i + 1 === properties.length) {
-        console.log(`  ${i + 1}/${properties.length} properties processed`);
-      }
     }
 
-    console.log(`Done. Seeded ${inserted} PropertyImage rows across ${properties.length} properties.`);
+    console.log(`Properties selected: ${selectedCount}`);
+    console.log(`PropertyImage rows deleted: ${deletedImages}`);
+    console.log(`PropertyImage rows inserted: ${insertedImages}`);
+    console.log('Done');
   } finally {
     await connection.end();
   }
