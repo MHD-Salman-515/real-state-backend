@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -42,17 +43,26 @@ const storageConfig = {
 
 @Controller('properties')
 export class PropertyController {
+  private readonly logger = new Logger(PropertyController.name);
+
   constructor(private readonly propertyService: PropertyService) { }
 
   @Get()
-  findAll(
+  async findAll(
     @Query('page') page?: string,
     @Query('limit') limit?: string,
   ) {
-    return this.propertyService.findPublic(
-      this.parsePositiveInt(page, 1, 'page'),
-      this.parsePublicLimit(limit),
-    );
+    try {
+      return await this.propertyService.findPublic(
+        this.parsePositiveInt(page, 1, 'page'),
+        this.parsePublicLimit(limit),
+      );
+    } catch (error: any) {
+      this.logger.error(
+        `GET /properties failed: ${error?.name ?? 'UnknownError'} ${error?.message ?? ''} ${error?.code ? `code=${error.code}` : ''}`.trim(),
+      );
+      throw error;
+    }
   }
 
   @Get(':id')

@@ -126,7 +126,11 @@ export class PropertyService {
     const props = await this.prisma.property.findMany({
       include: {
         owner: true,
-        images: { take: 1, orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }] },
+        images: {
+          take: 1,
+          orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }],
+          select: { url: true },
+        },
       },
       orderBy: { createdAt: 'desc' },
       ...pagination,
