@@ -820,7 +820,7 @@ export class OwnerChatService {
         sellerFlowActive = true;
         listingIntent = 'ESTIMATE';
         state.listing_intent = 'ESTIMATE';
-      } else if (this.ollamaOrchestrator && !isLocationConfirmation && !state.evalState && !(hasSellerSignal && sessionArea && (parsedArabic.ask_price ?? state.ask_price))) {
+      } else if (this.ollamaOrchestrator && !isLocationConfirmation && (!state.evalState || state.evalState.stage === 'complete') && !(hasSellerSignal && sessionArea && (parsedArabic.ask_price ?? state.ask_price))) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
             (this.toRecord(params.lastAssistant.payloadJson.data)?.market_evaluation ||
