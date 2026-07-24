@@ -618,12 +618,16 @@ export class OwnerChatService {
       // Guard: if user is mid-eval-flow, bypass small-talk / general-question filters.
       // Their reply is eval data (ownership type, floor, etc.), not casual conversation.
       const _evStage = (params.deterministicState as any)?.evalState?.stage as string | undefined;
+      this.logger.log(
+        `EVAL_GUARD_CHECK stage=${_evStage ?? 'none'} evalState=${JSON.stringify((params.deterministicState as any)?.evalState ?? null)} deterministicKeys=${Object.keys(params.deterministicState ?? {}).join(',') || 'none'}`,
+      );
       if (
         _evStage === 'asking_location' ||
         _evStage === 'asking_ownership' ||
         _evStage === 'asking_legal' ||
         _evStage === 'asking_building'
       ) {
+        this.logger.log(`EVAL_GUARD_HIT stage=${_evStage} — routing directly to handlePropertyEvaluation`);
         const parsedArabicEarly = parseArabicMessage(params.message);
         return this.handlePropertyEvaluation({
           ownerId: params.ownerId,
@@ -816,7 +820,7 @@ export class OwnerChatService {
         sellerFlowActive = true;
         listingIntent = 'ESTIMATE';
         state.listing_intent = 'ESTIMATE';
-      } else if (this.ollamaOrchestrator && !isLocationConfirmation && !(hasSellerSignal && sessionArea && (parsedArabic.ask_price ?? state.ask_price))) {
+      } else if (this.ollamaOrchestrator && !isLocationConfirmation && !state.evalState && !(hasSellerSignal && sessionArea && (parsedArabic.ask_price ?? state.ask_price))) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
             (this.toRecord(params.lastAssistant.payloadJson.data)?.market_evaluation ||
