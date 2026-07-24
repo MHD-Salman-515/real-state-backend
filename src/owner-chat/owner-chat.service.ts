@@ -615,6 +615,24 @@ export class OwnerChatService {
     recentHistory?: AiConversationTurn[];
   }): Promise<DispatchResult> {
     try {
+      // Guard: if user is mid-eval-flow, bypass small-talk / general-question filters.
+      // Their reply is eval data (ownership type, floor, etc.), not casual conversation.
+      const _evStage = (params.deterministicState as any)?.evalState?.stage as string | undefined;
+      if (
+        _evStage === 'asking_location' ||
+        _evStage === 'asking_ownership' ||
+        _evStage === 'asking_legal' ||
+        _evStage === 'asking_building'
+      ) {
+        const parsedArabicEarly = parseArabicMessage(params.message);
+        return this.handlePropertyEvaluation({
+          ownerId: params.ownerId,
+          message: params.message,
+          state: params.deterministicState ?? {},
+          parsedArabic: parsedArabicEarly,
+        });
+      }
+
       const SMALL_TALK =
         /^(صباح الخير|صباح النور|صباح الفل|صباح الياسمين|صباح الورد|مساء الخير|مساء النور|مساء الفل|كيف الحال|كيف حالك|كيفك|كيفكم|كيف الاحوال|كيف أحوالك|شو اخبارك|شو أخبارك|شو الأخبار|شو اخبار|هلا|هلا والله|هلا هلا|هلا بك|هلا فيك|أهلاً|أهلا|اهلا|أهلاً وسهلاً|اهلا وسهلا|أهل وسهل|مرحبا|مرحبتين|مرحبا فيك|السلام عليكم|سلام عليكم|وعليكم السلام|السلام|سلام|تسلم|تسلمي|تسلموا|يسلمو|يسلموا|الله يسلمك|الله يسلمكم|الله يحفظك|شكراً|شكرا|شكراً جزيلاً|شكرا جزيلا|شكراً كتير|مشكور|مشكورة|يعطيك العافية|الله يعطيك العافية|يعطيكم العافية|الله يعافيك|الله يعافيكم|عافاك الله|ممتاز|تمام|تمام تمام|زابط|زابطة|ماشي|ماشي الحال|بخير|الحمد لله|الحمد لله بخير|معلش|معليش|لا بأس|لا باس|مع السلامة|في أمان الله|في امان الله|إلى اللقاء|الى اللقاء|باي|باي باي|وداعاً|وداعا|صح|صحيح|أوكي|اوكي|ok|okay|hi|hello|hey|bye|goodbye|good morning|good afternoon|good evening|good night|thanks|thank you|thank you so much|sure|great|perfect|awesome|nice|cool|no problem|you are welcome|welcome|how are you|how is it going|whats up|what is up|see you|see you later|take care)[\s!،.؟?!]*$/i;
       if (SMALL_TALK.test(params.message.trim())) {
