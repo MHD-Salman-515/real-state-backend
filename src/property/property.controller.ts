@@ -47,6 +47,13 @@ export class PropertyController {
 
   constructor(private readonly propertyService: PropertyService) { }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('mine')
+  async getMyProperties(@Req() req: any) {
+    const ownerId = Number(req.user?.sub || req.user?.id);
+    return this.propertyService.findByOwner(ownerId);
+  }
+
   @Get()
   async findAll(
     @Query('page') page?: string,

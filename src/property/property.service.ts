@@ -116,6 +116,27 @@ export class PropertyService {
     return created;
   }
 
+  async findByOwner(ownerId: number) {
+    const props = await this.prisma.property.findMany({
+      where: { ownerId },
+      include: {
+        images: {
+          take: 1,
+          orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }],
+          select: { url: true },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return props.map((p) => ({
+      ...p,
+      area_m2: p.area,
+      bedrooms: p.bedrooms ?? 0,
+      image: p.image || p.images[0]?.url || null,
+    }));
+  }
+
   async findAll(page = 1, limit = 20) {
     return this.findPublic(page, limit);
   }
