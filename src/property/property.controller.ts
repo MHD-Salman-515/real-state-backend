@@ -141,10 +141,10 @@ export class PropertyController {
   }
 
   private parsePublicLimit(value: string | undefined): number {
-    const resolved = value == null || value === '' ? 20 : Number(value);
+    const resolved = value == null || value === '' ? 200 : Number(value);
     if (!Number.isInteger(resolved) || resolved <= 0) {
       throw new BadRequestException('limit must be a positive integer');
     }
-    return Math.min(resolved, 20);
+    return Math.min(resolved, 200);
   }
 }

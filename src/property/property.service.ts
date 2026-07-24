@@ -36,9 +36,9 @@ export class PropertyService {
     return property;
   }
 
-  private buildPublicPagination(page = 1, limit = 20) {
+  private buildPublicPagination(page = 1, limit = 200) {
     const safePage = Number.isInteger(page) && page > 0 ? page : 1;
-    const safeLimit = Number.isInteger(limit) && limit > 0 ? Math.min(limit, 20) : 20;
+    const safeLimit = Number.isInteger(limit) && limit > 0 ? Math.min(limit, 200) : 200;
 
     return {
       skip: (safePage - 1) * safeLimit,
