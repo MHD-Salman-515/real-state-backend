@@ -73,94 +73,102 @@ export class MailService {
   }
 
   async sendOtpEmail(email: string, code: string, expiresAt: Date): Promise<void> {
-    const subject = `Urbanex • رمز التحقق | Verification Code`;
-    const expiresText = expiresAt.toLocaleString('en-US', {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-      hour12: true,
-    });
-    const html = `
-  <div style="margin:0;padding:0;background:#f3f6fb;font-family:Arial,Helvetica,sans-serif;color:#111827;">
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:40px 16px;background:#f3f6fb;">
-      <tr>
-        <td align="center">
-          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:600px;background:#ffffff;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(15,23,42,0.08);">
-            
-            <tr>
-              <td style="padding:36px 32px;background:linear-gradient(135deg,#0b1220 0%,#1e3a8a 100%);text-align:center;">
-                <div style="width:64px;height:64px;line-height:64px;margin:0 auto 18px auto;border-radius:50%;background:rgba(255,255,255,0.12);color:#ffffff;font-size:24px;font-weight:800;">
-                  U
-                </div>
-                <h1 style="margin:0;font-size:30px;color:#ffffff;font-weight:800;letter-spacing:0.3px;">
-                  Urbanex
-                </h1>
-                <p style="margin:12px 0 0 0;font-size:15px;line-height:1.8;color:rgba(255,255,255,0.82);">
-                  Secure verification for your account<br>
-                  تحقق آمن لتسجيل الدخول إلى حسابك
-                </p>
-              </td>
-            </tr>
+    const subject = `Creos • رمز التحقق | Verification Code`;
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background:#F4F5F7;font-family:’Segoe UI’,Arial,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F4F5F7;padding:40px 0">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
 
-            <tr>
-              <td style="padding:34px 32px 28px 32px;">
-                <p style="margin:0 0 10px 0;text-align:center;font-size:15px;color:#6b7280;">
-                  استخدم الرمز التالي لإكمال عملية التحقق
-                </p>
-                <p style="margin:0 0 24px 0;text-align:center;font-size:15px;color:#6b7280;">
-                  Use the code below to verify your email address
-                </p>
+        <!-- HEADER -->
+        <tr>
+          <td style="background:linear-gradient(135deg,#1A1A2E 0%,#16213E 50%,#0F3460 100%);padding:36px 40px;text-align:center">
+            <div style="font-size:28px;font-weight:800;color:#E94560;letter-spacing:2px">CREOS</div>
+            <div style="font-size:12px;color:#94A3B8;margin-top:4px;letter-spacing:3px">SMART REAL ESTATE</div>
+          </td>
+        </tr>
 
-                <div style="text-align:center;margin-bottom:28px;">
-                  <div style="display:inline-block;padding:20px 26px;border-radius:18px;background:linear-gradient(180deg,#eff6ff 0%,#dbeafe 100%);border:1px solid #bfdbfe;color:#1d4ed8;font-size:38px;font-weight:800;letter-spacing:12px;">
-                    ${code}
+        <!-- BODY -->
+        <tr>
+          <td style="padding:40px 40px 20px">
+            <h2 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#1A1A2E">تحقق من هويتك</h2>
+            <p style="margin:0 0 24px;font-size:14px;color:#64748B;line-height:1.6">
+              Verify Your Identity
+            </p>
+            <p style="margin:0 0 28px;font-size:14px;color:#475569;line-height:1.7;direction:rtl">
+              استخدم الرمز أدناه لإكمال عملية تسجيل الدخول إلى حسابك في منصة كريوس.
+              <br/>Use the code below to complete your Creos account verification.
+            </p>
+
+            <!-- OTP BOX -->
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center" style="padding:8px 0 32px">
+                  <div style="background:#F8FAFC;border:2px dashed #E94560;border-radius:12px;padding:24px 40px;display:inline-block">
+                    <div style="font-size:10px;color:#94A3B8;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px">رمز التحقق / Verification Code</div>
+                    <div style="font-size:42px;font-weight:800;color:#1A1A2E;letter-spacing:10px">${code}</div>
                   </div>
-                </div>
+                </td>
+              </tr>
+            </table>
 
-                <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:16px;padding:18px 20px;margin-bottom:22px;">
-                  <p style="margin:0 0 8px 0;font-size:14px;font-weight:700;color:#111827;">
-                    Expiration / انتهاء الصلاحية
-                  </p>
-                  <p style="margin:0;font-size:14px;line-height:1.8;color:#4b5563;">
-                    This code expires on <strong>${expiresText}</strong>.<br>
-                    ينتهي هذا الرمز في <strong>${expiresText}</strong>.
-                  </p>
-                </div>
+            <!-- EXPIRY -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF7F7;border-radius:8px;margin-bottom:28px">
+              <tr>
+                <td style="padding:14px 20px">
+                  <span style="font-size:13px;color:#E94560;font-weight:600">&#9203; </span>
+                  <span style="font-size:13px;color:#475569">
+                    ينتهي هذا الرمز خلال <strong style="color:#E94560">10 دقائق</strong> /
+                    This code expires in <strong style="color:#E94560">10 minutes</strong>
+                  </span>
+                </td>
+              </tr>
+            </table>
 
-                <div style="font-size:14px;line-height:1.9;color:#4b5563;">
-                  <p style="margin:0 0 10px 0;">
-                    If you didn’t request this email, you can safely ignore it.
+            <!-- SECURITY NOTE -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#F8FAFC;border-radius:8px;border-left:4px solid #0F3460;margin-bottom:28px">
+              <tr>
+                <td style="padding:14px 20px">
+                  <p style="margin:0;font-size:12px;color:#64748B;line-height:1.6">
+                    &#128274; إذا لم تطلب هذا الرمز، يمكنك تجاهل هذه الرسالة بأمان.<br/>
+                    If you didn’t request this code, you can safely ignore this email.
                   </p>
-                  <p style="margin:0;">
-                    إذا لم تطلب هذا الرمز، يمكنك تجاهل هذه الرسالة بأمان.
-                  </p>
-                </div>
-              </td>
-            </tr>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
 
-            <tr>
-              <td style="padding:18px 32px;background:#fafafa;border-top:1px solid #f0f0f0;text-align:center;">
-                <p style="margin:0;font-size:12px;line-height:1.8;color:#9ca3af;">
-                  © ${new Date().getFullYear()} Urbanex - Secure Authentication System
-                </p>
-              </td>
-            </tr>
+        <!-- FOOTER -->
+        <tr>
+          <td style="background:#1A1A2E;padding:24px 40px;text-align:center">
+            <p style="margin:0 0 4px;font-size:13px;color:#E94560;font-weight:700">CREOS — منصة العقارات الذكية</p>
+            <p style="margin:0;font-size:11px;color:#475569">&#169; 2026 Creos · Secure Authentication System</p>
+          </td>
+        </tr>
 
-          </table>
-        </td>
-      </tr>
-    </table>
-  </div>
-`;
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
     const text = `
-Urbanex Verification Code / رمز التحقق
+Creos Verification Code / رمز التحقق
 
 Code: ${code}
-Expires on: ${expiresText}
 
-If you did not request this email, you can ignore it.
-إذا لم تطلب هذا الرمز، يمكنك تجاهل هذه الرسالة.
+This code expires in 10 minutes.
+ينتهي هذا الرمز خلال 10 دقائق.
 
-Urbanex Team
+If you did not request this code, you can safely ignore this email.
+إذا لم تطلب هذا الرمز، يمكنك تجاهل هذه الرسالة بأمان.
+
+CREOS — منصة العقارات الذكية
 `.trim();
     await this.sendMail({
       to: email,
