@@ -2192,6 +2192,10 @@ export class OwnerChatService {
       if (parsedArabic.finishQuality && !ev.finish_quality) ev.finish_quality = parsedArabic.finishQuality;
       state.evalState = ev;
 
+      // Track whether this message is a direct reply to the building question.
+      // Used below to skip the hasBuildingInfo re-ask gate.
+      const wasAskingBuilding = ev.stage === 'asking_building';
+
       // When user replies to asking_building — extract inline and force complete
       if (ev.stage === 'asking_building' && params.message) {
         const floorMatch = params.message.match(/طابق\s*(أرضي|أول|ثاني|ثالث|رابع|خامس|\d+)/);
@@ -2309,7 +2313,7 @@ export class OwnerChatService {
       // ── Step 4: building details ──────────────────────────────────────────
       const hasBuildingInfo =
         ev.floor != null || ev.has_elevator != null || ev.building_age || ev.finish_quality;
-      if (!hasBuildingInfo) {
+      if (!hasBuildingInfo && !wasAskingBuilding) {
         ev.stage = 'asking_building';
         return {
           response: {
