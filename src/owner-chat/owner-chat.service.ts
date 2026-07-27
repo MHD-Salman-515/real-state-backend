@@ -439,11 +439,9 @@ export class OwnerChatService {
       text: dispatch.response.text_ar,
     });
 
-    await this.updateSessionContext({
-      ownerId: params.ownerId,
-      sessionId: session.id,
-      propertyId: contextPropertyId ?? null,
-    });
+    // updateSessionContext removed: persistSessionContextState above already handles
+    // propertyId and all context fields. Calling updateSessionContext here re-reads
+    // from DB (potentially stale replica in Aiven cloud) and can overwrite evalState.
 
     const sessionDelegate = this.prisma.chatSession;
     if (!session.title) {
@@ -3135,6 +3133,9 @@ export class OwnerChatService {
         updatedAt: new Date(),
       },
     });
+    this.logger.log(
+      `PERSIST_CONTEXT sessionId=${params.sessionId} evalState=${JSON.stringify(nextContext.evalState ?? null)} propertyId=${nextContext.propertyId ?? null}`,
+    );
   }
 
   private async persistSessionTaskState(params: {
