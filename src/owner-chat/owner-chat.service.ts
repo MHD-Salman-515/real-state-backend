@@ -794,6 +794,12 @@ export class OwnerChatService {
       let sessionDistrict = parsedArabic.district ?? state.district;
       const sessionArea = parsedArabic.area_m2 ?? state.area_m2;
 
+      // True as soon as the message carries a seller/eval trigger + an area — enough to
+      // start (or continue) handlePropertyEvaluation, even before an ask_price is known.
+      // Without this, message 1 of the eval flow (no price yet) falls through to the
+      // ollama orchestrator, since evalState doesn't exist yet to trip the stage guard below.
+      const hasEvalTrigger = (hasSellerSignal || sellerFlowActive) && Boolean(sessionArea);
+
       // Check learned vocabulary for unrecognized district terms
       if (!sessionDistrict && this.vocabularyService) {
         const words = params.message.trim().split(/\s+/);
@@ -818,7 +824,10 @@ export class OwnerChatService {
         sellerFlowActive = true;
         listingIntent = 'ESTIMATE';
         state.listing_intent = 'ESTIMATE';
-      } else if (this.ollamaOrchestrator && !isLocationConfirmation && (!state.evalState || state.evalState.stage === 'complete') && !(hasSellerSignal && sessionArea && (parsedArabic.ask_price ?? state.ask_price))) {
+      } else if (this.ollamaOrchestrator && !isLocationConfirmation &&
+                 (!state.evalState || state.evalState.stage === 'complete') &&
+                 !(hasSellerSignal && sessionArea && (parsedArabic.ask_price ?? state.ask_price)) &&
+                 !hasEvalTrigger) {
         const lastDeterministicResult = Boolean(
           params.lastAssistant?.payloadJson?.data &&
             (this.toRecord(params.lastAssistant.payloadJson.data)?.market_evaluation ||
