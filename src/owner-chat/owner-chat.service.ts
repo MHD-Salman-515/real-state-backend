@@ -2174,10 +2174,17 @@ export class OwnerChatService {
           ev = { stage: 'initial' };
           state.evalState = ev;
         } else {
+          const REAL_ESTATE_KEYWORDS =
+            /عقار|شقة|شقه|بيت|بيوت|فيلا|أرض|ارض|محل|مكتب|مستودع|سعر|إيجار|ايجار|بيع|شراء|تقييم|تسعير|استثمار|منطقة|حي|مالكي|مزة|مزه|كفرسوسة|شعلان|مهاجرين|جرمانا|دمشق|حلب|حمص|طابق|مصعد|بناء|تشطيب|موقف|طابو|ملكية|سهم|ذمة|ميراث|ورثة|property|apartment|villa|house|price|rent|buy|sell|real estate|invest|district|floor|elevator/i;
+          const asksAboutAnotherProperty =
+            /عقار آخر|عقار اخر|شقة أخرى|شقة اخرى|تقييم آخر|تقييم اخر|عقار ثاني/i.test(params.message) ||
+            REAL_ESTATE_KEYWORDS.test(params.message);
           return {
             response: {
               intent: 'SMALL_TALK',
-              text_ar: 'تم التقييم بنجاح 🎉 هل تريد تقييم عقار آخر؟ أو يمكنني مساعدتك بأي سؤال عقاري آخر.',
+              text_ar: asksAboutAnotherProperty
+                ? 'تم التقييم بنجاح 🎉 هل تريد تقييم عقار آخر؟ أو يمكنني مساعدتك بأي سؤال عقاري آخر.'
+                : 'أنا مختص بالعقارات فقط، هل تريد تقييم عقار آخر أو لديك سؤال عقاري؟',
               data: { stage: 'complete', context_state: state },
               suggested_actions: [],
             },
@@ -2230,6 +2237,20 @@ export class OwnerChatService {
       // Advance from asking_location once district/area arrive
       if (ev.stage === 'asking_location' && (district || /^الموقع[:\s]/.test(params.message.trim()))) {
         ev.stage = 'asking_legal';
+      }
+
+      // ── Step 0: brand-new evaluation with no location at all — ask a focused question ──
+      if (ev.stage === 'initial' && !district && !(state.city || parsedArabic.city)) {
+        ev.stage = 'asking_location';
+        return {
+          response: {
+            intent: 'PROPERTY_EVALUATION',
+            text_ar: 'أين يقع العقار؟ (المدينة والحي)',
+            data: { stage: 'asking_location' },
+            suggested_actions: [{ type: 'PICK_LOCATION' as const, label_ar: '📍 حدد الموقع على الخريطة' }],
+          },
+          toolMessages: [],
+        };
       }
 
       // ── Step 1: location (district + area) ────────────────────────────────
