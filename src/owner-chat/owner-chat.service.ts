@@ -883,13 +883,19 @@ export class OwnerChatService {
       }
 
       // Third path — first message with district + area (even without ask_price yet)
+      const hasPropertyEvalSignal =
+        parsedArabic.listing_intent === 'SELL' ||
+        parsedArabic.listing_intent === 'ESTIMATE' ||
+        parsedArabic.ask_price !== undefined ||
+        /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|عندي فيلا|عندي أرض|عندي محل|لدي شقة|لدي بيت|لدي عقار|لدي فيلا|لدي أرض|ابيع|بدي ابيع|للبيع|i have|i own|my apartment|my house|my property/i.test(params.message);
+
       const sessionCity = parsedArabic.city ?? state.city;
       // ask_price is intentionally NOT required here — the eval flow can ask for it
-      // later or estimate without it (see handlePropertyEvaluation).
+      // later or estimate without it (see handlePropertyEvaluation). This message may
+      // have no city/district yet either (e.g. "عندي شقة 150 متر بسعر 900 مليون") —
+      // handlePropertyEvaluation asks for location itself, so only area is required here.
       const hasEnoughToStartEval = !!(
-        (state.city || parsedArabic.city) &&
-        (state.area_m2 || parsedArabic.area_m2) &&
-        (state.property_type || parsedArabic.property_type)
+        (hasPropertyEvalSignal || isLocationConfirmation) && sessionArea
       );
       if (!sellerFlowActive && hasEnoughToStartEval) {
         sellerFlowActive = true;
