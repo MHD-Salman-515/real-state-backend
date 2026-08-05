@@ -883,17 +883,14 @@ export class OwnerChatService {
       }
 
       // Third path — first message with district + area (even without ask_price yet)
-      const hasPropertyEvalSignal =
-        parsedArabic.listing_intent === 'SELL' ||
-        parsedArabic.listing_intent === 'ESTIMATE' ||
-        parsedArabic.ask_price !== undefined ||
-        /بدي أعرف|رأيك|قيمة|تقييم|كم يسوى|كم تسوى|بسعر|سعره|سعرها|عندي شقة|عندي عقار|عندي بيت|عندي فيلا|عندي أرض|عندي محل|لدي شقة|لدي بيت|لدي عقار|لدي فيلا|لدي أرض|ابيع|بدي ابيع|للبيع|i have|i own|my apartment|my house|my property/i.test(params.message);
-
       const sessionCity = parsedArabic.city ?? state.city;
-      const hasEnoughToStartEval =
-        (hasPropertyEvalSignal || isLocationConfirmation) &&
-        sessionArea &&
-        (state.ask_price ?? parsedArabic.ask_price);
+      // ask_price is intentionally NOT required here — the eval flow can ask for it
+      // later or estimate without it (see handlePropertyEvaluation).
+      const hasEnoughToStartEval = !!(
+        (state.city || parsedArabic.city) &&
+        (state.area_m2 || parsedArabic.area_m2) &&
+        (state.property_type || parsedArabic.property_type)
+      );
       if (!sellerFlowActive && hasEnoughToStartEval) {
         sellerFlowActive = true;
         this.logger.log(`CHAT_ROUTE: SELLER_FLOW_ACTIVATED area=${sessionArea} ask_price=${state.ask_price ?? parsedArabic.ask_price}`);
@@ -3059,7 +3056,16 @@ export class OwnerChatService {
         parsed.property_type ||
         this.toPositiveNumber(parsed.area_m2) != null,
     );
-    const preserveNumericContext = clearContinuation || !hasFreshPropertyAnchor;
+    // Mid-flow answers to handlePropertyEvaluation's own questions (e.g. giving the
+    // district after being asked for location) shouldn't wipe out numeric fields
+    // (area/ask_price) already captured earlier in the same evaluation.
+    const activeEvalInProgress = Boolean(
+      ctx.evalState &&
+        typeof ctx.evalState === 'object' &&
+        (ctx.evalState as any).stage &&
+        (ctx.evalState as any).stage !== 'complete',
+    );
+    const preserveNumericContext = clearContinuation || !hasFreshPropertyAnchor || activeEvalInProgress;
 
     const merged: DeterministicContextState = {
       city:
